@@ -335,6 +335,30 @@ This section details files and subdirectories found directly within `srm_backup/
         *   `syslog-ng`: Log rotation for `syslog-ng` (advanced system logging daemon).
         *   `upstart`: Log rotation for Upstart init system logs.
         *   `wifi`: General Wi-Fi related log rotation.
+    *   `netatalk/`: Configuration directory for Netatalk (AFP - Apple Filing Protocol server). This directory is empty, suggesting Netatalk might not have been explicitly configured or was using default settings.
+    *   `nfs/`: Configuration directory for NFS (Network File System).
+        *   `syno_nfs_conf`: Synology-specific NFS configuration file. Likely defines shared directories and NFS server settings.
+    *   `pam.d/`: Directory containing configuration files for Pluggable Authentication Modules (PAM). These files define the authentication stack for various services.
+        *   `findhostd`: PAM configuration for the `findhostd` service.
+        *   `ftpd`: PAM configuration for FTP services.
+        *   `netatalk`: PAM configuration for Netatalk (AFP) services.
+        *   `other`: Default PAM configuration for services without specific files.
+        *   `rsync`: PAM configuration for `rsync` services.
+        *   `samba`: PAM configuration for Samba services.
+        *   `sshd`: PAM configuration for SSH services.
+        *   `sudo`: PAM configuration for the `sudo` command.
+        *   `versionbackup`: PAM configuration likely for a versioned backup service (e.g., Hyper Backup).
+        *   `webdav`: PAM configuration for WebDAV services.
+        *   `webui`: PAM configuration for the web user interface (SRM login).
+    *   `php/`: Contains configuration files for PHP.
+        *   `php-fpm.conf`: Configuration file for PHP-FPM (FastCGI Process Manager), which is commonly used to serve PHP pages with web servers like Nginx or Apache.
+        *   `php.ini`: The main PHP configuration file, controlling various aspects of PHP's behavior.
+        *   `conf.d/`: Directory for additional PHP configuration snippets (often for enabling/configuring extensions).
+            *   `extensions.ini`: Likely defines which PHP extensions are enabled.
+            *   `opcache.ini`: Configuration for OPcache, a PHP extension that improves performance by storing precompiled script bytecode in shared memory.
+            *   `user-settings.ini`: Contains user-defined PHP settings that might override defaults or add specific configurations.
+        *   `fpm.d/`: Directory for PHP-FPM pool definitions. This directory is empty, suggesting that FPM pools are defined in the main `php-fpm.conf` or no custom pools are used.
+    *   `portforward/`: Directory intended for port forwarding configurations. This directory is empty, suggesting no manual port forwarding rules were defined here, or they are managed dynamically (e.g., via UPnP).
 
 ---
 
