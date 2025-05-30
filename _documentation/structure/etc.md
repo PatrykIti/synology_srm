@@ -72,7 +72,88 @@ This section details files and subdirectories found directly within `srm_backup/
 *   **`synoappprivilege.db`**: Synology database for application privileges.
 *   **`synoautoblock.db`**: Synology database for the auto-block feature (IP blocking).
 *   **`synogrinst.sh`**: Synology "great installer" script.
-*   **`synoinfo.conf`**: Key Synology system configuration file, containing various device-specific and system settings. (Further analysis planned for this file).
+*   **`synoinfo.conf`**: Key Synology system configuration file for the SRM (Synology Router Manager) operating system. It contains a wide range of parameters defining the device's identity, system behavior, service configurations, hardware capabilities, UI settings, and various operational limits. Below is a summary of its key sections and notable parameters:
+
+        *   **Device Identification & Basic Setup:**
+            *   `unique`: Unique identifier for the device model (e.g., "synology_cypress_rt6600ax").
+            *   `company_title`: "Synology".
+            *   `timezone`, `language`, `maillang`, `codepage`: Localization and regional settings.
+            *   `admin_port`, `secure_admin_port`: Ports for web administration interface (HTTP and HTTPS).
+            *   `hostname`: Default hostname for the router (e.g., "SynologyRouter").
+            *   `os_name`: Operating system name ("SRM").
+            *   `synobios`: BIOS or bootloader identifier (e.g., "rt6600ax").
+            *   `upnpmodelname`, `upnpfriendlyname`, `upnpdevicetype`: UPnP identification details.
+
+        *   **Supported Features & Hardware Capabilities:**
+            *   Numerous `support<feature>` flags (e.g., `supportphoto`, `supportssl`, `support_wireless`, `supportVLAN`, `support_apparmor`). These indicate whether a particular feature or technology is enabled or available on the hardware/software platform.
+            *   `support_wireless_number`: Number of supported wireless radios/bands.
+            *   `maxlanport`: Maximum number of LAN ports.
+            *   `external_phy_count`: Number of external physical Ethernet ports.
+            *   `support_usb_volume`, `support_mtd_serial`, `support_emmc_trim`, `support_buildin_storage`, `builtin_device`: Parameters related to storage and hardware interfaces.
+
+        *   **Service Configuration & Options:**
+            *   `ftpport`, `ftp_trans_ext_ip`, `ftpflowcontrol`, etc.: FTP server settings.
+            *   `syslogport`: Syslog server port.
+            *   `diskcache`, `standbytimer`: Disk cache and HDD standby settings (more relevant to NAS devices, but present).
+            *   `runmysql`, `runmediaservice`: Flags to enable/disable services like MySQL or media server.
+            *   `ddns_update`, `ddns_select`, `ddns_provider.conf`: DDNS settings.
+            *   `portmap_admin`, `portmap_ftp`, etc.: UPnP port mapping settings for various services.
+            *   `ntpdate_period`, `ntpdate_server`: NTP client configuration.
+            *   `httpport`, `httpsport`: Default ports for web services (distinct from admin ports).
+            *   `runWebHTTPS`, `runHTTPS`: Flags to enable HTTPS for web services.
+            *   `sftpPort`: SFTP port.
+
+        *   **Service & Resource Limitations:**
+            *   `maxaccounts`, `maxgroups`, `maxshares`: Limits for user accounts, groups, and shared folders.
+            *   `maxprinters`, `maxvhost`: Limits for printers and virtual hosts.
+            *   `firewall_max_rules`, `portforward_maximum_rules`, `static_route_maximum_rules`, `policy_route_maximum_rules`, `wifi_macfilter_rules_max`, `url_blocker_maximum_domain_names`, `parental_control_maximum_devices`: Various limits for networking and security features.
+            *   `vpn_conn_max`, `s2s_vpn_max_tunnel`: Limits for VPN connections.
+            *   `tc_qos_app_rules_max`, `tc_qos_devices_max`: Limits for Quality of Service rules.
+
+        *   **UI Options & Branding:**
+            *   `company`, `product`, `manager`, `vender`: Branding strings for the UI.
+            *   `supplang`: List of supported UI languages.
+            *   `updateurl`: URL for checking updates.
+            *   `online_help_base_url`: Base URL for online help documentation.
+            *   `dsmtimeout`: Session timeout for the web interface.
+
+        *   **Network & Wireless Specifics:**
+            *   `wan1_net_device_name`, `wan2_net_device_name`: Network device names for WAN interfaces.
+            *   `ethX_mtu` (e.g., `eth0_mtu`): MTU settings for Ethernet interfaces.
+            *   `net_topology`: Network topology (e.g., "router").
+            *   `support_wireless_repeating`, `support_mesh_network`, `support_wireless_80211r`, `support_wireless_mumimo`: Flags for advanced wireless features.
+            *   `boot_wireless_mode`: Default wireless mode on boot (e.g., "ap").
+
+        *   **Update & Package Management:**
+            *   `rss_server`, `rss_server_ssl`, `pkgupdate_server`, `update_server`, `small_info_path`: URLs for fetching update information and packages.
+            *   `package_update_channel`: Update channel for packages (e.g., "beta").
+            *   `pkg_source_trust_level`: Trust level for package sources.
+            *   `upgradetype`: Type of DSM/SRM upgrade.
+
+        *   **Security & Access Control:**
+            *   `pswdprotect`: Password protection status.
+            *   `autoblock_expriedday`, `autoblock_attempts`, `autoblock_attempt_min`: Auto-block settings.
+            *   `enable_syno_token`, `token_invalid_referer`, `token_valid_user_agent`: CSRF protection settings.
+            *   `strong_password_enable`: Enforces strong password policies.
+            *   `arp_ignore`: ARP ignore setting.
+
+        *   **Push Notifications & External Services:**
+            *   `smsserver`, `smsport`, `smstemplate`, etc.: SMS notification settings via Clickatell.
+            *   `pushservice_server`, `pushbrowser_server`: URLs for Synology's push notification services.
+            *   `redirect_server`: URL for Synology's redirect service (e.g., gofile.me).
+            *   `ga_tracking_id`, `ga_data_collect_enabled`, `ga_check_state`: Google Analytics tracking settings.
+            *   `pushservice_dstoken`, `pushservice_dsserial`: Device specific tokens/serials for push services.
+
+        *   **Fixed & Operational Items (often device-specific runtime values):**
+            *   `runapple`: Whether AppleTalk service is running.
+            *   `synofirewall_updated`: Indicates if firewall rules have been updated.
+            *   `usb_standbytimer`: USB device standby timer.
+            *   `dsm_autoupdate_type`: Auto-update check type.
+            *   `welcome_installer_hide`, `welcome_installer_mesh_finish`: Flags related to the initial setup wizard.
+            *   `runrelayd`: Whether the relay daemon is running.
+            *   `portcheck`: Whether port checking is enabled.
+
+        This file is central to the SRM's operation and is modified by the system as settings are changed through the web interface or other means.
 *   **`synonetbkp.conf`**: Synology network backup configuration.
 *   **`synopackageslimit.conf`**: Configuration for limits related to Synology packages.
 *   **`synouser.conf`**: Synology user configuration.
@@ -432,6 +513,34 @@ This section details files and subdirectories found directly within `srm_backup/
         *   `default.conf`: Default `sysctl` settings for the system.
     *   `sysctlconf/`: Directory for `sysctl` configuration files. These files contain kernel parameters that are set at boot time.
         *   `default.conf`: Default `sysctl` settings for the system.
+    *   `syslog-ng/`: Configuration directory for `syslog-ng`, an advanced system logging daemon.
+        *   `syslog-ng.conf`: Main configuration file for `syslog-ng`, defining sources, destinations, filters, and log paths.
+        *   **`patterndb.d/`**: Directory containing pattern database files (`.conf`) for `syslog-ng`. These files define how to parse and structure log messages from various applications and services.
+            *   `common.conf`: Common patterns applicable to multiple log types.
+            *   `gcpd.conf`: Patterns for Google Cloud Print daemon logs.
+            *   `mesh.conf`: Patterns for Synology Mesh Wi-Fi system logs.
+            *   `php-fpm.conf`: Patterns for PHP-FPM logs.
+            *   `postgresql.conf`: Patterns for PostgreSQL logs.
+            *   `scemd.conf`: Patterns for `scemd` (Synology System Condition Event Monitor Daemon) logs.
+            *   `synocacheclient.conf`: Patterns for Synology cache client logs.
+            *   `synocmsclient.conf`: Patterns for Synology CMS client logs.
+            *   `synofeasibilitycheck.conf`: Patterns for Synology feasibility check service logs.
+            *   `synogpoclient.conf`: Patterns for Synology GPO client logs.
+            *   `synoindex.conf`: Patterns for Synology indexing service logs.
+            *   `synolog.conf`: General patterns for Synology system logs.
+            *   `synoservice.conf`: Patterns for general Synology service logs.
+            *   `synowifi.conf`: Patterns for Synology Wi-Fi logs.
+            *   `syslog-acc.conf`: Patterns for accounting logs.
+            *   `syslog-dhcp.conf`: Patterns for DHCP service logs.
+            *   `syslog-ngfw.conf`: Patterns for Next-Generation Firewall logs.
+            *   `syslog-notification.conf`: Patterns for notification-related logs.
+            *   `syslog-pipe.conf`: Patterns for logs received via pipes.
+            *   `syslog-synodevicecored.conf`: Patterns for Synology device core daemon logs.
+            *   `syslog-synodeviced.conf`: Patterns for Synology device daemon logs.
+            *   `syslog-synonetd.conf`: Patterns for Synology network daemon logs.
+            *   `wifi.conf`: General Wi-Fi related log patterns.
+    *   `tc/`: Directory for `tc` (traffic control) configurations. `tc` is a command-line utility used to configure the Linux kernel's packet scheduler.
+        *   `default.cmd`: Likely a default script or command file for `tc`, defining traffic shaping and Quality of Service (QoS) rules.
 
 ---
 
