@@ -122,6 +122,66 @@ This section details files and subdirectories found directly within `srm_backup/
         *   `dhclient.conf`: Main configuration file for the DHCPv4 client.
     *   **`ipv6/`**: DHCPv6 specific configurations.
         *   `dhclient.conf`: Main configuration file for the DHCPv6 client.
+*   **`dhcpc/`**: Configuration for the DHCP client daemon (likely `dhcpcd`).
+    *   `daemon-select`: Possibly a script or file to select the DHCP client daemon.
+    *   `dhcpcd-eth0.info`, `dhcpcd-usbnet0.info`: Lease information for specific interfaces.
+    *   `dhcpcd-eth0.option.combine`, `dhcpcd-usbnet0.option.combine`: Combined DHCP options for interfaces.
+    *   `dhcpcd-eth0.pid`, `dhcpcd-usbnet0.pid`: PID files for `dhcpcd` instances.
+    *   `dhcpcd-usbnet0.cache-new`: New lease cache for `usbnet0`.
+    *   `dhcpcd-usbnet0.info.old`: Old lease information for `usbnet0`.
+    *   `resolv.conf`: DNS resolver configuration, likely managed by the DHCP client.
+    *   `synodhcpcddiag.tar.gz`: Synology `dhcpcd` diagnostic archive.
+*   **`dhcpd/`**: Configuration for the DHCP server daemon (`dhcpd`).
+    *   `dhcpd-gbr0-gbr00.conf`, `dhcpd-lbr0-lbr00.conf`: DHCP server configuration for specific bridge interfaces (guest and local).
+    *   `dhcpd-gbr0-gbr00.info`, `dhcpd-lbr0-lbr00.info`: Status/information files for DHCP server instances.
+    *   `dhcpd-leases.log`: Log of DHCP leases.
+    *   `dhcpd.conf`: Main DHCP server configuration file.
+    *   `dhcpd.conf.leases`: Current DHCP lease information.
+    *   `dhcpd.info`: General DHCP server status/information.
+    *   `dhcpserver.conf`: Synology-specific DHCP server configuration.
+    *   `tmp-dhcpd-leases.log`: Temporary DHCP lease log.
+*   **`dpkg/`**: Configuration for `dpkg`, the Debian package manager.
+    *   `dpkg.cfg`: Main `dpkg` configuration file.
+    *   **`dpkg.cfg.d/`**: Directory for `dpkg` configuration snippets (found to be empty in this backup).
+*   **`firewall/`**: Directory intended for firewall configurations (found to be empty in this backup, rules likely stored elsewhere).
+*   **`fw_security/`**: Firewall security configurations.
+    *   `global.conf`: Global firewall security settings.
+    *   **`sysconf/`**: System-level firewall security configurations.
+        *   `dos.pattern`, `dosv6.pattern`: Patterns for DoS (Denial of Service) protection (IPv4 and IPv6).
+        *   `ipsec_passthrough.pattern`, `l2tp_passthrough.pattern`, `pptp_passthrough.pattern`: Patterns for VPN passthrough (IPsec, L2TP, PPTP).
+        *   `iptables_security.sh`: Script for configuring `iptables` security rules.
+*   **`hostapd/`**: Configuration for `hostapd`, the Host Access Point Daemon (for Wi-Fi access points).
+    *   `hostapd-bwlan0.conf`, `hostapd-bwlan1.conf`: Configuration for `hostapd` on specific wireless bridge interfaces.
+    *   `hostapd-wlan000-mac.list`, `hostapd-wlan100-mac.list`, `hostapd-wlan200-mac.list`: MAC address lists for filtering on specific WLAN interfaces/SSIDs.
+    *   `hostapd-wlan000.conf`, `hostapd-wlan100.conf`, `hostapd-wlan200.conf`: `hostapd` configuration for specific WLAN interfaces/SSIDs.
+    *   **`mac_filter/`**: Directory for additional MAC filter configurations (found to be empty in this backup).
+*   **`httpd/`**: Configuration for the HTTP server (likely Apache or Nginx).
+    *   **`conf/`**: Main HTTP server configuration directory.
+        *   `httpd.conf-sys`: System's main HTTP server configuration file.
+        *   `httpd.conf-user`: User-specific HTTP server configuration.
+        *   `httpd.conf-webdav`: WebDAV-specific HTTP server configuration.
+        *   `magic`: File for `mod_mime_magic` to determine MIME types from file content.
+        *   `mime.types`: Maps file extensions to MIME types.
+        *   **`extra/`**: Additional configuration files included by the main server configuration.
+            *   `dsm.TrafficReport.conf`, `traffic_report.conf`: Configuration for network traffic reporting.
+            *   `httpd-alt-port-rewrite-default.conf`, `httpd-alt-port-ssl-setting.conf`, `httpd-template-alt-port-ssl.conf`, `httpd-template-alt-port.conf`: Settings for alternative HTTP/HTTPS ports, including rewrite rules and SSL.
+            *   `httpd-autoindex.conf-sys`, `httpd-autoindex.conf-user`: Configuration for directory auto-indexing.
+            *   `httpd-default.conf-sys`, `httpd-default.conf-user`, `httpd-default.conf-webdav`: Default server configurations for system, user, and WebDAV.
+            *   `httpd-frameOptions.conf-sys`: Configuration for the `X-Frame-Options` header (clickjacking protection).
+            *   `httpd-languages.conf-sys`, `httpd-languages.conf-user`: Language preference settings.
+            *   `httpd-mpm.conf-max-connection`, `httpd-mpm.conf-sys`, `httpd-mpm.conf-user`, `httpd-mpm.conf-webdav`: Configuration for Multi-Processing Modules (MPMs), including max connections.
+            *   `httpd-proxy-autoconf.conf-user`: User proxy auto-configuration.
+            *   `httpd-reqtimeout.conf`: HTTP request timeout settings.
+            *   `httpd-ssl.conf-cipher`, `httpd-ssl.conf-common`, `httpd-ssl.conf-sys`, `httpd-ssl.conf-user`, `httpd-ssl.conf-webdav`: SSL/TLS settings, including ciphers and specific contexts.
+            *   `httpd-template-alias.conf`, `httpd-template-user-alias.conf`: Templates for URL alias configurations.
+            *   `httpd-template-quickconnect-ssl.conf`: SSL configuration template for QuickConnect.
+            *   `httpd-userdir.conf-user`: User directory (`UserDir`) configuration.
+            *   `mod_fastcgi.conf`: FastCGI module configuration.
+            *   `mod_xsendfile.conf-sys`, `mod_xsendfile.conf-user`: `mod_xsendfile` module configuration for efficient file serving.
+            *   `proxy-html.conf`: Configuration for HTML rewriting in a proxy context.
+    *   **`sites-enabled/`**: Contains configurations for enabled virtual hosts (sites).
+    *   **`sites-enabled-user/`**: User-defined enabled virtual host configurations.
+
 
 ---
 
