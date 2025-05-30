@@ -5,6 +5,25 @@ This file records architectural and implementation decisions using a list format
 
 ## Decision
 
+*   **2025-05-30 13:27:00 - Corrected analysis of `srm_backup/data/` directory (Task 1.1.2 Correction).**
+    *   **Rationale:** Initial analysis incorrectly identified `srm_backup/data/` as empty. User feedback indicated the presence of a `vendor/` subdirectory. A re-analysis was required to accurately document the contents.
+    *   **Implementation Details:**
+        *   Used `list_files` tool to investigate `srm_backup/data/vendor/` and subsequently `srm_backup/data/vendor/wifi/`.
+        *   Identified `srm_backup/data/vendor/wifi/` containing `wlfw_cal_01_qcn9000_pci0.bin` and `wlfw_cal_01.bin`.
+        *   Deduced these files are likely Wi-Fi firmware calibration data.
+        *   Updated `_documentation/structure/data.md` with the corrected findings, detailing the path and probable purpose of these files.
+        *   The documentation was written in English.
+        *   Corresponding entities for the newly found directories and files will be added to Memory MCP.
+
+*   **2025-05-30 13:20:41 - Analysis of `srm_backup/data/` directory.**
+    *   **Rationale:** To provide comprehensive documentation of the Synology SRM system backup structure as part of Task 1.1.2.
+    *   **Implementation Details:**
+        *   Utilized `list_files` to check the contents of `srm_backup/data/`.
+        *   The directory was found to be empty. (This entry is now superseded by the corrected analysis above)
+        *   Created `_documentation/structure/data.md` to document this finding and the probable purpose of the directory.
+        *   The documentation was written in English.
+        *   Added a corresponding entity to the Memory MCP for the `srm_backup/data/` directory.
+
 *   **2025-05-30 13:14:14 - Detailed analysis of `srm_backup/bin/` directory.**
     *   **Rationale:** To provide comprehensive documentation of the Synology SRM system backup structure as part of Task 1.1.1. This involves identifying files, their types (executable, symbolic link), and their probable functions.
     *   **Implementation Details:**
@@ -14,12 +33,3 @@ This file records architectural and implementation decisions using a list format
         *   Explained the meaning of `@` (symbolic link) and `*` (executable) suffixes.
         *   Translated the entire `_documentation/structure/bin.md` content to English.
         *   Added corresponding entities to the Memory MCP for each file and the directory.
-
-*   **2025-05-30 13:20:41 - Analysis of `srm_backup/data/` directory.**
-    *   **Rationale:** To provide comprehensive documentation of the Synology SRM system backup structure as part of Task 1.1.2.
-    *   **Implementation Details:**
-        *   Utilized `list_files` to check the contents of `srm_backup/data/`.
-        *   The directory was found to be empty.
-        *   Created `_documentation/structure/data.md` to document this finding and the probable purpose of the directory.
-        *   The documentation was written in English.
-        *   Added a corresponding entity to the Memory MCP for the `srm_backup/data/` directory.
