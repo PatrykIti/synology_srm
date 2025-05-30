@@ -289,6 +289,52 @@ This section details files and subdirectories found directly within `srm_backup/
             *   `etc/`:
                 *   `rc.d/`: Directory for SysV-style init scripts, though here likely used in conjunction with Upstart.
                     *   `S99xmkcgikey.sh`: A shell script, likely executed late in the boot process (S99), related to `mkcgikey` (CGI key creation).
+    *   `iproute2/`: Configuration files for the `iproute2` suite of tools, used for advanced IP routing and network device configuration.
+        *   `ematch_map`: Likely a mapping file for extended matching (ematch) modules used with `tc` (traffic control).
+        *   `rt_tables`: Defines custom routing tables.
+        *   `config/`: Contains specific configuration files for `iproute2`.
+            *   `gateway_database`: Likely stores information about configured network gateways.
+            *   `gateway_v4_priority`: Configuration for IPv4 gateway priorities (e.g., for multi-WAN setups).
+            *   `gateway_v6_priority`: Configuration for IPv6 gateway priorities.
+            *   `multi_table_config`: Configuration for multiple routing tables.
+            *   `resolv4.conf`: DNS resolver configuration specifically for IPv4, potentially used by `iproute2` scripts or related services.
+            *   `usbnet0-table-rule`: Routing table rules specific to the `usbnet0` interface (likely a USB-based network adapter, e.g., for LTE modem).
+        *   `script/`: Contains shell scripts used by `iproute2` for various network management tasks.
+            *   `dhcpcd-info-6rd-up`: Script likely executed when `dhcpcd` (DHCP client daemon) brings up a 6rd (IPv6 Rapid Deployment) tunnel, using information obtained via DHCP.
+            *   `dhcpcd-up`: A general script executed when `dhcpcd` successfully configures an interface.
+            *   `gateway-mgt-function`: Script containing functions for managing network gateways (e.g., adding, deleting, prioritizing).
+            *   `policy_routing_common_function`: Script containing common functions for implementing policy-based routing.
+    *   `ipsec.d/`: Directory for IPsec configuration, specifically for `strongSwan` or similar IPsec implementations. In this backup, the directory is empty, suggesting no custom IPsec configurations were stored here or IPsec was not heavily used/customized.
+    *   `logrotate.d/`: Contains configuration files for `logrotate`, a utility that manages log file rotation, compression, and removal. Each file typically defines rotation rules for a specific service or application:
+        *   `dhcp-client`: Log rotation for the DHCP client.
+        *   `dmesg`: Log rotation for kernel ring buffer messages (`dmesg`).
+        *   `dpkg`: Log rotation for `dpkg` (Debian package manager) logs.
+        *   `gcpd`: Log rotation for Google Cloud Print daemon (if present).
+        *   `httpd`: Log rotation for the HTTP server (Apache/Nginx-like).
+        *   `mesh`: Log rotation for Synology Mesh Wi-Fi system components.
+        *   `ngfw`: Log rotation for Next-Generation Firewall components.
+        *   `php-fpm`: Log rotation for PHP FastCGI Process Manager.
+        *   `postgresql`: Log rotation for PostgreSQL database logs.
+        *   `samba`: Log rotation for Samba (SMB/CIFS server) logs.
+        *   `scemd`: Log rotation for `scemd` (Synology System Condition Event Monitor Daemon).
+        *   `suphp`: Log rotation for suPHP (executes PHP scripts with user permissions).
+        *   `synocacheclient`: Log rotation for Synology cache client.
+        *   `synocmsclient`: Log rotation for Synology CMS (Central Management System) client.
+        *   `synodevicecored`: Log rotation for Synology device core daemon.
+        *   `synodeviced`: Log rotation for Synology device daemon.
+        *   `synofeasibilitycheck`: Log rotation for Synology feasibility check service.
+        *   `synogpoclient`: Log rotation for Synology GPO (Group Policy Object) client.
+        *   `synolog`: Log rotation for general Synology system logs.
+        *   `synomesh`: Log rotation specifically for Synology Mesh components.
+        *   `synonetd`: Log rotation for Synology network daemon.
+        *   `synopkg`: Log rotation for Synology Package Manager (`synopkg`) logs.
+        *   `synorelayd`: Log rotation for Synology relay daemon.
+        *   `synoservice`: Log rotation for general Synology services.
+        *   `synowifi`: Log rotation for Synology Wi-Fi components.
+        *   `synowolagentd`: Log rotation for Synology Wake-on-LAN agent daemon.
+        *   `syslog-ng`: Log rotation for `syslog-ng` (advanced system logging daemon).
+        *   `upstart`: Log rotation for Upstart init system logs.
+        *   `wifi`: General Wi-Fi related log rotation.
 
 ---
 
