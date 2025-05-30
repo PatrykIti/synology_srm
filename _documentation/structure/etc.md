@@ -397,14 +397,14 @@ This section details files and subdirectories found directly within `srm_backup/
         *   `revaliases`: Defines reverse aliases for sSMTP, mapping local user accounts to email addresses.
         *   `ssmtp.conf`: Main configuration file for sSMTP, specifying the mail hub, authentication details, and other sending parameters.
     *   `sudoers.d/`: Directory for `sudo` configuration snippets. This allows for modular management of `sudo` privileges by dropping files into this directory, rather than editing the main `/etc/sudoers` file directly. (Found to be empty in this backup).
-   *   `suphp/`: Configuration directory for suPHP, a tool for executing PHP scripts with the permissions of their owners.
-       *   `suphp.conf`: Main configuration file for suPHP, defining security options, handlers, and logging.
-   *   `synosyslog/`: Configuration directory for Synology's system logging daemon (likely an extension or wrapper around `syslog-ng` or a similar standard syslog daemon).
-       *   `client.conf`: Configuration for the syslog client functionality (e.g., sending logs to a remote syslog server).
-       *   `mesh.conf`: Syslog configuration specific to Synology Mesh Wi-Fi components.
-       *   `notify.conf`: Configuration for syslog-based notifications.
-       *   `notify.filter`: Filter rules for syslog notifications, determining which log messages trigger notifications.
-       *   `server.conf`: Configuration for the syslog server functionality (e.g., receiving logs from remote devices).
+    *   `suphp/`: Configuration directory for suPHP, a tool for executing PHP scripts with the permissions of their owners.
+        *   `suphp.conf`: Main configuration file for suPHP, defining security options, handlers, and logging.
+    *   `synosyslog/`: Configuration directory for Synology's system logging daemon (likely an extension or wrapper around `syslog-ng` or a similar standard syslog daemon).
+        *   `client.conf`: Configuration for the syslog client functionality (e.g., sending logs to a remote syslog server).
+        *   `mesh.conf`: Syslog configuration specific to Synology Mesh Wi-Fi components.
+        *   `notify.conf`: Configuration for syslog-based notifications.
+        *   `notify.filter`: Filter rules for syslog notifications, determining which log messages trigger notifications.
+        *   `server.conf`: Configuration for the syslog server functionality (e.g., receiving logs from remote devices).
 
 ---
 
