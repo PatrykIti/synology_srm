@@ -430,6 +430,8 @@ This section details files and subdirectories found directly within `srm_backup/
             *   `port_trigger`: Configuration file for port triggering rules.
     *   `sysctlconf/`: Directory for `sysctl` configuration files. These files contain kernel parameters that are set at boot time.
         *   `default.conf`: Default `sysctl` settings for the system.
+    *   `sysctlconf/`: Directory for `sysctl` configuration files. These files contain kernel parameters that are set at boot time.
+        *   `default.conf`: Default `sysctl` settings for the system.
 
 ---
 
