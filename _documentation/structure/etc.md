@@ -405,6 +405,31 @@ This section details files and subdirectories found directly within `srm_backup/
         *   `notify.conf`: Configuration for syslog-based notifications.
         *   `notify.filter`: Filter rules for syslog notifications, determining which log messages trigger notifications.
         *   `server.conf`: Configuration for the syslog server functionality (e.g., receiving logs from remote devices).
+    *   `sysconfig/`: Contains system configuration files, often related to network settings and startup scripts, typically found in Red Hat-based systems but sometimes adopted by others.
+        *   `clock`: Configuration file for system clock settings, such as timezone and UTC hardware clock setting.
+        *   `ebtables-config`: Configuration file for `ebtables` (Ethernet bridge frame table administration).
+        *   `network`: Global network configuration settings.
+        *   **`miniupnpd/`**: Configuration for MiniUPnPd (a lightweight UPnP daemon).
+            *   `upnp-eth0-lbr0.conf`: MiniUPnPd configuration for a mapping between `eth0` (likely a WAN interface) and `lbr0` (a local bridge).
+            *   `upnp-ppp100-lbr0.conf`: MiniUPnPd configuration for a mapping between `ppp100` (a PPP interface) and `lbr0`.
+            *   `upnp-usbnet0-lbr0.conf`: MiniUPnPd configuration for a mapping between `usbnet0` (a USB network interface) and `lbr0`.
+        *   **`network-scripts/`**: Directory containing scripts and configuration files for network interfaces.
+            *   `ifcfg-bwlan0`, `ifcfg-bwlan0.1`, `ifcfg-bwlan0.2`: Interface configuration files for wireless bridge LAN 0 and its sub-interfaces/VLANs.
+            *   `ifcfg-bwlan1`, `ifcfg-bwlan1.1`, `ifcfg-bwlan1.2`: Interface configuration files for wireless bridge LAN 1 and its sub-interfaces/VLANs.
+            *   `ifcfg-eth0`, `ifcfg-eth1`, `ifcfg-eth2`, `ifcfg-eth3`, `ifcfg-eth4`: Interface configuration files for Ethernet interfaces.
+            *   `ifcfg-gbr0`: Interface configuration for a guest bridge.
+            *   `ifcfg-lbr0`: Interface configuration for a local bridge.
+            *   `ifcfg-ppp100`: Interface configuration for a PPP interface (e.g., PPPoE WAN).
+            *   `ifcfg-sta0`, `ifcfg-sta0.1`, `ifcfg-sta0.2`: Interface configuration files for a wireless station interface (client mode) 0 and its sub-interfaces.
+            *   `ifcfg-sta1`, `ifcfg-sta1.1`, `ifcfg-sta1.2`: Interface configuration files for a wireless station interface (client mode) 1 and its sub-interfaces.
+            *   `ifcfg-tun`: Interface configuration for a tunnel interface (e.g., VPN).
+            *   `ifcfg-usbnet0`: Interface configuration for a USB network interface.
+            *   `ifcfg-wlan0`, `ifcfg-wlan1`: Interface configuration files for physical wireless LAN interfaces.
+        *   **`networking/`**: Additional networking configurations.
+            *   `ifcfg-lo`: Interface configuration for the loopback interface.
+            *   `port_trigger`: Configuration file for port triggering rules.
+    *   `sysctlconf/`: Directory for `sysctl` configuration files. These files contain kernel parameters that are set at boot time.
+        *   `default.conf`: Default `sysctl` settings for the system.
 
 ---
 
