@@ -224,4 +224,12 @@ This directory contains default configuration files for the ISC DHCP client (`dh
 | `ipv6/`               | Subdirectory specifically for IPv6 DHCP client configurations.                                                                                 |                                                                                                                                                                                                   |
 | `ipv6/dhclient.conf`  | Default configuration file for the `dhclient` when operating in IPv6 mode (DHCPv6).                                                              | Defines parameters for requesting an IPv6 address and other IPv6 configuration details, potentially including prefix delegation requests.                                                           |
 
+### `dhcpc/`
+
+This directory appears to be related to a DHCP client, possibly a different one or supplementary to `dhclient`. The naming `dhcpc` is common for DHCP client utilities.
+
+| File                    | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                                                                            |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `synodhcpcddiag.tar.gz` | A compressed tar archive (`.tar.gz`). The name suggests it contains Synology-specific (`syno`) DHCP client (`dhcpc`) diagnostic data (`diag`). This is likely used for troubleshooting DHCP client issues. | The contents of this archive would need to be examined to understand the exact nature of the diagnostic data (e.g., log files, configuration snapshots, network state information at the time of a DHCP event). |
+
 *(Further subdirectory analysis will follow)*
