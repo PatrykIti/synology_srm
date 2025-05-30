@@ -359,6 +359,25 @@ This section details files and subdirectories found directly within `srm_backup/
             *   `user-settings.ini`: Contains user-defined PHP settings that might override defaults or add specific configurations.
         *   `fpm.d/`: Directory for PHP-FPM pool definitions. This directory is empty, suggesting that FPM pools are defined in the main `php-fpm.conf` or no custom pools are used.
     *   `portforward/`: Directory intended for port forwarding configurations. This directory is empty, suggesting no manual port forwarding rules were defined here, or they are managed dynamically (e.g., via UPnP).
+    *   `postgresql/`: Configuration directory for the PostgreSQL database server.
+        *   `pg_hba.conf`: PostgreSQL Host-Based Authentication file. Controls which hosts are allowed to connect to the database and how clients are authenticated.
+        *   `pg_ident.conf`: PostgreSQL user name mapping file. Used to map operating system user names to PostgreSQL database user names.
+        *   `postgresql.conf`: The main configuration file for PostgreSQL, controlling server behavior, resource usage, logging, etc.
+    *   `ppp/`: Configuration directory for PPP (Point-to-Point Protocol) services, commonly used for dial-up, PPPoE, or VPN connections.
+        *   `ip-down`, `ip-up`: Scripts executed by `pppd` when a network interface goes down or up (for IPv4).
+        *   `ip-function`: Likely a helper script with functions for `ip-up` and `ip-down`.
+        *   `ipv6-down`, `ipv6-up`: Scripts executed by `pppd` when an IPv6 network interface goes down or up.
+        *   `options`, `options_1`, `options_2`: Configuration files for `pppd`, specifying connection parameters.
+        *   `pap-secrets`: Stores credentials for PAP (Password Authentication Protocol) authentication.
+        *   `pppoe_1.conf`, `pppoe_2.conf`, `pppoe.conf`: Configuration files for PPPoE (Point-to-Point Protocol over Ethernet) connections.
+        *   `pppoe-generate-config.py`: Python script for generating PPPoE configurations.
+        *   `resolv.conf`: DNS resolver configuration, potentially managed by `pppd` for the PPP link.
+        *   `syno_pppoe.conf`: Synology-specific PPPoE configuration file.
+    *   `rc.d/`: Directory traditionally for SysV-style init scripts. In SRM, its usage might be adapted for Upstart compatibility or specific boot tasks.
+        *   `init.d/`: Standard subdirectory for service init scripts.
+            *   `ebtables`: Init script for `ebtables`, a tool for Ethernet bridge frame filtering.
+    *   `security/`: Directory for security-related configurations.
+        *   `pam_winbind.conf`: Configuration file for the `pam_winbind` PAM module, used for integrating with Windows Active Directory via Winbind for authentication.
 
 ---
 
