@@ -350,4 +350,50 @@ This directory is intended for IPsec (Internet Protocol Security) configuration 
 | -------------- | ------------------------------------------------ | ------------------------------------------------------------------------------ |
 | (empty)        | No default IPsec configuration files are present. | This directory is **empty** in the default configuration. Specific IPsec configurations, policies, and keys would be placed in the corresponding `/etc/ipsec.d/` directory. |
 
+### `logrotate.d/`
+
+This directory contains default configuration files for `logrotate`, a utility that manages log file rotation to prevent them from growing indefinitely. Each file in this directory typically specifies how logs for a particular service or application should be handled (e.g., rotation frequency, number of old logs to keep, compression, pre/post-rotate scripts).
+
+The presence of these files indicates that the system is configured to manage logs for a variety of services. The actual log rotation is typically triggered by a cron job that runs `logrotate` with its main configuration file (usually `/etc/logrotate.conf`), which in turn includes configurations from `/etc/logrotate.d/`.
+
+| File                  | Probable Purpose                                       | Notes                                                                 |
+| --------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- |
+| `dhcp-client`         | Log rotation rules for the DHCP client.                | Manages logs related to DHCP client operations.                       |
+| `dmesg`               | Log rotation rules for kernel ring buffer messages.    | Manages `dmesg` output logs.                                          |
+| `dpkg`                | Log rotation rules for the DPKG package manager.       | Manages logs related to package installations and removals.           |
+| `gcpd`                | Log rotation rules for Google Cloud Print daemon (?).  | Likely for managing logs of a Google Cloud Print related service.     |
+| `httpd`               | Log rotation rules for the Apache HTTP server.         | Manages web server access and error logs.                             |
+| `mesh`                | Log rotation rules for Mesh network services.          | Manages logs related to Wi-Fi Mesh functionality.                     |
+| `ngfw`                | Log rotation rules for Next-Generation Firewall.       | Manages logs for firewall/security services.                          |
+| `php-fpm`             | Log rotation rules for PHP FastCGI Process Manager.    | Manages PHP-FPM logs.                                                 |
+| `postgresql`          | Log rotation rules for PostgreSQL database server.     | Manages database server logs.                                         |
+| `samba`               | Log rotation rules for Samba (SMB/CIFS file sharing).  | Manages logs for file sharing services.                               |
+| `scemd`               | Log rotation rules for SCEMD (Synology Control Engine).| Manages logs for a core Synology system daemon.                       |
+| `suphp`               | Log rotation rules for suPHP.                          | Manages logs related to suPHP execution.                              |
+| `synocacheclient`     | Log rotation rules for Synology Cache Client.          | Manages logs for a Synology caching service.                          |
+| `synocmsclient`       | Log rotation rules for Synology CMS Client.            | Manages logs for a Synology Central Management System client.         |
+| `synodevicecored`     | Log rotation rules for Synology Device Core Daemon.    | Manages logs for a core device management service.                    |
+| `synodeviced`         | Log rotation rules for Synology Device Daemon.         | Manages logs for another device-related daemon.                       |
+| `synofeasibilitycheck`| Log rotation rules for Synology Feasibility Check.     | Manages logs for a system check utility.                              |
+| `synogpoclient`       | Log rotation rules for Synology GPO Client.            | Manages logs for Group Policy Object client.                          |
+| `synolog`             | Log rotation rules for generic Synology logs.          | Could be for a central Synology logging mechanism.                    |
+| `synomesh`            | Log rotation rules for Synology Mesh services.         | Similar to `mesh`, specific to Synology's implementation.             |
+| `synonetd`            | Log rotation rules for Synology Network Daemon.        | Manages logs for a core network management service.                   |
+| `synopkg`             | Log rotation rules for Synology Package Manager.       | Manages logs related to package operations on the SRM.                |
+| `synorelayd`          | Log rotation rules for Synology Relay Daemon.          | Manages logs for a relay service (e.g., QuickConnect).                |
+| `synoservice`         | Log rotation rules for Synology Service management.    | Manages logs related to starting/stopping system services.            |
+| `synowifi`            | Log rotation rules for Synology Wi-Fi services.        | Manages logs specific to Wi-Fi functionalities.                       |
+| `synowolagentd`       | Log rotation rules for Synology Wake-on-LAN Agent.     | Manages logs for the Wake-on-LAN service.                           |
+| `syslog-ng`           | Log rotation rules for `syslog-ng` daemon.             | Manages system-wide logs collected by `syslog-ng`.                    |
+| `upstart`             | Log rotation rules for Upstart init system logs.       | Manages logs generated by the Upstart init daemon.                    |
+| `wifi`                | Log rotation rules for general Wi-Fi services.         | Potentially for lower-level Wi-Fi driver or system logs.              |
+
+### `netatalk/`
+
+This directory is intended for Netatalk configuration files. Netatalk is a free, open-source implementation of the Apple Filing Protocol (AFP), allowing Unix-like operating systems to serve as file servers for Apple Macintosh computers.
+
+| File/Directory | Probable Purpose                                    | Notes                                                                                                |
+| -------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| (empty)        | No default Netatalk configuration files are present. | This directory is **empty**. Actual configuration files like `afp.conf` would be in `/etc/netatalk/`. |
+
 *(Further subdirectory analysis will follow)*
