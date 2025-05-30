@@ -1,34 +1,34 @@
 # Synology SRM System Backup Repository
 
-To repozytorium zawiera backup systemu operacyjnego Synology SRM (Synology Router Manager), pochodzący z routera Synology. Celem tego repozytorium jest szczegółowa analiza, dokumentacja oraz zrozumienie wewnętrznej struktury i działania systemu SRM.
+This repository contains a backup of the Synology SRM (Synology Router Manager) operating system, originating from a Synology router. The purpose of this repository is to conduct detailed analysis, documentation, and understanding of the internal structure and operation of the SRM system.
 
-## Struktura Katalogów w `srm_backup/`
+## Directory Structure in `srm_backup/`
 
-Katalog `srm_backup/` zawiera kluczowe komponenty systemu Synology SRM, zorganizowane w następujący sposób:
+The `srm_backup/` directory contains key components of the Synology SRM system, organized as follows:
 
-*   **[`bin/`](srm_backup/bin):** Zawiera pliki wykonywalne (binarne) oraz skrypty systemowe. Są to podstawowe narzędzia i programy niezbędne do działania systemu.
-*   **[`data/`](srm_backup/data):** Przechowuje dane aplikacji, tymczasowe pliki danych oraz inne zasoby wykorzystywane przez system i zainstalowane pakiety.
-*   **[`etc/`](srm_backup/etc):** Katalog ten zawiera główne pliki konfiguracyjne systemu. Zmiany w tych plikach bezpośrednio wpływają na zachowanie systemu.
-*   **[`etc.defaults/`](srm_backup/etc.defaults):** Przechowuje domyślne pliki konfiguracyjne. Są to szablony, które system wykorzystuje do przywracania ustawień lub inicjalizacji nowych komponentów.
-*   **[`ini/`](srm_backup/ini):** Prawdopodobnie zawiera dodatkowe pliki inicjalizacyjne lub konfiguracyjne dla specyficznych modułów.
-*   **[`initrd/`](srm_backup/initrd):** Obraz początkowego ramdysku, używany podczas procesu bootowania systemu. Zawiera minimalny zestaw narzędzi i sterowników potrzebnych do załadowania głównego systemu plików.
-*   **[`lib/`](srm_backup/lib):** Biblioteki współdzielone (shared libraries) wymagane przez programy systemowe i aplikacje. Przykłady to `libapr-1.so`, `libboost_regex.so`, `libdbus-1.so`, `libicui18n.so`, `libip6tc.so`, `libkadm5clnt_mit.so`, `liblber-2.4.so`, `libpq.so`, `libsynoglusterfs-dsm.so`, `libsynoportmap.so`, `libsynowifidaemon.so`, `libsyslog-ng-3.5.5.so`, `libtalloc.so`.
-*   **[`lost+found/`](srm_backup/lost+found):** Standardowy katalog systemu plików Linux, przechowujący odzyskane fragmenty plików po awariach systemu.
-*   **[`mnt/`](srm_backup/mnt):** Puste punkty montowania dla tymczasowych systemów plików lub urządzeń zewnętrznych.
-*   **[`root/`](srm_backup/root):** Katalog domowy użytkownika `root`, zawierający pliki konfiguracyjne i skrypty specyficzne dla administratora (`.profile`, `.wget-hsts`).
-*   **[`run/`](srm_backup/run):** Zawiera pliki tymczasowe, identyfikatory procesów (PID files), pliki socket oraz inne dane runtime. Przykłady to `crond.pid`, `dhcp-server.pid`, `dnsmasq.pid`, `sshd.pid`, `synoconfd.pid`, pliki reguł dostępu (`access_srm_rules_v4`, `access_srm_rules_v6`), oraz podkatalogi takie jak `avahi-daemon/`, `ddns/`, `httpd/`, `ipset/`, `lock/`, `ngfw/`, `samba/`, `sudo/`, `synoservice/`, `udev/`.
-*   **[`sbin/`](srm_backup/sbin):** Zawiera systemowe pliki wykonywalne, przeznaczone głównie do zarządzania systemem przez administratora.
-*   **[`usr/`](srm_backup/usr):** Zawiera pliki użytkowe, w tym programy, biblioteki i dokumentację, z których korzystają użytkownicy i aplikacje.
-*   **[`var/`](srm_backup/var):** Przechowuje zmienne dane, takie jak pliki logów, spool, pliki tymczasowe oraz inne dane, które zmieniają się w czasie działania systemu.
-*   **[`var.defaults/`](srm_backup/var.defaults):** Domyślne zmienne dane, podobne do `var/` ale zawierające początkowe lub resetowalne konfiguracje. Wyróżniającym się elementem jest `dynlib/securityscan/ruleDB/`, który zawiera reguły skanowania bezpieczeństwa, w tym skrypty Pythona do weryfikacji konfiguracji (`DirectoryService`, `FileService`, `Malware`, `Network`, `PublicAccess`, `Security`, `SharedFolder`, `SystemCheck`, `Terminal`, `Update`, `User`).
-*   **[`volume1/`](srm_backup/volume1):** Prawdopodobnie punkt montowania dla głównego woluminu pamięci routera, gdzie przechowywane są dane użytkownika i pakiety.
+*   **[`bin/`](srm_backup/bin):** Contains executable files (binaries) and system scripts. These are the basic tools and programs necessary for system operation.
+*   **[`data/`](srm_backup/data):** Stores application data, temporary data files, and other resources used by the system and installed packages.
+*   **[`etc/`](srm_backup/etc):** This directory contains the main system configuration files. Changes to these files directly affect system behavior.
+*   **[`etc.defaults/`](srm_backup/etc.defaults):** Stores default configuration files. These are templates that the system uses to restore settings or initialize new components.
+*   **[`ini/`](srm_backup/ini):** Likely contains additional initialization or configuration files for specific modules.
+*   **[`initrd/`](srm_backup/initrd):** Initial RAM disk image, used during the system boot process. It contains a minimal set of tools and drivers needed to load the main file system.
+*   **[`lib/`](srm_backup/lib):** Shared libraries required by system programs and applications. Examples include `libapr-1.so`, `libboost_regex.so`, `libdbus-1.so`, `libicui18n.so`, `libip6tc.so`, `libkadm5clnt_mit.so`, `liblber-2.4.so`, `libpq.so`, `libsynoglusterfs-dsm.so`, `libsynoportmap.so`, `libsynowifidaemon.so`, `libsyslog-ng-3.5.5.so`, `libtalloc.so`.
+*   **[`lost+found/`](srm_backup/lost+found):** A standard Linux file system directory, storing recovered file fragments after system crashes.
+*   **[`mnt/`](srm_backup/mnt):** Empty mount points for temporary file systems or external devices.
+*   **[`root/`](srm_backup/root):** The home directory for the `root` user, containing configuration files and scripts specific to the administrator (`.profile`, `.wget-hsts`).
+*   **[`run/`](srm_backup/run):** Contains temporary files, process IDs (PID files), socket files, and other runtime data. Examples include `crond.pid`, `dhcp-server.pid`, `dnsmasq.pid`, `sshd.pid`, `synoconfd.pid`, access rule files (`access_srm_rules_v4`, `access_srm_rules_v6`), and subdirectories such as `avahi-daemon/`, `ddns/`, `httpd/`, `ipset/`, `lock/`, `ngfw/`, `samba/`, `sudo/`, `synoservice/`, `udev/`.
+*   **[`sbin/`](srm_backup/sbin):** Contains system executable files, primarily for system administration.
+*   **[`usr/`](srm_backup/usr):** Contains user files, including programs, libraries, and documentation used by users and applications.
+*   **[`var/`](srm_backup/var):** Stores variable data such as log files, spool, temporary files, and other data that changes during system operation.
+*   **[`var.defaults/`](srm_backup/var.defaults):** Default variable data, similar to `var/` but containing initial or resettable configurations. A notable element is `dynlib/securityscan/ruleDB/`, which contains security scan rules, including Python scripts for configuration verification (`DirectoryService`, `FileService`, `Malware`, `Network`, `PublicAccess`, `Security`, `SharedFolder`, `SystemCheck`, `Terminal`, `Update`, `User`).
+*   **[`volume1/`](srm_backup/volume1):** Likely the mount point for the router's main storage volume, where user data and packages are stored.
 
-## Cel Dokumentacji
+## Documentation Goal
 
-Głównym celem tego repozytorium jest stworzenie kompleksowej dokumentacji systemu Synology SRM, która pozwoli na:
-*   Zrozumienie architektury systemu.
-*   Identyfikację kluczowych komponentów i ich funkcji.
-*   Analizę mechanizmów bezpieczeństwa i konfiguracji sieciowych.
-*   Ułatwienie ewentualnych prac badawczych lub rozwojowych związanych z systemem SRM.
+The primary goal of this repository is to create comprehensive documentation for the Synology SRM system, which will allow for:
+*   Understanding the system architecture.
+*   Identification of key components and their functions.
+*   Analysis of security mechanisms and network configurations.
+*   Facilitation of potential research or development work related to the SRM system.
 
-Szczegółowa dokumentacja zostanie umieszczona w katalogu [`_documentation/`](_documentation) i będzie podzielona na podkatalogi odpowiadające głównym obszarom systemu.
+Detailed documentation will be placed in the [`_documentation/`](_documentation) directory and will be divided into subdirectories corresponding to the main areas of the system.
