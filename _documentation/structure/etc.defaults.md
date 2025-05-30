@@ -329,4 +329,25 @@ Key groups of services and individual files found:
 
 This directory is crucial for understanding the default services and their startup configurations on the SRM device.
 
+### `iproute2/`
+
+This directory contains configuration files for `iproute2`, a collection of utilities for controlling network configuration in Linux.
+
+| File/Directory | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rt_protos`    | Defines human-readable names for routing protocol numbers.                                                                                                                                                   | Standard `iproute2` file.                                                                                                                                                                                                                                       |
+| `rt_realms`    | Defines human-readable names for routing realms. Realms are used in advanced routing scenarios, often with policy-based routing.                                                                               | Standard `iproute2` file.                                                                                                                                                                                                                                       |
+| `rt_scopes`    | Defines human-readable names for routing scopes (e.g., link, host, global).                                                                                                                                  | Standard `iproute2` file.                                                                                                                                                                                                                                       |
+| `rt_tables`    | Defines human-readable names for routing tables. Linux supports multiple routing tables, and this file allows assigning names to them for easier management with `ip rule` commands.                              | Standard `iproute2` file. Often includes default tables like `local`, `main`, `default`.                                                                                                                                                                    |
+| `rt_dsfield`   | Defines human-readable names for Differentiated Services Code Point (DSCP) values used in Quality of Service (QoS) marking.                                                                                  | Standard `iproute2` file.                                                                                                                                                                                                                                       |
+| `ematch_map`   | Maps extended match (ematch) names to their corresponding library files for use with `tc` (traffic control).                                                                                                 | Standard `iproute2` file, used for advanced traffic shaping and classification.                                                                                                                                                                 |
+
+### `ipsec.d/`
+
+This directory is intended for IPsec (Internet Protocol Security) configuration files, typically used for setting up VPNs. It often contains subdirectories for certificates (`cacerts/`, `certs/`, `private/`) and policy files.
+
+| File/Directory | Probable Purpose                                 | Notes                                                                          |
+| -------------- | ------------------------------------------------ | ------------------------------------------------------------------------------ |
+| (empty)        | No default IPsec configuration files are present. | This directory is **empty** in the default configuration. Specific IPsec configurations, policies, and keys would be placed in the corresponding `/etc/ipsec.d/` directory. |
+
 *(Further subdirectory analysis will follow)*
