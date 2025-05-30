@@ -257,6 +257,38 @@ This section details files and subdirectories found directly within `srm_backup/
     *   `nss_loader.conf`: Job for loading Name Service Switch (NSS) modules.
     *   `ntpd.conf`: Job for starting the NTP daemon (`ntpd`).
     *   `ntpsync.conf`: Job for NTP time synchronization.
+    *   `opentftp.conf`: Job for starting the OpenTFTP server.
+    *   `pgsql-adapter.conf`: Adapter configuration for PostgreSQL.
+    *   `pluto.conf`: Job for starting the Pluto daemon (IPsec).
+    *   `pppd-options.conf`: Configuration for PPP daemon (`pppd`) options.
+    *   `pppoe-relay.conf`: Job for PPPoE relay.
+    *   `rsyncd.conf`: Job for starting the `rsyncd` daemon (rsync server).
+    *   `samba.conf`: Main Samba configuration job.
+    *   `sftpd.conf`: Job for starting the SFTP daemon.
+    *   `smbd.conf`: Job for starting the `smbd` daemon (Samba file and print sharing).
+    *   `snmpd.conf`: Job for starting the SNMP daemon (`snmpd`).
+    *   `sshd.conf`: Job for starting the SSH daemon (`sshd`).
+    *   `statd.conf`: Job for starting the `statd` daemon (NFS status monitor).
+    *   `syslog-ng.conf`: Main `syslog-ng` configuration job.
+    *   `system.conf`: General system job.
+    *   `tftpd.conf`: Job for starting the TFTP daemon.
+    *   `time.conf`: Job related to system time.
+    *   `tty.conf`: Configuration for TTY terminals.
+    *   `udev-finish.conf`: Job for finishing `udev` configuration.
+    *   `udev-start.conf`: Job for starting `udev` configuration.
+    *   `udev-trigger.conf`: Job for triggering `udev` events.
+    *   `upnpd.conf`: Job for starting the UPnP daemon.
+    *   `usbipd.conf`: Job for starting the `usbipd` daemon (USB over IP).
+    *   `usbmount.conf`: Job for USB device mounting.
+    *   `webdavd.conf`: Job for starting the WebDAV daemon.
+    *   `winbindd.conf`: Job for starting the `winbindd` daemon (Samba's Windows domain integration).
+    *   `wpa_supplicant.conf`: Job for starting `wpa_supplicant` (Wi-Fi client).
+    *   `zdummy.conf`: Likely a placeholder or dummy configuration file.
+    *   `usr/`: Contains further Synology-specific Upstart job configurations.
+        *   `syno/`:
+            *   `etc/`:
+                *   `rc.d/`: Directory for SysV-style init scripts, though here likely used in conjunction with Upstart.
+                    *   `S99xmkcgikey.sh`: A shell script, likely executed late in the boot process (S99), related to `mkcgikey` (CGI key creation).
 
 ---
 
