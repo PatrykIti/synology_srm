@@ -1,4 +1,4 @@
-# Synology SRM System Analysis and Documentation Plan
+i# Synology SRM System Analysis and Documentation Plan
 
 This document outlines a detailed plan for the analysis and documentation of the Synology SRM system, a backup of which is located in the `srm_backup/` directory. The goal is to create a comprehensive knowledge base about the system's structure, functionality, and configuration.
 

@@ -1,199 +1,199 @@
-# Struktura katalogu `srm_backup/bin/`
+# Structure of `srm_backup/bin/` directory
 
-Ten plik zawiera szczegółową analizę zawartości katalogu `srm_backup/bin/`, wraz z opisem przeznaczenia każdego pliku i podkatalogu.
+This file contains a detailed analysis of the contents of the `srm_backup/bin/` directory, along with a description of the purpose of each file and subdirectory.
 
-## Zawartość katalogu `srm_backup/bin/ `
+## Contents of `srm_backup/bin/`
 
-Poniżej znajduje się lista plików i podkatalogów znalezionych w `srm_backup/bin/` wraz z ich prawdopodobnym przeznaczeniem w systemie Synology SRM. Znak `@` na końcu nazwy pliku wskazuje na dowiązanie symboliczne (symbolic link), co oznacza, że plik jest w rzeczywistości linkiem do innego pliku, często znajdującego się w `busybox`.
+Below is a list of files and subdirectories found in `srm_backup/bin/` along with their probable purpose in the Synology SRM system. The `@` character at the end of a filename indicates a symbolic link, meaning the file is actually a link to another file, often located within `busybox`.
 
 *   **`ash@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do interpretera poleceń (shell), prawdopodobnie do `busybox`. `ash` (Almquist shell) to lekki shell, często używany w systemach wbudowanych. Służy do wykonywania skryptów shellowych i interaktywnej pracy w wierszu poleceń.
+    *   **Probable purpose:** A symbolic link to a command interpreter (shell), likely to `busybox`. `ash` (Almquist shell) is a lightweight shell often used in embedded systems. It is used to execute shell scripts and for interactive command-line work.
 
 *   **`busybox*`**
-    *   **Prawdopodobne przeznaczenie:** Jest to pojedynczy plik wykonywalny, który łączy w sobie wiele popularnych narzędzi UNIX-owych (takich jak `ls`, `cp`, `mv`, `grep`, `tar` itp.). W systemie Synology SRM, BusyBox jest często używany do zapewnienia podstawowych funkcji systemowych i narzędzi w środowiskach z ograniczonymi zasobami, minimalizując rozmiar systemu operacyjnego. Służy jako uniwersalne narzędzie do wykonywania wielu podstawowych operacji systemowych. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** This is a single executable file that combines many popular UNIX tools (such as `ls`, `cp`, `mv`, `grep`, `tar`, etc.). In Synology SRM, BusyBox is often used to provide basic system functions and tools in resource-constrained environments, minimizing the operating system size. It serves as a universal tool for performing many basic system operations. The asterisk `*` indicates that it is an executable file.
 
 *   **`cat@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `cat` służy do wyświetlania zawartości plików tekstowych na standardowe wyjście, łączenia plików oraz tworzenia nowych plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `cat` utility is used to display the contents of text files to standard output, concatenate files, and create new files.
 
 *   **`catv@`**
-    *   **Prawdopodobne przeznaczenie:** Prawdopodobnie dowiązanie symboliczne do `busybox` lub specjalizowana wersja `cat`. Może służyć do wyświetlania zawartości plików z wizualizacją znaków niedrukowalnych.
+    *   **Probable purpose:** Likely a symbolic link to `busybox` or a specialized version of `cat`. It may be used to display file contents with visualization of non-printable characters.
 
 *   **`chgrp@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `chgrp` służy do zmiany grupy właściciela plików lub katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `chgrp` utility is used to change the group ownership of files or directories.
 
 *   **`chmod@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `chmod` służy do zmiany uprawnień dostępu do plików lub katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `chmod` utility is used to change file or directory permissions.
 
 *   **`chown@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `chown` służy do zmiany właściciela plików lub katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `chown` utility is used to change the owner of files or directories.
 
 *   **`cp@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `cp` służy do kopiowania plików i katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `cp` utility is used to copy files and directories.
 
 *   **`date@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `date` służy do wyświetlania lub ustawiania daty i czasu systemowego.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `date` utility is used to display or set the system date and time.
 
 *   **`dd@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `dd` służy do konwersji i kopiowania plików na niskim poziomie, często używane do tworzenia obrazów dysków lub kopiowania danych blok po bloku.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `dd` utility is used for low-level file conversion and copying, often used for creating disk images or copying data block by block.
 
 *   **`df@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `df` służy do wyświetlania informacji o zajętości przestrzeni dyskowej w systemie plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `df` utility is used to display information about disk space usage in the file system.
 
 *   **`dmesg@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `dmesg` służy do wyświetlania komunikatów z bufora jądra systemu, co jest przydatne do diagnostyki sprzętu i sterowników.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `dmesg` utility is used to display messages from the kernel ring buffer, which is useful for hardware and driver diagnostics.
 
 *   **`dnsdomainname@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `dnsdomainname` służy do wyświetlania nazwy domeny DNS systemu.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `dnsdomainname` utility is used to display the system's DNS domain name.
 
 *   **`echo@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `echo` służy do wyświetlania tekstu lub zmiennych na standardowe wyjście.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `echo` utility is used to display text or variables to standard output.
 
 *   **`egrep@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `egrep` jest wersją `grep` obsługującą rozszerzone wyrażenia regularne. Służy do wyszukiwania wzorców w plikach.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `egrep` utility is a version of `grep` that supports extended regular expressions. It is used for searching patterns in files.
 
 *   **`false@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `false` zawsze zwraca status wyjścia niezerowy (błąd), używane w skryptach shellowych do warunkowego sterowania przepływem.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `false` utility always returns a non-zero exit status (error), used in shell scripts for conditional flow control.
 
 *   **`fgrep@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `fgrep` jest wersją `grep` do wyszukiwania stałych ciągów znaków (bez wyrażeń regularnych).
+    *   **Probable purpose:** A symbolic link to `busybox`. The `fgrep` utility is a version of `grep` for searching fixed strings (without regular expressions).
 
 *   **`get_key_value@`**
-    *   **Prawdopodobne przeznaczenie:** Prawdopodobnie dowiązanie symboliczne do `busybox` lub niestandardowe narzędzie Synology. Może służyć do odczytywania wartości z plików konfiguracyjnych w formacie klucz-wartość.
+    *   **Probable purpose:** Likely a symbolic link to `busybox` or a custom Synology tool. It may be used to read values from key-value formatted configuration files.
 
 *   **`getopt@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `getopt` służy do parsowania opcji wiersza poleceń, ułatwiając pisanie skryptów shellowych z obsługą argumentów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `getopt` utility is used for parsing command-line options, making it easier to write shell scripts with argument handling.
 
 *   **`grep@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `grep` służy do wyszukiwania wzorców (tekstu) w plikach.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `grep` utility is used for searching patterns (text) in files.
 
 *   **`gunzip@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `gunzip` służy do dekompresji plików skompresowanych za pomocą `gzip`.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `gunzip` utility is used to decompress files compressed with `gzip`.
 
 *   **`gzip@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `gzip` służy do kompresji plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `gzip` utility is used to compress files.
 
 *   **`hostname@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `hostname` służy do wyświetlania lub ustawiania nazwy hosta systemu.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `hostname` utility is used to display or set the system's hostname.
 
 *   **`ip*`**
-    *   **Prawdopodobne przeznaczenie:** Standardowe narzędzie w systemach Linux do zarządzania i konfiguracji interfejsów sieciowych, routingiem, politykami routingu, tunelami itp. W Synology SRM będzie używany do zarządzania siecią urządzenia, konfiguracji adresów IP, tras sieciowych i innych parametrów związanych z łącznością. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** A standard Linux utility for managing and configuring network interfaces, routing, routing policies, tunnels, etc. In Synology SRM, it will be used for managing the device's network, configuring IP addresses, network routes, and other connectivity-related parameters. The asterisk `*` indicates that it is an executable file.
 
 *   **`ipcalc@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox` lub narzędzie do obliczeń związanych z adresacją IP (np. maska podsieci, adres sieci, adres rozgłoszeniowy). Może być używane do walidacji lub generowania konfiguracji sieciowych.
+    *   **Probable purpose:** A symbolic link to `busybox` or a tool for IP address calculations (e.g., subnet mask, network address, broadcast address). It may be used for validating or generating network configurations.
 
 *   **`jq*`**
-    *   **Prawdopodobne przeznaczenie:** Lekki i elastyczny procesor JSON w wierszu poleceń. W Synology SRM może być używany do parsowania, filtrowania i manipulowania danymi JSON, które są często wykorzystywane w konfiguracjach, logach, danych zwracanych przez API systemowe lub do interakcji z usługami webowymi. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** A lightweight and flexible command-line JSON processor. In Synology SRM, it can be used for parsing, filtering, and manipulating JSON data, which is often used in configurations, logs, data returned by system APIs, or for interacting with web services. The asterisk `*` indicates that it is an executable file.
 
 *   **`kill@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `kill` służy do wysyłania sygnałów do procesów, najczęściej w celu ich zakończenia.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `kill` utility is used to send signals to processes, most commonly to terminate them.
 
 *   **`killps@`**
-    *   **Prawdopodobne przeznaczenie:** Prawdopodobnie dowiązanie symboliczne do `busybox` lub niestandardowe narzędzie Synology. Może być skryptem lub aliasem ułatwiającym zabijanie procesów, np. wszystkich procesów o danej nazwie.
+    *   **Probable purpose:** Likely a symbolic link to `busybox` or a custom Synology tool. It may be a script or alias that simplifies killing processes, e.g., all processes with a given name.
 
 *   **`ln@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `ln` służy do tworzenia dowiązań (linków) do plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `ln` utility is used to create links to files.
 
 *   **`login@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `login` służy do logowania użytkowników do systemu.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `login` utility is used for logging users into the system.
 
 *   **`ls@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `ls` służy do listowania zawartości katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `ls` utility is used to list directory contents.
 
 *   **`mkdir@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `mkdir` służy do tworzenia katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `mkdir` utility is used to create directories.
 
 *   **`mknod@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `mknod` służy do tworzenia specjalnych plików (np. urządzeń blokowych, znakowych, potoków nazwanych).
+    *   **Probable purpose:** A symbolic link to `busybox`. The `mknod` utility is used to create special files (e.g., block devices, character devices, named pipes).
 
 *   **`more@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `more` służy do paginacji zawartości plików tekstowych, umożliwiając przeglądanie ich strona po stronie.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `more` utility is used for paginating text file contents, allowing them to be viewed page by page.
 
 *   **`mount@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `mount` służy do montowania systemów plików (np. dysków, partycji).
+    *   **Probable purpose:** A symbolic link to `busybox`. The `mount` utility is used to mount file systems (e.g., disks, partitions).
 
 *   **`mv@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `mv` służy do przenoszenia lub zmiany nazwy plików i katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `mv` utility is used to move or rename files and directories.
 
 *   **`netstat@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `netstat` służy do wyświetlania połączeń sieciowych, tablic routingu, statystyk interfejsów itp.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `netstat` utility is used to display network connections, routing tables, interface statistics, etc.
 
 *   **`nice@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `nice` służy do uruchamiania programów ze zmienionym priorytetem, wpływając na ich harmonogramowanie przez jądro.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `nice` utility is used to run programs with a modified priority, affecting their scheduling by the kernel.
 
 *   **`ntfs-3g*`**
-    *   **Prawdopodobne przeznaczenie:** Jest to sterownik i zestaw narzędzi do odczytu i zapisu na partycjach systemu plików NTFS (New Technology File System), używanego głównie w systemach Windows. W Synology SRM, `ntfs-3g` jest kluczowy do obsługi zewnętrznych dysków twardych sformatowanych w NTFS, umożliwiając odczyt i zapis danych z tych dysków. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** This is a driver and set of tools for reading and writing to NTFS (New Technology File System) partitions, primarily used in Windows systems. In Synology SRM, `ntfs-3g` is crucial for handling external hard drives formatted in NTFS, enabling reading and writing data from these drives. The asterisk `*` indicates that it is an executable file.
 
 *   **`ntfs-3g.probe*`**
-    *   **Prawdopodobne przeznaczenie:** Narzędzie pomocnicze dla `ntfs-3g`, używane do sondowania (probe) partycji i wykrywania, czy są one sformatowane jako NTFS. Prawdopodobnie używane do automatycznego montowania lub sprawdzania integralności dysków NTFS podłączanych do urządzenia Synology SRM. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** A helper tool for `ntfs-3g`, used to probe partitions and detect if they are formatted as NTFS. Likely used for automatic mounting or checking the integrity of NTFS drives connected to the Synology SRM device. The asterisk `*` indicates that it is an executable file.
 
 *   **`pidof@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `pidof` służy do znajdowania PID (Process ID) uruchomionych programów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `pidof` utility is used to find the PID (Process ID) of running programs.
 
 *   **`ping@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `ping` służy do sprawdzania łączności sieciowej z hostem.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `ping` utility is used to check network connectivity to a host.
 
 *   **`ping6@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Wersja `ping` dla protokołu IPv6.
+    *   **Probable purpose:** A symbolic link to `busybox`. This is the `ping` version for IPv6 protocol.
 
 *   **`proxy*`**
-    *   **Prawdopodobne przeznaczenie:** Nazwa wskazuje, że może to być plik wykonywalny związany z serwerem proxy lub narzędziem do zarządzania połączeniami sieciowymi. W kontekście Synology SRM, może być używany do obsługi przekierowywania portów, serwera proxy dla usług sieciowych (np. Web Proxy, Reverse Proxy), lub innych funkcji związanych z pośredniczeniem w ruchu sieciowym w celu zwiększenia bezpieczeństwa lub optymalizacji dostępu do zasobów. Gwiazdka `*` oznacza, że jest to plik wykonywalny.
+    *   **Probable purpose:** The name indicates that this might be an executable file related to a proxy server or a network connection management tool. In the context of Synology SRM, it could be used for handling port forwarding, a proxy server for network services (e.g., Web Proxy, Reverse Proxy), or other functions related to mediating network traffic for security or resource access optimization. The asterisk `*` indicates that it is an executable file.
 
 *   **`ps@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `ps` służy do wyświetlania informacji o aktualnie uruchomionych procesach.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `ps` utility is used to display information about currently running processes.
 
 *   **`pwd@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `pwd` służy do wyświetlania bieżącego katalogu roboczego.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `pwd` utility is used to display the current working directory.
 
 *   **`rm@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `rm` służy do usuwania plików i katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `rm` utility is used to remove files and directories.
 
 *   **`rmdir@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `rmdir` służy do usuwania pustych katalogów.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `rmdir` utility is used to remove empty directories.
 
 *   **`run-parts@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `run-parts` służy do wykonywania skryptów w katalogu. Często używane do zarządzania skryptami startowymi lub cronem.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `run-parts` utility is used to execute scripts in a directory. Often used for managing startup scripts or cron jobs.
 
 *   **`sed@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `sed` (Stream Editor) służy do filtrowania i transformowania tekstu.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `sed` (Stream Editor) utility is used for filtering and transforming text.
 
 *   **`sh@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Jest to kolejny interpreter poleceń (shell), często symboliczny link do `ash` lub `bash`.
+    *   **Probable purpose:** A symbolic link to `busybox`. This is another command interpreter (shell), often a symbolic link to `ash` or `bash`.
 
 *   **`sleep@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `sleep` służy do wstrzymywania wykonania na określony czas.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `sleep` utility is used to pause execution for a specified duration.
 
 *   **`stat@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `stat` służy do wyświetlania szczegółowych informacji o pliku lub systemie plików (np. rozmiar, uprawnienia, daty modyfikacji).
+    *   **Probable purpose:** A symbolic link to `busybox`. The `stat` utility is used to display detailed information about a file or file system (e.g., size, permissions, modification dates).
 
 *   **`stty@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `stty` służy do ustawiania i wyświetlania opcji terminala.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `stty` utility is used to set and display terminal options.
 
 *   **`su@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `su` (substitute user) służy do zmiany identyfikatora użytkownika podczas sesji.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `su` (substitute user) utility is used to change the user ID during a session.
 
 *   **`sync@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `sync` służy do wymuszania zapisu buforowanych danych na dysk.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `sync` utility is used to force buffered data to be written to disk.
 
 *   **`tar@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `tar` służy do archiwizowania i dearchiwizowania plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `tar` utility is used for archiving and unarchiving files.
 
 *   **`touch@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `touch` służy do zmiany daty ostatniego dostępu/modyfikacji pliku lub tworzenia pustych plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `touch` utility is used to change the access/modification times of a file or to create empty files.
 
 *   **`true@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `true` zawsze zwraca status wyjścia zero (sukces), używane w skryptach shellowych do warunkowego sterowania przepływem.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `true` utility always returns a zero exit status (success), used in shell scripts for conditional flow control.
 
 *   **`umount@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `umount` służy do odmontowywania systemów plików.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `umount` utility is used to unmount file systems.
 
 *   **`uname@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `uname` służy do wyświetlania informacji o systemie operacyjnym (np. nazwa jądra, wersja).
+    *   **Probable purpose:** A symbolic link to `busybox`. The `uname` utility is used to display system operating system information (e.g., kernel name, version).
 
 *   **`usleep@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `usleep` służy do wstrzymywania wykonania na określoną liczbę mikrosekund.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `usleep` utility is used to pause execution for a specified number of microseconds.
 
 *   **`vi@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Jest to prosty edytor tekstu w trybie terminala, często używany do szybkiej edycji plików konfiguracyjnych lub skryptów.
+    *   **Probable purpose:** A symbolic link to `busybox`. This is a simple terminal-based text editor, often used for quick editing of configuration files or scripts.
 
 *   **`zcat@`**
-    *   **Prawdopodobne przeznaczenie:** Dowiązanie symboliczne do `busybox`. Narzędzie `zcat` służy do wyświetlania zawartości skompresowanych plików (np. `.gz`) bez konieczności ich wcześniejszej dekompresji.
+    *   **Probable purpose:** A symbolic link to `busybox`. The `zcat` utility is used to display the contents of compressed files (e.g., `.gz`) without needing to decompress them first.
