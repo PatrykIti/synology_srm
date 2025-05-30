@@ -1,24 +1,43 @@
-# `/srm_backup/data/` Directory Analysis
+# `srm_backup/data/` Directory Analysis
 
-**Last Updated:** 2025-05-30
+The `srm_backup/data/` directory appears to store vendor-specific or module-specific configuration and calibration data for the Synology SRM system.
 
-## Overview
+## Directory Structure
 
-The `/srm_backup/data/` directory is part of the Synology SRM (Synology Router Manager) system backup.
+```
+srm_backup/data/
+└── vendor/
+    └── wifi/
+        ├── wlfw_cal_01_qcn9000_pci0.bin
+        └── wlfw_cal_01.bin
+```
 
-Based on the analysis performed, this directory was found to be **empty**.
+## Contents
 
-## Structure and Content
+### `srm_backup/data/`
 
-*   **`srm_backup/data/`**:
-    *   **Type:** Directory
-    *   **Content:** Empty
-    *   **Probable Purpose:** This directory is likely intended to store various data files related to the SRM's configuration, user data, or application data. However, in this specific backup instance, it contains no files or subdirectories. The reason for it being empty could be due to several factors:
-        *   No relevant data was present on the SRM device at the time of backup.
-        *   The specific backup configuration excluded data from this location.
-        *   The data typically stored here is transient and was not captured.
-        *   It might be a placeholder for future data storage or for specific packages/applications that were not installed or configured.
+*   **`vendor/`**: This subdirectory likely contains data provided by or specific to hardware vendors whose components are used in the Synology SRM device.
 
-## Further Analysis
+### `srm_backup/data/vendor/`
 
-Since the directory is empty, no further analysis of its contents is possible. If future backups show content in this directory, a re-analysis will be necessary.
+*   **`wifi/`**: This subdirectory strongly suggests it holds data related to the Wi-Fi subsystem of the router.
+
+### `srm_backup/data/vendor/wifi/`
+
+*   **`wlfw_cal_01_qcn9000_pci0.bin`**:
+    *   **Type**: Binary file (`.bin`)
+    *   **Probable Purpose**: Wi-Fi firmware calibration data. The name components suggest:
+        *   `wlfw`: Wireless Firmware.
+        *   `cal`: Calibration.
+        *   `qcn9000`: Likely refers to a Qualcomm Atheros QCN9000 series Wi-Fi chipset (a Wi-Fi 6/6E chipset).
+        *   `pci0`: May indicate the specific PCI bus or device instance.
+    *   **Function**: This file likely stores hardware-specific calibration data for the Wi-Fi radio, essential for optimal performance, regulatory compliance (e.g., power levels, channel usage), and stability of the wireless network. Such data is often unique to each physical device or batch.
+
+*   **`wlfw_cal_01.bin`**:
+    *   **Type**: Binary file (`.bin`)
+    *   **Probable Purpose**: General or alternative Wi-Fi firmware calibration data.
+    *   **Function**: Similar to the file above, this likely contains calibration data for the Wi-Fi firmware. It might be a more generic calibration file, a calibration for a different radio/band, or a fallback calibration. The `_01` might indicate a version or a primary calibration set.
+
+## Summary
+
+The `srm_backup/data/` directory, through its `vendor/wifi/` path, stores critical binary files that are most likely Wi-Fi firmware calibration data. These files are essential for the correct and optimal operation of the Synology SRM router's wireless functionalities. Losing or corrupting these files could lead to Wi-Fi performance issues or complete Wi-Fi failure. They are a crucial part of the system's low-level hardware configuration.
