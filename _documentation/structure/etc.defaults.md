@@ -1,0 +1,173 @@
+# `/srm_backup/etc.defaults/` Directory Analysis
+
+The `/srm_backup/etc.defaults/` directory contains the default configuration files for various system services and applications on the Synology SRM device. These files are used as templates or fallbacks if the corresponding user-modified configurations in `/srm_backup/etc/` are missing or corrupted.
+
+This document provides an analysis of the files and subdirectories found within `/srm_backup/etc.defaults/`.
+
+## Direct Files in `/srm_backup/etc.defaults/`
+
+This section lists and describes the files found directly within the `/srm_backup/etc.defaults/` directory.
+
+| File                 | Probable Purpose                                                                                                | Notes                                                                      |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `afp.conf`           | Default configuration for the Apple Filing Protocol (AFP) service, used for file sharing with macOS devices.    | Likely defines default shares, guest access, and other AFP settings.         |
+| `AHAtasks`           | Potentially related to scheduled tasks or high availability (HA) processes. "AHA" might stand for "Another HA". | Needs further investigation, possibly by reading its content.             |
+| `ca-certificates.conf` | Configuration for Certificate Authority (CA) certificates.                                                      | Manages trusted CAs for SSL/TLS connections.                               |
+| `crontab`            | Default system-wide crontab file for scheduling recurring tasks.                                                | Contains default cron jobs for system maintenance and operations.          |
+| `ddns_provider.conf` | Configuration for Dynamic DNS (DDNS) providers.                                                                 | Lists available DDNS providers and their settings.                         |
+| `ddns.conf`          | Default configuration for the DDNS client.                                                                      | Defines how the system updates its IP address with DDNS services.          |
+| `ethertypes`         | Defines Ethernet protocol type numbers.                                                                         | Standard Linux/Unix file.                                                  |
+| `extmap.conf`        | Likely related to external device mapping or extended attributes.                                               | Purpose unclear without content analysis.                                  |
+| `fstab`              | Default file system table, defining how disk partitions, various other block devices, or remote filesystems are mounted into the filesystem. | Crucial for system boot and mounting storage.                              |
+| `ftpusers`           | List of users denied FTP access.                                                                                | Security measure for the FTP service.                                      |
+| `fuse.conf`          | Configuration for Filesystem in Userspace (FUSE).                                                               | Allows non-privileged users to create their own filesystems.               |
+| `grinst-common.sh`   | A shell script, likely part of the Synology installation or upgrade process ("grinst" might relate to "generic installer"). | Common functions for installation scripts.                               |
+| `group`              | Default list of user groups.                                                                                    | Standard Linux/Unix file, defines group IDs and members.                   |
+| `group_desc`         | Descriptions for user groups.                                                                                   | Synology-specific, provides human-readable descriptions for groups.        |
+| `gssapi_mech.conf`   | Configuration for GSSAPI (Generic Security Service Application Program Interface) mechanisms.                     | Relates to authentication services like Kerberos.                          |
+| `host.conf`          | Configuration for resolver libraries, specifies how host lookups are performed.                                 | Standard Linux/Unix file.                                                  |
+| `hostname`           | Default hostname for the device.                                                                                |                                                                            |
+| `hosts`              | Static table lookup for hostnames.                                                                              | Maps IP addresses to hostnames. Standard Linux/Unix file.                  |
+| `hosts.allow`        | Rules for allowing access to network services (used by TCP Wrappers).                                           | Security configuration.                                                    |
+| `hosts.deny`         | Rules for denying access to network services (used by TCP Wrappers).                                            | Security configuration.                                                    |
+| `idmapd.conf`        | Configuration for the NFSv4 ID Mapping Daemon.                                                                  | Maps NFSv4 user/group names to local UIDs/GIDs.                          |
+| `inetd.conf`         | Configuration for the `inetd` super-server, which manages internet services.                                    | Defines which services `inetd` should listen for and start.                |
+| `installer.sh`       | A shell script, likely part of the system installation or package installation process.                         |                                                                            |
+| `lftp.conf`          | Default configuration for the `lftp` command-line FTP client.                                                   |                                                                            |
+| `localtime`          | Symbolic link or copy of the current system timezone file.                                                      | Determines the local time settings.                                        |
+| `logrotate.conf`     | Default configuration for `logrotate`, a utility that manages log file rotation.                                | Defines how system logs are rotated, compressed, and removed.              |
+| `mke2fs.conf`        | Configuration for `mke2fs`, used when creating ext2/ext3/ext4 filesystems.                                      | Defines default parameters for new filesystems.                            |
+| `modules.conf`       | Potentially an alias for or related to `modprobe.conf` or files in `modprobe.d`, for kernel module configuration. | Specifies options for kernel modules.                                      |
+| `mtab`               | List of currently mounted filesystems. Often a symbolic link to `/proc/mounts`.                                 | Provides a snapshot of the current mount points.                           |
+| `netconfig`          | General network configuration settings.                                                                         | May contain various network parameters.                                    |
+| `newdisk.sh`         | Shell script, likely for initializing or setting up new disks.                                                  |                                                                            |
+| `nsswitch.conf`      | Name Service Switch configuration, determines sources for various system databases (e.g., `passwd`, `group`, `hosts`). | Standard Linux/Unix file.                                                  |
+| `ntp.conf`           | Default configuration for the Network Time Protocol (NTP) client/server.                                        | Defines NTP servers and synchronization settings.                          |
+| `ntp.conf.user`      | User-specific NTP configuration, possibly overriding or extending `ntp.conf`.                                   |                                                                            |
+| `passwd`             | Default user account information (usernames, UIDs, GIDs, home directories, shells).                             | Standard Linux/Unix file. Passwords are usually in `shadow`.               |
+| `profile`            | System-wide environment and startup programs for login shells.                                                  | Executed when a user logs in. Standard Linux/Unix file.                    |
+| `protocols`          | Defines various DARPA Internet protocols.                                                                       | Standard Linux/Unix file.                                                  |
+| `rc`                 | Main runlevel control script or a directory containing runlevel scripts (System V init style).                  | Manages startup and shutdown of services.                                  |
+| `rc.check_device_busy` | Shell script, likely checks if a device is busy before performing an operation (e.g., unmounting).            | Part of system scripts.                                                    |
+| `rc.check_device_busy2`| Another shell script for checking device busy state, possibly a newer or alternative version.                   | Part of system scripts.                                                    |
+| `rc.crypto`          | Shell script for managing cryptographic services or hardware.                                                   | Part of system scripts.                                                    |
+| `rc.fan`             | Shell script for controlling fan speed and temperature management.                                              | Part of system scripts.                                                    |
+| `rc.network`         | Main network initialization script.                                                                             | Configures network interfaces, routing, etc. Part of system scripts.       |
+| `rc.network_routing` | Shell script specifically for network routing configuration.                                                    | Part of system scripts.                                                    |
+| `rc.network.driver`  | Shell script related to network driver loading or configuration.                                                | Part of system scripts.                                                    |
+| `rc.scanusbdev`      | Shell script for scanning and configuring USB devices.                                                          | Part of system scripts.                                                    |
+| `rc.subr`            | Library of shell functions used by other `rc` scripts.                                                          | Common utilities for startup scripts.                                      |
+| `rc.volume`          | Shell script for managing storage volumes.                                                                      | Part of system scripts.                                                    |
+| `rc.wifi`            | Shell script for Wi-Fi network configuration and management.                                                    | Part of system scripts.                                                    |
+| `rc.wifi.common`     | Common functions or settings for Wi-Fi related `rc` scripts.                                                    | Part of system scripts.                                                    |
+| `resolv.conf`        | Resolver configuration file, specifies DNS servers.                                                             | Crucial for domain name resolution.                                        |
+| `rsyncd.conf`        | Default configuration for the `rsync` daemon.                                                                   | Defines rsync modules and access permissions.                              |
+| `rsyncd.secrets`     | File for storing `rsync` daemon usernames and passwords.                                                        | Sensitive file, should have restricted permissions.                        |
+| `securetty`          | Lists TTY devices where root login is allowed.                                                                  | Security measure.                                                          |
+| `services`           | Defines network service names and their port numbers/protocols.                                                 | Standard Linux/Unix file.                                                  |
+| `shadow`             | Default shadowed password file, contains encrypted passwords and account expiry information.                      | Standard Linux/Unix file. Highly sensitive.                                |
+| `shells`             | Lists valid login shells.                                                                                       | Standard Linux/Unix file.                                                  |
+| `sudoers`            | Default configuration for `sudo`, defining which users/groups can run commands as root or other users.          | Crucial for privilege management. Syntax is strict.                        |
+| `support_ssd.db`     | A database file, likely related to SSD support, TRIM, or compatibility lists.                                   | Specific to Synology.                                                      |
+| `synogrinst.sh`      | Synology-specific generic installation script. Similar to `grinst-common.sh` but possibly more top-level.       | Part of Synology's software management.                                    |
+| `synoinfo.conf`      | Key system information and configuration parameters for the Synology device.                                    | Central Synology configuration file. Contains model info, serials, etc.    |
+| `synonetbkp.conf`    | Configuration for Synology network backup services.                                                             |                                                                            |
+| `synopackageslimit.conf` | Configuration limiting Synology packages, perhaps resource limits or installation restrictions.               |                                                                            |
+| `synouser.conf`      | Configuration related to Synology user management or user-specific settings.                                    |                                                                            |
+| `sysctl.conf`        | Default kernel parameters to be set at boot time using `sysctl`.                                                | Fine-tunes kernel behavior.                                                |
+| `termcap`            | Terminal capability database.                                                                                   | Used by text-based applications to adapt to different terminal types.      |
+| `TZ`                 | Timezone setting file.                                                                                          | Defines the system's timezone.                                             |
+| `uniconf.conf`       | Possibly a "unified configuration" file, specific to Synology.                                                  | Purpose unclear without content analysis.                                  |
+| `upgrade_helper`     | A helper script or binary for the system upgrade process.                                                       |                                                                            |
+| `upgrade_size.sh`    | Shell script, likely calculates required disk space for an upgrade.                                             | Part of the upgrade mechanism.                                             |
+| `upgrade.sh`         | Main shell script for performing system upgrades.                                                               |                                                                            |
+| `VERSION`            | Contains system version information.                                                                            | Crucial for identifying the firmware version.                              |
+| `wgetrc`             | Default system-wide configuration file for `wget`.                                                              |                                                                            |
+
+---
+
+## Subdirectories in `/srm_backup/etc.defaults/`
+
+This section details the subdirectories found within `/srm_backup/etc.defaults/` and their contents.
+
+### `apparmor/`
+
+This directory contains configuration files related to AppArmor, a Linux security module that provides mandatory access control.
+
+| File              | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `subdomain.conf`  | Shared AppArmor configuration file. It includes settings for the OWLSM (Openwall Linux Security Module) extension, AppArmor event daemon (`aaeventd`), behavior on module load failure, and default paths for `subdomain_parser`. | OWLSM aims to prevent /tmp race attacks by restricting symlink following and hardlink creation. `aaeventd` is for reporting. Both are disabled by default (`SUBDOMAIN_ENABLE_OWLSM="no"`, `APPARMOR_ENABLE_AAEVENTD="no"`). |
+
+### `apparmor.d/`
+
+This directory holds AppArmor profiles and related configuration files. AppArmor profiles define access control rules for specific applications.
+
+| File/Directory      | Probable Purpose                                                                                                | Notes                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `usr.bin.httpd`     | AppArmor profile for the Apache HTTP Server (`httpd`).                                                          | Defines what resources the web server process can access. This is a common profile name.                                                      |
+| `abstractions/`     | Contains reusable snippets of AppArmor policy, known as abstractions. These are included in main profiles.        | Will be analyzed in detail below.                                                                                                             |
+| `cache/`            | Stores cached or precompiled versions of AppArmor profiles for faster loading.                                  | Will be analyzed in detail below. Contains many Synology-specific cache files.                                                                |
+| `httpd/`            | Likely contains additional configuration snippets or profiles specific to different aspects or modules of `httpd`.| This seems to be a directory, distinct from the `usr.bin.httpd` profile file. Will be analyzed in detail below.                             |
+| `tunables/`         | Contains variables (tunables) that can be used within AppArmor profiles to allow for easier customization.        | Will be analyzed in detail below.                                                                                                             |
+
+#### `apparmor.d/abstractions/`
+
+This subdirectory contains AppArmor abstraction files. Abstractions are reusable snippets of policy that can be included in multiple AppArmor profiles. They help to avoid duplication and simplify profile management by grouping common access rules for various functionalities (e.g., accessing base system libraries, name services, authentication mechanisms).
+
+Key files found in `apparmor.d/abstractions/`:
+
+| File                    | Probable Purpose                                                                                               |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `app-privilege`         | Abstraction for general application privilege rules.                                                           |
+| `authentication`        | Rules related to common authentication mechanisms.                                                             |
+| `autoblock`             | Likely related to Synology's autoblock feature (blocking IPs after failed login attempts).                     |
+| `base`                  | Fundamental rules required by most applications (e.g., access to essential libraries).                         |
+| `base-cgi`              | Base rules specifically for CGI scripts.                                                                       |
+| `boot-sequence`         | Rules related to processes running during the boot sequence.                                                   |
+| `curl`                  | Abstraction for the `curl` command-line tool, defining its allowed network access and file operations.         |
+| `fast-wakeup`           | Potentially related to Synology's fast wakeup or power-saving features.                                        |
+| `firewall`              | Rules for interacting with firewall components or configurations.                                              |
+| `images`                | Rules for accessing or manipulating image files.                                                               |
+| `kerberosclient`        | Abstraction for Kerberos client operations.                                                                    |
+| `ldapclient`            | Abstraction for LDAP client operations.                                                                        |
+| `log`                   | Rules for accessing system logging facilities.                                                                 |
+| `mydscenter`            | Likely related to Synology's MyDS Center or account services.                                                  |
+| `nameservice`           | Rules for name resolution services (DNS, local host files).                                                    |
+| `notification`          | Rules for system notification mechanisms.                                                                      |
+| `openssl`               | Abstraction for OpenSSL library usage, defining access to certificates, keys, etc.                             |
+| `pgsql`                 | Abstraction for PostgreSQL client or server operations.                                                        |
+| `python`                | Abstraction for Python interpreter and common Python script operations.                                        |
+| `quickconnect`          | Rules related to Synology's QuickConnect service.                                                              |
+| `SDKPlugin`             | Likely for plugins developed using a Synology SDK.                                                             |
+| `session`               | Rules related to user sessions.                                                                                |
+| `share`                 | Rules for accessing shared resources or network shares.                                                        |
+| `smbpass`               | Likely related to Samba/SMB password handling or authentication.                                               |
+| `synoaha`               | Abstraction for Synology High Availability (AHA) services.                                                     |
+| `synoha`                | Abstraction for Synology High Availability (HA) services (possibly an older or different version than `synoaha`).|
+| `synoservice`           | General abstraction for Synology system services.                                                              |
+| `wget`                  | Abstraction for the `wget` command-line tool.                                                                  |
+| `winbind`               | Abstraction for Winbind service, used for integrating with Windows domains.                                    |
+| `wutmp`                 | Rules for accessing `wtmp` (user login/logout records).                                                        |
+| `webfm/bandwidth`       | Abstraction for bandwidth management within Synology's File Station (WebFM).                                   |
+| `webfm/base`            | Base abstraction for Synology's File Station.                                                                  |
+| `webfm/index`           | Abstraction for indexing functionalities within File Station.                                                  |
+| `webfm/vfs`             | Abstraction for Virtual File System operations within File Station.                                            |
+
+#### `apparmor.d/cache/`
+
+This directory stores cached (pre-compiled) AppArmor profiles. Caching profiles improves performance by avoiding the need to parse the human-readable profile files on every application startup or policy reload. The filenames often correspond to the full path of the executable they apply to, with `/` replaced by `.`, or follow a Synology-specific naming convention (e.g., `SYNO.Core.System`).
+
+Examples of cached profiles found:
+
+*   `SYNO.ACEEditor.Preference`
+*   `SYNO.Core.File.Thumbnail`
+*   `SYNO.Core.Package.Installation`
+*   `SYNO.Core.QuickConnect`
+*   `SYNO.FileStation.VFS.Connection`
+*   `usr.bin.httpd` (cached profile for the Apache web server)
+*   `usr.share.captiveportal.captiveportal.cgi`
+*   `usr.syno.synoman.webapi.entry.cgi`
+*   Many `usr.syno.synoman.webfm.*` entries related to File Station CGI scripts.
+*   Many `usr.syno.synoman.webman.*` entries related to DSM (DiskStation Manager) web interface CGI scripts.
+
+*(Further subdirectory analysis will follow)*
