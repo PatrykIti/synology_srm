@@ -396,4 +396,12 @@ This directory is intended for Netatalk configuration files. Netatalk is a free,
 | -------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | (empty)        | No default Netatalk configuration files are present. | This directory is **empty**. Actual configuration files like `afp.conf` would be in `/etc/netatalk/`. |
 
+### `nfs/`
+
+This directory contains default configuration files related to the Network File System (NFS) service, which allows remote clients to access files over a network as if they were local.
+
+| File/Directory   | Probable Purpose                                     | Notes                                                                                                                                                                                                                                                           |
+| ---------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `syno_nfs_conf`  | Synology-specific NFS default configuration options. | This file likely sets global default parameters for the NFS server on the SRM device. Based on its content, it defines:<ul><li>`udp_read_size=8192`: Default UDP read buffer size.</li><li>`udp_write_size=8192`: Default UDP write buffer size.</li><li>`nfsv4_enable=no`: NFS version 4 is disabled by default.</li><li>`nfs_unix_pri_enable=1`: Standard Unix permissions are enabled for NFS shares by default.</li><li>`nfs_custom_port_enable=no`: Using custom ports for NFS services (like `statd`, `mountd`) is disabled by default.</li></ul> |
+
 *(Further subdirectory analysis will follow)*
