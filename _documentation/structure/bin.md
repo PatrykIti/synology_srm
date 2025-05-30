@@ -1,31 +1,25 @@
-# Structure of `srm_backup/bin/` directory
+# Struktura katalogu `srm_backup/bin/`
 
-This file contains a detailed analysis of the contents of the `srm_backup/bin/` directory, along with a description of the purpose of each file and subdirectory.
+Ten plik zawiera szczegółową analizę zawartości katalogu `srm_backup/bin/`, wraz z opisem przeznaczenia każdego pliku i podkatalogu.
 
-## Contents of `srm_backup/bin/`
+## Zawartość katalogu `srm_backup/bin/`
 
-Below is a list of files and subdirectories found in `srm_backup/bin/` and their probable purposes within the Synology SRM system, based on common Linux/Unix conventions:
+Poniżej znajduje się lista plików i podkatalogów znalezionych w `srm_backup/bin/` wraz z ich prawdopodobnym przeznaczeniem w systemie Synology SRM:
 
-*   **`busybox`**:
-    *   **Purpose:** A multi-call binary that combines many common Unix utilities into a single executable. It's often used in embedded systems and environments with limited resources, like Synology SRM. It can act as `ls`, `cp`, `mv`, `grep`, `sh`, etc.
-    *   **Function:** Provides essential command-line tools for system administration, scripting, and basic operations.
+*   **`busybox`**
+    *   **Prawdopodobne przeznaczenie:** Jest to pojedynczy plik wykonywalny, który łączy w sobie wiele popularnych narzędzi UNIX-owych (takich jak `ls`, `cp`, `mv`, `grep`, `tar` itp.). W systemie Synology SRM, BusyBox jest często używany do zapewnienia podstawowych funkcji systemowych i narzędzi w środowiskach z ograniczonymi zasobami, minimalizując rozmiar systemu operacyjnego. Służy jako uniwersalne narzędzie do wykonywania wielu podstawowych operacji systemowych.
 
-*   **`ip`**:
-    *   **Purpose:** A utility for showing and manipulating routing, devices, policy routing and tunnels. It's a modern replacement for older tools like `ifconfig` and `route`.
-    *   **Function:** Manages network interfaces, IP addresses, routing tables, and network configurations on the SRM device. Crucial for network connectivity and services.
+*   **`ip`**
+    *   **Prawdopodobne przeznaczenie:** Standardowe narzędzie w systemach Linux do zarządzania i konfiguracji interfejsów sieciowych, routingiem, politykami routingu, tunelami itp. W Synology SRM będzie używany do zarządzania siecią urządzenia, konfiguracji adresów IP, tras sieciowych i innych parametrów związanych z łącznością.
 
-*   **`jq`**:
-    *   **Purpose:** A lightweight and flexible command-line JSON processor. It can be used to slice, filter, map, and transform structured data with ease.
-    *   **Function:** Likely used for parsing, querying, and manipulating JSON data, which is commonly used for configuration files, API responses, and inter-process communication in modern systems, including network devices.
+*   **`jq`**
+    *   **Prawdopodobne przeznaczenie:** Lekki i elastyczny procesor JSON w wierszu poleceń. W Synology SRM może być używany do parsowania, filtrowania i manipulowania danymi JSON, które są często wykorzystywane w konfiguracjach, logach, danych zwracanych przez API systemowe lub do interakcji z usługami webowymi.
 
-*   **`ntfs-3g`**:
-    *   **Purpose:** A stable, open-source, GPL-licensed, POSIX-compliant, NTFS driver for Linux and other Unix-like operating systems. It allows read and write access to NTFS partitions.
-    *   **Function:** Enables the Synology SRM device to mount and interact with external storage devices formatted with the NTFS (New Technology File System) file system, commonly used by Windows. This is essential for data exchange with Windows-based systems.
+*   **`ntfs-3g`**
+    *   **Prawdopodobne przeznaczenie:** Jest to sterownik i zestaw narzędzi do odczytu i zapisu na partycjach systemu plików NTFS (New Technology File System), używanego głównie w systemach Windows. W Synology SRM, `ntfs-3g` jest kluczowy do obsługi zewnętrznych dysków twardych sformatowanych w NTFS, umożliwiając odczyt i zapis danych z tych dysków.
 
-*   **`ntfs-3g.probe`**:
-    *   **Purpose:** A helper utility associated with `ntfs-3g`. Its name suggests it's used to probe or inspect NTFS file systems.
-    *   **Function:** Likely used to quickly check the status, integrity, or properties of NTFS partitions before attempting to mount them with `ntfs-3g`.
+*   **`ntfs-3g.probe`**
+    *   **Prawdopodobne przeznaczenie:** Narzędzie pomocnicze dla `ntfs-3g`, używane do sondowania (probe) partycji i wykrywania, czy są one sformatowane jako NTFS. Prawdopodobnie używane do automatycznego montowania lub sprawdzania integralności dysków NTFS podłączanych do urządzenia Synology SRM.
 
-*   **`proxy`**:
-    *   **Purpose:** The name suggests it's an executable related to proxy functionality. This could be a generic proxy client/server or a specific component for managing proxy settings.
-    *   **Function:** Could be used for various networking tasks, such as forwarding network requests, acting as an intermediary for internet access, or implementing specific network security policies.
+*   **`proxy`**
+    *   **Prawdopodobne przeznaczenie:** Nazwa wskazuje, że może to być plik wykonywalny związany z serwerem proxy lub narzędziem do zarządzania połączeniami sieciowymi. W kontekście Synology SRM, może być używany do obsługi przekierowywania portów, serwera proxy dla usług sieciowych (np. Web Proxy, Reverse Proxy), lub innych funkcji związanych z pośredniczeniem w ruchu sieciowym w celu zwiększenia bezpieczeństwa lub optymalizacji dostępu do zasobów.
