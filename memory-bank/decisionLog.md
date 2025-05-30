@@ -3,6 +3,12 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
+*   **[2025-05-30 20:37:19] - Analiza `srm_backup/etc/` (Task 1.1.3).**
+    *   **Rationale:** Kontynuacja dokumentacji struktury systemu Synology SRM.
+    *   **Implementation Details:**
+        *   Przeprowadzono analizę zawartości katalogu `srm_backup/etc/`.
+        *   Utworzono/zaktualizowano dokumentację w `_documentation/structure/etc.md`.
+        *   Nie podjęto nowych, znaczących decyzji dotyczących sposobu dokumentacji czy interpretacji plików podczas tej analizy.
 ## Decision
 
 *   **2025-05-30 13:27:00 - Corrected analysis of `srm_backup/data/` directory (Task 1.1.2 Correction).**
