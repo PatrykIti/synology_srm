@@ -180,8 +180,83 @@ This section details files and subdirectories found directly within `srm_backup/
             *   `mod_xsendfile.conf-sys`, `mod_xsendfile.conf-user`: `mod_xsendfile` module configuration for efficient file serving.
             *   `proxy-html.conf`: Configuration for HTML rewriting in a proxy context.
     *   **`sites-enabled/`**: Contains configurations for enabled virtual hosts (sites).
+        *   `blocktime.httpd-ssl.conf`, `blocktime.httpd.conf`: Configurations for "block time" functionality (SSL and non-SSL).
+        *   `redirect-ssl.conf`, `redirect-ssl.conf.welcomeInstall`, `redirect.conf`, `redirect.conf.welcomeInstall`: Redirect configurations, including SSL and welcome/installation pages.
+        *   `safe-browsing-filter.httpd-ssl.conf`, `safe-browsing-filter.httpd.conf`: Safe browsing filter configurations.
+        *   `security-filter.httpd-ssl.conf`, `security-filter.httpd.conf`: General security filter configurations.
+        *   `timequota.httpd-ssl.conf`, `timequota.httpd.conf`: Time quota configurations.
+        *   `webfilter.httpd-ssl.conf`, `webfilter.httpd.conf`: Web filter configurations.
     *   **`sites-enabled-user/`**: User-defined enabled virtual host configurations.
-
+        *   `redirect.conf`: User-defined redirect rules.
+*   **`init/`**: Contains configuration files for the Upstart init system, which manages services and tasks during boot and runtime. Each `.conf` file typically defines an Upstart job.
+    *   `3rdparty-services.conf`: Manages third-party services.
+    *   `afpd-avahi.conf`, `afpd-avahi.override`: Configuration and override for AFP (Apple Filing Protocol) daemon integration with Avahi (Zeroconf/Bonjour).
+    *   `apparmor.conf`: Job for starting and managing AppArmor.
+    *   `autoupdate_schedule_set.conf`: Sets the schedule for automatic updates.
+    *   `beamforming.conf`: Configuration related to Wi-Fi beamforming technology.
+    *   `before-halt.conf`: Job executed before system halt.
+    *   `block_doh.conf`: Configuration for blocking DNS over HTTPS (DoH).
+    *   `bluetoothd.conf`, `bluetoothd.override`: Configuration and override for the Bluetooth daemon (`bluetoothd`).
+    *   `bonjour.conf`, `bonjour.override`: Configuration and override for the Bonjour (mDNS/DNS-SD) service.
+    *   `btacd.conf`, `btacd.override`: Likely configuration for a Bluetooth Audio related daemon.
+    *   `burnin_loader.conf`: Possibly related to hardware burn-in testing processes.
+    *   `checkFile.conf`: Job for checking files.
+    *   `crond.conf`: Job for starting the `cron` daemon.
+    *   `dbus-system.conf`: Job for the system D-Bus message bus.
+    *   `dc-output.conf`: Likely related to "Disk Caching output" or a similar feature.
+    *   `ddnsd.conf`: Job for starting the DDNS daemon.
+    *   `dhcp-client.conf`, `dhcp-client6.conf`: General configurations for DHCP clients (IPv4 and IPv6).
+    *   `dhcpclient_init.conf`: DHCP client initialization job.
+    *   `dhcpserver_init.conf`: DHCP server initialization job.
+    *   `dhcpserver.conf`: Job for starting the DHCP server.
+    *   `dsm-services.conf`: Manages DSM/SRM services.
+    *   `dsmupdate.conf`: Job related to DSM/SRM updates.
+    *   `dsmupdatefinish.conf`: Job executed after DSM/SRM update completion.
+    *   `eee-task.conf`: Configuration for Energy Efficient Ethernet (EEE) tasks.
+    *   `exebit_cleaner.conf`: Job for cleaning execute bits, possibly for security hardening.
+    *   `fileindex.conf`, `fileindex.override`: Configuration and override for the file indexing service.
+    *   `filter_rule.conf`: Configuration for filter rules (e.g., firewall, content filter).
+    *   `findhostd.conf`: Configuration for `findhostd` daemon, likely for host discovery in the network (e.g., Synology Assistant).
+    *   `firewall_init.conf`: Firewall initialization job.
+    *   `firewall-bit.conf`: Possibly related to "Firewall Built-In Test" or a similar feature.
+    *   `ftpd-pure.conf`, `ftpd-pure.override`: Configuration and override for the Pure-FTPd server.
+    *   `ftpd-ssl.override`: Override for FTPd SSL configuration.
+    *   `ftpd.conf`, `ftpd.override`: General FTP daemon configuration and override.
+    *   `grinst-create-vol.conf`: "Great installer" job related to volume creation.
+    *   `heartbeatd.conf`, `heartbeatd.override`: Configuration and override for the heartbeat daemon (used in high availability clusters).
+    *   `hostap-global.conf`: Global configuration for `hostapd`.
+    *   `hostap.conf`: Main `hostapd` configuration.
+    *   `hostapd_cli.conf`: Configuration for the `hostapd` command-line interface.
+    *   `hostname.conf`: Job for setting the system hostname.
+    *   `hotplugd.conf`: Configuration for the `hotplugd` daemon, which handles dynamic device events.
+    *   `httpd-avahi.conf`: Job for Avahi integration with the HTTP server.
+    *   `httpd-sys-monitor.conf`: Job for monitoring the system HTTP server.
+    *   `httpd-sys.conf`: Main job for the system HTTP server.
+    *   `httpd-user.conf`, `httpd-user.override`: Configuration and override for the user-specific HTTP server (e.g., Web Station).
+    *   `hyfi-bridge-mitigation-flush-hw-bridge.conf`, `hyfi-bridge-mitigation-flush-hyfi-bridge-manual-start.conf`, `hyfi-bridge-mitigation-flush-hyfi-bridge.conf`: Jobs related to Hy-Fi (Hybrid Fidelity) bridge mitigation and flushing.
+    *   `igmp-snooping-daemon.conf`: Job for the IGMP snooping daemon (multicast optimization).
+    *   `igmpproxy.conf`: Job for the IGMP proxy daemon.
+    *   `interceptsrmd.conf`: Likely a job for an SRM request interception daemon.
+    *   `ipsec.conf`: Job for starting IPsec services.
+    *   `iptable-default-rules.conf`: Job for loading default `iptables` rules.
+    *   `job-monitor-handler.conf`, `job-monitor.conf`: Configurations related to system job monitoring.
+    *   `kill-all-process.conf`: Job to kill all processes (likely used during shutdown).
+    *   `kill-synousbmodemd.conf`: Job to kill the `synousbmodemd` (Synology USB modem daemon).
+    *   `lan_init.conf`: LAN interface initialization job.
+    *   `lbd.conf`, `lbd.guest.conf`: Configuration for `lbd` (Local BSS Discovery), possibly for main and guest Wi-Fi networks.
+    *   `logrotate.conf`: Job for running `logrotate`.
+    *   `manutild.conf`: Configuration for `manutild` (likely "management utility daemon").
+    *   `mdns-repeater.conf`: Configuration for an mDNS (Multicast DNS) repeater.
+    *   `miniupnpd-handler.conf`, `miniupnpd.conf`: Configuration and handler for the `miniupnpd` (MiniUPnP daemon).
+    *   `mkcgikey.conf`: Job for creating a CGI key.
+    *   `netatalk.conf`: Job for starting Netatalk (AFP implementation).
+    *   `network.conf`: Main network configuration job.
+    *   `nfsd-adapter.conf`: Adapter configuration for the NFS daemon (`nfsd`).
+    *   `ngfw-task.conf`, `ngfw.conf`: Configurations related to Next-Generation Firewall (NGFW) tasks.
+    *   `nmbd.conf`: Job for starting the `nmbd` daemon (NetBIOS name server, part of Samba).
+    *   `nss_loader.conf`: Job for loading Name Service Switch (NSS) modules.
+    *   `ntpd.conf`: Job for starting the NTP daemon (`ntpd`).
+    *   `ntpsync.conf`: Job for NTP time synchronization.
 
 ---
 
