@@ -170,4 +170,45 @@ Examples of cached profiles found:
 *   Many `usr.syno.synoman.webfm.*` entries related to File Station CGI scripts.
 *   Many `usr.syno.synoman.webman.*` entries related to DSM (DiskStation Manager) web interface CGI scripts.
 
+#### `apparmor.d/httpd/`
+
+This directory is present but **empty** in the default configuration. It might be intended for site-specific or module-specific AppArmor profiles for the Apache HTTP Server, to be populated by administrators or packages.
+
+#### `apparmor.d/tunables/`
+
+This directory contains files that define AppArmor tunables. Tunables are like variables that can be used in AppArmor profiles to make them more adaptable to different environments or configurations without needing to rewrite the entire profile. They often define paths to common directories or settings that might vary.
+
+| File         | Probable Purpose                                                                                                |
+| ------------ | --------------------------------------------------------------------------------------------------------------- |
+| `global`     | Defines global tunables that can be used across multiple AppArmor profiles.                                     |
+| `kernelvars` | Defines tunables related to kernel variables or paths that might be influenced by the kernel version or configuration. |
+| `proc`       | Defines tunables related to the `/proc` filesystem, allowing profiles to refer to paths within `/proc` abstractly.    |
+
+### `cups/`
+
+This directory contains default configuration files for the CUPS (Common Unix Printing System) printing service.
+
+| File/Directory | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cupsd.conf`   | Main configuration file for the CUPS daemon (`cupsd`). It defines server settings, logging, job management, security, and access control.                                                                    | Key directives observed: `ServerBin /usr/lib/cups`, `Printcap /usr/syno/etc/printcap`, `LogLevel error`, `ErrorLog syslog`, `RequestRoot /var/services/printer`, `Port 631`, `DefaultAuthType Basic`. Access to web interface locations is generally open by default. |
+| `ppd/`         | Stands for PostScript Printer Description. This subdirectory is intended to store PPD files, which describe the capabilities of specific printer models to CUPS. These files are typically provided by printer manufacturers. | This directory is **empty** in the default configuration.                                                                                                                                                                                                       |
+
+### `debsig/`
+
+This directory relates to `debsigs`, the Debian package signature verification system. It contains policies for verifying the authenticity and integrity of Debian packages.
+
+| File/Directory                      | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `policies/`                         | Subdirectory containing signature verification policies.                                                                                       |                                                                                                                                                                            |
+| `policies/C42CCD870EBD11E7/`        | A specific policy directory, likely named after a GPG key ID (`C42CCD870EBD11E7`) used for signing certain packages or updates.                  | Contains the actual policy file.                                                                                                                                           |
+| `policies/C42CCD870EBD11E7/smallupdate.pol` | The signature verification policy file itself. The `.pol` extension is standard for `debsigs` policies. This one is named `smallupdate.pol`. | Defines rules for verifying signatures, e.g., which keys are trusted for "small updates". The content of this file would specify the exact verification criteria. |
+
+### `default/`
+
+This directory typically contains default environment variables or startup configurations for various services.
+
+| File   | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                       |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pluto`| Default configuration or environment settings for the Pluto daemon. Pluto is the IKE (Internet Key Exchange) daemon used by IPsec (e.g., in Openswan/Libreswan implementations) to negotiate and manage security associations for VPNs. | This file likely sets default options or parameters for Pluto when it starts, such as logging levels, interface bindings, or paths to other configuration files. |
+
 *(Further subdirectory analysis will follow)*
