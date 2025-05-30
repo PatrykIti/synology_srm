@@ -378,6 +378,25 @@ This section details files and subdirectories found directly within `srm_backup/
             *   `ebtables`: Init script for `ebtables`, a tool for Ethernet bridge frame filtering.
     *   `security/`: Directory for security-related configurations.
         *   `pam_winbind.conf`: Configuration file for the `pam_winbind` PAM module, used for integrating with Windows Active Directory via Winbind for authentication.
+    *   `space/`: Likely related to disk space management or reporting.
+        *   `space_history_19691231_160206.xml`: An XML file, possibly containing historical data about disk space usage. The date "19691231" is the day before the Unix epoch, which might indicate an uninitialized timestamp or a very old record.
+    *   `ssh/`: Configuration directory for the SSH (Secure Shell) daemon (`sshd`) and related utilities.
+        *   `ssh_host_dsa_key`, `ssh_host_dsa_key.pub`: DSA host key (private and public parts) for the SSH server.
+        *   `ssh_host_ecdsa_key`, `ssh_host_ecdsa_key.pub`: ECDSA host key (private and public parts) for the SSH server.
+        *   `ssh_host_ed25519_key`, `ssh_host_ed25519_key.pub`: Ed25519 host key (private and public parts) for the SSH server.
+        *   `ssh_host_rsa_key`, `ssh_host_rsa_key.pub`: RSA host key (private and public parts) for the SSH server.
+        *   `sshd_config`: Main configuration file for the OpenSSH daemon (`sshd`), controlling server behavior, authentication methods, security options, etc.
+        *   `syno_sshd_config`: Synology-specific SSH daemon configuration file, likely included by or used in conjunction with the main `sshd_config`.
+    *   `ssl/`: Contains SSL/TLS related configuration files and certificates.
+        *   `ct_log_list.cnf`, `ct_log_list.cnf.dist`: Configuration files related to Certificate Transparency (CT) log lists. `.dist` is likely the distribution default.
+        *   `openssl.cnf`, `openssl.cnf.dist`: Main OpenSSL configuration files. `.dist` is likely the distribution default.
+        *   **`certs/`**: Directory for SSL certificates.
+            *   `ca-certificates.crt`: A bundle of trusted CA (Certificate Authority) certificates.
+        *   **`private/`**: Directory intended for private keys (found to be empty in this backup, which is good practice as private keys should be protected).
+    *   `ssmtp/`: Configuration directory for sSMTP, a simple mail transfer agent (MTA) used for sending emails from the system.
+        *   `revaliases`: Defines reverse aliases for sSMTP, mapping local user accounts to email addresses.
+        *   `ssmtp.conf`: Main configuration file for sSMTP, specifying the mail hub, authentication details, and other sending parameters.
+    *   `sudoers.d/`: Directory for `sudo` configuration snippets. This allows for modular management of `sudo` privileges by dropping files into this directory, rather than editing the main `/etc/sudoers` file directly. (Found to be empty in this backup).
 
 ---
 
