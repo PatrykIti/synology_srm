@@ -55,3 +55,10 @@ This file records architectural and implementation decisions using a list format
         *   Explained the meaning of `@` (symbolic link) and `*` (executable) suffixes.
         *   Translated the entire `_documentation/structure/bin.md` content to English.
         *   Added corresponding entities to the Memory MCP for each file and the directory.
+*   **[2025-05-31 12:56] - Zakończenie analizy `srm_backup/lib/` i planowanie następnego kroku.**
+    *   **Decision:** Uznano analizę katalogu `srm_backup/lib/` za zakończoną. Następnym krokiem będzie konsultacja z `_documentation/_TASK_LIST.md` w celu identyfikacji kolejnego katalogu do analizy.
+    *   **Rationale:** Zakończono Task 1.1.4. Konieczne jest odwołanie się do głównej listy zadań, aby kontynuować systematyczną dokumentację.
+    *   **Implementation Details:**
+        *   Utworzono plik `_documentation/structure/lib.md` z wynikami analizy.
+        *   Pliki Memory Bank (`activeContext.md`, `progress.md`) są właśnie aktualizowane, aby odzwierciedlić ten postęp.
+        *   Następne podzadanie będzie polegało na odczytaniu `_documentation/_TASK_LIST.md`.

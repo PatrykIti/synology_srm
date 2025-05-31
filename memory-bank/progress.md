@@ -5,6 +5,7 @@ This file tracks the project's progress using a task list format.
 
 ## Completed Tasks
 
+*   [2025-05-31 12:56] - Task 1.1.4: Zakończono analizę srm_backup/lib/ i utworzono _documentation/structure/lib.md.
 *   [2025-05-31 12:46] - Task (Zakończony): Pełna analiza srm_backup/etc.defaults/. Dokumentacja zaktualizowana w _documentation/structure/etc.defaults.md.
 *   [2025-05-30 20:37:03] - Task 1.1.3: Zakończono analizę `srm_backup/etc/` i utworzono/zaktualizowano `_documentation/structure/etc.md`.
 *   2025-05-30 13:27:00 - Task 1.1.2 (Corrected): Re-analyzed `srm_backup/data/`, identified `vendor/wifi/` subdirectory and Wi-Fi calibration firmware files. Updated `_documentation/structure/data.md`.
@@ -15,8 +16,8 @@ This file tracks the project's progress using a task list format.
 
 ## Current Tasks
 
-*   [2025-05-31 12:46] - Task 1.1.4 (Rozpoczęty): Analiza katalogu srm_backup/lib/.
+*   [2025-05-31 12:56] - Identyfikacja następnego zadania z _documentation/_TASK_LIST.md.
 
 ## Next Steps
 
-*   [2025-05-31 12:46] - Po zakończeniu analizy srm_backup/lib/, następny krok zostanie określony na podstawie _documentation/_TASK_LIST.md.
+*   [2025-05-31 12:56] - Odczytanie pliku _documentation/_TASK_LIST.md w celu ustalenia kolejnego katalogu do analizy (Task 1.1.5 lub kolejny).
