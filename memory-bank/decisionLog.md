@@ -3,6 +3,13 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
+*   **[2025-05-31 12:46] - Rozpoczęcie analizy `srm_backup/lib/` po ukończeniu `srm_backup/etc.defaults/`.**
+    *   **Decision:** Przystąpić do analizy katalogu `srm_backup/lib/` jako kolejnego kroku w dokumentowaniu struktury Synology SRM.
+    *   **Rationale:** Zakończono analizę `srm_backup/etc.defaults/`. Zgodnie z informacjami z `memory-bank/progress.md` (który powinien być zsynchronizowany z `_documentation/_TASK_LIST.md`), `lib/` (Task 1.1.4) jest następnym katalogiem do analizy.
+    *   **Implementation Details:**
+        *   Zostanie utworzone nowe podzadanie dla trybu Architect w celu przeprowadzenia analizy `srm_backup/lib/`.
+        *   Wyniki zostaną zapisane w `_documentation/structure/lib.md`.
+        *   Pliki Memory Bank (`activeContext.md`, `progress.md`) są właśnie aktualizowane, aby odzwierciedlić ten postęp.
 *   **[2025-05-30 21:05] - Przerwanie analizy `srm_backup/etc.defaults/` i delegowanie pozostałej części.**
     *   **Decision:** Analiza katalogu `srm_backup/etc.defaults/` została częściowo wykonana (do podkatalogu `nfs/` włącznie). Ze względu na duży rozmiar kontekstu i pozostałą liczbę podkatalogów, dalsza analiza zostanie oddelegowana do nowego podzadania.
     *   **Rationale:** Utrzymanie zarządzalnego rozmiaru kontekstu dla bieżącego zadania, zapewnienie efektywności i przejrzystości pracy.
