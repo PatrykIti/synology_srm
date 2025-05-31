@@ -1,142 +1,145 @@
-# Katalog `srm_backup/lib/`
+# Directory `srm_backup/lib/`
 
-Katalog `srm_backup/lib/` w systemie Synology SRM pełni kluczową rolę w przechowywaniu bibliotek współdzielonych (shared libraries) oraz modułów jądra, które są niezbędne do prawidłowego funkcjonowania systemu operacyjnego i zainstalowanych aplikacji. Biblioteki te dostarczają reużywalny kod dla różnych programów, co pozwala na zmniejszenie rozmiaru plików wykonywalnych i efektywniejsze zarządzanie pamięcią.
+The `srm_backup/lib/` directory in the Synology SRM system plays a crucial role in storing shared libraries and kernel modules essential for the proper functioning of the operating system and installed applications. These libraries provide reusable code for various programs, which helps reduce the size of executable files and manage memory more efficiently.
 
-## Ogólne przeznaczenie
+## General Purpose
 
-Głównym celem katalogu `/lib` (i jego odpowiednika w backupie `srm_backup/lib/`) jest centralne repozytorium dla:
+The main purpose of the `/lib` directory (and its counterpart in the backup, `srm_backup/lib/`) is to serve as a central repository for:
 
-*   **Bibliotek współdzielonych (`.so`):** Są to pliki zawierające skompilowany kod funkcji, z których mogą korzystać różne programy jednocześnie. Przykłady to standardowe biblioteki C ([`libc.so`](srm_backup/lib/libc.so.6:0)), biblioteki do obsługi wątków ([`libpthread.so`](srm_backup/lib/libpthread.so.0:0)), biblioteki kryptograficzne ([`libcrypto.so`](srm_backup/lib/libcrypto.so.1.1:0)), sieciowe ([`libcurl.so`](srm_backup/lib/libcurl.so.4.7.0:0)) i wiele innych specyficznych dla Synology ([`libsynocore.so`](srm_backup/lib/libsynocore.so:0)).
-*   **Modułów jądra (w podkatalogu `modules/`):** Są to fragmenty kodu, które mogą być dynamicznie ładowane i usuwane z jądra systemu operacyjnego, rozszerzając jego funkcjonalność. Dotyczy to np. sterowników sprzętowych, obsługi systemów plików czy protokołów sieciowych.
-*   **Firmware (często w podkatalogu `firmware/`):** Pliki firmware dla różnych komponentów sprzętowych.
-*   **Innych plików systemowych:** Mogą tu również znajdować się inne pliki pomocnicze związane z bibliotekami lub konfiguracją systemu.
+*   **Shared Libraries (`.so`):** These are files containing compiled code of functions that can be used by multiple programs simultaneously. Examples include standard C libraries ([`libc.so`](srm_backup/lib/libc.so.6:0)), thread handling libraries ([`libpthread.so`](srm_backup/lib/libpthread.so.0:0)), cryptographic libraries ([`libcrypto.so`](srm_backup/lib/libcrypto.so.1.1:0)), network libraries ([`libcurl.so`](srm_backup/lib/libcurl.so.4.7.0:0)), and many other Synology-specific ones ([`libsynocore.so`](srm_backup/lib/libsynocore.so:0)).
+*   **Kernel Modules (in the `modules/` subdirectory):** These are pieces of code that can be dynamically loaded into and unloaded from the operating system kernel, extending its functionality. This includes, for example, hardware drivers, file system support, or network protocols.
+*   **Firmware (often in the `firmware/` subdirectory):** Firmware files for various hardware components.
+*   **Other System Files:** Other auxiliary files related to libraries or system configuration may also be located here.
 
-## Struktura podkatalogów i zawartość
+## Subdirectory Structure and Contents
 
-Na podstawie listingu katalogu `srm_backup/lib/` można wyróżnić następujące kluczowe elementy:
+Based on the listing of the `srm_backup/lib/` directory, the following key elements can be identified:
 
-### 1. Biblioteki współdzielone bezpośrednio w `srm_backup/lib/`
+### 1. Shared Libraries Directly in `srm_backup/lib/`
 
-Bezpośrednio w tym katalogu znajduje się wiele plików `.so`, które są fundamentalnymi bibliotekami systemowymi oraz bibliotekami specyficznymi dla Synology. Poniżej kilka przykładów z ich prawdopodobnymi rolami:
+Directly in this directory, there are many `.so` files, which are fundamental system libraries and Synology-specific libraries. Below are a few examples with their probable roles:
 
-*   **`ld.so.1`**: Dynamiczny linker/ładowarka, odpowiedzialny za ładowanie bibliotek współdzielonych do pamięci podczas uruchamiania programów.
-*   **`libcrypt.so.1`**: Biblioteka do obsługi funkcji kryptograficznych, np. hashowania haseł.
-*   **`libcrypto.so.1.1`**: Część pakietu OpenSSL, dostarcza szeroki zakres algorytmów kryptograficznych.
-*   **`libcurl.so.4.7.0`**: Biblioteka do transferu danych z użyciem różnych protokołów sieciowych (HTTP, FTP, itp.).
-*   **`libdl.so.2`**: Biblioteka do dynamicznego ładowania bibliotek (interfejs do `dlopen()`, `dlsym()`).
-*   **`libm.so.6`**: Biblioteka matematyczna.
-*   **`libpam.so.0.83.1`**: Pluggable Authentication Modules - biblioteka do obsługi uwierzytelniania.
-*   **`libpthread.so.0`** (prawdopodobnie dowiązanie do `libpthread-X.Y.Z.so`): Biblioteka do obsługi wątków POSIX.
-*   **`librt.so.1`**: Biblioteka czasu rzeczywistego POSIX.
-*   **`libsqlite3.so.0.8.6`**: Biblioteka do obsługi bazy danych SQLite.
-*   **`libssl.so.1.1`** (nieobecna na liście, ale spodziewana obok `libcrypto.so.1.1`): Część pakietu OpenSSL, obsługa protokołów SSL/TLS.
-*   **`libstdc++.so.6`**: Standardowa biblioteka C++.
-*   **Biblioteki `libsyno*`**: Duża grupa bibliotek specyficznych dla Synology, np.:
-    *   `libsynocore.so` (nieobecna na liście, ale spodziewana): Podstawowe funkcje systemowe Synology.
-    *   `libsynobackup.so.1`: Funkcje związane z backupem.
-    *   `libsynocgi.so.5`: Obsługa interfejsów CGI.
-    *   `libsynofirewall.so.1.1`: Funkcje związane z firewallem.
-    *   `libsynolog.so.1`: Obsługa logowania systemowego.
-    *   `libsynomesh.so.5.2`: Funkcje związane z siecią mesh Wi-Fi.
-    *   `libsynorouter.so`: Funkcje specyficzne dla routera.
-    *   `libsynoutils.so.1`: Różne narzędzia i funkcje pomocnicze Synology.
+*   **`ld.so.1`**: Dynamic linker/loader, responsible for loading shared libraries into memory when programs are launched.
+*   **`libcrypt.so.1`**: Library for cryptographic functions, e.g., password hashing.
+*   **`libcrypto.so.1.1`**: Part of the OpenSSL package, provides a wide range of cryptographic algorithms.
+*   **`libcurl.so.4.7.0`**: Library for data transfer using various network protocols (HTTP, FTP, etc.).
+*   **`libdl.so.2`**: Library for dynamic library loading (interface to `dlopen()`, `dlsym()`).
+*   **`libm.so.6`**: Mathematical library.
+*   **`libpam.so.0.83.1`**: Pluggable Authentication Modules - library for authentication handling.
+*   **`libpthread.so.0`** (likely a symbolic link to `libpthread-X.Y.Z.so`): Library for POSIX thread handling.
+*   **`librt.so.1`**: POSIX real-time library.
+*   **`libsqlite3.so.0.8.6`**: Library for SQLite database handling.
+*   **`libssl.so.1.1`** (not present in the list, but expected alongside `libcrypto.so.1.1`): Part of the OpenSSL package, handling SSL/TLS protocols.
+*   **`libstdc++.so.6`**: Standard C++ library.
+*   **`libsyno*` Libraries**: A large group of Synology-specific libraries, e.g.:
+    *   `libsynocore.so` (not present in the list, but expected): Core Synology system functions.
+    *   `libsynobackup.so.1`: Functions related to backup.
+    *   `libsynocgi.so.5`: CGI interface handling.
+    *   `libsynofirewall.so.1.1`: Functions related to the firewall.
+    *   `libsynolog.so.1`: System logging handling.
+    *   `libsynomesh.so.5.2`: Functions related to Wi-Fi mesh networking.
+    *   `libsynorouter.so`: Router-specific functions.
+    *   `libsynoutils.so.1`: Various Synology utilities and helper functions.
 
-### 2. Kluczowe podkatalogi
+### 2. Key Subdirectories
 
-*   **`modules/`**: Zawiera moduły jądra.
-*   **`firmware/`**: Prawdopodobnie zawiera pliki firmware dla różnych urządzeń.
-*   **`samba/`**: Biblioteki i pliki konfiguracyjne związane z serwerem Samba (udostępnianie plików i drukarek w sieci Windows).
-*   **`php/`**: Moduły i rozszerzenia dla interpretera PHP.
-*   **`python2.7/`**: Standardowe biblioteki i moduły dla Pythona w wersji 2.7.
-*   **`openvpn/`**: Pliki związane z OpenVPN.
-*   **`httpd/`**: Moduły dla serwera HTTP (prawdopodobnie Apache).
-*   **`iptables/`**: Rozszerzenia i biblioteki dla `iptables` (firewall).
-*   **`security/`**: Moduły PAM (`.so`) używane do uwierzytelniania.
-*   **`udev/`**: Reguły i pliki pomocnicze dla `udev` (zarządzanie urządzeniami w systemie Linux).
-*   **`ebtables/`**: Narzędzia i biblioteki do filtrowania ramek Ethernet.
-*   **`gconv/`**: Moduły konwersji kodowania znaków dla `glibc`.
-*   **`locale/`**: Pliki lokalizacyjne (językowe) dla aplikacji.
+*   **`modules/`**: Contains kernel modules.
+*   **`firmware/`**: Likely contains firmware files for various devices.
+*   **`samba/`**: Libraries and configuration files related to the Samba server (file and printer sharing in Windows networks).
+*   **`php/`**: Modules and extensions for the PHP interpreter.
+*   **`python2.7/`**: Standard libraries and modules for Python version 2.7.
+*   **`openvpn/`**: Files related to OpenVPN.
+*   **`httpd/`**: Modules for the HTTP server (likely Apache).
+*   **`iptables/`**: Extensions and libraries for `iptables` (firewall).
+*   **`security/`**: PAM modules (`.so`) used for authentication.
+*   **`udev/`**: Rules and helper files for `udev` (device management in Linux).
+*   **`ebtables/`**: Tools and libraries for Ethernet frame filtering.
+*   **`gconv/`**: Character encoding conversion modules for `glibc`.
+*   **`locale/`**: Localization (language) files for applications.
 
-W kolejnych sekcjach zostaną opisane bardziej szczegółowo wybrane podkatalogi.
-### 3. Podkatalog `modules/` (Moduły Jądra)
+Subsequent sections will describe selected subdirectories in more detail.
 
-Podkatalog `srm_backup/lib/modules/` zawiera moduły jądra systemu Linux (`.ko` - Kernel Object). W odróżnieniu od typowej struktury, gdzie moduły są zorganizowane w podkatalogach odpowiadających wersji jądra (np. `4.4.60/kernel/`), w tym przypadku wszystkie moduły znajdują się bezpośrednio w `srm_backup/lib/modules/`.
+### 3. Subdirectory `modules/` (Kernel Modules)
 
-Moduły te rozszerzają funkcjonalność jądra o obsługę specyficznego sprzętu, systemów plików, protokołów sieciowych itp. Poniżej przykładowe kategorie modułów znalezione w tym katalogu wraz z reprezentatywnymi plikami i ich prawdopodobnym przeznaczeniem:
+The `srm_backup/lib/modules/` subdirectory contains Linux kernel modules (`.ko` - Kernel Object). Unlike a typical structure where modules are organized into subdirectories corresponding to the kernel version (e.g., `4.4.60/kernel/`), in this case, all modules are located directly in `srm_backup/lib/modules/`.
 
-*   **Moduły sieciowe (Netfilter, QoS, VPN, etc.):**
-    *   `xt_geoip.ko`: Moduł Netfilter do filtrowania ruchu na podstawie geolokalizacji IP.
-    *   `xt_limit.ko`: Moduł Netfilter do ograniczania liczby połączeń.
-    *   `xt_mac.ko`: Moduł Netfilter do filtrowania na podstawie adresu MAC.
-    *   `sch_htb.ko`: Moduł QoS (Quality of Service) do hierarchicznego zarządzania pasmem.
-    *   `gre.ko`, `ip6_tunnel.ko`, `l2tp_ppp.ko`, `pppoe.ko`, `pptp.ko`: Moduły do obsługi różnych protokołów tunelowania i VPN.
-    *   `nat46.ko`: Moduł do translacji adresów sieciowych między IPv4 a IPv6.
-    *   `nf_conntrack_*.ko`, `nf_nat_*.ko`: Moduły Netfilter do śledzenia połączeń i NAT dla różnych protokołów (np. PPTP, SIP).
-*   **Moduły związane z Wi-Fi i sprzętem Qualcomm Atheros (QCA):**
-    *   `cfg80211.ko`: Podstawowa konfiguracja Wi-Fi dla Linuksa.
-    *   `umac.ko`, `qdf.ko`, `qca_ol.ko`, `qca_spectral.ko`, `ath_pktlog.ko`: Prawdopodobnie sterowniki i moduły pomocnicze dla chipsetów Wi-Fi Qualcomm Atheros.
-    *   `qca-nss-drv.ko` i inne `qca-nss-*.ko`: Moduły związane z Network Subsystem (NSS) firmy Qualcomm, służące do akceleracji sprzętowej operacji sieciowych.
-    *   `shortcut-fe.ko`, `shortcut-fe-ipv6.ko`: Moduły "Shortcut Forwarding Engine", prawdopodobnie do przyspieszania przekazywania pakietów.
-    *   `wifi_2_0.ko`, `wifi_3_0.ko`: Prawdopodobnie główne moduły sterowników Wi-Fi.
-*   **Moduły systemów plików:**
-    *   `vfat.ko`, `fat.ko`: Obsługa systemów plików FAT/VFAT.
-    *   `hfsplus.ko`: Obsługa systemu plików HFS+ (używanego przez Apple).
-    *   `ecryptfs.ko`: Obsługa szyfrowanego systemu plików eCryptfs.
-*   **Moduły USB:**
-    *   `usbnet.ko`: Sterownik dla urządzeń USB działających jako karty sieciowe.
-    *   `usbserial.ko`: Ogólny sterownik dla urządzeń szeregowych USB.
-    *   `cdc-acm.ko`, `cdc_ether.ko`, `cdc_ncm.ko`: Moduły dla urządzeń USB klasy CDC (Communication Device Class).
-    *   `usblp.ko`: Sterownik dla drukarek USB.
-*   **Moduły kryptograficzne:**
-    *   `cryptodev.ko`: Interfejs do sprzętowych i programowych sterowników kryptograficznych.
-    *   `ocf.ko` (OpenBSD Cryptographic Framework): Framework dla operacji kryptograficznych.
-    *   `qca-nss-cfi-cryptoapi.ko`: Moduł integrujący akcelerację kryptograficzną NSS z CryptoAPI Linuksa.
-*   **Moduły specyficzne dla Synology:**
-    *   `synobios.ko`: Prawdopodobnie moduł związany z interakcją z BIOS/firmware systemu.
-    *   `synoxtmac.ko`: Może być związany z obsługą specyficznych funkcji sieciowych lub sprzętowych Synology.
-    *   `syno_port_event.ko`: Moduł do obsługi zdarzeń portów.
-*   **Inne:**
-    *   `bonding.ko`: Agregacja interfejsów sieciowych.
-    *   `loop.ko`: Obsługa urządzeń pętli zwrotnej (loop devices).
-    *   `tun.ko`: Obsługa wirtualnych interfejsów sieciowych TUN/TAP.
+These modules extend the kernel's functionality by adding support for specific hardware, file systems, network protocols, etc. Below are example categories of modules found in this directory, along with representative files and their probable purposes:
 
-Liczba i rodzaj modułów wskazują na zaawansowane funkcje sieciowe routera, w tym obsługę różnych protokołów VPN, QoS, akcelerację sprzętową operacji sieciowych oraz wsparcie dla specyficznych chipsetów Wi-Fi.
-### 4. Podkatalog `firmware/`
+*   **Network Modules (Netfilter, QoS, VPN, etc.):**
+    *   `xt_geoip.ko`: Netfilter module for IP geolocation-based traffic filtering.
+    *   `xt_limit.ko`: Netfilter module for limiting the number of connections.
+    *   `xt_mac.ko`: Netfilter module for MAC address-based filtering.
+    *   `sch_htb.ko`: QoS (Quality of Service) module for hierarchical bandwidth management.
+    *   `gre.ko`, `ip6_tunnel.ko`, `l2tp_ppp.ko`, `pppoe.ko`, `pptp.ko`: Modules for handling various tunneling and VPN protocols.
+    *   `nat46.ko`: Module for network address translation between IPv4 and IPv6.
+    *   `nf_conntrack_*.ko`, `nf_nat_*.ko`: Netfilter modules for connection tracking and NAT for various protocols (e.g., PPTP, SIP).
+*   **Wi-Fi and Qualcomm Atheros (QCA) Hardware-Related Modules:**
+    *   `cfg80211.ko`: Basic Wi-Fi configuration for Linux.
+    *   `umac.ko`, `qdf.ko`, `qca_ol.ko`, `qca_spectral.ko`, `ath_pktlog.ko`: Likely drivers and helper modules for Qualcomm Atheros Wi-Fi chipsets.
+    *   `qca-nss-drv.ko` and other `qca-nss-*.ko`: Modules related to Qualcomm's Network Subsystem (NSS), used for hardware acceleration of network operations.
+    *   `shortcut-fe.ko`, `shortcut-fe-ipv6.ko`: "Shortcut Forwarding Engine" modules, likely for accelerating packet forwarding.
+    *   `wifi_2_0.ko`, `wifi_3_0.ko`: Likely main Wi-Fi driver modules.
+*   **File System Modules:**
+    *   `vfat.ko`, `fat.ko`: Support for FAT/VFAT file systems.
+    *   `hfsplus.ko`: Support for HFS+ file system (used by Apple).
+    *   `ecryptfs.ko`: Support for the eCryptfs encrypted file system.
+*   **USB Modules:**
+    *   `usbnet.ko`: Driver for USB devices acting as network cards.
+    *   `usbserial.ko`: Generic driver for USB serial devices.
+    *   `cdc-acm.ko`, `cdc_ether.ko`, `cdc_ncm.ko`: Modules for USB CDC (Communication Device Class) devices.
+    *   `usblp.ko`: Driver for USB printers.
+*   **Cryptographic Modules:**
+    *   `cryptodev.ko`: Interface to hardware and software cryptographic drivers.
+    *   `ocf.ko` (OpenBSD Cryptographic Framework): Framework for cryptographic operations.
+    *   `qca-nss-cfi-cryptoapi.ko`: Module integrating NSS cryptographic acceleration with Linux CryptoAPI.
+*   **Synology-Specific Modules:**
+    *   `synobios.ko`: Likely a module related to interaction with the system's BIOS/firmware.
+    *   `synoxtmac.ko`: May be related to handling specific Synology network or hardware functions.
+    *   `syno_port_event.ko`: Module for handling port events.
+*   **Other:**
+    *   `bonding.ko`: Network interface aggregation.
+    *   `loop.ko`: Support for loopback devices.
+    *   `tun.ko`: Support for TUN/TAP virtual network interfaces.
 
-Podkatalog `srm_backup/lib/firmware/` przechowuje pliki firmware, które są niezbędne do działania różnych komponentów sprzętowych routera. Na podstawie listingu można zidentyfikować:
+The number and type of modules indicate advanced router networking features, including support for various VPN protocols, QoS, hardware acceleration of network operations, and support for specific Wi-Fi chipsets.
 
-*   **Pliki `.bin` bezpośrednio w `firmware/`:**
-    *   `ifpp.bin`, `ipue.bin`, `ofpp.bin`, `opue.bin`: Mogą to być pliki firmware dla specyficznych mikrokontrolerów lub procesorów sygnałowych.
-    *   `qca-nss0.bin`: Plik firmware dla jednostki Qualcomm Atheros Network Subsystem (NSS), odpowiedzialnej za akcelerację sprzętową operacji sieciowych.
+### 4. Subdirectory `firmware/`
 
-*   **Podkatalogi specyficzne dla chipsetów Qualcomm:**
-    *   **`IPQ6018/`**: Ten podkatalog prawdopodobnie zawiera firmware specyficzny dla chipsetu Qualcomm IPQ6018, który jest popularnym SoC (System-on-Chip) używanym w routerach Wi-Fi 6. Można się spodziewać, że wewnątrz znajdują się pliki `.bin` dla różnych komponentów tego SoC (np. rdzeni CPU, kontrolera Wi-Fi, jednostki NSS).
-    *   **`qcn9000/`**: Ten podkatalog prawdopodobnie zawiera firmware dla chipsetu Qualcomm QCN9000, który jest używany w zaawansowanych rozwiązaniach Wi-Fi 6 i Wi-Fi 6E. Podobnie jak w przypadku `IPQ6018/`, można oczekiwać plików `.bin` dla tego konkretnego chipsetu.
+The `srm_backup/lib/firmware/` subdirectory stores firmware files necessary for the operation of various router hardware components. Based on the listing, the following can be identified:
 
-Zawartość tego katalogu jest kluczowa dla inicjalizacji i poprawnego działania sprzętu sieciowego routera, w szczególności modułów Wi-Fi i funkcji akceleracji sieciowej.
-### 5. Inne istotne podkatalogi
+*   **`.bin` Files Directly in `firmware/`:**
+    *   `ifpp.bin`, `ipue.bin`, `ofpp.bin`, `opue.bin`: These could be firmware files for specific microcontrollers or signal processors.
+    *   `qca-nss0.bin`: Firmware file for the Qualcomm Atheros Network Subsystem (NSS) unit, responsible for hardware acceleration of network operations.
 
-Oprócz `modules/` i `firmware/`, katalog `srm_backup/lib/` zawiera wiele innych podkatalogów, które przechowują biblioteki i pliki konfiguracyjne dla różnych usług i aplikacji systemowych. Poniżej krótki opis niektórych z nich:
+*   **Subdirectories Specific to Qualcomm Chipsets:**
+    *   **`IPQ6018/`**: This subdirectory likely contains firmware specific to the Qualcomm IPQ6018 chipset, a popular SoC (System-on-Chip) used in Wi-Fi 6 routers. It is expected to contain `.bin` files for various components of this SoC (e.g., CPU cores, Wi-Fi controller, NSS unit).
+    *   **`qcn9000/`**: This subdirectory likely contains firmware for the Qualcomm QCN9000 chipset, used in advanced Wi-Fi 6 and Wi-Fi 6E solutions. Similar to `IPQ6018/`, `.bin` files for this specific chipset are expected.
 
-*   **`samba/`**: Zawiera biblioteki współdzielone (`.so`) oraz prawdopodobnie pliki konfiguracyjne dla serwera Samba, który implementuje protokół SMB/CIFS, umożliwiając udostępnianie plików i drukarek w sieciach Windows.
-*   **`php/`**: Prawdopodobnie zawiera moduły i rozszerzenia dla interpretera PHP, używanego przez interfejs webowy routera lub inne aplikacje webowe.
-*   **`python2.7/`**: Zawiera standardowe biblioteki i moduły dla interpretera Python w wersji 2.7, który może być używany przez różne skrypty systemowe lub aplikacje.
-*   **`httpd/`**: Moduły dla serwera HTTP (prawdopodobnie Apache lub jego pochodna, np. `lighttpd`), który obsługuje interfejs zarządzania routerem.
-*   **`iptables/`**: Rozszerzenia i biblioteki dla `iptables`, narzędzia do konfiguracji firewalla w systemie Linux.
-*   **`security/`**: Zawiera moduły PAM (Pluggable Authentication Modules, pliki `.so`), które są używane przez system do uwierzytelniania użytkowników i usług.
-*   **`udev/`**: Reguły (`.rules`) i programy pomocnicze dla systemu `udev`, który dynamicznie zarządza plikami urządzeń w katalogu `/dev` w odpowiedzi na zdarzenia jądra (np. podłączenie urządzenia USB).
-*   **`cups/`**: Pliki związane z Common UNIX Printing System, jeśli router obsługuje funkcje serwera wydruku.
-*   **`ebtables/`**: Narzędzia i biblioteki do filtrowania na poziomie mostu sieciowego (Ethernet bridge filtering).
-*   **`gconv/`**: Moduły konwersji kodowania znaków używane przez bibliotekę `glibc`.
-*   **`locale/`**: Pliki danych lokalizacyjnych (tłumaczenia, formaty daty/czasu itp.) dla różnych języków.
-*   **`openvpn/`**: Pliki związane z klientem lub serwerem OpenVPN.
-*   **`postgresql/`**: Biblioteki klienckie lub inne komponenty związane z bazą danych PostgreSQL, jeśli jest używana przez system.
-*   **`pppd/`**: Pliki związane z demonem PPP (Point-to-Point Protocol), używanym m.in. do połączeń PPPoE.
-*   **`rsync/`**: Pliki związane z narzędziem `rsync` do synchronizacji plików.
-*   **`sasl2/`**: Biblioteki SASL (Simple Authentication and Security Layer) używane do uwierzytelniania w różnych protokołach sieciowych.
-*   **`syslog-ng/`**: Pliki konfiguracyjne i moduły dla zaawansowanego demona logowania `syslog-ng`.
-*   **`ulogd/`**: Demon do logowania pakietów z Netfilter.
-*   **`vfs/`**: Moduły VFS (Virtual File System) dla Samby, rozszerzające jej możliwości.
-*   **`wifi/`**: Dodatkowe pliki konfiguracyjne lub skrypty związane z Wi-Fi, które nie są bezpośrednio modułami jądra ani firmware.
+The contents of this directory are crucial for the initialization and proper operation of the router's network hardware, particularly Wi-Fi modules and network acceleration functions.
 
-Ta lista nie jest wyczerpująca, ale pokazuje różnorodność komponentów systemowych, których biblioteki i pliki pomocnicze znajdują się w `srm_backup/lib/`. Dokładna analiza każdego z tych podkatalogów wykraczałaby poza zakres tego dokumentu, ale ich obecność świadczy o bogatej funkcjonalności systemu SRM.
+### 5. Other Significant Subdirectories
+
+In addition to `modules/` and `firmware/`, the `srm_backup/lib/` directory contains many other subdirectories that store libraries and configuration files for various system services and applications. Below is a brief description of some of them:
+
+*   **`samba/`**: Contains shared libraries (`.so`) and possibly configuration files for the Samba server, which implements the SMB/CIFS protocol, enabling file and printer sharing in Windows networks.
+*   **`php/`**: Likely contains modules and extensions for the PHP interpreter, used by the router's web interface or other web applications.
+*   **`python2.7/`**: Contains standard libraries and modules for the Python 2.7 interpreter, which may be used by various system scripts or applications.
+*   **`httpd/`**: Modules for the HTTP server (likely Apache or its derivative, e.g., `lighttpd`), which serves the router's management interface.
+*   **`iptables/`**: Extensions and libraries for `iptables`, the tool for configuring the firewall in Linux.
+*   **`security/`**: Contains PAM (Pluggable Authentication Modules, `.so` files) modules, which are used by the system to authenticate users and services.
+*   **`udev/`**: Rules (`.rules`) and helper programs for the `udev` system, which dynamically manages device files in the `/dev` directory in response to kernel events (e.g., plugging in a USB device).
+*   **`cups/`**: Files related to the Common UNIX Printing System, if the router supports print server functions.
+*   **`ebtables/`**: Tools and libraries for filtering at the network bridge level (Ethernet bridge filtering).
+*   **`gconv/`**: Character encoding conversion modules used by the `glibc` library.
+*   **`locale/`**: Localization data files (translations, date/time formats, etc.) for various languages.
+*   **`openvpn/`**: Files related to the OpenVPN client or server.
+*   **`postgresql/`**: Client libraries or other components related to the PostgreSQL database, if used by the system.
+*   **`pppd/`**: Files related to the PPP (Point-to-Point Protocol) daemon, used for PPPoE connections, among others.
+*   **`rsync/`**: Files related to the `rsync` tool for file synchronization.
+*   **`sasl2/`**: SASL (Simple Authentication and Security Layer) libraries used for authentication in various network protocols.
+*   **`syslog-ng/`**: Configuration files and modules for the advanced `syslog-ng` logging daemon.
+*   **`ulogd/`**: Daemon for logging packets from Netfilter.
+*   **`vfs/`**: VFS (Virtual File System) modules for Samba, extending its capabilities.
+*   **`wifi/`**: Additional Wi-Fi related configuration files or scripts that are not directly kernel modules or firmware.
+
+This list is not exhaustive but shows the diversity of system components whose libraries and auxiliary files are located in `srm_backup/lib/`. A detailed analysis of each of these subdirectories would be beyond the scope of this document, but their presence indicates the rich functionality of the SRM system.
