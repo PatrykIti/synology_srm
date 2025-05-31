@@ -5,10 +5,12 @@ This file tracks the project's current status, including recent changes, current
 
 ## Current Focus
 
+*   [2025-05-31 12:34] - Podsumowanie dotychczasowej analizy `srm_backup/etc.defaults/` (do `sysctlconf/` włącznie - wylistowany) i przygotowanie do zakończenia bieżącej sesji.
 *   [2025-05-30 21:05] - Podsumowanie częściowej analizy `srm_backup/etc.defaults/` i przygotowanie do delegowania pozostałej części analizy do nowego podzadania.
 
 ## Recent Changes
 
+*   [2025-05-31 12:34] - Analiza katalogu `srm_backup/etc.defaults/` wstrzymana. Udokumentowano podkatalogi do `sysconfig/` włącznie. Podkatalog `sysctlconf/` został wylistowany (zawiera `default.conf`), ale nie został jeszcze dodany do `_documentation/structure/etc.defaults.md`.
 *   [2025-05-30 21:05] - Częściowo zakończono analizę katalogu `srm_backup/etc.defaults/`. Utworzono i zaktualizowano dokumentację w `_documentation/structure/etc.defaults.md` dla przeanalizowanych podkatalogów (do `nfs/` włącznie). Pozostała część analizy zostanie oddelegowana.
 *   [2025-05-30 20:36:41] - Zakończono analizę katalogu `srm_backup/etc/` i utworzono/zaktualizowano dokumentację w `_documentation/structure/etc.md` (Task 1.1.3).
 *   2025-05-30 13:27:00 - Completed Task 1.1.2 (Corrected): Re-analyzed `srm_backup/data/`, identified `vendor/wifi/` subdirectory with Wi-Fi calibration firmware files. Updated `_documentation/structure/data.md` accordingly.
