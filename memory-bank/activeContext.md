@@ -5,10 +5,11 @@ This file tracks the project's current status, including recent changes, current
 
 ## Current Focus
 
-*   [2025-05-31 12:46] - Przygotowanie do analizy katalogu srm_backup/lib/ po zakończeniu analizy srm_backup/etc.defaults/.
+*   [2025-05-31 12:56] - Zakończono analizę srm_backup/lib/. Przygotowanie do identyfikacji następnego zadania z _documentation/_TASK_LIST.md.
 
 ## Recent Changes
 
+*   [2025-05-31 12:56] - Zakończono analizę katalogu srm_backup/lib/ (Task 1.1.4). Utworzono dokumentację w _documentation/structure/lib.md.
 *   [2025-05-31 12:46] - Zakończono pełną analizę katalogu srm_backup/etc.defaults/. Dokumentacja została zaktualizowana w _documentation/structure/etc.defaults.md.
 *   [2025-05-30 20:36:41] - Zakończono analizę katalogu `srm_backup/etc/` i utworzono/zaktualizowano dokumentację w `_documentation/structure/etc.md` (Task 1.1.3).
 *   2025-05-30 13:27:00 - Completed Task 1.1.2 (Corrected): Re-analyzed `srm_backup/data/`, identified `vendor/wifi/` subdirectory with Wi-Fi calibration firmware files. Updated `_documentation/structure/data.md` accordingly.
