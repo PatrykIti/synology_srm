@@ -3,28 +3,28 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
-*   **[2025-05-31 12:46] - Rozpoczęcie analizy `srm_backup/lib/` po ukończeniu `srm_backup/etc.defaults/`.**
-    *   **Decision:** Przystąpić do analizy katalogu `srm_backup/lib/` jako kolejnego kroku w dokumentowaniu struktury Synology SRM.
-    *   **Rationale:** Zakończono analizę `srm_backup/etc.defaults/`. Zgodnie z informacjami z `memory-bank/progress.md` (który powinien być zsynchronizowany z `_documentation/_TASK_LIST.md`), `lib/` (Task 1.1.4) jest następnym katalogiem do analizy.
+*   **[2025-05-31 12:46] - Start of `srm_backup/lib/` analysis after completing `srm_backup/etc.defaults/`.**
+    *   **Decision:** Proceed with the analysis of the `srm_backup/lib/` directory as the next step in documenting the Synology SRM structure.
+    *   **Rationale:** Analysis of `srm_backup/etc.defaults/` has been completed. According to information from `memory-bank/progress.md` (which should be synchronized with `_documentation/_TASK_LIST.md`), `lib/` (Task 1.1.4) is the next directory to analyze.
     *   **Implementation Details:**
-        *   Zostanie utworzone nowe podzadanie dla trybu Architect w celu przeprowadzenia analizy `srm_backup/lib/`.
-        *   Wyniki zostaną zapisane w `_documentation/structure/lib.md`.
-        *   Pliki Memory Bank (`activeContext.md`, `progress.md`) są właśnie aktualizowane, aby odzwierciedlić ten postęp.
-*   **[2025-05-30 21:05] - Przerwanie analizy `srm_backup/etc.defaults/` i delegowanie pozostałej części.**
-    *   **Decision:** Analiza katalogu `srm_backup/etc.defaults/` została częściowo wykonana (do podkatalogu `nfs/` włącznie). Ze względu na duży rozmiar kontekstu i pozostałą liczbę podkatalogów, dalsza analiza zostanie oddelegowana do nowego podzadania.
-    *   **Rationale:** Utrzymanie zarządzalnego rozmiaru kontekstu dla bieżącego zadania, zapewnienie efektywności i przejrzystości pracy.
+        *   A new sub-task will be created for Architect mode to conduct the analysis of `srm_backup/lib/`.
+        *   The results will be saved in `_documentation/structure/lib.md`.
+        *   Memory Bank files (`activeContext.md`, `progress.md`) are currently being updated to reflect this progress.
+*   **[2025-05-30 21:05] - Interruption of `srm_backup/etc.defaults/` analysis and delegation of the remaining part.**
+    *   **Decision:** The analysis of the `srm_backup/etc.defaults/` directory has been partially completed (up to and including the `nfs/` subdirectory). Due to the large context size and the remaining number of subdirectories, further analysis will be delegated to a new sub-task.
+    *   **Rationale:** Maintain a manageable context size for the current task, ensuring efficiency and clarity of work.
     *   **Implementation Details:**
-        *   Zaktualizowano `_documentation/structure/etc.defaults.md` o przeanalizowane podkatalogi.
-        *   Zaktualizowano `memory-bank/activeContext.md` i `memory-bank/progress.md`, aby odzwierciedlić częściowe ukończenie i następne kroki.
-        *   Encje w `memory` MCP zostaną zaktualizowane dla przeanalizowanych elementów.
-        *   Przygotowane zostanie podsumowanie dotychczasowej pracy.
+        *   Updated `_documentation/structure/etc.defaults.md` with the analyzed subdirectories.
+        *   Updated `memory-bank/activeContext.md` and `memory-bank/progress.md` to reflect partial completion and next steps.
+        *   Entities in `memory` MCP will be updated for the analyzed elements.
+        *   A summary of the work done so far will be prepared.
 
-*   **[2025-05-30 20:37:19] - Analiza `srm_backup/etc/` (Task 1.1.3).**
-    *   **Rationale:** Kontynuacja dokumentacji struktury systemu Synology SRM.
+*   **[2025-05-30 20:37:19] - Analysis of `srm_backup/etc/` (Task 1.1.3).**
+    *   **Rationale:** Continuation of documenting the Synology SRM system structure.
     *   **Implementation Details:**
-        *   Przeprowadzono analizę zawartości katalogu `srm_backup/etc/`.
-        *   Utworzono/zaktualizowano dokumentację w `_documentation/structure/etc.md`.
-        *   Nie podjęto nowych, znaczących decyzji dotyczących sposobu dokumentacji czy interpretacji plików podczas tej analizy.
+        *   Conducted analysis of the contents of the `srm_backup/etc/` directory.
+        *   Created/updated documentation in `_documentation/structure/etc.md`.
+        *   No new, significant decisions regarding documentation methods or file interpretation were made during this analysis.
 ## Decision
 
 *   **2025-05-30 13:27:00 - Corrected analysis of `srm_backup/data/` directory (Task 1.1.2 Correction).**
@@ -55,10 +55,10 @@ This file records architectural and implementation decisions using a list format
         *   Explained the meaning of `@` (symbolic link) and `*` (executable) suffixes.
         *   Translated the entire `_documentation/structure/bin.md` content to English.
         *   Added corresponding entities to the Memory MCP for each file and the directory.
-*   **[2025-05-31 12:56] - Zakończenie analizy `srm_backup/lib/` i planowanie następnego kroku.**
-    *   **Decision:** Uznano analizę katalogu `srm_backup/lib/` za zakończoną. Następnym krokiem będzie konsultacja z `_documentation/_TASK_LIST.md` w celu identyfikacji kolejnego katalogu do analizy.
-    *   **Rationale:** Zakończono Task 1.1.4. Konieczne jest odwołanie się do głównej listy zadań, aby kontynuować systematyczną dokumentację.
+*   **[2025-05-31 12:56] - Completion of `srm_backup/lib/` analysis and planning the next step.**
+    *   **Decision:** The analysis of the `srm_backup/lib/` directory is considered complete. The next step will be to consult `_documentation/_TASK_LIST.md` to identify the next directory for analysis.
+    *   **Rationale:** Task 1.1.4 has been completed. It is necessary to refer to the main task list to continue systematic documentation.
     *   **Implementation Details:**
-        *   Utworzono plik `_documentation/structure/lib.md` z wynikami analizy.
-        *   Pliki Memory Bank (`activeContext.md`, `progress.md`) są właśnie aktualizowane, aby odzwierciedlić ten postęp.
-        *   Następne podzadanie będzie polegało na odczytaniu `_documentation/_TASK_LIST.md`.
+        *   Created the file `_documentation/structure/lib.md` with the analysis results.
+        *   Memory Bank files (`activeContext.md`, `progress.md`) are currently being updated to reflect this progress.
+        *   The next sub-task will involve reading `_documentation/_TASK_LIST.md`.
