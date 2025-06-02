@@ -3,6 +3,48 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
+*   **[2025-06-02 12:53:18] - Analysis and documentation of `srm_backup/volume1/` directory.**
+    *   **Decision:** Analyze the `srm_backup/volume1/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory represents the primary storage volume, containing user data, application data, and package configurations.
+    *   **Implementation Details:**
+        *   Used `list_files` first with `recursive: false` and then with `recursive: true` to list the contents of `srm_backup/volume1/`.
+        *   Identified key top-level items: `srm-backup-fixed.tar.gz`, `@appstore/`, `@db/`, `@tmp/`, and `lost+found/`.
+        *   Analyzed sub-contents of `@appstore/` (specifically `SafeAccess/` with its `block_page/`, `lib/`, `report_ui/`, `scripts/`, `webapi/` components).
+        *   Analyzed sub-contents of `@db/var/db/` (including `geoip-database/`, `libsynooui/oui.db`, `safebrowsing-database/prefix.db`, `sudo/`, `syno-device-identity-database/`, `syno-doh-server-lists/`, `syno-domain-lists/`, `syno-ip-blocklist/`, `synotps-database/`).
+        *   Analyzed sub-contents of `@tmp/` (specifically `pkglist.tmp/`).
+        *   Created `_documentation/structure/volume1.md` detailing the general purpose of `/volume1` and its key subdirectories and files.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
+*   **[2025-06-02 12:48:55] - Analysis and documentation of `srm_backup/var.defaults/` directory.**
+    *   **Decision:** Analyze the `srm_backup/var.defaults/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory contains default versions of files and structures for `/var`, crucial for system initialization and fallback.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to list the contents of `srm_backup/var.defaults/`.
+        *   Created `_documentation/structure/var.defaults.md` detailing the general purpose of `/var.defaults` and its key subdirectories (`cache/`, `dynlib/` (including `securityscan/` with its ruleDB and texts), `empty/`, `lib/` (including `dpkg/`), `log/`, `packages/`, `services/`, `spool/`).
+        *   Noted the complexity of `dynlib/securityscan/` and its role in providing default security rules and localizations.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
+*   **[2025-06-02 12:44] - Analysis and documentation of `srm_backup/var/` directory.**
+    *   **Decision:** Analyze the `srm_backup/var/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory is crucial as it contains variable data such as logs, cache, and system state files.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to list the contents of `srm_backup/var/`.
+        *   Created `_documentation/structure/var.md` detailing the general purpose of `/var` and its key subdirectories (`cache`, `dynlib`, `empty`, `lib`, `log`, `packages`, `services`, `spool`).
+        *   Noted the complexity and potential need for separate detailed analysis for `var/log/` (especially `upstart/`, `synolog/`, `mesh/`) and `var/dynlib/securityscan/`.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
+*   **[2025-06-02 12:40] - Analysis and documentation of `srm_backup/usr/` directory.**
+    *   **Decision:** Analyze the `srm_backup/usr/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory is crucial as it contains user-installed programs, libraries, and shared data.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to list the contents of `srm_backup/usr/`.
+        *   Created `_documentation/structure/usr.md` detailing the general purpose of `/usr` and its key subdirectories (`bin`, `etc`, `libexec`, `local`, `sbin`, `share`, `syno`, `var`).
+        *   Noted the complexity of `usr/share/` (especially `ca-certificates`) and `usr/syno/`, suggesting they may require separate, more detailed analysis tasks.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
+*   **[2025-06-02 12:36] - Analysis and documentation of `srm_backup/sbin/` directory.**
+    *   **Decision:** Analyze the `srm_backup/sbin/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory contains essential system administration binaries.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to list the contents of `srm_backup/sbin/`.
+        *   Created `_documentation/structure/sbin.md` detailing the purpose of the directory and providing a description for each identified binary (e.g., `badblocks`, `debugfs`, `dhcpcd`, `e2fsck`, `ebtables`, `init`, `ip`, `iwconfig`, `mke2fs`, `parted`, `reboot`, `rpcbind`, `shutdown`, `sysctl`, `tc`).
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
 *   **[2025-06-02 12:33] - Analysis and documentation of `srm_backup/run/` directory.**
     *   **Decision:** Analyze the `srm_backup/run/` directory and create corresponding documentation.
     *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory contains volatile runtime data.
