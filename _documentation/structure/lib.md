@@ -81,50 +81,112 @@ Directly in this directory, there are many `.so` files (shared objects) and some
 
 ### 3. Subdirectory `modules/` (Kernel Modules)
 
-The `srm_backup/lib/modules/` subdirectory contains Linux kernel modules (`.ko` - Kernel Object). These modules are loaded directly from this path, not from a kernel version-specific subdirectory as often seen in standard Linux distributions. They extend the kernel's functionality.
+The `srm_backup/lib/modules/` subdirectory contains Linux kernel modules (`.ko` - Kernel Object). These modules are loaded directly from this path, not from a kernel version-specific subdirectory as often seen in standard Linux distributions. They extend the kernel's functionality significantly, particularly in networking, hardware support, and security.
 
 Key categories and examples based on the provided list:
 
-*   **Network & Netfilter Modules:**
-    *   `xt_geoip.ko`, `xt_limit.ko`, `xt_mac.ko`, `xt_iprange.ko`, `xt_string.ko`, `xt_multiport.ko`: Netfilter extensions for matching packets.
-    *   `xt_CLASSIFY.ko`, `xt_SYNOCLASSIFY.ko`, `xt_classify_synomatch.ko`: Classification targets.
-    *   `nf_conntrack_pptp.ko`, `nf_conntrack_sip.ko`, `nf_nat_pptp.ko`, `nf_nat_sip.ko`: Connection tracking and NAT helpers for specific protocols.
-    *   `sch_htb.ko`, `sch_sfq.ko`: QoS (Quality of Service) scheduling algorithms.
-    *   `gre.ko`, `ip6_tunnel.ko`, `l2tp_ppp.ko`, `pppoe.ko`, `pptp.ko`: Tunneling and VPN protocols.
-    *   `nat46.ko`: IPv4/IPv6 NAT.
-    *   `bonding.ko`: Network interface aggregation.
+*   **Core Network & Netfilter Modules:**
+    *   `af_key.ko`: Kernel AKey management API (used with IPsec).
+    *   `ah4.ko`, `ah6.ko`: IPsec Authentication Header for IPv4 and IPv6.
+    *   `asf.ko`: Accelerated Switching Framework (ASF) or similar, possibly related to `shortcut-fe`.
+    *   `bonding.ko`: Network interface aggregation (link bonding).
+    *   `cfg80211.ko`: Core Wi-Fi configuration interface for nl80211.
+    *   `cls_flow.ko`: Traffic classifier for flow-based queuing.
+    *   `cls_fw.ko`: Traffic classifier based on firewall marks.
+    *   `cls_u32.ko`: Traffic classifier using a 32-bit hash table.
+    *   `ebt_arp.ko`, `ebt_ip.ko`, `ebt_ip6.ko`, `ebt_limit.ko`, `ebt_netlink.ko`: ebtables (Ethernet bridge firewall) match extensions.
+    *   `ebtable_broute.ko`, `ebtable_filter.ko`: ebtables table modules.
+    *   `ecm.ko`: Ethernet Connection Manager, likely related to QCA NSS (Network SubSystem).
+    *   `em_meta.ko`: Extended Match (ematch) for metadata.
+    *   `esp4_offload.ko`, `esp6_offload.ko`: IPsec ESP (Encapsulating Security Payload) hardware offload for IPv4/IPv6.
+    *   `esp4.ko`, `esp6.ko`: IPsec ESP for IPv4 and IPv6.
+    *   `gre.ko`: Generic Routing Encapsulation tunneling protocol.
+    *   `ip6_tunnel.ko`: IPv6 tunneling (e.g., SIT).
+    *   `ip6_udp_tunnel.ko`: IPv6 UDP tunneling.
+    *   `ip6t_REJECT.ko`: ip6tables REJECT target.
+    *   `l2tp_core.ko`, `l2tp_netlink.ko`, `l2tp_ppp.ko`: Layer 2 Tunneling Protocol support.
+    *   `nat46.ko`: IPv4/IPv6 Network Address Translation.
+    *   `nf_conntrack_pptp.ko`, `nf_conntrack_proto_gre.ko`, `nf_conntrack_sip.ko`: Netfilter connection tracking helpers for PPTP, GRE, and SIP.
+    *   `nf_nat_pptp.ko`, `nf_nat_proto_gre.ko`, `nf_nat_sip.ko`: Netfilter NAT helpers for PPTP, GRE, and SIP.
+    *   `ppp_async.ko`: PPP (Point-to-Point Protocol) asynchronous serial support.
+    *   `ppp_deflate.ko`: PPP Deflate compression.
+    *   `ppp_mppe.ko`: PPP Microsoft Point-to-Point Encryption.
+    *   `pppoe.ko`: PPP over Ethernet.
+    *   `pppox.ko`: PPP over L2TP/PPPoE sockets.
+    *   `pptp.ko`: Point-to-Point Tunneling Protocol.
+    *   `sch_htb.ko`: Hierarchical Token Bucket (HTB) QoS scheduler.
+    *   `sch_sfq.ko`: Stochastic Fairness Queuing (SFQ) QoS scheduler.
+    *   `shortcut-fe-drv.ko`, `shortcut-fe-ipv6.ko`, `shortcut-fe.ko`: "Shortcut Forwarding Engine" modules, for accelerating packet forwarding (Fast Path).
+    *   `ts_bm.ko`: Traffic Shaper - Bufferbloat Mitigation.
     *   `tun.ko`: TUN/TAP virtual network interfaces.
+    *   `udp_tunnel.ko`: UDP tunneling.
+    *   `xt_classify_synomatch.ko`, `xt_CLASSIFY.ko`, `xt_SYNOCLASSIFY.ko`: Netfilter classification match/target (Synology specific).
+    *   `xt_geoip.ko`: Netfilter GeoIP matching.
+    *   `xt_iprange.ko`: Netfilter IP range matching.
+    *   `xt_limit.ko`: Netfilter rate limiting match.
+    *   `xt_mac.ko`: Netfilter MAC address matching.
+    *   `xt_multiport.ko`: Netfilter multiple port matching.
+    *   `xt_physdev.ko`: Netfilter physical device matching (for bridged traffic).
+    *   `xt_string.ko`: Netfilter string matching in packet content.
+    *   `xt_SYNOCONNMAC.ko`: Netfilter Synology-specific connection MAC matching.
+    *   `xt_SYNOINTERFACE.ko`: Netfilter Synology-specific interface matching.
+
 *   **Wi-Fi and Qualcomm Atheros (QCA) Hardware-Related Modules:**
-    *   `cfg80211.ko`: Core Wi-Fi configuration interface.
-    *   `umac.ko`, `qdf.ko`, `qca_ol.ko`, `qca_spectral.ko`, `ath_pktlog.ko`: Drivers and helper modules for Qualcomm Atheros Wi-Fi chipsets.
-    *   `qca-nss-drv.ko`, `qca-nss-crypto.ko`, `qca-nss-dp.ko`, `qca-nss-ipsecmgr.ko`, `qca-nss-pppoe.ko`, `qca-nss-qdisc.ko`: Modules related to Qualcomm's Network Subsystem (NSS) for hardware acceleration.
-    *   `shortcut-fe.ko`, `shortcut-fe-ipv6.ko`, `shortcut-fe-drv.ko`: "Shortcut Forwarding Engine" modules, for accelerating packet forwarding.
-    *   `wifi_2_0.ko`, `wifi_3_0.ko`: Main Wi-Fi driver modules.
-    *   `hyfi-bridging.ko`: Hybrid Wi-Fi (PLC and Wi-Fi) bridging.
+    *   `ath_pktlog.ko`: Atheros packet logging for debugging.
+    *   `hyfi-bridging.ko`: Hybrid Wi-Fi (PLC and Wi-Fi) bridging (Qualcomm Hy-Fi).
+    *   `qca_ol.ko`: Qualcomm Atheros Offload driver (for Wi-Fi chipsets).
+    *   `qca_spectral.ko`: Qualcomm Atheros spectral scan support.
+    *   `qca-mcs.ko`: Qualcomm Atheros Multicast Snooping.
+    *   `qca-nss-bridge-mgr.ko`: QCA Network SubSystem bridge manager.
+    *   `qca-nss-cfi-cryptoapi.ko`, `qca-nss-cfi-ocf.ko`: QCA NSS Cryptographic Framework Interface for CryptoAPI/OCF.
+    *   `qca-nss-crypto.ko`: QCA NSS cryptography.
+    *   `qca-nss-dp.ko`: QCA NSS Data Plane.
+    *   `qca-nss-drv.ko`: QCA NSS main driver.
+    *   `qca-nss-ipsecmgr.ko`: QCA NSS IPsec manager.
+    *   `qca-nss-pppoe.ko`: QCA NSS PPPoE offload.
+    *   `qca-nss-pptp.ko`: QCA NSS PPTP offload.
+    *   `qca-nss-qdisc.ko`: QCA NSS QoS offload.
+    *   `qca-nss-tun6rd.ko`: QCA NSS 6rd tunnel offload.
+    *   `qca-nss-tunipip6.ko`: QCA NSS IP-in-IP6 tunnel offload.
+    *   `qca-nss-vlan.ko`: QCA NSS VLAN offload.
+    *   `qca-ssdk.ko`: Qualcomm Atheros Switch Software Development Kit.
+    *   `qdf.ko`: Qualcomm Data Framework (core driver component for QCA Wi-Fi).
     *   `smart_antenna.ko`: Smart antenna functionality.
+    *   `umac.ko`: Upper MAC layer for Atheros Wi-Fi.
+    *   `wifi_2_0.ko`, `wifi_3_0.ko`: Main Wi-Fi driver modules (likely for different radio bands or chipsets).
+
 *   **File System Modules:**
-    *   `vfat.ko`, `fat.ko`: Support for FAT/VFAT file systems.
-    *   `hfsplus.ko`: Support for HFS+ file system.
-    *   `ecryptfs.ko`: Support for the eCryptfs encrypted file system.
+    *   `bsd_comp.ko`: BSD compress PPP compression.
+    *   `ecryptfs.ko`: eCryptfs encrypted file system support.
+    *   `fat.ko`, `vfat.ko`: Support for FAT/VFAT file systems.
+    *   `hfsplus.ko`: Support for HFS+ file system (Apple).
     *   `loop.ko`: Support for loopback devices.
+
 *   **USB Modules:**
-    *   `usbnet.ko`: Driver for USB network devices.
-    *   `usbserial.ko`: Generic driver for USB serial devices.
-    *   `cdc-acm.ko`, `cdc_ether.ko`, `cdc_ncm.ko`, `cdc-phonet.ko`, `cdc-wdm.ko`: Modules for USB CDC (Communication Device Class) devices.
-    *   `usblp.ko`: Driver for USB printers.
-    *   `option.ko`, `sierra.ko`, `usb_wwan.ko`: Drivers for USB WWAN (Wireless Wide Area Network) modems.
+    *   `cdc_ether.ko`, `cdc_ncm.ko`, `cdc-acm.ko`, `cdc-phonet.ko`, `cdc-wdm.ko`: USB CDC (Communication Device Class) drivers for various device types (Ethernet, NCM, ACM serial, Phonet, WDM).
     *   `ipheth.ko`: iPhone USB tethering.
-    *   `rndis_host.ko`, `rndis_wlan.ko`: RNDIS (Remote NDIS) USB protocol.
+    *   `option.ko`: Driver for Option USB WWAN modems.
+    *   `phonet.ko`: Phonet protocol stack (used by some Nokia phones over USB).
+    *   `rndis_host.ko`, `rndis_wlan.ko`: RNDIS (Remote NDIS) USB protocol for network devices/WLAN.
+    *   `sierra.ko`: Driver for Sierra Wireless USB WWAN modems.
+    *   `usb_wwan.ko`: Generic USB WWAN modem driver.
     *   `usbip-core.ko`, `usbip-host.ko`: USB/IP project - for sharing USB devices over network.
+    *   `usblp.ko`: Driver for USB printers.
+    *   `usbnet.ko`: Driver for USB network devices (generic).
+    *   `usbserial.ko`: Generic driver for USB serial devices.
+
 *   **Cryptographic Modules:**
-    *   `cryptodev.ko`: Interface to hardware and software cryptographic drivers.
-    *   `ocf.ko`: OpenBSD Cryptographic Framework.
-    *   `qca-nss-cfi-cryptoapi.ko`, `qca-nss-cfi-ocf.ko`: Modules integrating NSS cryptographic acceleration.
+    *   `cryptodev.ko`: Kernel cryptographic device interface.
     *   `cryptosoft.ko`: Software crypto algorithms.
+    *   `ocf.ko`: OpenBSD Cryptographic Framework.
+
 *   **Synology-Specific Modules:**
-    *   `synobios.ko`: Interaction with system's BIOS/firmware.
+    *   `mem_manager.ko`: Synology memory manager.
+    *   `syno_port_event.ko`: Synology port event handling.
+    *   `synobios.ko`: Interaction with system's BIOS/firmware (Synology specific).
     *   `synoxtmac.ko`: Synology specific MAC address handling extension.
-    *   `syno_port_event.ko`: Port event handling.
+
+This comprehensive set of kernel modules indicates a highly customized Linux kernel tailored for networking, routing, Wi-Fi, security, and hardware support specific to the Synology SRM device, with significant contributions from Qualcomm Atheros for its networking and Wi-Fi capabilities.
 
 ### 4. Subdirectory `firmware/`
 
@@ -156,9 +218,102 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
 *   **`samba/`**: Contains a large number of shared libraries (`.so`) and subdirectories (`auth/`, `gensec/`, `idmap/`, `ldb/`, `nss_info/`) for the Samba server. This indicates a comprehensive Samba implementation.
     *   Key libraries include `libads.so` (Active Directory Support), `libauthkrb5.so` (Kerberos authentication), `libdcerpc-samba.so` (DCE/RPC), `libldb.so` (LDB database library), `libsmbclient.so` (SMB client library - not directly listed, but functionality likely present via other libs like `libLIBWBCLIENT_OLD.so` or `libsmbd_base.so`), `libwinbind-client.so`.
     *   The `ldb/` subdirectory contains many LDB modules (`.so`) for various database backends and functionalities (e.g., `acl.so`, `password_hash.so`, `samba_dsdb.so`).
-*   **`php/modules/`**: Contains PHP extensions (`.so` files) such as `apcu.so` (APC User Cache), `curl.so`, `gd.so` (image processing), `json.so`, `mcrypt.so`, `openssl.so`, `pdo_sqlite.so`, `sqlite3.so`, `xml.so`, `zip.so`, and a Synology-specific `syno_compiler.so`.
+*   **`php/modules/`**: This subdirectory contains a comprehensive set of shared object files (`.so`) which are dynamically loadable extensions for the PHP interpreter. These modules extend PHP's core functionality. Notable extensions include:
+    *   `apcu.so`: APC User Cache for opcode caching and user data caching.
+    *   `bcmath.so`: Arbitrary precision mathematics.
+    *   `bz2.so`: Bzip2 compression.
+    *   `calendar.so`: Calendar conversion functions.
+    *   `ctype.so`: Character type checking.
+    *   `curl.so`: Client URL Library functions (data transfer).
+    *   `dba.so`: Database (DBA) functions (abstraction for various file-based databases).
+    *   `dom.so`: Document Object Model (XML/HTML manipulation).
+    *   `exif.so`: Exchangeable image file information (metadata in images).
+    *   `fileinfo.so`: File Information (determining file types).
+    *   `ftp.so`: FTP client functions.
+    *   `gd.so`: GD Graphics Library for image creation and manipulation.
+    *   `gettext.so`: GNU Gettext for internationalization.
+    *   `iconv.so`: Character set conversion.
+    *   `imap.so`: IMAP, POP3 and NNTP client functions.
+    *   `intl.so`: Internationalization functions (ICU).
+    *   `json.so`: JSON data handling.
+    *   `ldap.so`: LDAP (Lightweight Directory Access Protocol) client functions.
+    *   `mbstring.so`: Multibyte string functions.
+    *   `mcrypt.so`: Mcrypt encryption functions (deprecated in later PHP versions but common in older setups).
+    *   `mssql.so`: Microsoft SQL Server functions (deprecated).
+    *   `opcache.so`: Zend OPcache for opcode caching, improving performance.
+    *   `openssl.so`: OpenSSL cryptographic functions.
+    *   `pdo.so`: PHP Data Objects (PDO) core for database abstraction.
+    *   `pdo_dblib.so`: PDO driver for FreeTDS/Sybase/MSSQL.
+    *   `pdo_pgsql.so`: PDO driver for PostgreSQL.
+    *   `pdo_sqlite.so`: PDO driver for SQLite.
+    *   `pgsql.so`: PostgreSQL database functions.
+    *   `phar.so`: PHP Archive files.
+    *   `posix.so`: POSIX functions.
+    *   `session.so`: Session management.
+    *   `shmop.so`: Shared memory operations.
+    *   `simplexml.so`: SimpleXML (easy XML handling).
+    *   `soap.so`: SOAP (Simple Object Access Protocol) client/server.
+    *   `sockets.so`: Low-level socket communication.
+    *   `sqlite3.so`: SQLite version 3 database functions.
+    *   `ssh2.so`: Secure Shell 2 functions.
+    *   `syno_compiler.so`: Synology-specific PHP extension, possibly for a custom compiler or preprocessor (e.g., for Synology's web UI components or internal scripts).
+    *   `tokenizer.so`: PHP source tokenizer.
+    *   `wddx.so`: Web Distributed Data Exchange.
+    *   `xml.so`: XML parser functions (Expat).
+    *   `xmlreader.so`: XMLReader (pull parser for XML).
+    *   `xmlrpc.so`: XML-RPC client/server.
+    *   `xmlwriter.so`: XMLWriter (creating XML documents).
+    *   `xsl.so`: XSLT processor (XML transformations).
+    *   `zip.so`: Zip archive handling.
+    *   `zlib.so`: Zlib compression.
+    This extensive list indicates a fully featured PHP environment, likely used for the SRM's web interface, API endpoints, and other system scripts.
 *   **`python2.7/`**: Contains the standard Python 2.7 library, including `.py`, `.pyc`, and `.pyo` files, and subdirectories like `compiler/`, `ctypes/`, `email/`, `json/`, `sqlite3/`, `xml/`, and `lib-dynload/` (with C extensions like `_bsddb.so`, `_sqlite3.so`, `pyexpat.so`).
-*   **`iptables/`**: Contains `iptables` and `ip6tables` extension libraries (`.so` files), such as `libipt_DNAT.so`, `libxt_geoip.so`, `libxt_limit.so`, `libxt_mac.so`, `libxt_string.so`, and Synology-specific ones like `libxt_classify_synomatch.so`, `libxt_synoclassify.so`.
+*   **`iptables/`**: This subdirectory contains shared library files (`.so`) which are extensions for the `iptables` (for IPv4) and `ip6tables` (for IPv6) firewall utilities. These extensions provide additional matching criteria (prefixed with `libxt_`) and targets (prefixed with `libipt_` or `libip6t_`).
+    *   **IPv4 Targets (`libipt_*.so`):**
+        *   `libipt_DNAT.so`: Destination Network Address Translation.
+        *   `libipt_icmp.so`: (This is unusual, `icmp` is typically a match, not a target. Could be a Synology specific extension or a misinterpretation without deeper analysis of the binary itself. Standard ICMP matching is part of `libxt_icmp.so` or built-in).
+        *   `libipt_LOG.so`: Kernel logging of matching packets.
+        *   `libipt_MASQUERADE.so`: Source Network Address Translation, typically for dynamic IP addresses.
+        *   `libipt_REDIRECT.so`: Redirect packets to the local machine.
+        *   `libipt_REJECT.so`: Send an error packet back in response to a matched packet.
+        *   `libipt_SNAT.so`: Source Network Address Translation.
+        *   `libipt_TRIGGER.so`: A target that can dynamically add or remove firewall rules, often used for port triggering.
+        *   `libipt_ttl.so`: (This is unusual, `ttl` is typically a match. Could be a target to modify TTL).
+        *   `libipt_webstr.so`: Likely a Synology-specific target for web string matching/filtering (related to `libxt_string.so` or custom functionality).
+    *   **IPv6 Targets (`libip6t_*.so`):**
+        *   `libip6t_DNAT.so`: Destination NAT for IPv6.
+        *   `libip6t_icmp6.so`: (Similar to `libipt_icmp.so`, `icmp6` is usually a match. Could be a Synology specific extension).
+        *   `libip6t_LOG.so`: Kernel logging for IPv6.
+        *   `libip6t_REDIRECT.so`: Redirect for IPv6.
+        *   `libip6t_REJECT.so`: Reject for IPv6.
+    *   **Extended Matches (`libxt_*.so` - used by both iptables and ip6tables):**
+        *   `libxt_classify_synomatch.so`: Synology-specific match for packet classification.
+        *   `libxt_CLASSIFY.so`: Standard target to set an skb's priority.
+        *   `libxt_connmark.so`: Match on connection marks.
+        *   `libxt_conntrack.so`: Match on connection tracking states.
+        *   `libxt_geoip.so`: Match based on GeoIP database (country of origin/destination).
+        *   `libxt_iprange.so`: Match on a range of IP addresses.
+        *   `libxt_limit.so`: Limit the rate of matching.
+        *   `libxt_mac.so`: Match on source MAC address.
+        *   `libxt_mark.so`: Match on Netfilter mark values.
+        *   `libxt_multiport.so`: Match on multiple source or destination ports.
+        *   `libxt_NFLOG.so`: Target to log packets to `nfnetlink_log`.
+        *   `libxt_NFQUEUE.so`: Target to queue packets to userspace.
+        *   `libxt_physdev.so`: Match on bridge port input/output devices.
+        *   `libxt_policy.so`: Match for IPsec policy.
+        *   `libxt_set.so`: Match against IP sets.
+        *   `libxt_standard.so`: Standard target (ACCEPT, DROP etc. - though these are usually built-in, this might provide aliases or specific logging).
+        *   `libxt_state.so`: Older state matching module (superseded by `conntrack`).
+        *   `libxt_string.so`: Match on a string within packet content.
+        *   `libxt_synoclassify.so`: Synology-specific classification match.
+        *   `libxt_synoconnmac.so`: Synology-specific match based on connection and MAC address.
+        *   `libxt_synointerface.so`: Synology-specific match based on interface.
+        *   `libxt_synomac.so`: Synology-specific MAC address matching.
+        *   `libxt_tcp.so`: Match on TCP header fields.
+        *   `libxt_TCPMSS.so`: Target to alter TCP MSS (Maximum Segment Size) values.
+        *   `libxt_TPROXY.so`: Target for transparent proxying.
+        *   `libxt_udp.so`: Match on UDP header fields.
+    This extensive collection indicates a robust firewall capability with many standard and Synology-customized options for fine-grained packet filtering and manipulation.
 *   **`security/`**: Contains Pluggable Authentication Modules (PAM) (`.so` files) like `pam_deny.so`, `pam_ldap.so`, `pam_unix.so`, `pam_winbind.so`, and several Synology-specific modules (e.g., `pam_syno_autoblock.so`, `pam_syno_privilege.so`).
 *   **`udev/`**: Contains `udev` rules and scripts.
     *   `rules.d/`: Contains `.rules` files for device handling (e.g., `50-disk.rules`, `50-usb.rules`, `50-net.rules`).
@@ -167,7 +322,8 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
 *   **`openvpn/`**: Contains OpenVPN plugins like `openvpn-plugin-down-root.so`.
 *   **`ebtables/`**: Contains libraries like `libebtc.so` for Ethernet bridge table administration.
 *   **`gconv/`**: This subdirectory contains modules for character set conversion, used by the `glibc` library (specifically the `iconv` functionality). It houses a comprehensive collection of shared object files (`.so`) for a multitude of encoding standards, including various Code Pages (e.g., `CP1252.so`), IBM encodings (e.g., `IBM850.so`), ISO standards (e.g., `ISO8859-15.so`), East Asian encodings (e.g., `EUC-JP.so`, `GBK.so`, `BIG5HKSCS.so`), Cyrillic encodings (e.g., `KOI8-R.so`), and many others. It also includes the `gconv-modules` configuration file, which lists available conversion modules and their aliases, enabling broad support for internationalization and text data interchange.
-*   **`locale/`**: Contains localization data. While the full list of locales isn't available from the top-level listing, this directory's presence indicates multi-language support.
+*   **`locale/`**: This directory contains localization data, essential for multi-language support in the system.
+    *   `locale-archive`: This single file is a compiled archive of all locale information (like character sets, date/time formatting, message translations, etc.) for the various languages supported by the system. It's used by glibc and other system components to provide localized user interfaces and data handling. Instead of many individual files per language, a single archive is often used in embedded systems for efficiency.
 *   **`cups/daemon/`**: Contains `cups-lpd`, suggesting CUPS (Common UNIX Printing System) LPD mini-server is present.
 *   **`ulogd/`**: Contains `ulogd_INPUT_NFCT.so`, `ulogd_INPUT_LOGEMU.so`, `ulogd_OUTPUT_LOGEMU.so`, `ulogd_OUTPUT_SQLITE3.so`, `ulogd_OUTPUT_SYSLOG.so` (based on common ulogd plugins, specific list would require deeper `list_files`), for user-space logging of Netfilter packets.
 ### 6. Subdirectory `apr-util-1/`
@@ -491,3 +647,80 @@ The `srm_backup/lib/hyd_lib/` directory appears to contain shared libraries (`.s
 *   **`syno_hyd_preload.so`**: Synology-specific preload library for `hyd` (Hybrid Daemon or similar), possibly to initialize or modify behavior of the hybrid networking components.
 
 This collection of libraries suggests a sophisticated system for managing hybrid networks (Wi-Fi and potentially PLC), Wi-Fi mesh/SON capabilities, and low-level network configuration, heavily leveraging Qualcomm Atheros technologies and OpenWrt-derived components.
+
+### 20. Subdirectory `libgphoto2/`
+
+The `srm_backup/lib/libgphoto2/` directory contains components for `libgphoto2`, a library that provides access to a wide range of digital cameras. This allows applications to download images, control cameras, and perform other camera-specific operations. The actual camera drivers (camlibs) are typically located in a versioned subdirectory.
+
+*   **`2.1.99/`**: This subdirectory contains the camera-specific driver modules (`.so` files) for `libgphoto2` version 2.1.99. Each file typically provides support for a specific camera model, brand, or protocol. Examples include:
+    *   `adc65.so`
+    *   `agfa_cl20.so`
+    *   `aox.so`
+    *   `barbie.so` (Likely for novelty or toy cameras)
+    *   `canon.so` (General Canon camera support)
+    *   `casio_qv.so` (Casio QV series)
+    *   `digigr8.so`
+    *   `digita.so` (Cameras using Digita OS)
+    *   `dimagev.so` (Minolta Dimage V series)
+    *   `dimera3500.so`
+    *   `directory.so` (Accessing cameras as a storage directory)
+    *   `enigma13.so`
+    *   `fuji.so` (Fujifilm cameras)
+    *   `gsmart300.so`
+    *   `hp215.so` (HP PhotoSmart 215)
+    *   `iclick.so`
+    *   `jamcam.so`
+    *   `jd11.so`
+    *   `kodak_dc120.so`, `kodak_dc210.so`, `kodak_dc240.so`, `kodak_dc3200.so`, `kodak_ez200.so` (Various Kodak DC and EZ series)
+    *   `konica_qm150.so`, `konica.so` (Konica cameras)
+    *   `largan.so`
+    *   `lg_gsm.so` (LG mobile phones with camera capabilities)
+    *   `mars.so`
+    *   `mustek.so` (Mustek cameras)
+    *   `panasonic_coolshot.so`, `panasonic_dc1000.so`, `panasonic_dc1580.so`, `panasonic_l859.so` (Various Panasonic cameras)
+    *   `pccam300.so`, `pccam600.so` (Certain PC webcams/cameras)
+    *   `polaroid_pdc320.so`, `polaroid_pdc640.so`, `polaroid_pdc700.so` (Polaroid PDC series)
+    *   `ptp2.so` (Picture Transfer Protocol v2 - a common standard for many modern cameras)
+    *   `ricoh_g3.so`, `ricoh.so` (Ricoh cameras)
+    *   `samsung.so` (Samsung cameras)
+    *   `sierra.so` (Possibly for Sierra Wireless modems with camera functions, or a camera brand)
+    *   `sipix_blink.so`, `sipix_blink2.so`, `sipix_web2.so` (SiPix cameras)
+    *   `smal.so`
+    *   `sonix.so` (Sonix chipset based cameras/webcams)
+    *   `sony_dscf1.so`, `sony_dscf55.so` (Sony DSC-F1, DSC-F55 cameras)
+    *   `soundvision.so`
+    *   `spca50x.so` (SPCA50x chipset based cameras/webcams)
+    *   `sq905.so` (SQ905 chipset based cameras)
+    *   `stv0674.so`, `stv0680.so` (STMicroelectronics STV0674/STV0680 chipset based cameras/webcams)
+    *   `sx330z.so`
+    *   `toshiba_pdrm11.so` (Toshiba PDR-M11)
+    The presence of these libraries suggests that the SRM device might have (or had planned) functionality to interact with a wide variety of digital cameras, possibly for direct photo import or other camera-related tasks via USB.
+
+### 21. Subdirectory `libgphoto2_port/`
+
+The `srm_backup/lib/libgphoto2_port/` directory contains I/O port libraries for `libgphoto2`. These libraries handle the low-level communication with cameras over different physical or logical ports.
+
+*   **`0.5.2/`**: This subdirectory contains the port driver modules (`.so` files) for `libgphoto2_port` version 0.5.2.
+    *   `usb.so`: This module provides support for communicating with cameras connected via USB (Universal Serial Bus). It would handle the enumeration of USB devices, finding cameras, and managing data transfer over USB endpoints. This is a crucial component for `libgphoto2` to function with the vast majority of modern digital cameras that use USB for connectivity.
+
+### 22. Subdirectory `libnfsidmap/`
+
+The `srm_backup/lib/libnfsidmap/` directory contains plugin modules for the NFS ID mapping daemon (`nfsidmap`). This daemon is used by NFSv4 clients and servers to translate between NFSv4 user/group string principals (e.g., `user@domain`) and local numeric UIDs/GIDs.
+
+*   **`nsswitch.so`**: This plugin likely uses the Name Service Switch (NSS) mechanism (e.g., `/etc/nsswitch.conf`, `/etc/passwd`, `/etc/group`) to perform ID mapping. It would look up users and groups in local system databases.
+*   **`static.so`**: This plugin probably implements a static mapping method, where translations between NFSv4 names and local IDs are defined in a static configuration file (e.g., `/etc/idmapd.conf` might contain static entries or point to a file with them).
+*   **`synomap.so`**: This is a Synology-specific plugin for NFS ID mapping. It likely integrates with Synology's own user and group management system (e.g., users created via the SRM interface, or potentially users from a Synology Directory Server or LDAP domain joined by the SRM). This ensures consistent ID mapping within the Synology ecosystem.
+
+### 21. Subdirectory `libgphoto2_port/`
+
+The `srm_backup/lib/libgphoto2_port/` directory contains I/O port libraries for `libgphoto2`. These libraries handle the low-level communication with cameras over different physical or logical ports.
+
+*   **`0.5.2/`**: This subdirectory contains the port driver modules (`.so` files) for `libgphoto2_port` version 0.5.2.
+    *   `usb.so`: This module provides support for communicating with cameras connected via USB (Universal Serial Bus). It would handle the enumeration of USB devices, finding cameras, and managing data transfer over USB endpoints. This is a crucial component for `libgphoto2` to function with the vast majority of modern digital cameras that use USB for connectivity.
+
+### 23. Subdirectory `pkgconfig/`
+
+This directory contains `.pc` files, which are metadata files used by the `pkg-config` utility. `pkg-config` helps developers compile applications and libraries by providing the necessary compiler and linker flags, such as include paths, library paths, and library names.
+
+*   **`libgcrypt.pc`**: This file provides build information for the Libgcrypt cryptographic library. It would specify flags needed to compile against and link with Libgcrypt (e.g., `-I/usr/include`, `-L/usr/lib`, `-lgcrypt`).
+*   **`libmaxminddb.pc`**: This file provides build information for the `libmaxminddb` library, which is used for reading MaxMind DB files (often used for GeoIP lookups). It would specify flags like include paths for `maxminddb.h` and linking information for `libmaxminddb`.
