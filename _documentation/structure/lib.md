@@ -77,7 +77,7 @@ Directly in this directory, there are many `.so` files (shared objects) and some
 *   **`ebtables/`**: Libraries for Ethernet bridge table administration (e.g., `libebtc.so`).
 *   **`gconv/`**: Character encoding conversion modules for `glibc`.
 *   **`locale/`**: Localization (language) files for applications.
-*   **Other service-specific directories**: `apr-util-1/`, `charset/`, `cmake/`, `cups/`, `dbd/`, `ecryptfs/`, `engines-1.1/`, `gio/`, `hyd_lib/`, `libgphoto2/`, `libgphoto2_port/`, `libnfsidmap/`, `pkgconfig/`, `postgresql/`, `pppd/`, `rp-pppoe/`, `rsync/`, `sasl2/`, `syslog-ng/`, `ulogd/`, `vfs/`, `wifi/`.
+*   **Other service-specific directories**: `apr-util-1/`, `charset/`, `cmake/`, `cups/` (detailed below), `dbd/`, `ecryptfs/` (kernel module detailed above), `engines-1.1/`, `firmware/` (detailed above), `gconv/` (detailed below), `gio/`, `httpd/` (detailed below), `hyd_lib/`, `iptables/` (detailed below), `libgphoto2/`, `libgphoto2_port/`, `libnfsidmap/`, `locale/` (detailed below), `modules/` (detailed above), `openvpn/` (detailed below), `php/` (detailed below), `pkgconfig/`, `postgresql/`, `pppd/`, `python2.7/` (detailed below), `rp-pppoe/`, `rsync/`, `samba/` (detailed below), `sasl2/`, `security/` (detailed below), `syslog-ng/`, `udev/` (detailed below), `ulogd/` (detailed below), `vfs/`, `wifi/`.
 
 ### 3. Subdirectory `modules/` (Kernel Modules)
 
@@ -171,5 +171,9 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
 *   **`locale/`**: Contains localization data. While the full list of locales isn't available from the top-level listing, this directory's presence indicates multi-language support.
 *   **`cups/daemon/`**: Contains `cups-lpd`, suggesting CUPS (Common UNIX Printing System) LPD mini-server is present.
 *   **`ulogd/`**: Contains `ulogd_INPUT_NFCT.so`, `ulogd_INPUT_LOGEMU.so`, `ulogd_OUTPUT_LOGEMU.so`, `ulogd_OUTPUT_SQLITE3.so`, `ulogd_OUTPUT_SYSLOG.so` (based on common ulogd plugins, specific list would require deeper `list_files`), for user-space logging of Netfilter packets.
+### 6. Subdirectory `apr-util-1/`
 
-This detailed analysis provides a comprehensive overview of the libraries, modules, and firmware stored within the `srm_backup/lib/` directory, highlighting the complexity and rich feature set of the Synology SRM operating system.
+This subdirectory contains modules for the Apache Portable Runtime (APR) Utility Library, which provides helpful interfaces to functionality not found in APR itself, such as support for XML parsing, URI parsing, and various database backends.
+
+*   **`apr_dbd_freetds-1.so`**: This is likely the FreeTDS database driver for APR. FreeTDS is an open-source implementation of the Tabular Data Stream (TDS) protocol, used by Microsoft SQL Server and Sybase databases. This module would allow APR-based applications (potentially including parts of Apache httpd or other Synology services) to connect to and interact with such databases.
+*   **`apr_ldap-1.so`**: This module provides LDAP (Lightweight Directory Access Protocol) client support for APR applications. It would enable applications using APR to perform LDAP operations like searching, adding, modifying, or deleting entries in an LDAP directory.
