@@ -305,3 +305,10 @@ This subdirectory contains shared libraries (`.so` files) that are extensions an
 This subdirectory is related to the eCryptfs (Enterprise Cryptographic Filesystem), a stacked cryptographic filesystem for Linux. It allows for encrypting individual directories.
 
 *   **`libecryptfs_key_mod_passphrase.so`**: This is a shared library module for eCryptfs that handles key derivation from user-supplied passphrases. When mounting an eCryptfs filesystem, this module would be involved in processing the passphrase to unlock the encryption keys needed to access the data. The presence of this file, along with the `ecryptfs.ko` kernel module found in `srm_backup/lib/modules/`, indicates that the SRM system has capabilities for encrypted folders or volumes using passphrase-based security.
+
+### 16. Subdirectory `engines-1.1/`
+
+This subdirectory contains dynamically loadable cryptographic engine modules for OpenSSL version 1.1.x. OpenSSL engines provide a way to offload cryptographic operations to hardware accelerators or to use alternative software implementations.
+
+*   **`capi.so`**: This engine likely provides an interface to Microsoft's Cryptographic Application Programming Interface (CryptoAPI). In a Linux context, this might be used to interface with hardware cryptographic modules that expose a CAPI-compatible interface, or potentially for compatibility layers.
+*   **`padlock.so`**: This engine enables OpenSSL to use the VIA PadLock hardware security features found in VIA C3, C7, and Nano processors. VIA PadLock includes hardware acceleration for AES encryption/decryption, SHA-1/SHA-256 hashing, and a hardware random number generator. Using this engine can significantly speed up these operations if the underlying hardware supports it.
