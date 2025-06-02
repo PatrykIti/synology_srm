@@ -5,6 +5,10 @@ This file tracks the project's progress using a task list format.
 
 ## Completed Tasks
 
+*   [2025-06-02 12:33] - Task 1.1.12: Completed analysis of `srm_backup/run/` and created `_documentation/structure/run.md`.
+*   [2025-06-02 12:30] - Task 1.1.11: Completed analysis of `srm_backup/root/` and created `_documentation/structure/root.md`.
+*   [2025-06-02 12:27:06] - Task 1.1.10: Completed analysis of `srm_backup/mnt/` and created `_documentation/structure/mnt.md`.
+*   [2025-06-02 12:23] - Task 1.1.9: Completed analysis of `srm_backup/lost+found/` and created `_documentation/structure/lost+found.md`.
 *   [2025-06-02 10:47] - Task 1.1.8: Completed analysis of `srm_backup/libexec/` and created `_documentation/structure/libexec.md`.
 *   [2025-06-02 10:46] - Task 1.1.7: Completed analysis of `srm_backup/lib64/` and created `_documentation/structure/lib64.md`.
 *   [2025-06-02 10:33] - Task 1.1.6: Completed analysis of `srm_backup/initrd/` and created `_documentation/structure/initrd.md`.
@@ -20,8 +24,8 @@ This file tracks the project's progress using a task list format.
 
 ## Current Tasks
 
-*   [2025-06-02 10:47] - Completed documentation for `ini/`, `initrd/`, `lib64/`, and `libexec/`. Awaiting next instructions.
+*   [2025-06-02 12:33] - Completed analysis and documentation for `srm_backup/run/`. Awaiting next instructions.
 
 ## Next Steps
 
-*   [2025-06-02 10:47] - Awaiting user instruction for the next directory to analyze or other tasks.
+*   [2025-06-02 12:33] - Awaiting user instruction for the next directory to analyze or other tasks.

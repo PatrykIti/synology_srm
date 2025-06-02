@@ -5,10 +5,18 @@ This file tracks the project's current status, including recent changes, current
 
 ## Current Focus
 
+*   [2025-06-02 12:33] - Analyzing and documenting `srm_backup/run/`.
+*   [2025-06-02 12:30] - Analyzing and documenting `srm_backup/root/`.
+*   [2025-06-02 12:26:50] - Analyzing and documenting `srm_backup/mnt/`.
+*   [2025-06-02 12:23] - Analyzing and documenting `srm_backup/lost+found/`.
 *   [2025-06-02 10:47] - Completed analysis and documentation for `srm_backup/ini/`, `srm_backup/initrd/`, `srm_backup/lib64/`, and `srm_backup/libexec/`. Awaiting next steps or identification of next task from `_documentation/_TASK_LIST.md`.
 
 ## Recent Changes
 
+*   [2025-06-02 12:33] - Created documentation file `_documentation/structure/run.md` for the `srm_backup/run/` directory.
+*   [2025-06-02 12:30] - Created documentation file `_documentation/structure/root.md` for the `srm_backup/root/` directory, documenting `.profile` and `.wget-hsts`.
+*   [2025-06-02 12:26:50] - Created documentation file `_documentation/structure/mnt.md` for the (empty) `srm_backup/mnt/` directory.
+*   [2025-06-02 12:23] - Created documentation file `_documentation/structure/lost+found.md` for the (empty) `srm_backup/lost+found/` directory.
 *   [2025-06-02 10:47] - Created documentation file `_documentation/structure/libexec.md` for the (empty) `srm_backup/libexec/` directory.
 *   [2025-06-02 10:46] - Created documentation file `_documentation/structure/lib64.md` for the `srm_backup/lib64/` directory.
 *   [2025-06-02 10:33] - Created documentation file `_documentation/structure/initrd.md` for the (empty) `srm_backup/initrd/` directory.

@@ -3,6 +3,34 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
+*   **[2025-06-02 12:33] - Analysis and documentation of `srm_backup/run/` directory.**
+    *   **Decision:** Analyze the `srm_backup/run/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory contains volatile runtime data.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to check the contents of `srm_backup/run/`.
+        *   Created `_documentation/structure/run.md` explaining the purpose of the directory, common file types (PIDs, locks, sockets), and summarizing the findings from the backup. Emphasized the volatile nature of these files.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
+*   **[2025-06-02 12:30] - Analysis and documentation of `srm_backup/root/` directory.**
+    *   **Decision:** Analyze the `srm_backup/root/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory is the home directory for the root user.
+    *   **Implementation Details:**
+        *   Used `list_files` with `recursive: true` to check the contents of `srm_backup/root/`. Found `.profile` and `.wget-hsts`.
+        *   Created `_documentation/structure/root.md` explaining the purpose of the directory and its contents (`.profile` for shell configuration, `.wget-hsts` for HSTS data used by `wget`).
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) have been updated.
+*   **[2025-06-02 12:27:19] - Analysis and documentation of `srm_backup/mnt/` directory.**
+    *   **Decision:** Analyze the `srm_backup/mnt/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory is standard in Unix-like systems for temporary mount points.
+    *   **Implementation Details:**
+        *   Used `list_files` to check the contents of `srm_backup/mnt/`. The directory was found to be empty.
+        *   Created `_documentation/structure/mnt.md` explaining the purpose of the directory, its typical use as a mount point, and noting its empty state in the backup context.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) have been updated.
+*   **[2025-06-02 12:23] - Analysis and documentation of `srm_backup/lost+found/` directory.**
+    *   **Decision:** Analyze the `srm_backup/lost+found/` directory and create corresponding documentation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure. This directory is standard in Unix-like systems.
+    *   **Implementation Details:**
+        *   Used `list_files` to check the contents of `srm_backup/lost+found/`. The directory was found to be empty.
+        *   Created `_documentation/structure/lost+found.md` explaining the purpose of the directory and noting its empty state.
+        *   Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`) are being updated.
 *   **[2025-06-02 10:47] - Completion of documentation for `srm_backup/ini/`, `srm_backup/initrd/`, `srm_backup/lib64/`, and `srm_backup/libexec/` directories.**
     *   **Decision:** Sequentially analyze and document these directories based on user confirmation.
     *   **Rationale:** Continue systematic documentation of the SRM backup structure.
