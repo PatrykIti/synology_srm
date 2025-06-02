@@ -177,3 +177,17 @@ This subdirectory contains modules for the Apache Portable Runtime (APR) Utility
 
 *   **`apr_dbd_freetds-1.so`**: This is likely the FreeTDS database driver for APR. FreeTDS is an open-source implementation of the Tabular Data Stream (TDS) protocol, used by Microsoft SQL Server and Sybase databases. This module would allow APR-based applications (potentially including parts of Apache httpd or other Synology services) to connect to and interact with such databases.
 *   **`apr_ldap-1.so`**: This module provides LDAP (Lightweight Directory Access Protocol) client support for APR applications. It would enable applications using APR to perform LDAP operations like searching, adding, modifying, or deleting entries in an LDAP directory.
+
+### 7. Subdirectory `charset/`
+
+This directory contains shared object files (`.so`) that are likely related to character set conversions or definitions, often used by libraries like `iconv` or other internationalization components.
+
+*   **`CP437.so`**: Module for Code Page 437, the character set of the original IBM PC for the US market.
+*   **`CP850.so`**: Module for Code Page 850, a hardware code page used in Western Europe.
+
+### 8. Subdirectory `charset/`
+
+This directory contains shared object files (`.so`) that are likely related to character set conversions or definitions, often used by libraries like `iconv` or other internationalization components.
+
+*   **`CP437.so`**: Module for Code Page 437, the character set of the original IBM PC for the US market.
+*   **`CP850.so`**: Module for Code Page 850, a hardware code page used in Western Europe.
