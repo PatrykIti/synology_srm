@@ -5,14 +5,24 @@ This file tracks the project's current status, including recent changes, current
 
 ## Current Focus
 
+*   [2025-06-02 12:53:18] - Analyzing and documenting `srm_backup/volume1/`.
+*   [2025-06-02 12:48:55] - Analyzing and documenting `srm_backup/var.defaults/`.
+*   [2025-06-02 12:44] - Analyzing and documenting `srm_backup/var/`.
+*   [2025-06-02 12:40] - Analyzing and documenting `srm_backup/usr/`.
+*   [2025-06-02 12:36] - Analyzing and documenting `srm_backup/sbin/`.
 *   [2025-06-02 12:33] - Analyzing and documenting `srm_backup/run/`.
 *   [2025-06-02 12:30] - Analyzing and documenting `srm_backup/root/`.
 *   [2025-06-02 12:26:50] - Analyzing and documenting `srm_backup/mnt/`.
 *   [2025-06-02 12:23] - Analyzing and documenting `srm_backup/lost+found/`.
-*   [2025-06-02 10:47] - Completed analysis and documentation for `srm_backup/ini/`, `srm_backup/initrd/`, `srm_backup/lib64/`, and `srm_backup/libexec/`. Awaiting next steps or identification of next task from `_documentation/_TASK_LIST.md`.
+*   [2025-06-02 10:47] - Completed analysis and documentation for `srm_backup/ini/`, `srm_backup/initrd/`, `srm_backup/lib64/`, and `srm_backup/libexec/`.
 
 ## Recent Changes
+*   [2025-06-02 12:53:18] - Created documentation file `_documentation/structure/volume1.md` for the `srm_backup/volume1/` directory.
 
+*   [2025-06-02 12:48:55] - Created documentation file `_documentation/structure/var.defaults.md` for the `srm_backup/var.defaults/` directory.
+*   [2025-06-02 12:44] - Created documentation file `_documentation/structure/var.md` for the `srm_backup/var/` directory.
+*   [2025-06-02 12:40] - Created documentation file `_documentation/structure/usr.md` for the `srm_backup/usr/` directory.
+*   [2025-06-02 12:36] - Created documentation file `_documentation/structure/sbin.md` for the `srm_backup/sbin/` directory.
 *   [2025-06-02 12:33] - Created documentation file `_documentation/structure/run.md` for the `srm_backup/run/` directory.
 *   [2025-06-02 12:30] - Created documentation file `_documentation/structure/root.md` for the `srm_backup/root/` directory, documenting `.profile` and `.wget-hsts`.
 *   [2025-06-02 12:26:50] - Created documentation file `_documentation/structure/mnt.md` for the (empty) `srm_backup/mnt/` directory.
