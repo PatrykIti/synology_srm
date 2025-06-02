@@ -3,6 +3,15 @@
 This file records architectural and implementation decisions using a list format.
 2025-05-30 12:47:29 - Log of updates made.
 
+*   **[2025-06-02 10:47] - Completion of documentation for `srm_backup/ini/`, `srm_backup/initrd/`, `srm_backup/lib64/`, and `srm_backup/libexec/` directories.**
+    *   **Decision:** Sequentially analyze and document these directories based on user confirmation.
+    *   **Rationale:** Continue systematic documentation of the SRM backup structure.
+    *   **Implementation Details:**
+        *   Created `_documentation/structure/ini.md` for `srm_backup/ini/`.
+        *   Created `_documentation/structure/initrd.md` for `srm_backup/initrd/` (found to be empty).
+        *   Created `_documentation/structure/lib64.md` for `srm_backup/lib64/`.
+        *   Created `_documentation/structure/libexec.md` for `srm_backup/libexec/` (found to be empty).
+        *   Memory Bank files are being updated to reflect these completions.
 *   **[2025-05-31 12:46] - Start of `srm_backup/lib/` analysis after completing `srm_backup/etc.defaults/`.**
     *   **Decision:** Proceed with the analysis of the `srm_backup/lib/` directory as the next step in documenting the Synology SRM structure.
     *   **Rationale:** Analysis of `srm_backup/etc.defaults/` has been completed. According to information from `memory-bank/progress.md` (which should be synchronized with `_documentation/_TASK_LIST.md`), `lib/` (Task 1.1.4) is the next directory to analyze.
