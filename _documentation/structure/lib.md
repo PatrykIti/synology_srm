@@ -215,9 +215,33 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
 
 ### 5. Other Significant Subdirectories
 
-*   **`samba/`**: Contains a large number of shared libraries (`.so`) and subdirectories (`auth/`, `gensec/`, `idmap/`, `ldb/`, `nss_info/`) for the Samba server. This indicates a comprehensive Samba implementation.
-    *   Key libraries include `libads.so` (Active Directory Support), `libauthkrb5.so` (Kerberos authentication), `libdcerpc-samba.so` (DCE/RPC), `libldb.so` (LDB database library), `libsmbclient.so` (SMB client library - not directly listed, but functionality likely present via other libs like `libLIBWBCLIENT_OLD.so` or `libsmbd_base.so`), `libwinbind-client.so`.
-    *   The `ldb/` subdirectory contains many LDB modules (`.so`) for various database backends and functionalities (e.g., `acl.so`, `password_hash.so`, `samba_dsdb.so`).
+*   **`samba/`**: This directory houses a very extensive collection of shared libraries (`.so` files) and subdirectories, indicating a comprehensive and feature-rich Samba implementation. Samba is a software suite that provides file and print services to SMB/CIFS clients, allowing for interoperability between Linux/Unix servers and Windows clients. The contents suggest support for Active Directory integration, various authentication mechanisms, and a modular database backend (LDB).
+    *   **Key Shared Libraries (directly in `samba/`)**:
+        *   `libads.so`: Active Directory Support library.
+        *   `libauth.so`, `libauth4.so`, `libauthkrb5.so`: Libraries related to different authentication mechanisms, including Kerberos.
+        *   `libdcerpc-samba.so`, `libdcerpc-samba4.so`: DCE/RPC (Distributed Computing Environment/Remote Procedure Call) libraries, crucial for Samba's communication.
+        *   `libldb.so.1.1.16`: The core LDB (LDAP-like Database) library, used by Samba for storing various types of data.
+        *   `libsmbclient.so` (indirectly, via `libLIBWBCLIENT_OLD.so` or `libsmbd_base.so`): Provides SMB/CIFS client functionalities.
+        *   `libsmbd_base.so`: Base library for the SMB daemon (`smbd`).
+        *   `libwinbind-client.so`: Client library for Winbind, which handles user and group information from Windows domains.
+        *   Numerous other libraries for core Samba functions, networking, security, utilities, and specific protocols (e.g., `libnet_keytab.so`, `libsamba-security.so`, `libtalloc.so.2.0.8`, `libtevent.so.0.9.18`).
+    *   **Subdirectories:**
+        *   **`auth/`**: Contains authentication modules.
+            *   `script.so`: Likely for script-based authentication methods.
+        *   **`gensec/`**: Generic Security Services (GSSAPI) modules.
+            *   `krb5.so`: Kerberos 5 GSSAPI mechanism.
+        *   **`idmap/`**: Identity Mapping modules, used to map Windows SIDs to Unix UIDs/GIDs and vice-versa.
+            *   `tdb2.so`: An ID mapping backend using TDB2 (Trivial Database 2).
+        *   **`ldb/`**: Contains a large number of LDB backend and operational modules. These modules extend LDB's functionality for specific tasks and data types. Examples include:
+            *   `acl.so`: Access Control List management.
+            *   `samba_dsdb.so`: Samba Directory Services Database (for Active Directory domain controller functionality).
+            *   `password_hash.so`: Password hashing.
+            *   `samldb.so`: SAM (Security Account Manager) database operations.
+            *   `tdb.so`: TDB backend for LDB.
+            *   Many others for schema handling, replication, specific attribute types, etc.
+        *   **`nss_info/`**: Modules for NSS (Name Service Switch) integration, allowing Samba to provide user/group information to the system.
+            *   `hash.so`: Likely an NSS module using a hash-based lookup.
+    The sheer number and variety of libraries and modules underscore a sophisticated Samba setup, capable of acting as a file server, print server, and potentially even an Active Directory domain controller, with extensive options for authentication, authorization, and database management.
 *   **`php/modules/`**: This subdirectory contains a comprehensive set of shared object files (`.so`) which are dynamically loadable extensions for the PHP interpreter. These modules extend PHP's core functionality. Notable extensions include:
     *   `apcu.so`: APC User Cache for opcode caching and user data caching.
     *   `bcmath.so`: Arbitrary precision mathematics.
@@ -267,7 +291,32 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
     *   `zip.so`: Zip archive handling.
     *   `zlib.so`: Zlib compression.
     This extensive list indicates a fully featured PHP environment, likely used for the SRM's web interface, API endpoints, and other system scripts.
-*   **`python2.7/`**: Contains the standard Python 2.7 library, including `.py`, `.pyc`, and `.pyo` files, and subdirectories like `compiler/`, `ctypes/`, `email/`, `json/`, `sqlite3/`, `xml/`, and `lib-dynload/` (with C extensions like `_bsddb.so`, `_sqlite3.so`, `pyexpat.so`).
+*   **`python2.7/`**: This directory houses the standard library for Python version 2.7. It's a comprehensive collection of modules providing a wide range of functionalities. The directory contains numerous individual `.py` (source), `.pyc` (compiled bytecode), and `.pyo` (optimized compiled bytecode) files directly, as well as many subdirectories representing larger packages or collections of related modules. Key subdirectories and their general purpose include:
+    *   `bsddb/`: Berkeley DB bindings.
+    *   `compiler/`: Python code compiler tools.
+    *   `ctypes/`: A foreign function library for Python, allowing calls to functions in DLLs/shared libraries.
+    *   `curses/`: Bindings for the ncurses library (terminal handling).
+    *   `distutils/`: For building and distributing Python modules.
+    *   `email/`: Package for parsing, handling, and generating email messages.
+    *   `encodings/`: Python's internal codecs for various character encodings.
+    *   `ensurepip/`: Bootstrapping `pip` into a Python installation.
+    *   `hotshot/`: (Deprecated) High-performance logging profiler.
+    *   `idlelib/`: Core of IDLE, Python's Integrated Development and Learning Environment.
+    *   `importlib/`: Implementation of Python's `import` statement.
+    *   `json/`: JSON (JavaScript Object Notation) encoder and decoder.
+    *   `lib-dynload/`: Contains dynamically loaded C extension modules (`.so` files on Linux) that provide low-level functionality (e.g., `_socket.so`, `_ssl.so`, `zlib.so`, `pyexpat.so`, `_sqlite3.so`, `_bsddb.so`).
+    *   `lib-tk/`: Support files for Tkinter (Python's Tcl/Tk interface).
+    *   `lib2to3/`: The `2to3` utility's library for converting Python 2 code to Python 3.
+    *   `logging/`: Logging facility for Python.
+    *   `multiprocessing/`: Process-based parallelism.
+    *   `plat-linux2/`: Platform-specific modules for Linux (kernel version 2.x).
+    *   `pydoc_data/`: Data files used by `pydoc` for generating documentation.
+    *   `site-packages/`: The target directory for externally-developed Python packages installed on the system. Its contents would vary depending on what additional Python libraries have been installed. (The `list_files` output was truncated, so the specific contents of `site-packages` are not fully detailed here but would typically include libraries like `OpenSSL`, `six`, etc., if they were installed via pip or a similar mechanism for Python 2.7).
+    *   `sqlite3/`: DB-API 2.0 interface for SQLite databases.
+    *   `unittest/`: Unit testing framework.
+    *   `wsgiref/`: WSGI (Web Server Gateway Interface) utilities and reference implementation.
+    *   `xml/`: Package for XML processing, including submodules like `dom` (Document Object Model), `sax` (Simple API for XML), and `etree` (ElementTree).
+    The presence of a full Python 2.7 standard library suggests that various system scripts or applications on the SRM device are written in Python 2.7.
 *   **`iptables/`**: This subdirectory contains shared library files (`.so`) which are extensions for the `iptables` (for IPv4) and `ip6tables` (for IPv6) firewall utilities. These extensions provide additional matching criteria (prefixed with `libxt_`) and targets (prefixed with `libipt_` or `libip6t_`).
     *   **IPv4 Targets (`libipt_*.so`):**
         *   `libipt_DNAT.so`: Destination Network Address Translation.
@@ -314,11 +363,49 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
         *   `libxt_TPROXY.so`: Target for transparent proxying.
         *   `libxt_udp.so`: Match on UDP header fields.
     This extensive collection indicates a robust firewall capability with many standard and Synology-customized options for fine-grained packet filtering and manipulation.
-*   **`security/`**: Contains Pluggable Authentication Modules (PAM) (`.so` files) like `pam_deny.so`, `pam_ldap.so`, `pam_unix.so`, `pam_winbind.so`, and several Synology-specific modules (e.g., `pam_syno_autoblock.so`, `pam_syno_privilege.so`).
-*   **`udev/`**: Contains `udev` rules and scripts.
-    *   `rules.d/`: Contains `.rules` files for device handling (e.g., `50-disk.rules`, `50-usb.rules`, `50-net.rules`).
-    *   `script/`: Contains helper scripts (`.sh`, `.py`) used by udev rules (e.g., `firmware.sh`, `usb.sh`, `printer-util.py`).
-    *   `devicetable/`: Contains tables like `usb.usbmodem.table`.
+*   **`security/`**: This directory contains Pluggable Authentication Modules (PAM), which are shared libraries (`.so` files) that provide a flexible framework for application authentication. They allow system administrators to configure how applications authenticate users without modifying the applications themselves. The modules found here include:
+    *   **Standard PAM Modules:**
+        *   `pam_deny.so`: This module always denies access. It's often used as a default or at the end of a PAM stack to ensure no access is granted if other modules haven't explicitly permitted it.
+        *   `pam_ldap.so`: Enables authentication against an LDAP (Lightweight Directory Access Protocol) server.
+        *   `pam_rootok.so`: This module grants access if the user is `root` (UID 0), otherwise it denies.
+        *   `pam_unix.so`: The standard PAM module for traditional Unix authentication, typically using `/etc/passwd` and `/etc/shadow` for password checking and account management.
+    *   **Samba-Related PAM Modules:**
+        *   `pam_smbpass.so`: Used for Samba authentication, often to check passwords against Samba's own password database (e.g., `smbpasswd` file or a TDB database).
+        *   `pam_winbind.so`: Integrates with Winbind, a Samba service that allows a Unix system to act as a client in a Windows domain, enabling authentication via domain controllers.
+    *   **Synology-Specific PAM Modules:**
+        *   `pam_syno_autoblock.so`: Likely part of Synology's auto-block feature, which blocks IP addresses after a certain number of failed login attempts.
+        *   `pam_syno_log_fail.so`: Custom module for logging failed login attempts in a Synology-specific format or location.
+        *   `pam_syno_log_success.so`: Custom module for logging successful login attempts.
+        *   `pam_syno_privilege.so`: Manages Synology-specific user privileges or access control.
+        *   `pam_syno_root_use_admin_password.so`: A Synology-specific module that might allow the `root` user to authenticate using the `admin` user's password, or enforce specific policies for root login.
+    This collection of PAM modules indicates a robust authentication system with support for local Unix users, LDAP, Windows domain integration (via Samba/Winbind), and several custom Synology security enhancements like auto-blocking and specialized logging.
+*   **`udev/`**: This directory is central to Linux's dynamic device management system, `udev`. It populates `/dev` with device nodes and performs actions when devices are added or removed.
+    *   **`rules.d/`**: This subdirectory contains `.rules` files that define `udev` rules. These rules match devices based on their attributes (e.g., vendor ID, product ID, subsystem) and then execute actions, such as creating device nodes with specific names, setting permissions, loading kernel modules, or running scripts. Examples found include:
+        *   `05-system-default.rules`, `05-system-env.rules`: Early system rules, possibly setting default environments or permissions.
+        *   `39-usbmuxd.rules`: Rules for `usbmuxd`, a daemon for communicating with Apple iOS devices over USB.
+        *   `40-check-rdx.rules`: Rules likely related to RDX removable disk backup systems.
+        *   `50-disk.rules`, `50-mmc.rules`, `50-scsi.rules`, `50-scsi_host.rules`: Rules for various storage devices (disks, MMC cards, SCSI devices).
+        *   `50-firmware.rules`: Rules for firmware loading.
+        *   `50-hiddev.rules`: Rules for HID (Human Interface Device) event devices.
+        *   `50-net.rules`, `50-nic-offload.rules`, `50-usb-net.rules`, `60-net-usbif.rules`: Various rules for network interfaces, including USB network devices and NIC offloading features.
+        *   `50-printer-bus.rules`, `50-printers.rules`: Rules for printer devices.
+        *   `50-tty.rules`: Rules for TTY (teletypewriter) devices, including serial ports.
+        *   `50-usb-bluetooth.rules`, `50-usb-dvb.rules`, `50-usb-modem.rules`, `50-usb-wifi.rules`, `50-usb.rules`, `90-usb-iphone.rules`: Extensive rules for various USB devices including Bluetooth dongles, DVB tuners, modems, Wi-Fi adapters, general USB devices, and specifically iPhones.
+    *   **`script/`**: This subdirectory contains helper scripts (shell scripts `.sh` and Python scripts `.py`) that are called by `udev` rules to perform more complex actions when a device event occurs. Examples include:
+        *   `firmware.sh`: Script for handling firmware loading.
+        *   `hotplugd-util.sh`, `manual_gen_hotplug.sh`: Utilities related to hotplug event handling.
+        *   `printer-remove-check.py`, `printer-usbdev-check.py`, `printer-util.py`: Python scripts for printer management.
+        *   `rdx_util.sh`: Utility script for RDX devices.
+        *   `record-nic-offload.sh`: Script to record NIC offload settings.
+        *   `sas-bs-pwrctl.sh`, `sas-snapshot-update.sh`: Scripts related to SAS (Serial Attached SCSI) devices, possibly for power control or snapshot updates.
+        *   `sdcard.sh`: Script for SD card handling.
+        *   `syno_default_env.sh`: Synology-specific script for setting default environment variables for udev events.
+        *   `tty-util.sh`: Utility for TTY devices.
+        *   `usb-bluetooth-util.sh`, `usb-dvb-util.sh`, `usb-env-util.sh`, `usb-modem-util.sh`, `usb-net-iphone.sh`, `usb-net-util.sh`, `usb-net.sh`, `usb-parse-vidpid.sh`, `usb-wifi-util.sh`, `usb.sh`: A large collection of utility scripts for various USB device types, handling environment setup, network configuration, modem interactions, VID/PID parsing, etc.
+    *   **`devicetable/`**: This subdirectory contains tables used by `udev` or its helper scripts, likely for mapping device identifiers or properties.
+        *   `usb.usbmodem.table`: A table specifically for USB modems, possibly containing VID/PID information or specific modem configurations.
+    *   **`hwdb.d/`**: This directory is for hardware database files (`.hwdb`). `udev` uses `hwdb` (Hardware Database) to store hardware-specific information that isn't directly available from kernel sysfs attributes. This can include things like keyboard layout mappings, sensor properties, or default settings for certain devices. The directory is empty in this backup, but would typically contain `.hwdb` files compiled into a binary `hwdb.bin` in `/etc/udev/`.
+    The comprehensive set of rules and scripts in `srm_backup/lib/udev/` demonstrates a highly customized device management system tailored to the SRM hardware and its supported peripherals, especially various USB devices (modems, printers, storage, Wi-Fi, Bluetooth, iPhone).
 *   **`openvpn/`**: Contains OpenVPN plugins like `openvpn-plugin-down-root.so`.
 *   **`ebtables/`**: Contains libraries like `libebtc.so` for Ethernet bridge table administration.
 *   **`gconv/`**: This subdirectory contains modules for character set conversion, used by the `glibc` library (specifically the `iconv` functionality). It houses a comprehensive collection of shared object files (`.so`) for a multitude of encoding standards, including various Code Pages (e.g., `CP1252.so`), IBM encodings (e.g., `IBM850.so`), ISO standards (e.g., `ISO8859-15.so`), East Asian encodings (e.g., `EUC-JP.so`, `GBK.so`, `BIG5HKSCS.so`), Cyrillic encodings (e.g., `KOI8-R.so`), and many others. It also includes the `gconv-modules` configuration file, which lists available conversion modules and their aliases, enabling broad support for internationalization and text data interchange.
@@ -724,3 +811,71 @@ This directory contains `.pc` files, which are metadata files used by the `pkg-c
 
 *   **`libgcrypt.pc`**: This file provides build information for the Libgcrypt cryptographic library. It would specify flags needed to compile against and link with Libgcrypt (e.g., `-I/usr/include`, `-L/usr/lib`, `-lgcrypt`).
 *   **`libmaxminddb.pc`**: This file provides build information for the `libmaxminddb` library, which is used for reading MaxMind DB files (often used for GeoIP lookups). It would specify flags like include paths for `maxminddb.h` and linking information for `libmaxminddb`.
+
+### 24. Subdirectory `postgresql/`
+
+This directory contains shared library files (`.so`) related to PostgreSQL, a powerful open-source object-relational database system. These are typically procedural language extensions or other loadable modules for PostgreSQL.
+
+*   **`plpgsql.so`**: This is the shared library for PL/pgSQL, PostgreSQL's procedural language. PL/pgSQL allows developers to write functions, stored procedures, and triggers in a block-structured language, significantly extending the capabilities of SQL for complex logic within the database. Its presence indicates that the SRM might use a PostgreSQL database internally for some of its applications or services, and these services might utilize stored procedures or functions written in PL/pgSQL.
+
+### 25. Subdirectory `pppd/`
+
+This directory contains plugin modules for the Point-to-Point Protocol daemon (`pppd`). `pppd` is used to manage network connections over serial lines and various tunneling protocols like PPPoE, PPTP, and L2TP.
+
+*   **`pppol2tp.so`**: This plugin provides support for PPP over L2TP (Layer 2 Tunneling Protocol). It allows `pppd` to establish PPP sessions encapsulated within L2TP tunnels, commonly used by VPN services and ISPs.
+*   **`pptp.so`**: This plugin provides support for PPTP (Point-to-Point Tunneling Protocol). It enables `pppd` to create and manage PPTP VPN connections.
+
+### 26. Subdirectory `rp-pppoe/`
+
+This directory contains components related to Roaring Penguin PPPoE (Point-to-Point Protocol over Ethernet) client software. PPPoE is commonly used by ISPs to manage DSL and fiber optic internet connections.
+
+*   **`rp-pppoe.so`**: This is a plugin for the `pppd` (Point-to-Point Protocol daemon). It allows `pppd` to establish and manage PPPoE connections. When the system needs to connect to an ISP using PPPoE, this plugin handles the specifics of the PPPoE encapsulation and session management, while `pppd` handles the PPP layer itself (authentication, IP address assignment, etc.).
+
+### 27. Subdirectory `rsync/`
+
+This directory contains Synology-specific shared libraries (`.so` files) related to `rsync` functionalities, likely used for backup and synchronization tasks within the SRM.
+
+*   **`librsync-bkpsvr.so`**: This library is probably used by Synology's backup server applications that leverage `rsync` for transferring and managing backup data. The "bkpsvr" likely stands for "backup server".
+*   **`librsync-lunbkp.so`**: This library appears to be related to `rsync` operations specifically for LUN (Logical Unit Number) backups. LUNs are often used in iSCSI storage environments, and this library would handle the `rsync`-based backup process for these block-level storage units.
+
+### 28. Subdirectory `sasl2/`
+
+This directory contains plugin modules for the Cyrus SASL (Simple Authentication and Security Layer) library, version 2. SASL is a framework for authentication and data security in Internet protocols. Applications use SASL to select an appropriate authentication mechanism.
+
+*   **`liblogin.so`**: This shared library implements the `LOGIN` SASL mechanism. The `LOGIN` mechanism is a simple username/password authentication method, often used in protocols like SMTP (Simple Mail Transfer Protocol) for email server authentication.
+*   **`libplain.so`**: This shared library implements the `PLAIN` SASL mechanism. The `PLAIN` mechanism is another straightforward method for transmitting an authorization identity (typically the user who wants to log in), an authentication identity (username), and a password to a server. It's widely supported by various protocols.
+
+### 29. Subdirectory `syslog-ng/`
+
+This directory contains plugin modules (`.so` files) for `syslog-ng`, an enhanced logging daemon with a focus on portability and high-performance central log collection and processing. These modules extend its functionality for various sources, destinations, parsers, and formatting.
+
+*   **`libaffile.so`**: Destination driver for writing log messages to plain text files (`af` likely stands for "alternative file" or similar, indicating advanced file destination options).
+*   **`libafprog.so`**: Destination driver for sending log messages to an external program's standard input.
+*   **`libafsocket-notls.so`**: Destination driver for sending log messages to a remote server via TCP/UDP sockets without TLS encryption.
+*   **`libafsocket-tls.so`**: Destination driver for sending log messages to a remote server via TCP/UDP sockets with TLS encryption for secure transport.
+*   **`libafsql.so`**: Destination driver for logging messages to an SQL database.
+*   **`libafuser.so`**: Destination driver for sending messages to logged-in users.
+*   **`libbasicfuncs.so`**: Provides basic function plugins, possibly for simple message manipulation or filtering.
+*   **`libconfgen.so`**: Module for configuration generation or management within `syslog-ng`.
+*   **`libcryptofuncs.so`**: Provides cryptographic function plugins, likely for encrypting or hashing log data.
+*   **`libcsvparser.so`**: Parser module for handling Comma-Separated Values (CSV) formatted log messages.
+*   **`libdbparser.so`**: Parser module for `syslog-ng`'s pattern database (`patterndb`), allowing for advanced message classification and extraction of information based on predefined patterns.
+*   **`libjson-plugin.so`**: Plugin for JSON (JavaScript Object Notation) support, likely for parsing JSON-formatted logs or formatting outgoing messages as JSON.
+*   **`liblinux-kmsg-format.so`**: Module for formatting messages read from the Linux kernel log buffer (`/dev/kmsg`).
+*   **`libsyslogformat.so`**: Module related to standard syslog message formatting (e.g., RFC3164, RFC5424).
+*   **`libsystem-source.so`**: Source driver for reading log messages from system-specific sources (e.g., `/dev/log` on Unix-like systems).
+*   **`libtfgeoip.so`**: Template function for GeoIP lookups, allowing enrichment of log messages with geographical information based on IP addresses.
+
+The presence of these modules indicates a robust `syslog-ng` setup capable of collecting logs from various sources, parsing them in multiple formats (including JSON and CSV), performing advanced pattern matching, enriching data (e.g., with GeoIP), and sending them to diverse destinations such as files, programs, remote sockets (with or without TLS), and SQL databases.
+
+### 30. Subdirectory `vfs/`
+
+This directory contains Virtual File System (VFS) modules for Samba. VFS modules allow Samba to extend or modify the behavior of filesystem operations for shared directories. These modules can add features like recycle bins, audit logging, custom access control, and more.
+
+*   **`dirsort.so`**: This VFS module likely provides functionality to sort directory listings presented to SMB clients.
+*   **`recycle.so`**: Implements a recycle bin feature. When files are deleted from a Samba share configured with this module, they are moved to a hidden recycle bin directory instead of being permanently deleted, allowing for recovery.
+*   **`synovfs_acl.so`**: A Synology-specific VFS module for handling Access Control Lists (ACLs). This would integrate Samba's ACL management with Synology's underlying filesystem and permission model, ensuring consistent ACL behavior.
+*   **`synovfs_indexing.so`**: Synology-specific VFS module related to file indexing. This could be used to interface with Synology's Universal Search or other indexing services, potentially to update indexes when files are modified via Samba or to use indexes for faster searching.
+*   **`synovfs_stream.so`**: Synology-specific VFS module for handling alternate data streams (ADS) or similar stream-like file properties, possibly for compatibility with Windows filesystems or for storing Synology-specific metadata.
+*   **`synovfs_xattr.so`**: Synology-specific VFS module for managing extended attributes (xattr). Extended attributes allow storing additional metadata for files beyond standard filesystem attributes.
+*   **`synovfs_xferlog.so`**: Synology-specific VFS module for transfer logging (xferlog). This module likely logs file access and transfer operations (uploads, downloads, deletions) performed via Samba shares, which can be useful for auditing and monitoring.
