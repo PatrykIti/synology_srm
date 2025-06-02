@@ -879,3 +879,11 @@ This directory contains Virtual File System (VFS) modules for Samba. VFS modules
 *   **`synovfs_stream.so`**: Synology-specific VFS module for handling alternate data streams (ADS) or similar stream-like file properties, possibly for compatibility with Windows filesystems or for storing Synology-specific metadata.
 *   **`synovfs_xattr.so`**: Synology-specific VFS module for managing extended attributes (xattr). Extended attributes allow storing additional metadata for files beyond standard filesystem attributes.
 *   **`synovfs_xferlog.so`**: Synology-specific VFS module for transfer logging (xferlog). This module likely logs file access and transfer operations (uploads, downloads, deletions) performed via Samba shares, which can be useful for auditing and monitoring.
+
+### 31. Subdirectory `wifi/`
+
+This directory contains configuration files related to the Wi-Fi subsystem, likely for Qualcomm Atheros (QCA) based chipsets.
+
+*   **`qcacommands_ol_radio.xml`**: An XML file, possibly defining commands or configuration parameters for the QCA Wi-Fi "offload radio" (ol_radio) functionality. Offload features typically move some Wi-Fi processing from the main CPU to the Wi-Fi chipset itself to improve performance.
+*   **`qcacommands_vap.xml`**: Another XML file, likely related to commands or configurations for Virtual Access Points (VAPs) on QCA chipsets. VAPs allow a single physical Wi-Fi radio to broadcast multiple SSIDs.
+*   **`tools_config`**: A generic name suggesting a configuration file for various Wi-Fi related diagnostic or management tools. Its specific content would determine its exact purpose.
