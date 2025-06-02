@@ -158,7 +158,6 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
     *   The `ldb/` subdirectory contains many LDB modules (`.so`) for various database backends and functionalities (e.g., `acl.so`, `password_hash.so`, `samba_dsdb.so`).
 *   **`php/modules/`**: Contains PHP extensions (`.so` files) such as `apcu.so` (APC User Cache), `curl.so`, `gd.so` (image processing), `json.so`, `mcrypt.so`, `openssl.so`, `pdo_sqlite.so`, `sqlite3.so`, `xml.so`, `zip.so`, and a Synology-specific `syno_compiler.so`.
 *   **`python2.7/`**: Contains the standard Python 2.7 library, including `.py`, `.pyc`, and `.pyo` files, and subdirectories like `compiler/`, `ctypes/`, `email/`, `json/`, `sqlite3/`, `xml/`, and `lib-dynload/` (with C extensions like `_bsddb.so`, `_sqlite3.so`, `pyexpat.so`).
-*   **`httpd/modules/`**: Contains Apache HTTP Server modules (`.so` files). This includes standard modules like `mod_alias.so`, `mod_auth_basic.so`, `mod_rewrite.so`, `mod_ssl.so`, `mod_proxy.so`, as well as `mod_fastcgi.so`, `mod_suphp.so`, and Synology-specific `mod_synobandwidth.so`.
 *   **`iptables/`**: Contains `iptables` and `ip6tables` extension libraries (`.so` files), such as `libipt_DNAT.so`, `libxt_geoip.so`, `libxt_limit.so`, `libxt_mac.so`, `libxt_string.so`, and Synology-specific ones like `libxt_classify_synomatch.so`, `libxt_synoclassify.so`.
 *   **`security/`**: Contains Pluggable Authentication Modules (PAM) (`.so` files) like `pam_deny.so`, `pam_ldap.so`, `pam_unix.so`, `pam_winbind.so`, and several Synology-specific modules (e.g., `pam_syno_autoblock.so`, `pam_syno_privilege.so`).
 *   **`udev/`**: Contains `udev` rules and scripts.
@@ -167,7 +166,7 @@ The `srm_backup/lib/firmware/` subdirectory stores firmware files for various ha
     *   `devicetable/`: Contains tables like `usb.usbmodem.table`.
 *   **`openvpn/`**: Contains OpenVPN plugins like `openvpn-plugin-down-root.so`.
 *   **`ebtables/`**: Contains libraries like `libebtc.so` for Ethernet bridge table administration.
-*   **`gconv/`**: Contains various character set conversion modules (`.so`) like `CP772.so`, `UTF-16.so`.
+*   **`gconv/`**: This subdirectory contains modules for character set conversion, used by the `glibc` library (specifically the `iconv` functionality). It houses a comprehensive collection of shared object files (`.so`) for a multitude of encoding standards, including various Code Pages (e.g., `CP1252.so`), IBM encodings (e.g., `IBM850.so`), ISO standards (e.g., `ISO8859-15.so`), East Asian encodings (e.g., `EUC-JP.so`, `GBK.so`, `BIG5HKSCS.so`), Cyrillic encodings (e.g., `KOI8-R.so`), and many others. It also includes the `gconv-modules` configuration file, which lists available conversion modules and their aliases, enabling broad support for internationalization and text data interchange.
 *   **`locale/`**: Contains localization data. While the full list of locales isn't available from the top-level listing, this directory's presence indicates multi-language support.
 *   **`cups/daemon/`**: Contains `cups-lpd`, suggesting CUPS (Common UNIX Printing System) LPD mini-server is present.
 *   **`ulogd/`**: Contains `ulogd_INPUT_NFCT.so`, `ulogd_INPUT_LOGEMU.so`, `ulogd_OUTPUT_LOGEMU.so`, `ulogd_OUTPUT_SQLITE3.so`, `ulogd_OUTPUT_SYSLOG.so` (based on common ulogd plugins, specific list would require deeper `list_files`), for user-space logging of Netfilter packets.
@@ -312,3 +311,183 @@ This subdirectory contains dynamically loadable cryptographic engine modules for
 
 *   **`capi.so`**: This engine likely provides an interface to Microsoft's Cryptographic Application Programming Interface (CryptoAPI). In a Linux context, this might be used to interface with hardware cryptographic modules that expose a CAPI-compatible interface, or potentially for compatibility layers.
 *   **`padlock.so`**: This engine enables OpenSSL to use the VIA PadLock hardware security features found in VIA C3, C7, and Nano processors. VIA PadLock includes hardware acceleration for AES encryption/decryption, SHA-1/SHA-256 hashing, and a hardware random number generator. Using this engine can significantly speed up these operations if the underlying hardware supports it.
+
+### 17. Subdirectory `gio/`
+
+This directory contains modules related to GIO (GLib Input/Output), a library that provides a modern, easy-to-use VFS (Virtual File System) API. It allows applications to access local and remote files and other resources in a unified way.
+
+*   **`modules/`**: This subdirectory holds the dynamically loadable GIO modules.
+    *   **`libgiognutls.so`**: This module provides TLS/SSL support for GIO network operations using the GnuTLS library. It enables secure network connections (e.g., HTTPS, FTPS) for applications using GIO.
+    *   **`libgiolibproxy.so`**: This module integrates GIO with `libproxy`, a library for automatic proxy configuration. It allows GIO-based applications to automatically detect and use system proxy settings.
+    *   **`libgvfsdbus.so`**: This module provides an interface to GVfs (GNOME Virtual File System) backends via D-Bus. GVfs extends GIO's capabilities by adding support for various protocols and filesystems (e.g., SMB, FTP, SFTP, MTP). This module allows GIO to leverage GVfs for accessing a wider range of resources.
+
+### 18. Subdirectory `httpd/`
+
+The `srm_backup/lib/httpd/` directory contains modules for the Apache HTTP Server, which is likely used to serve the SRM web interface and potentially other web-based services. The primary content is within its `modules/` subdirectory.
+
+*   **`modules/`**: This subdirectory houses a comprehensive collection of Apache HTTP Server modules (`.so` files), enabling a wide range of functionalities. These can be broadly categorized as follows:
+
+    *   **Core & Request Handling:**
+        *   `mod_unixd.so`: Basic Unix daemon functionalities.
+        *   `mod_env.so`: Modify or clear environment variables.
+        *   `mod_setenvif.so`: Set environment variables based on request characteristics.
+        *   `mod_dir.so`: Directory indexing and serving default index files.
+        *   `mod_actions.so`: Execute CGI scripts based on media type or request method.
+        *   `mod_alias.so`: Mapping different parts of the host filesystem into the document tree.
+        *   `mod_rewrite.so`: Powerful URL rewriting using regular expressions.
+        *   `mod_negotiation.so`: Content negotiation.
+        *   `mod_vhost_alias.so`: Support for dynamically configured mass virtual hosting.
+        *   `mod_asis.so`: Send files that contain their own HTTP headers.
+        *   `mod_imagemap.so`: Server-side imagemap processing.
+        *   `mod_include.so`: Server-Side Includes (SSI).
+        *   `mod_autoindex.so`: Automatic directory listings.
+        *   `mod_info.so`: Provides a comprehensive overview of the server configuration.
+        *   `mod_status.so`: Provides information on server activity and performance.
+        *   `mod_version.so`: Version dependent configuration.
+        *   `mod_remoteip.so`: Replaces the original client IP address for the connection with the useragent IP address list presented by a proxy or a load balancer.
+        *   `mod_request.so`: Manages and makes available client request bodies to other modules.
+        *   `mod_reqtimeout.so`: Set timeouts and minimum data rates for receiving requests.
+        *   `mod_watchdog.so`: Provides an API for other modules to run periodic tasks.
+        *   `mod_macro.so`: Provides macros within Apache httpd configuration files.
+        *   `mod_filter.so`: Context-sensitive smart filter.
+        *   `mod_substitute.so`: Perform search and replace operations on response bodies.
+        *   `mod_sed.so`: Filter content using `sed` syntax.
+        *   `mod_charset_lite.so`: Character set translation.
+        *   `mod_file_cache.so`: Caches static files to improve performance.
+        *   `mod_ext_filter.so`: Pass the response body through an external program before delivery to the client.
+        *   `mod_unique_id.so`: Generates a unique request identifier for every request.
+
+    *   **Authentication & Authorization (Authn & Authz):**
+        *   `mod_auth_basic.so`: Basic authentication.
+        *   `mod_auth_digest.so`: MD5 digest authentication.
+        *   `mod_auth_form.so`: Form-based authentication.
+        *   `mod_authn_core.so`: Core authentication provider.
+        *   `mod_authn_file.so`: User authentication using plain text files.
+        *   `mod_authn_dbm.so`: User authentication using DBM files.
+        *   `mod_authn_anon.so`: Anonymous user authentication.
+        *   `mod_authn_dbd.so`: User authentication using SQL databases via APR_dbd.
+        *   `mod_authn_socache.so`: Authentication front-end for shared object cache.
+        *   `mod_authz_core.so`: Core authorization provider.
+        *   `mod_authz_host.so`: Host-based access control.
+        *   `mod_authz_groupfile.so`: Group authorization using plain text files.
+        *   `mod_authz_user.so`: User authorization.
+        *   `mod_authz_dbm.so`: Group authorization using DBM files.
+        *   `mod_authz_owner.so`: Authorization based on file ownership.
+        *   `mod_authz_dbd.so`: Group authorization using SQL databases via APR_dbd.
+        *   `mod_authnz_ldap.so`: LDAP authentication/authorization. (Requires `mod_ldap.so`)
+        *   `mod_access_compat.so`: Compatibility for `Allow`, `Deny`, `Order` directives.
+        *   `mod_allowmethods.so`: Restrict HTTP methods.
+
+    *   **Caching:**
+        *   `mod_cache.so`: Content caching.
+        *   `mod_cache_disk.so`: Disk-based cache storage.
+        *   `mod_cache_socache.so`: Shared object cache storage.
+        *   `mod_socache_dbm.so`: DBM shared object cache provider.
+        *   `mod_socache_memcache.so`: Memcached shared object cache provider.
+        *   `mod_socache_redis.so`: Redis shared object cache provider.
+        *   `mod_socache_shmcb.so`: Shared memory (shmcb) shared object cache provider.
+        *   `mod_slotmem_shm.so`: Shared memory slot-based memory provider.
+
+    *   **Proxying & Load Balancing:**
+        *   `mod_proxy.so`: Main proxy module.
+        *   `mod_proxy_http.so`: HTTP proxy.
+        *   `mod_proxy_fcgi.so`: FastCGI proxy.
+        *   `mod_proxy_ftp.so`: FTP proxy.
+        *   `mod_proxy_ajp.so`: AJP (Apache JServ Protocol) proxy.
+        *   `mod_proxy_connect.so`: Handles `CONNECT` requests for SSL tunneling.
+        *   `mod_proxy_balancer.so`: Load balancing support.
+        *   `mod_proxy_express.so`: Dynamically configured reverse proxies.
+        *   `mod_proxy_fdpass.so`: Pass file descriptors to other processes.
+        *   `mod_proxy_scgi.so`: SCGI gateway.
+        *   `mod_proxy_uwsgi.so`: UWSGI gateway.
+        *   `mod_proxy_wstunnel.so`: WebSocket tunnel.
+        *   `mod_lbmethod_bybusyness.so`: Load balancing scheduler based on busyness.
+        *   `mod_lbmethod_byrequests.so`: Load balancing scheduler based on request count.
+        *   `mod_lbmethod_bytraffic.so`: Load balancing scheduler based on traffic.
+        *   `mod_lbmethod_heartbeat.so`: Heartbeat traffic counting module for load balancers.
+        *   `mod_proxy_hcheck.so`: Dynamic health checking of balancer members.
+
+    *   **SSL/TLS:**
+        *   `mod_ssl.so`: SSL/TLS encryption.
+        *   `mod_ssl_npn.so`: Likely related to Next Protocol Negotiation (NPN) for SSL/TLS, a precursor to ALPN. (Note: ALPN is typically part of `mod_ssl` in later Apache versions or handled by `mod_http2`).
+        *   `mod_md.so`: Manages domain certificates using ACME (e.g., Let's Encrypt).
+
+    *   **Logging & Monitoring:**
+        *   `mod_log_config.so`: Customizable logging of requests.
+        *   `mod_log_debug.so`: Configurable debug logging.
+        *   `mod_log_forensic.so`: Forensic logging of requests.
+        *   `mod_logio.so`: Logging of input/output bytes per request.
+        *   `mod_dumpio.so`: Dumps all I/O to error log as desired.
+        *   `mod_ident.so`: RFC 1413 ident lookups.
+        *   `mod_usertrack.so`: User tracking cookies for logging (deprecated).
+
+    *   **Dynamic Content & External Processes:**
+        *   `mod_cgid.so`: CGI script execution using an external daemon.
+        *   `mod_fastcgi.so`: (Often third-party) Enables FastCGI for running external applications.
+        *   `mod_suphp.so`: (Often third-party) Execute PHP scripts with the permissions of their owners.
+
+    *   **Headers & Metainformation:**
+        *   `mod_headers.so`: Control HTTP request and response headers.
+        *   `mod_expires.so`: Generation of `Expires` and `Cache-Control` HTTP headers.
+        *   `mod_cern_meta.so`: Support for CERN httpd metafile semantics.
+        *   `mod_mime.so`: Determines document types from file extensions.
+        *   `mod_mime_magic.so`: Determines document types by examining file content.
+
+    *   **Session Management:**
+        *   `mod_session.so`: Session support.
+        *   `mod_session_cookie.so`: Cookie-based session support.
+        *   `mod_session_dbd.so`: DBD/SQL based session support.
+
+    *   **WebDAV:**
+        *   `mod_dav.so`: Core WebDAV (Distributed Authoring and Versioning) protocol.
+        *   `mod_dav_fs.so`: Filesystem backend for WebDAV.
+        *   `mod_dav_lock.so`: Generic locking module for WebDAV.
+
+    *   **Database Connectivity:**
+        *   `mod_dbd.so`: Manages SQL database connections for other modules.
+        *   `mod_ldap.so`: LDAP connection pooling and result caching. (Used by `mod_authnz_ldap.so`)
+
+    *   **Performance & Resource Management:**
+        *   `mod_deflate.so`: Compresses content before it is delivered to the client.
+        *   `mod_buffer.so`: Buffering of input and output.
+        *   `mod_ratelimit.so`: Bandwidth rate limiting for clients.
+
+    *   **Miscellaneous & Synology Specific:**
+        *   `mod_speling.so`: Corrects minor typos in URLs.
+        *   `mod_userdir.so`: User-specific directories.
+        *   `mod_xsendfile.so`: (Often third-party) Allows the web server to delegate serving files to the operating system, improving performance for large files.
+        *   `mod_synobandwidth.so`: Synology-specific module, likely for bandwidth management or shaping integrated with SRM's features.
+
+This extensive list of modules indicates a highly capable and configurable Apache HTTP server instance, tailored for the Synology SRM's web interface and other potential web services, with strong support for security, proxying, caching, and dynamic content.
+
+### 19. Subdirectory `hyd_lib/`
+
+The `srm_backup/lib/hyd_lib/` directory appears to contain shared libraries (`.so` files) related to Qualcomm's Hy-Fi (Hybrid Wi-Fi, combining Wi-Fi with Power Line Communication - PLC) technology, IEEE 1905.1 (a standard for hybrid home networking), Wi-Fi Self-Organizing Networks (SON), and associated low-level system utilities.
+
+*   **`libbreakpad_qcawrapper.so`**: Wrapper library for Google Breakpad, a crash reporting system, likely specific to Qualcomm Atheros (QCA) components.
+*   **`libc.so`**: A symbolic link or copy of the standard C library, essential for almost all programs.
+*   **`libgcc_s.so.1`**: GCC low-level runtime library, providing support functions for code generated by the GCC compiler.
+*   **`libhyfi-bridge.so`**: Library for Hy-Fi bridging functionalities, managing the interaction between Wi-Fi and PLC segments of a hybrid network.
+*   **`libhyficommon.so`**: Common library for Hy-Fi functionalities, likely containing shared code used by other Hy-Fi related libraries.
+*   **`libieee1905.so`**: Library implementing or supporting the IEEE 1905.1 standard, which defines an abstraction layer for multiple home networking technologies to interoperate.
+*   **`libjansson.so.4.7.0`**: Jansson library (version 4.7.0) for encoding, decoding, and manipulating JSON data.
+*   **`liblbcmnlibs.so`**: Likely a common library for "LBC" (Load Balancing Controller or similar QCA technology) or other Qualcomm-specific components.
+*   **`libmcfwdtbleswitch.so`**: Library related to "MCFWDTBL" (Multi-Client Forwarding Table) for switch components, possibly for managing forwarding rules in a hybrid network.
+*   **`libmcfwdtblwlan2g.so`**: MCFWDTBL library specifically for 2.4GHz WLAN.
+*   **`libmcfwdtblwlan5g.so`**: MCFWDTBL library specifically for 5GHz WLAN.
+*   **`libmcfwdtblwlan6g.so`**: MCFWDTBL library specifically for 6GHz WLAN (Wi-Fi 6E).
+*   **`libnl-3.so.200.16.1`**: Netlink library (version 3.200.16.1), used for inter-process communication between kernel and user-space, particularly for network configuration.
+*   **`libnl-genl-3.so.200.16.1`**: Generic Netlink library, an extension to Netlink.
+*   **`libpluginManager.so`**: A generic plugin manager library.
+*   **`libpsService.so`**: "PS" could stand for Power Saving or a similar service related to network device states.
+*   **`libqca_nl80211_wrapper.so`**: Qualcomm Atheros wrapper library for `nl80211`, which is the Netlink interface for Wi-Fi configuration.
+*   **`libqcasonmemdebug.so`**: Qualcomm Atheros Wi-Fi SON (Self-Organizing Network) memory debugging library.
+*   **`libstdc++.so.6.0.21`**: The GNU Standard C++ Library (version 6.0.21).
+*   **`libubox.so`**: Library providing utility functions for OpenWrt's Ubus system.
+*   **`libubus.so`**: Ubus (micro bus architecture) library for inter-process communication in OpenWrt-based systems.
+*   **`libuci.so`**: UCI (Unified Configuration Interface) library for managing configuration in OpenWrt-based systems.
+*   **`libwifisoncfg.so`**: Library for Wi-Fi SON configuration.
+*   **`libwpa2.so`**: Library related to WPA2 (Wi-Fi Protected Access 2) security protocols.
+*   **`syno_hyd_preload.so`**: Synology-specific preload library for `hyd` (Hybrid Daemon or similar), possibly to initialize or modify behavior of the hybrid networking components.
+
+This collection of libraries suggests a sophisticated system for managing hybrid networks (Wi-Fi and potentially PLC), Wi-Fi mesh/SON capabilities, and low-level network configuration, heavily leveraging Qualcomm Atheros technologies and OpenWrt-derived components.
