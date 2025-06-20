@@ -1,0 +1,351 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Initialize Project and Setup Analysis Environment",
+        "description": "Set up the project structure, version control (Git), and configure analysis tools (MCP Zen, Gemini Pro, Task Master) as per PRD. Define initial task breakdown in Task Master.",
+        "details": "Create a central project directory. Initialize a Git repository for version control of documentation and analysis scripts. Install and configure MCP Zen tools for system analysis. Ensure access to Gemini Pro for advanced analysis capabilities. Set up Task Master (or chosen task management tool) and import the initial high-level tasks. Perform web searches for best practices in documenting embedded Linux systems and SRM-like devices.",
+        "testStrategy": "Verify Git repository is functional. Confirm MCP Zen tools and Gemini Pro access are operational. Task Master is set up with initial tasks. Basic project structure is in place.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Define Standard Documentation Template and Structure",
+        "description": "Create a consistent and comprehensive template for documenting each directory and component. The template must include sections for purpose, key files/subdirectories, configuration details, security implications, performance considerations, maintenance guidelines, and cross-references.",
+        "details": "Develop a Markdown or similar format template. Sections to include: 1. Component Name & Path, 2. Overview & Purpose, 3. Key Files & Subdirectories (with brief descriptions), 4. Detailed Configuration (if applicable), 5. Operational Aspects, 6. Security Implications & Best Practices, 7. Performance Considerations, 8. Maintenance & Troubleshooting Guidelines, 9. Cross-References to related components/documentation. Store this template in the project's version control.",
+        "testStrategy": "Review template against PRD requirements (Documentation Requirements, Quality Requirements). Ensure all specified sections are present and clearly defined. Confirm template is easily applicable to diverse components.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Analyze and Document /etc Directory (Active System Configuration)",
+        "description": "Perform deep analysis of the /etc directory, documenting all active system configuration files, their purpose, structure, parameters, and security implications. This includes network settings, firewall rules, and service configurations.",
+        "details": "Access the srm_backup /etc folder. Systematically analyze each file and subdirectory using MCP Zen tools with Gemini Pro. For each configuration file, document its purpose, syntax, common parameters, default values, and their impact on system behavior. Identify relationships with /etc.defaults (Task 4). Pay special attention to files related to network configuration, firewall rules, service configurations, and system-wide settings. Document security implications for each sensitive file (permissions, potential misconfigurations). Adhere to the defined documentation template (Task 2). Cross-reference with network services (Task 6) and security analysis (Task 5).",
+        "testStrategy": "Review documentation for accuracy, completeness, and adherence to the template. Verify all significant files in /etc are covered. Ensure security implications are clearly noted. Cross-check with /etc.defaults documentation.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Analyze and Document /etc.defaults Directory (Default Configuration Templates)",
+        "description": "Analyze default configuration templates in /etc.defaults, documenting their relationship to active configurations in /etc and their role in system initialization or factory resets.",
+        "details": "Using MCP Zen tools and Gemini Pro, analyze each file in /etc.defaults. Compare these templates with corresponding files in /etc to understand customizations and default states. Document the purpose of each template file and how the system uses them (e.g., during first boot, reset, or as fallbacks). Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation accuracy and completeness. Ensure the relationship between /etc.defaults and /etc is clearly explained for key configurations. Confirm adherence to the documentation template.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Comprehensive Security Analysis and Report Generation",
+        "description": "Conduct a focused analysis to identify all security-related components, configurations, and potential vulnerabilities across the entire SRM system. Produce a dedicated Security Analysis Report.",
+        "details": "Systematically scan the srm_backup for security components: authentication mechanisms (PAM, shadow files), authorization controls, firewall configurations (iptables, nftables), VPN services, daemons handling sensitive data, known vulnerable software versions (check /lib, /usr/lib). Use MCP Zen tools and Gemini Pro for this analysis. Document findings, potential vulnerabilities, and recommended hardening practices. This information will feed into the 'Security Implications' section of other documentation tasks. Compile findings into a standalone Security Analysis Report as a key deliverable. Research common vulnerabilities for embedded systems and routers.",
+        "testStrategy": "Review the Security Analysis Report for thoroughness, accuracy, and actionable insights. Ensure security implications are consistently integrated into individual component documentation. Verify report covers key security areas mentioned in PRD.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Analyze and Document Network Services and Daemons",
+        "description": "Identify, analyze, and document all network services and daemons, including their configurations, ports, protocols, startup scripts, and integration points. Produce a Network Services Inventory.",
+        "details": "Locate service configuration files (primarily in /etc, /usr/local/etc) and startup scripts (e.g., in /etc/init.d, or systemd unit files if used). For each service (e.g., HTTP/HTTPS server, DNS resolver/proxy, DHCP server/client, NTP, SSH, VPNs), document its purpose, key configuration files and parameters, default ports, protocols used, and security considerations (authentication, encryption). Use MCP Zen tools and netstat/ss (if analyzing a live similar system for context) to identify listening services. Compile this into a Network Services Inventory deliverable using the standard template (Task 2).",
+        "testStrategy": "Verify the Network Services Inventory is complete and accurate. Documentation for each service should cover configuration, security, operational aspects, and adherence to the template. Cross-check with /etc documentation (Task 3).",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Analyze and Document /sbin Directory (System Administration Binaries)",
+        "description": "Analyze and document system administration binaries in /sbin, detailing their purpose, usage, command-line options, and any specific SRM customizations or wrappers.",
+        "details": "For each binary in /sbin, use MCP Zen tools, `file`, `strings`, `ldd`, and available `--help` or `man` pages (if any within the backup or via web search for common utilities). Document its function, typical use cases in system administration, important command-line options, and any observed SRM-specific behavior or scripts that wrap these binaries. Focus on utilities for system control, filesystem management, and network configuration. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for accuracy and completeness. Ensure key system administration binaries are covered and their SRM context is explained. Adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Analyze and Document /bin Directory (System Binaries)",
+        "description": "Analyze and document standard system binaries and executables in /bin, detailing their purpose, usage, and any SRM-specific behaviors.",
+        "details": "Similar to /sbin analysis (Task 7), but for /bin which typically contains essential user command-line utilities. Use MCP Zen tools, `file`, `strings`, `ldd`. Document purpose, common options, and any SRM-specific aspects. Examples: shell (sh, bash), core utilities (ls, cp, mv, grep). Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for accuracy. Ensure essential user-level system binaries are documented. Adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Analyze and Document /lib and /lib64 Directories (System Libraries)",
+        "description": "Analyze and document shared system libraries in /lib and /lib64, identifying key libraries, their versions, dependencies, and their role in supporting system binaries and services.",
+        "details": "Identify critical shared libraries (e.g., libc.so, libm.so, libpthread.so, libssl.so, libcrypto.so, and any SRM-specific libraries). Use MCP Zen tools, `file`, `strings`, and `objdump` or `readelf` to inspect libraries. Document their purpose, version (if discernible), and primary executables/services that depend on them. Note any security implications of specific library versions (e.g., known vulnerabilities). Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation for key libraries. Check for accuracy in versioning (if available) and dependency information. Ensure security notes on critical libraries like OpenSSL are included. Adherence to template.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Analyze and Document /libexec Directory (Library Executables)",
+        "description": "Analyze executables in /libexec that are not meant to be executed directly by users but are called by other programs or services. Document their function and interaction.",
+        "details": "Identify executables within /libexec. For each, determine its purpose and which parent programs or services call it. This might require analyzing scripts or configurations in /etc or /usr that invoke these helpers. Use MCP Zen tools and `strings` to understand functionality. Document their role in the system. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Ensure the role and callers of these executables are clearly documented. Verify accuracy and adherence to the template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Analyze and Document /usr Directory Structure and Key Components",
+        "description": "Provide an overview of the /usr directory structure (e.g., /usr/bin, /usr/sbin, /usr/lib, /usr/local, /usr/share) and document key components, applications, and libraries within.",
+        "details": "Document the purpose of major subdirectories within /usr (e.g., /usr/bin for non-essential command-line programs, /usr/sbin for non-essential system administration binaries, /usr/lib for non-essential libraries, /usr/share for architecture-independent data, /usr/local for locally installed software). Identify and document key applications, utilities, and libraries specific to /usr, particularly those related to SRM's extended functionality. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for comprehensive coverage of /usr's structure and significant contents. Ensure clarity and accuracy. Adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Analyze and Document /run Directory (Runtime Data)",
+        "description": "Analyze and document the /run directory, focusing on runtime variable data, PID files, sockets, and their significance in inter-process communication and service management.",
+        "details": "Explain the volatile nature of /run (typically a tmpfs mount). Identify common file types found here: PID files for running daemons, Unix domain sockets for IPC, lock files. Document how services utilize this directory for runtime state management. Use MCP Zen tools to inspect typical contents if available from a snapshot. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation accurately describes the purpose and typical contents of /run and its role in a running system. Adherence to template.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Analyze and Document /var and /var.defaults Directories (Variable Data)",
+        "description": "Analyze and document the /var directory for variable data like logs, caches, spools, and /var.defaults for their initial state or templates.",
+        "details": "Document key subdirectories within /var (e.g., /var/log for system and application logs, /var/run (often a symlink to /run), /var/tmp for temporary files persisting across reboots, /var/cache for cached application data, /var/spool for queued tasks). Explain the purpose of data stored in these locations. Discuss log rotation mechanisms or cache management if evident from scripts or configurations. Document /var.defaults and its relation to /var, if it provides initial structures or content. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for coverage of important variable data locations and their management (logs, cache). Accuracy and adherence to template.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Analyze and Document /ini Directory (Initialization/Configuration Files)",
+        "description": "Analyze and document files within the /ini directory, typically used for initialization scripts or specific component configurations, possibly for Synology-specific applications.",
+        "details": "Investigate the purpose of the /ini directory and its contents. Analyze each file or subdirectory. These might be custom INI-style configuration files or scripts used during system/application initialization. Document configuration parameters, their effects, and which components or services use them. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Ensure each file/subdirectory in /ini is documented with its role and configuration options if applicable. Accuracy and adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Analyze and Document /initrd Directory (Initial RAM Disk Components)",
+        "description": "Analyze and document the components of the initial RAM disk (/initrd), focusing on the early boot process, kernel module loading, and initial filesystem setup.",
+        "details": "Describe the purpose of an initrd in the SRM boot sequence. If the /initrd directory contains an uncompressed or easily explorable initramfs image, analyze its structure. Identify key scripts (e.g., init script), essential kernel modules, and utilities within it. Document the early system initialization steps facilitated by the initrd. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation accurately explains the role and typical contents of an initrd in the SRM context. Accuracy and adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Analyze and Document /data Directory (Application Data and Vendor Components)",
+        "description": "Analyze and document the /data directory, focusing on application-specific data, databases, and third-party/vendor components stored here.",
+        "details": "Identify subdirectories within /data that relate to specific SRM applications or packages (e.g., Threat Prevention, VPN Plus data). Document data formats, storage mechanisms (e.g., SQLite databases, proprietary formats), and configurations if discernible. Note any vendor-specific components and their roles. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for coverage of key application data and vendor components in /data. Accuracy and adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 17,
+        "title": "Analyze and Document /mnt Directory (Mount Points)",
+        "description": "Document the purpose of the /mnt directory and typical mount points used by SRM, such as for external storage devices.",
+        "details": "Explain the conventional role of /mnt as a temporary mount point for filesystems. Document any standard subdirectories within /mnt that SRM might use for automatically or manually mounted external storage (e.g., USB drives). Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation accurately describes the use of /mnt in SRM. Adherence to template.",
+        "priority": "low",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Analyze and Document /root Directory (Root User Home)",
+        "description": "Analyze and document the contents of the /root user's home directory, noting any scripts, configuration files, or tools specific to SRM's root user environment.",
+        "details": "Examine the /root directory for any SRM-specific setup files, operational scripts, or custom configurations for the root user (e.g., .profile, .bashrc, custom scripts). Document any findings. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for any significant findings in /root. If mostly empty or standard, note that. Adherence to template.",
+        "priority": "low",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 19,
+        "title": "Analyze and Document /volume1 Directory (Volume-Specific Data)",
+        "description": "Document the structure and purpose of /volume1 (and similar, e.g., /volumeUSB1), focusing on how user data, installed packages, and applications are stored on SRM volumes.",
+        "details": "Explain the concept of volumes in SRM (if applicable, similar to Synology NAS). Document common subdirectories found on /volume1 (e.g., for installed application packages, shared folders if SRM supports them directly, system data related to the volume). Note how this directory relates to user-accessible storage and package management. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
+        "testStrategy": "Verify documentation clearly explains the role and structure of /volume1 and its significance for persistent data and applications. Adherence to template.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 20,
+        "title": "Develop System Architecture Diagrams and Map Component Relationships",
+        "description": "Synthesize information from all analyzed components to create descriptive system architecture diagrams and document cross-component relationships, illustrating data flow and control flow.",
+        "details": "Based on the detailed analysis of individual directories and components, create high-level system architecture diagrams. These diagrams should be descriptive (text-based or simple graphical representations) illustrating: 1. Key SRM services and their interactions. 2. Configuration data flow (e.g., from defaults to active configs). 3. Major data storage locations and their purpose. 4. Network traffic flow for key services. Produce the 'Cross-component relationship documentation' and 'System architecture diagrams (descriptive)' deliverables. Use tools like draw.io (for diagrams if desired) or structured text/markdown.",
+        "testStrategy": "Review diagrams and relationship documentation for clarity, accuracy, and completeness. Ensure they provide a good overview of the SRM system architecture and how components interact. Verify they meet PRD deliverable requirements.",
+        "priority": "high",
+        "dependencies": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          19
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 21,
+        "title": "Compile Configuration Management Guide",
+        "description": "Create a comprehensive guide detailing how system configuration is managed in SRM, covering key files, tools (if any), hierarchy, precedence, and best practices for modification and persistence.",
+        "details": "Synthesize information from tasks related to configuration (especially /etc, /etc.defaults, /ini, and service configurations). Explain the hierarchy and precedence of configuration files. Detail how configurations are applied (e.g., on boot, service restart). Provide guidance on making and persisting changes, if possible, or highlight where changes are typically made through the SRM web UI and how those translate to backend files. Produce the 'Configuration management guide' deliverable.",
+        "testStrategy": "Review the guide for practical usability, technical accuracy, and completeness in covering SRM configuration management. Ensure it's a valuable resource for administrators.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 22,
+        "title": "Final Documentation Review, Consistency Check, and Validation",
+        "description": "Conduct a comprehensive review of all generated documentation to ensure consistency, technical accuracy, completeness, proper cross-referencing, and adherence to quality requirements and the defined template.",
+        "details": "Perform a thorough pass over all documentation artifacts. Verify: 1. Adherence to the standard documentation template (Task 2). 2. Technical accuracy of information. 3. Completeness of coverage for each component as per PRD. 4. Consistent terminology and writing style. 5. Presence and correctness of cross-references. 6. Clarity, conciseness, and professional language. 7. All deliverables are finalized. Validate against PRD success criteria.",
+        "testStrategy": "Peer review and self-review against a checklist derived from PRD quality requirements and success criteria. Confirm all deliverables are present and meet professional standards. Final sign-off on documentation set.",
+        "priority": "high",
+        "dependencies": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-20T19:30:39.187Z",
+      "updated": "2025-06-20T19:30:39.187Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
