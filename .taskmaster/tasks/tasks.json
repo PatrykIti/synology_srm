@@ -10,7 +10,59 @@
         "priority": "high",
         "dependencies": [],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Project Directory and Git Repository",
+            "description": "Create the main project folder structure and initialize a new Git repository within it for version control, based on the first major component.",
+            "dependencies": [],
+            "details": "Define project naming convention. Create standard subdirectories (e.g., /src, /docs, /tests). Initialize Git with a .gitignore file appropriate for the project type.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Install and Configure MCP Zen Tools",
+            "description": "Install the MCP Zen toolset and configure it according to project requirements and best practices, as per the second major component.",
+            "dependencies": [
+              1
+            ],
+            "details": "Follow official MCP Zen documentation for installation. Configure any project-specific settings, licenses, or integrations. Store configuration files within the project structure if applicable.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Ensure Gemini Pro Access and Setup",
+            "description": "Verify access to Gemini Pro API or platform and configure any necessary API keys, SDKs, or environment variables for integration, addressing the third major component.",
+            "dependencies": [
+              1
+            ],
+            "details": "Verify Gemini Pro account status and access credentials. Obtain API key if needed. Set up environment variables or configuration files securely, potentially using a .env file managed by .gitignore.",
+            "status": "pending"
+          },
+          {
+            "id": 4,
+            "title": "Set Up Task Master and Import Initial Tasks",
+            "description": "Install or configure the chosen Task Master application/tool and populate it with the initial set of project tasks, fulfilling the fourth major component.",
+            "dependencies": [
+              1
+            ],
+            "details": "Select or confirm the Task Master tool to be used. Configure the project within Task Master. Prepare and import the initial task list derived from project planning or the prompt itself.",
+            "status": "pending"
+          },
+          {
+            "id": 5,
+            "title": "Conduct Initial Web Searches for Best Practices",
+            "description": "Perform web searches to identify and document best practices related to the project's core components (Git, MCP Zen, Gemini Pro, Task Master) and overall development workflow, as outlined in the fifth component.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Research best practices for: project structuring, Git branching models, efficient use of MCP Zen tools, secure Gemini Pro API integration, and effective task management strategies. Document key findings and resources in the project's documentation folder.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 2,
@@ -37,7 +89,80 @@
           2
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Analyze Network Configuration in /etc",
+            "description": "Conduct a detailed analysis of network configuration files within /etc (interfaces, DNS, routing). Document findings using the standard template, including a thorough assessment of security implications.",
+            "dependencies": [],
+            "details": "Focus on files like /etc/network/interfaces, /etc/sysconfig/network-scripts/, /etc/resolv.conf, /etc/hosts, /etc/nsswitch.conf, and configurations related to network routes.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Analyze Firewall Rules in /etc",
+            "description": "Perform an in-depth analysis of firewall rules (e.g., iptables, nftables) configured via files in /etc. Document the ruleset, its logic, and default policies using the standard template, and evaluate associated security implications.",
+            "dependencies": [],
+            "details": "Identify active firewall system (iptables, nftables, ufw, firewalld), locate rule files (e.g., /etc/sysconfig/iptables, /etc/iptables/rules.v4, /etc/nftables.conf, /etc/ufw/, /etc/firewalld/), analyze rule logic, default policies, and logging.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Analyze Core Service Configurations in /etc",
+            "description": "Analyze configurations for essential system services (e.g., SSH, NTP, cron, syslog) located in /etc. Document each service's configuration using the standard template and assess potential security implications.",
+            "dependencies": [],
+            "details": "Examine files such as /etc/ssh/sshd_config, /etc/ntp.conf or /etc/chrony/chrony.conf, /etc/crontab and files in /etc/cron.*, /etc/rsyslog.conf or /etc/syslog-ng/syslog-ng.conf.",
+            "status": "pending"
+          },
+          {
+            "id": 4,
+            "title": "Analyze Authentication and Authorization Configs in /etc",
+            "description": "Investigate and analyze authentication mechanisms (e.g., PAM, SSSD, LDAP clients) and authorization settings (e.g., sudoers, group policies) within /etc. Document findings per the template and evaluate security implications.",
+            "dependencies": [],
+            "details": "Focus on /etc/pam.d/, /etc/nsswitch.conf, /etc/sssd/sssd.conf, /etc/ldap.conf, /etc/sudoers, /etc/sudoers.d/, /etc/passwd, /etc/shadow, /etc/group, /etc/security/access.conf.",
+            "status": "pending"
+          },
+          {
+            "id": 5,
+            "title": "Analyze Web Server and UI Related Configs in /etc",
+            "description": "Analyze configuration files for web servers (e.g., Apache, Nginx) and any UI-related components managed through /etc. Document settings using the standard template and assess their security implications.",
+            "dependencies": [],
+            "details": "Look for directories like /etc/apache2/, /etc/nginx/, /etc/httpd/, and other web application specific configurations if present in /etc (e.g., Tomcat server.xml if symlinked or included from /etc).",
+            "status": "pending"
+          },
+          {
+            "id": 6,
+            "title": "Analyze Other Critical System-Wide Settings in /etc",
+            "description": "Identify and analyze other critical system-wide configurations in /etc not covered in previous tasks (e.g., kernel parameters, system limits, filesystem mounts, shared resources). Document these configurations per template and evaluate security implications.",
+            "dependencies": [],
+            "details": "Includes files like /etc/sysctl.conf, /etc/security/limits.conf, /etc/fstab, /etc/exports, /etc/modprobe.d/, /etc/issue, /etc/motd, /etc/login.defs, /etc/environment.",
+            "status": "pending"
+          },
+          {
+            "id": 7,
+            "title": "Analyze Scripts and Startup Items in /etc",
+            "description": "Review and analyze scripts (e.g., init scripts, rc.local, systemd unit files or overrides) and other startup items located in /etc. Document their functionality and assess security implications using the standard template.",
+            "dependencies": [],
+            "details": "Examine contents of /etc/init.d/, /etc/rc?.d/ symlinks, /etc/rc.local, /etc/profile, /etc/bash.bashrc, /etc/profile.d/, and systemd unit files or overrides in /etc/systemd/system/ and /etc/systemd/user/.",
+            "status": "pending"
+          },
+          {
+            "id": 8,
+            "title": "Analyze and Document Relationships with /etc.defaults",
+            "description": "Investigate and document the relationships between configurations in /etc and any corresponding default configurations (e.g., in /etc.defaults, /usr/share/doc, or package-provided defaults). Analyze deviations, document findings per template, and assess security implications of overrides or reliance on potentially insecure defaults.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "Identify if an /etc.defaults (or similar like /usr/share/doc/*/examples/, /usr/lib/systemd/system/) pattern is used. Compare default files with active configurations from previous tasks, document deviations, and their impact on system behavior and security.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 4,
@@ -52,7 +177,58 @@
           3
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Identify Contents of /etc.defaults",
+            "description": "List all files and subdirectories within the /etc.defaults directory to establish a baseline for analysis.",
+            "dependencies": [],
+            "details": "Use system commands (e.g., 'ls -AlR /etc.defaults') to recursively list all entries. Document the structure and types of files found (e.g., plain text, scripts, binaries, symlinks).",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Analyze Network-Related Defaults and Compare with /etc",
+            "description": "Identify network configuration files in /etc.defaults, analyze their default settings, and compare them with the corresponding active configurations in /etc.",
+            "dependencies": [
+              1
+            ],
+            "details": "Focus on files related to network interfaces, DNS, routing, firewall, etc. Document default values and note any differences or overrides found in /etc. Analyze the impact of these differences.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Analyze Service-Related Defaults and Compare with /etc",
+            "description": "Identify service configuration files in /etc.defaults, analyze their default settings, and compare them with the corresponding active configurations in /etc.",
+            "dependencies": [
+              1
+            ],
+            "details": "Focus on configuration files for system daemons and services (e.g., sshd, cron, syslog, web servers). Document default parameters and note any customizations present in /etc. Analyze how these changes affect service behavior.",
+            "status": "pending"
+          },
+          {
+            "id": 4,
+            "title": "Analyze Other System Defaults and Compare with /etc",
+            "description": "Identify any remaining system-level default configuration files in /etc.defaults (e.g., user environment, system limits, boot scripts), analyze them, and compare with /etc.",
+            "dependencies": [
+              1
+            ],
+            "details": "Categorize and analyze files not covered in network or service analysis. Document default settings and compare with /etc to identify system-wide customizations. Assess the purpose of these defaults.",
+            "status": "pending"
+          },
+          {
+            "id": 5,
+            "title": "Document Overall Role and Relationship of /etc.defaults",
+            "description": "Synthesize findings to document the overall role of /etc.defaults in system initialization, reset processes, and its relationship with the active /etc configuration directory.",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Explain how /etc.defaults provides baseline configurations, how /etc overrides or extends these defaults, and the implications for system stability, updates, and recovery. Describe scenarios where /etc.defaults is referenced (e.g., new user creation, factory reset).",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 5,
@@ -165,7 +341,37 @@
           2
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Document /run Directory Fundamentals",
+            "description": "Document the purpose of the /run directory, its volatile nature (being a tmpfs), and the typical lifecycle of its contents.",
+            "dependencies": [],
+            "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Identify Common File Types in /run and Their Significance",
+            "description": "Identify and document common file types found within the /run directory, such as PID files, Unix domain sockets, and lock files, explaining their significance in system operation and inter-process communication.",
+            "dependencies": [
+              1
+            ],
+            "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Analyze SRM Service Utilization of /run for Runtime State",
+            "description": "Provide specific examples of how System Resource Management (SRM) services utilize the /run directory for managing their runtime state.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 13,
@@ -221,7 +427,48 @@
           2
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Identify Major Subdirectories in /data",
+            "description": "Scan the /data directory to list and identify major subdirectories, focusing on those related to specific SRM applications or software packages.",
+            "dependencies": [],
+            "details": "Focus on subdirectories that appear to contain application-specific data or configurations. Note any naming conventions that suggest application or package association. The output should be a list of identified subdirectories with brief notes on their suspected purpose.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Document Data Formats and Storage Mechanisms",
+            "description": "For each major subdirectory identified in subtask 1, investigate and document the data formats (e.g., CSV, JSON, XML, binary) and storage mechanisms (e.g., SQLite, flat files, proprietary databases) used.",
+            "dependencies": [
+              1
+            ],
+            "details": "This involves inspecting file types, looking for database files (e.g., .db, .sqlite), and potentially analyzing file headers or contents to infer format. Document findings for each relevant subdirectory.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Document Data Storage and Application Configurations",
+            "description": "Within the identified subdirectories (from subtask 1), locate and document any configuration files or settings related to data storage (e.g., database connection strings, storage paths) or general application behavior.",
+            "dependencies": [
+              1
+            ],
+            "details": "Look for common configuration file extensions (e.g., .conf, .ini, .xml, .yaml, .properties). Document key parameters and their values, especially those impacting data handling, storage locations, or application operational settings.",
+            "status": "pending"
+          },
+          {
+            "id": 4,
+            "title": "Identify and Document Vendor-Specific Components",
+            "description": "Based on the findings from previous subtasks, identify any vendor-specific components, libraries, or executables within the /data directory or its subdirectories, and document their apparent roles or functions in relation to the SRM applications.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "This may involve researching component names online, checking for embedded version information, or inferring roles based on file names, locations, and observed interactions with other application data or configurations. Note any dependencies or licensing information if discoverable.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 17,
@@ -235,7 +482,26 @@
           2
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Document Conventional Role of /mnt",
+            "description": "Document the conventional role of /mnt as a temporary mount point in Unix-like systems.",
+            "dependencies": [],
+            "details": "Research and document the standard, conventional use of the /mnt directory in Linux/Unix-like systems. Focus on its historical and common role as a temporary mount point for filesystems by system administrators.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Document SRM-Specific Utilization of /mnt",
+            "description": "Document any standard subdirectories or specific ways SRM utilizes /mnt for automatically or manually mounted external storage (e.g., USB drives).",
+            "dependencies": [
+              1
+            ],
+            "details": "Investigate and document how Synology Router Manager (SRM) specifically uses the /mnt directory. This includes identifying any standard subdirectories created or used by SRM under /mnt, and detailing the processes for how external storage devices (like USB drives) are automatically or manually mounted and accessed via /mnt within the SRM environment.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 18,
@@ -290,7 +556,57 @@
           19
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Consolidate and Review Inputs from Prior Analyses (Tasks 1-4)",
+            "description": "Gather and meticulously review all outputs from the preceding four analysis tasks (SRM service interactions, configuration data flow, data storage mapping, network traffic flow) to ensure a complete and understood foundation for synthesis.",
+            "dependencies": [],
+            "details": "Outputs include diagrams, descriptions, and mappings from tasks 1-4 mentioned in the broader context. Check for consistency and any immediate gaps before synthesis.",
+            "status": "pending"
+          },
+          {
+            "id": 2,
+            "title": "Analyze and Map Interdependencies for Cross-Component View",
+            "description": "Synthesize the consolidated information from Subtask 1 to identify, analyze, and explicitly map the complex interdependencies and relationships between different system components (services, data, configuration, network).",
+            "dependencies": [
+              1
+            ],
+            "details": "This involves connecting insights from service interactions, config flow, data storage, and network traffic (from the outputs of tasks 1-4) to build a holistic understanding required for the deliverables.",
+            "status": "pending"
+          },
+          {
+            "id": 3,
+            "title": "Draft 'Cross-Component Relationship Documentation'",
+            "description": "Develop the initial draft of the 'Cross-component relationship documentation' by structuring and articulating the synthesized interdependencies and relationships identified in Subtask 2.",
+            "dependencies": [
+              2
+            ],
+            "details": "This document will narrate how various system parts work together, their reliance on each other, and the overall flow of information and control across components, based on the holistic analysis.",
+            "status": "pending"
+          },
+          {
+            "id": 4,
+            "title": "Create Draft 'System Architecture Diagrams'",
+            "description": "Design and produce a set of draft 'System architecture diagrams' that visually represent the synthesized understanding of component interactions, data flows, and overall system structure, based on the analysis from Subtask 2.",
+            "dependencies": [
+              2
+            ],
+            "details": "Diagrams should integrate aspects from all prior analyses (service interactions, config data flow, data storage, network traffic) into coherent visual representations. May include multiple diagram types (e.g., deployment, logical, data flow).",
+            "status": "pending"
+          },
+          {
+            "id": 5,
+            "title": "Review, Iterate, and Finalize Documentation and Diagrams",
+            "description": "Conduct a comprehensive review of both the 'Cross-component relationship documentation' (from Subtask 3) and 'System architecture diagrams' (from Subtask 4). Incorporate feedback, iterate on content and visuals, and finalize both deliverables for accuracy, clarity, and completeness.",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Ensure alignment between the textual documentation and visual diagrams, and that they collectively meet the goal of providing a holistic architectural view as per the main task's objective.",
+            "status": "pending"
+          }
+        ]
       },
       {
         "id": 21,
