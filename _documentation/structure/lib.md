@@ -1,5 +1,9 @@
 # /lib - System Libraries
 
+[← Back to Documentation Index](../README.md) | [← Previous: /etc](etc.md) | [→ Next: /usr](usr.md)
+
+---
+
 ## Overview
 The `/lib` directory contains essential shared libraries, kernel modules, and firmware required for system operation. This directory includes 1,300+ shared objects optimized for ARM aarch64 architecture, providing core functionality from basic C library operations to advanced networking and security features. The presence of outdated libraries (OpenSSL 1.1.x, Python 2.7) poses significant security risks requiring immediate attention.
 
@@ -245,6 +249,10 @@ The `/lib` directory contains essential shared libraries, kernel modules, and fi
   - glibc: 2.20
   - Kernel modules: Mixed (2022 timestamps)
 - **Analysis Tools Used**: MCP Zen with Gemini Pro
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /etc](etc.md) | [→ Next: /usr](usr.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

@@ -1,5 +1,9 @@
 # /sbin - System Administration Binaries
 
+[← Back to Documentation Index](../README.md) | [← Previous: /bin](bin.md) | [→ Next: /etc](etc.md)
+
+---
+
 ## Overview
 The `/sbin` directory contains essential system administration binaries crucial for system management, network configuration, filesystem operations, and security. Following traditional Unix conventions, it houses binaries requiring administrative privileges. The directory includes 152 entries with a mix of standalone binaries, BusyBox symlinks, and Synology-specific tools optimized for ARM aarch64 architecture.
 
@@ -237,6 +241,10 @@ The `/sbin` directory contains essential system administration binaries crucial 
 - **Last Updated**: 2025-06-21
 - **Component Versions**: Mixed (2011-2022)
 - **Analysis Tools Used**: MCP Zen with Gemini Pro
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /bin](bin.md) | [→ Next: /etc](etc.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

@@ -1,5 +1,9 @@
 # /etc - Active System Configuration
 
+[← Back to Documentation Index](../README.md) | [← Previous: /sbin](sbin.md) | [→ Next: /lib](lib.md)
+
+---
+
 ## Overview
 The `/etc` directory is the nerve center of the Synology SRM system, containing all active system configuration files, service definitions, and security policies. This directory controls network behavior, system services, user authentication, and security features. It represents the runtime configuration state of the router and is critical for system operation.
 
@@ -251,6 +255,10 @@ ipsec_passthrough_enable=yes
 - **Last Updated**: 2025-06-21
 - **Component Version**: SRM 1.3.x
 - **Analysis Tools Used**: MCP Zen with Gemini Pro
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /sbin](sbin.md) | [→ Next: /lib](lib.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
