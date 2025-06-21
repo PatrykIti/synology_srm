@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__zen__listmodels",
+      "mcp__taskmaster-ai__initialize_project",
+      "mcp__taskmaster-ai__parse_prd",
+      "mcp__taskmaster-ai__models",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "mcp__taskmaster-ai__get_tasks",
+      "mcp__taskmaster-ai__add_tag",
+      "mcp__taskmaster-ai__analyze_project_complexity",
+      "mcp__taskmaster-ai__expand_all",
+      "mcp__taskmaster-ai__expand_task",
+      "mcp__taskmaster-ai__set_task_status",
+      "mcp__zen__analyze",
+      "Bash(find:*)",
+      "mcp__taskmaster-ai__update_subtask",
+      "Bash(ls:*)",
+      "Bash(readelf:*)",
+      "mcp__taskmaster-ai__get_task",
+      "mcp__taskmaster-ai__add_task",
+      "Bash(rm:*)",
+      "Bash(grep:*)",
+      "Bash(file:*)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "context7",
+    "taskmaster-ai",
+    "zen"
+  ]
+}
