@@ -25,7 +25,8 @@
       "Bash(file:*)",
       "Bash(ldd:*)",
       "Bash(readlink:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "mcp__zen__chat"
     ]
   },
   "enabledMcpjsonServers": [
