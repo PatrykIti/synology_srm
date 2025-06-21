@@ -23,7 +23,9 @@
       "Bash(rm:*)",
       "Bash(grep:*)",
       "Bash(file:*)",
-      "Bash(ldd:*)"
+      "Bash(ldd:*)",
+      "Bash(readlink:*)",
+      "Bash(cat:*)"
     ]
   },
   "enabledMcpjsonServers": [
