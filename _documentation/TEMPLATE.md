@@ -1,5 +1,11 @@
 # [Component Name]
 
+[← Back to Documentation Index](../README.md) | [← Previous: Component Name](previous.md) | [→ Next: Component Name](next.md)
+
+---
+
+> **Navigation Instructions**: Replace the navigation links above with actual component names and paths. The order should follow the logical directory structure (e.g., /bin → /sbin → /etc → /lib → /usr → /var, etc.). Ensure all links are relative and working.
+
 ## Overview
 Brief description of the component's purpose and role in the Synology SRM system. Include high-level functionality and importance within the overall system architecture.
 
@@ -188,6 +194,10 @@ parameter2=value2
 - **Last Updated**: [Date]
 - **Component Version**: [If applicable]
 - **Analysis Tools Used**: MCP Zen with Gemini Pro
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: Component Name](previous.md) | [→ Next: Component Name](next.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
