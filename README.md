@@ -1,34 +1,96 @@
-# Synology SRM System Backup Repository
+# Synology SRM System Analysis Project
 
-This repository contains a backup of the Synology SRM (Synology Router Manager) operating system, originating from a Synology router. The purpose of this repository is to conduct detailed analysis, documentation, and understanding of the internal structure and operation of the SRM system.
+This repository contains a comprehensive analysis and documentation of the Synology SRM (Synology Router Manager) operating system from a Synology router backup. The project aims to provide deep insights into the system architecture, security mechanisms, and operational components.
 
-## Directory Structure in `srm_backup/`
+## 🎯 Project Status
 
-The `srm_backup/` directory contains key components of the Synology SRM system, organized as follows:
+**Current Phase**: Deep System Analysis and Documentation
+- ✅ Initial structure analysis completed
+- ✅ Critical security vulnerabilities identified
+- 📝 Detailed component documentation in progress
+- 🔄 Cross-reference analysis pending
 
-*   **[`bin/`](_documentation/structure/bin.md):** Contains executable files (binaries) and system scripts. These are the basic tools and programs necessary for system operation.
-*   **[`data/`](_documentation/structure/data.md):** Stores application data, temporary data files, and other resources used by the system and installed packages.
-*   **[`etc/`](_documentation/structure/etc.md):** This directory contains the main system configuration files. Changes to these files directly affect system behavior.
-*   **[`etc.defaults/`](_documentation/structure/etc.defaults.md):** Stores default configuration files. These are templates that the system uses to restore settings or initialize new components.
-*   **[`ini/`](_documentation/structure/ini.md):** Likely contains additional initialization or configuration files for specific modules.
-*   **[`initrd/`](_documentation/structure/initrd.md):** Initial RAM disk image, used during the system boot process. It contains a minimal set of tools and drivers needed to load the main file system.
-*   **[`lib/`](_documentation/structure/lib.md):** Shared libraries required by system programs and applications. Examples include `libapr-1.so`, `libboost_regex.so`, `libdbus-1.so`, `libicui18n.so`, `libip6tc.so`, `libkadm5clnt_mit.so`, `liblber-2.4.so`, `libpq.so`, `libsynoglusterfs-dsm.so`, `libsynoportmap.so`, `libsynowifidaemon.so`, `libsyslog-ng-3.5.5.so`, `libtalloc.so`.
-*   **[`lost+found/`](_documentation/structure/lost+found.md):** A standard Linux file system directory, storing recovered file fragments after system crashes.
-*   **[`mnt/`](_documentation/structure/mnt.md):** Empty mount points for temporary file systems or external devices.
-*   **[`root/`](_documentation/structure/root.md):** The home directory for the `root` user, containing configuration files and scripts specific to the administrator (`.profile`, `.wget-hsts`).
-*   **[`run/`](_documentation/structure/run.md):** Contains temporary files, process IDs (PID files), socket files, and other runtime data. Examples include `crond.pid`, `dhcp-server.pid`, `dnsmasq.pid`, `sshd.pid`, `synoconfd.pid`, access rule files (`access_srm_rules_v4`, `access_srm_rules_v6`), and subdirectories such as `avahi-daemon/`, `ddns/`, `httpd/`, `ipset/`, `lock/`, `ngfw/`, `samba/`, `sudo/`, `synoservice/`, `udev/`.
-*   **[`sbin/`](_documentation/structure/sbin.md):** Contains system executable files, primarily for system administration.
-*   **[`usr/`](_documentation/structure/usr.md):** Contains user files, including programs, libraries, and documentation used by users and applications.
-*   **[`var/`](_documentation/structure/var.md):** Stores variable data such as log files, spool, temporary files, and other data that changes during system operation.
-*   **[`var.defaults/`](_documentation/structure/var.defaults.md):** Default variable data, similar to `var/` but containing initial or resettable configurations. A notable element is `dynlib/securityscan/ruleDB/`, which contains security scan rules, including Python scripts for configuration verification (`DirectoryService`, `FileService`, `Malware`, `Network`, `PublicAccess`, `Security`, `SharedFolder`, `SystemCheck`, `Terminal`, `Update`, `User`).
-*   **[`volume1/`](_documentation/structure/volume1.md):** Likely the mount point for the router's main storage volume, where user data and packages are stored.
+## 📚 Documentation
 
-## Documentation Goal
+### [→ View Comprehensive System Documentation](_documentation/README.md)
 
-The primary goal of this repository is to create comprehensive documentation for the Synology SRM system, which will allow for:
-*   Understanding the system architecture.
-*   Identification of key components and their functions.
-*   Analysis of security mechanisms and network configurations.
-*   Facilitation of potential research or development work related to the SRM system.
+The detailed documentation covers:
+- System architecture and components
+- Security analysis and vulnerabilities
+- Network services and configurations
+- Performance considerations
+- Maintenance recommendations
 
-Detailed documentation will be placed in the [`_documentation/`](_documentation) directory and will be divided into subdirectories corresponding to the main areas of the system.
+## 🔒 Critical Security Findings
+
+### Immediate Attention Required
+1. **OpenSSL 1.1.x (EOL)** - Multiple critical CVEs including CVE-2023-0286, CVE-2023-0215
+2. **Python 2.7 (EOL 2020)** - No security support, known vulnerabilities
+3. **DoS Protection Disabled** - System vulnerable to denial-of-service attacks
+4. **WiFi Passwords in Plaintext** - Credentials exposed in configuration files
+5. **BusyBox v1.16.1 (2011)** - Severely outdated with multiple security issues
+
+[→ View Full Security Analysis](_documentation/README.md#key-findings)
+
+## 🏗️ System Architecture
+
+**Platform**: ARM aarch64 (64-bit)
+**Init System**: Upstart
+**Core Components**:
+- BusyBox-based Unix utilities
+- Qualcomm Atheros network hardware
+- Custom Synology management layer
+- Comprehensive firewall (iptables/ip6tables/ebtables)
+
+## 📁 System Structure Overview
+
+| Directory | Purpose | Documentation Status |
+|-----------|---------|---------------------|
+| [`/bin`](srm_backup/bin/) | Core system utilities (BusyBox) | ✅ [Updated](_documentation/structure/bin.md) |
+| [`/sbin`](srm_backup/sbin/) | System administration tools | ✅ [Updated](_documentation/structure/sbin.md) |
+| [`/etc`](srm_backup/etc/) | System configuration | ✅ [Updated](_documentation/structure/etc.md) |
+| [`/lib`](srm_backup/lib/) | Shared libraries & modules | ✅ [Updated](_documentation/structure/lib.md) |
+| [`/usr`](srm_backup/usr/) | User programs & libraries | 📝 [In Progress](_documentation/structure/usr.md) |
+| [`/var`](srm_backup/var/) | Variable data & logs | 📝 [In Progress](_documentation/structure/var.md) |
+| [`/etc.defaults`](srm_backup/etc.defaults/) | Default configurations | 🔄 [Pending](_documentation/structure/etc.defaults.md) |
+| [`/var.defaults`](srm_backup/var.defaults/) | Default variable data | 🔄 [Pending](_documentation/structure/var.defaults.md) |
+| [Other directories](srm_backup/) | Various system components | 🔄 [Pending](_documentation/README.md) |
+
+## 🛠️ Analysis Methodology
+
+This project employs advanced analysis tools and methodologies:
+- **MCP Zen with Gemini Pro** - Deep reasoning and code analysis
+- **Parallel Subagents** - Concurrent analysis of multiple components
+- **Cross-reference Analysis** - Mapping dependencies and data flows
+- **Security-First Approach** - Identifying vulnerabilities and risks
+
+## 🚀 Getting Started
+
+1. **Browse Documentation**: Start with the [Documentation Index](_documentation/README.md)
+2. **Security Review**: Check [Critical Findings](_documentation/README.md#key-findings)
+3. **Component Analysis**: Explore individual [directory documentation](_documentation/structure/)
+4. **Contributing**: Follow the [documentation template](_documentation/TEMPLATE.md)
+
+## 📋 Project Management
+
+This project uses Task Master AI for comprehensive task tracking:
+- 22 main tasks with detailed subtasks
+- Organized by security, network, configuration, and library tags
+- Progress tracked in `.taskmaster/` directory
+
+## 🤝 Contributing
+
+When contributing to documentation:
+1. Use the standardized [template](_documentation/TEMPLATE.md)
+2. Include navigation links between documents
+3. Focus on security implications
+4. Use MCP tools for deep analysis
+5. Update the documentation index
+
+## 📄 License
+
+This analysis is for educational and security research purposes. The Synology SRM system and its components are property of Synology Inc.
+
+---
+*Last Updated: 2025-06-21*
+*Analysis Framework: MCP Zen with Gemini Pro*

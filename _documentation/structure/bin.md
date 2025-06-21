@@ -1,5 +1,9 @@
 # /bin - System Binaries
 
+[← Back to Documentation Index](../README.md) | [→ Next: /sbin](sbin.md)
+
+---
+
 ## Overview
 The `/bin` directory contains essential system binaries required for basic system operation and recovery. In Synology SRM, it's highly optimized for embedded systems using BusyBox as a multi-call binary. This directory provides core Unix utilities through a single executable with multiple symbolic links, achieving efficient space usage (~1.2MB total) while maintaining Unix compatibility.
 
@@ -186,6 +190,10 @@ The `/bin` directory contains essential system binaries required for basic syste
 - **Last Updated**: 2025-06-21
 - **Component Version**: BusyBox v1.16.1
 - **Analysis Tools Used**: MCP Zen with Gemini Pro
+
+---
+
+[← Back to Documentation Index](../README.md) | [→ Next: /sbin](sbin.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
