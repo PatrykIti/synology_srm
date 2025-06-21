@@ -22,7 +22,8 @@
       "mcp__taskmaster-ai__add_task",
       "Bash(rm:*)",
       "Bash(grep:*)",
-      "Bash(file:*)"
+      "Bash(file:*)",
+      "Bash(ldd:*)"
     ]
   },
   "enabledMcpjsonServers": [
