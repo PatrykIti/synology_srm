@@ -26,7 +26,8 @@
       "Bash(ldd:*)",
       "Bash(readlink:*)",
       "Bash(cat:*)",
-      "mcp__zen__chat"
+      "mcp__zen__chat",
+      "mcp__taskmaster-ai__update_task"
     ]
   },
   "enabledMcpjsonServers": [
