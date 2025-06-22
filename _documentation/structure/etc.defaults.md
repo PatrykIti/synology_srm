@@ -1,646 +1,242 @@
-# `/srm_backup/etc.defaults/` Directory Analysis
-
-The `/srm_backup/etc.defaults/` directory contains the default configuration files for various system services and applications on the Synology SRM device. These files are used as templates or fallbacks if the corresponding user-modified configurations in `/srm_backup/etc/` are missing or corrupted.
-
-This document provides an analysis of the files and subdirectories found within `/srm_backup/etc.defaults/`.
-
-## Direct Files in `/srm_backup/etc.defaults/`
-
-This section lists and describes the files found directly within the `/srm_backup/etc.defaults/` directory.
-
-| File                 | Probable Purpose                                                                                                | Notes                                                                      |
-| -------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `afp.conf`           | Default configuration for the Apple Filing Protocol (AFP) service, used for file sharing with macOS devices.    | Likely defines default shares, guest access, and other AFP settings.         |
-| `AHAtasks`           | Potentially related to scheduled tasks or high availability (HA) processes. "AHA" might stand for "Another HA". | Needs further investigation, possibly by reading its content.             |
-| `ca-certificates.conf` | Configuration for Certificate Authority (CA) certificates.                                                      | Manages trusted CAs for SSL/TLS connections.                               |
-| `crontab`            | Default system-wide crontab file for scheduling recurring tasks.                                                | Contains default cron jobs for system maintenance and operations.          |
-| `ddns_provider.conf` | Configuration for Dynamic DNS (DDNS) providers.                                                                 | Lists available DDNS providers and their settings.                         |
-| `ddns.conf`          | Default configuration for the DDNS client.                                                                      | Defines how the system updates its IP address with DDNS services.          |
-| `ethertypes`         | Defines Ethernet protocol type numbers.                                                                         | Standard Linux/Unix file.                                                  |
-| `extmap.conf`        | Likely related to external device mapping or extended attributes.                                               | Purpose unclear without content analysis.                                  |
-| `fstab`              | Default file system table, defining how disk partitions, various other block devices, or remote filesystems are mounted into the filesystem. | Crucial for system boot and mounting storage.                              |
-| `ftpusers`           | List of users denied FTP access.                                                                                | Security measure for the FTP service.                                      |
-| `fuse.conf`          | Configuration for Filesystem in Userspace (FUSE).                                                               | Allows non-privileged users to create their own filesystems.               |
-| `grinst-common.sh`   | A shell script, likely part of the Synology installation or upgrade process ("grinst" might relate to "generic installer"). | Common functions for installation scripts.                               |
-| `group`              | Default list of user groups.                                                                                    | Standard Linux/Unix file, defines group IDs and members.                   |
-| `group_desc`         | Descriptions for user groups.                                                                                   | Synology-specific, provides human-readable descriptions for groups.        |
-| `gssapi_mech.conf`   | Configuration for GSSAPI (Generic Security Service Application Program Interface) mechanisms.                     | Relates to authentication services like Kerberos.                          |
-| `host.conf`          | Configuration for resolver libraries, specifies how host lookups are performed.                                 | Standard Linux/Unix file.                                                  |
-| `hostname`           | Default hostname for the device.                                                                                |                                                                            |
-| `hosts`              | Static table lookup for hostnames.                                                                              | Maps IP addresses to hostnames. Standard Linux/Unix file.                  |
-| `hosts.allow`        | Rules for allowing access to network services (used by TCP Wrappers).                                           | Security configuration.                                                    |
-| `hosts.deny`         | Rules for denying access to network services (used by TCP Wrappers).                                            | Security configuration.                                                    |
-| `idmapd.conf`        | Configuration for the NFSv4 ID Mapping Daemon.                                                                  | Maps NFSv4 user/group names to local UIDs/GIDs.                          |
-| `inetd.conf`         | Configuration for the `inetd` super-server, which manages internet services.                                    | Defines which services `inetd` should listen for and start.                |
-| `installer.sh`       | A shell script, likely part of the system installation or package installation process.                         |                                                                            |
-| `lftp.conf`          | Default configuration for the `lftp` command-line FTP client.                                                   |                                                                            |
-| `localtime`          | Symbolic link or copy of the current system timezone file.                                                      | Determines the local time settings.                                        |
-| `logrotate.conf`     | Default configuration for `logrotate`, a utility that manages log file rotation.                                | Defines how system logs are rotated, compressed, and removed.              |
-| `mke2fs.conf`        | Configuration for `mke2fs`, used when creating ext2/ext3/ext4 filesystems.                                      | Defines default parameters for new filesystems.                            |
-| `modules.conf`       | Potentially an alias for or related to `modprobe.conf` or files in `modprobe.d`, for kernel module configuration. | Specifies options for kernel modules.                                      |
-| `mtab`               | List of currently mounted filesystems. Often a symbolic link to `/proc/mounts`.                                 | Provides a snapshot of the current mount points.                           |
-| `netconfig`          | General network configuration settings.                                                                         | May contain various network parameters.                                    |
-| `newdisk.sh`         | Shell script, likely for initializing or setting up new disks.                                                  |                                                                            |
-| `nsswitch.conf`      | Name Service Switch configuration, determines sources for various system databases (e.g., `passwd`, `group`, `hosts`). | Standard Linux/Unix file.                                                  |
-| `ntp.conf`           | Default configuration for the Network Time Protocol (NTP) client/server.                                        | Defines NTP servers and synchronization settings.                          |
-| `ntp.conf.user`      | User-specific NTP configuration, possibly overriding or extending `ntp.conf`.                                   |                                                                            |
-| `passwd`             | Default user account information (usernames, UIDs, GIDs, home directories, shells).                             | Standard Linux/Unix file. Passwords are usually in `shadow`.               |
-| `profile`            | System-wide environment and startup programs for login shells.                                                  | Executed when a user logs in. Standard Linux/Unix file.                    |
-| `protocols`          | Defines various DARPA Internet protocols.                                                                       | Standard Linux/Unix file.                                                  |
-| `rc`                 | Main runlevel control script or a directory containing runlevel scripts (System V init style).                  | Manages startup and shutdown of services.                                  |
-| `rc.check_device_busy` | Shell script, likely checks if a device is busy before performing an operation (e.g., unmounting).            | Part of system scripts.                                                    |
-| `rc.check_device_busy2`| Another shell script for checking device busy state, possibly a newer or alternative version.                   | Part of system scripts.                                                    |
-| `rc.crypto`          | Shell script for managing cryptographic services or hardware.                                                   | Part of system scripts.                                                    |
-| `rc.fan`             | Shell script for controlling fan speed and temperature management.                                              | Part of system scripts.                                                    |
-| `rc.network`         | Main network initialization script.                                                                             | Configures network interfaces, routing, etc. Part of system scripts.       |
-| `rc.network_routing` | Shell script specifically for network routing configuration.                                                    | Part of system scripts.                                                    |
-| `rc.network.driver`  | Shell script related to network driver loading or configuration.                                                | Part of system scripts.                                                    |
-| `rc.scanusbdev`      | Shell script for scanning and configuring USB devices.                                                          | Part of system scripts.                                                    |
-| `rc.subr`            | Library of shell functions used by other `rc` scripts.                                                          | Common utilities for startup scripts.                                      |
-| `rc.volume`          | Shell script for managing storage volumes.                                                                      | Part of system scripts.                                                    |
-| `rc.wifi`            | Shell script for Wi-Fi network configuration and management.                                                    | Part of system scripts.                                                    |
-| `rc.wifi.common`     | Common functions or settings for Wi-Fi related `rc` scripts.                                                    | Part of system scripts.                                                    |
-| `resolv.conf`        | Resolver configuration file, specifies DNS servers.                                                             | Crucial for domain name resolution.                                        |
-| `rsyncd.conf`        | Default configuration for the `rsync` daemon.                                                                   | Defines rsync modules and access permissions.                              |
-| `rsyncd.secrets`     | File for storing `rsync` daemon usernames and passwords.                                                        | Sensitive file, should have restricted permissions.                        |
-| `securetty`          | Lists TTY devices where root login is allowed.                                                                  | Security measure.                                                          |
-| `services`           | Defines network service names and their port numbers/protocols.                                                 | Standard Linux/Unix file.                                                  |
-| `shadow`             | Default shadowed password file, contains encrypted passwords and account expiry information.                      | Standard Linux/Unix file. Highly sensitive.                                |
-| `shells`             | Lists valid login shells.                                                                                       | Standard Linux/Unix file.                                                  |
-| `sudoers`            | Default configuration for `sudo`, defining which users/groups can run commands as root or other users.          | Crucial for privilege management. Syntax is strict.                        |
-| `support_ssd.db`     | A database file, likely related to SSD support, TRIM, or compatibility lists.                                   | Specific to Synology.                                                      |
-| `synogrinst.sh`      | Synology-specific generic installation script. Similar to `grinst-common.sh` but possibly more top-level.       | Part of Synology's software management.                                    |
-| `synoinfo.conf`      | Key system information and configuration parameters for the Synology device.                                    | Central Synology configuration file. Contains model info, serials, etc.    |
-| `synonetbkp.conf`    | Configuration for Synology network backup services.                                                             |                                                                            |
-| `synopackageslimit.conf` | Configuration limiting Synology packages, perhaps resource limits or installation restrictions.               |                                                                            |
-| `synouser.conf`      | Configuration related to Synology user management or user-specific settings.                                    |                                                                            |
-| `sysctl.conf`        | Default kernel parameters to be set at boot time using `sysctl`.                                                | Fine-tunes kernel behavior.                                                |
-| `termcap`            | Terminal capability database.                                                                                   | Used by text-based applications to adapt to different terminal types.      |
-| `TZ`                 | Timezone setting file.                                                                                          | Defines the system's timezone.                                             |
-| `uniconf.conf`       | Possibly a "unified configuration" file, specific to Synology.                                                  | Purpose unclear without content analysis.                                  |
-| `upgrade_helper`     | A helper script or binary for the system upgrade process.                                                       |                                                                            |
-| `upgrade_size.sh`    | Shell script, likely calculates required disk space for an upgrade.                                             | Part of the upgrade mechanism.                                             |
-| `upgrade.sh`         | Main shell script for performing system upgrades.                                                               |                                                                            |
-| `VERSION`            | Contains system version information.                                                                            | Crucial for identifying the firmware version.                              |
-| `wgetrc`             | Default system-wide configuration file for `wget`.                                                              |                                                                            |
-
----
-
-## Subdirectories in `/srm_backup/etc.defaults/`
-
-This section details the subdirectories found within `/srm_backup/etc.defaults/` and their contents.
-
-### `apparmor/`
-
-This directory contains configuration files related to AppArmor, a Linux security module that provides mandatory access control.
-
-| File              | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `subdomain.conf`  | Shared AppArmor configuration file. It includes settings for the OWLSM (Openwall Linux Security Module) extension, AppArmor event daemon (`aaeventd`), behavior on module load failure, and default paths for `subdomain_parser`. | OWLSM aims to prevent /tmp race attacks by restricting symlink following and hardlink creation. `aaeventd` is for reporting. Both are disabled by default (`SUBDOMAIN_ENABLE_OWLSM="no"`, `APPARMOR_ENABLE_AAEVENTD="no"`). |
-
-### `apparmor.d/`
-
-This directory holds AppArmor profiles and related configuration files. AppArmor profiles define access control rules for specific applications.
-
-| File/Directory      | Probable Purpose                                                                                                | Notes                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `usr.bin.httpd`     | AppArmor profile for the Apache HTTP Server (`httpd`).                                                          | Defines what resources the web server process can access. This is a common profile name.                                                      |
-| `abstractions/`     | Contains reusable snippets of AppArmor policy, known as abstractions. These are included in main profiles.        | Will be analyzed in detail below.                                                                                                             |
-| `cache/`            | Stores cached or precompiled versions of AppArmor profiles for faster loading.                                  | Will be analyzed in detail below. Contains many Synology-specific cache files.                                                                |
-| `httpd/`            | Likely contains additional configuration snippets or profiles specific to different aspects or modules of `httpd`.| This seems to be a directory, distinct from the `usr.bin.httpd` profile file. Will be analyzed in detail below.                             |
-| `tunables/`         | Contains variables (tunables) that can be used within AppArmor profiles to allow for easier customization.        | Will be analyzed in detail below.                                                                                                             |
-
-#### `apparmor.d/abstractions/`
-
-This subdirectory contains AppArmor abstraction files. Abstractions are reusable snippets of policy that can be included in multiple AppArmor profiles. They help to avoid duplication and simplify profile management by grouping common access rules for various functionalities (e.g., accessing base system libraries, name services, authentication mechanisms).
-
-Key files found in `apparmor.d/abstractions/`:
-
-| File                    | Probable Purpose                                                                                               |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `app-privilege`         | Abstraction for general application privilege rules.                                                           |
-| `authentication`        | Rules related to common authentication mechanisms.                                                             |
-| `autoblock`             | Likely related to Synology's autoblock feature (blocking IPs after failed login attempts).                     |
-| `base`                  | Fundamental rules required by most applications (e.g., access to essential libraries).                         |
-| `base-cgi`              | Base rules specifically for CGI scripts.                                                                       |
-| `boot-sequence`         | Rules related to processes running during the boot sequence.                                                   |
-| `curl`                  | Abstraction for the `curl` command-line tool, defining its allowed network access and file operations.         |
-| `fast-wakeup`           | Potentially related to Synology's fast wakeup or power-saving features.                                        |
-| `firewall`              | Rules for interacting with firewall components or configurations.                                              |
-| `images`                | Rules for accessing or manipulating image files.                                                               |
-| `kerberosclient`        | Abstraction for Kerberos client operations.                                                                    |
-| `ldapclient`            | Abstraction for LDAP client operations.                                                                        |
-| `log`                   | Rules for accessing system logging facilities.                                                                 |
-| `mydscenter`            | Likely related to Synology's MyDS Center or account services.                                                  |
-| `nameservice`           | Rules for name resolution services (DNS, local host files).                                                    |
-| `notification`          | Rules for system notification mechanisms.                                                                      |
-| `openssl`               | Abstraction for OpenSSL library usage, defining access to certificates, keys, etc.                             |
-| `pgsql`                 | Abstraction for PostgreSQL client or server operations.                                                        |
-| `python`                | Abstraction for Python interpreter and common Python script operations.                                        |
-| `quickconnect`          | Rules related to Synology's QuickConnect service.                                                              |
-| `SDKPlugin`             | Likely for plugins developed using a Synology SDK.                                                             |
-| `session`               | Rules related to user sessions.                                                                                |
-| `share`                 | Rules for accessing shared resources or network shares.                                                        |
-| `smbpass`               | Likely related to Samba/SMB password handling or authentication.                                               |
-| `synoaha`               | Abstraction for Synology High Availability (AHA) services.                                                     |
-| `synoha`                | Abstraction for Synology High Availability (HA) services (possibly an older or different version than `synoaha`).|
-| `synoservice`           | General abstraction for Synology system services.                                                              |
-| `wget`                  | Abstraction for the `wget` command-line tool.                                                                  |
-| `winbind`               | Abstraction for Winbind service, used for integrating with Windows domains.                                    |
-| `wutmp`                 | Rules for accessing `wtmp` (user login/logout records).                                                        |
-| `webfm/bandwidth`       | Abstraction for bandwidth management within Synology's File Station (WebFM).                                   |
-| `webfm/base`            | Base abstraction for Synology's File Station.                                                                  |
-| `webfm/index`           | Abstraction for indexing functionalities within File Station.                                                  |
-| `webfm/vfs`             | Abstraction for Virtual File System operations within File Station.                                            |
-
-#### `apparmor.d/cache/`
-
-This directory stores cached (pre-compiled) AppArmor profiles. Caching profiles improves performance by avoiding the need to parse the human-readable profile files on every application startup or policy reload. The filenames often correspond to the full path of the executable they apply to, with `/` replaced by `.`, or follow a Synology-specific naming convention (e.g., `SYNO.Core.System`).
-
-Examples of cached profiles found:
-
-*   `SYNO.ACEEditor.Preference`
-*   `SYNO.Core.File.Thumbnail`
-*   `SYNO.Core.Package.Installation`
-*   `SYNO.Core.QuickConnect`
-*   `SYNO.FileStation.VFS.Connection`
-*   `usr.bin.httpd` (cached profile for the Apache web server)
-*   `usr.share.captiveportal.captiveportal.cgi`
-*   `usr.syno.synoman.webapi.entry.cgi`
-*   Many `usr.syno.synoman.webfm.*` entries related to File Station CGI scripts.
-*   Many `usr.syno.synoman.webman.*` entries related to DSM (DiskStation Manager) web interface CGI scripts.
-
-#### `apparmor.d/httpd/`
-
-This directory is present but **empty** in the default configuration. It might be intended for site-specific or module-specific AppArmor profiles for the Apache HTTP Server, to be populated by administrators or packages.
-
-#### `apparmor.d/tunables/`
-
-This directory contains files that define AppArmor tunables. Tunables are like variables that can be used in AppArmor profiles to make them more adaptable to different environments or configurations without needing to rewrite the entire profile. They often define paths to common directories or settings that might vary.
-
-| File         | Probable Purpose                                                                                                |
-| ------------ | --------------------------------------------------------------------------------------------------------------- |
-| `global`     | Defines global tunables that can be used across multiple AppArmor profiles.                                     |
-| `kernelvars` | Defines tunables related to kernel variables or paths that might be influenced by the kernel version or configuration. |
-| `proc`       | Defines tunables related to the `/proc` filesystem, allowing profiles to refer to paths within `/proc` abstractly.    |
-
-### `cups/`
-
-This directory contains default configuration files for the CUPS (Common Unix Printing System) printing service.
-
-| File/Directory | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cupsd.conf`   | Main configuration file for the CUPS daemon (`cupsd`). It defines server settings, logging, job management, security, and access control.                                                                    | Key directives observed: `ServerBin /usr/lib/cups`, `Printcap /usr/syno/etc/printcap`, `LogLevel error`, `ErrorLog syslog`, `RequestRoot /var/services/printer`, `Port 631`, `DefaultAuthType Basic`. Access to web interface locations is generally open by default. |
-| `ppd/`         | Stands for PostScript Printer Description. This subdirectory is intended to store PPD files, which describe the capabilities of specific printer models to CUPS. These files are typically provided by printer manufacturers. | This directory is **empty** in the default configuration.                                                                                                                                                                                                       |
-
-### `debsig/`
-
-This directory relates to `debsigs`, the Debian package signature verification system. It contains policies for verifying the authenticity and integrity of Debian packages.
-
-| File/Directory                      | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                      |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `policies/`                         | Subdirectory containing signature verification policies.                                                                                       |                                                                                                                                                                            |
-| `policies/C42CCD870EBD11E7/`        | A specific policy directory, likely named after a GPG key ID (`C42CCD870EBD11E7`) used for signing certain packages or updates.                  | Contains the actual policy file.                                                                                                                                           |
-| `policies/C42CCD870EBD11E7/smallupdate.pol` | The signature verification policy file itself. The `.pol` extension is standard for `debsigs` policies. This one is named `smallupdate.pol`. | Defines rules for verifying signatures, e.g., which keys are trusted for "small updates". The content of this file would specify the exact verification criteria. |
-
-### `default/`
-
-This directory typically contains default environment variables or startup configurations for various services.
-
-| File   | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                       |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pluto`| Default configuration or environment settings for the Pluto daemon. Pluto is the IKE (Internet Key Exchange) daemon used by IPsec (e.g., in Openswan/Libreswan implementations) to negotiate and manage security associations for VPNs. | This file likely sets default options or parameters for Pluto when it starts, such as logging levels, interface bindings, or paths to other configuration files. |
-
-### `dhclient/`
-
-This directory contains default configuration files for the ISC DHCP client (`dhclient`). This client is responsible for obtaining an IP address and other network configuration parameters from a DHCP server.
-
-| File/Directory        | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                             |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dhclient-script`     | A script executed by `dhclient` at various points during the DHCP lease process (e.g., when a lease is obtained, renewed, or expired). It configures network interfaces, DNS, routes, etc., based on the information received from the DHCP server. | This is a standard script used by ISC DHCP client.                                                                                                                                                |
-| `dhclient.conf.example` | An example configuration file for `dhclient`. It shows various options that can be used in `dhclient.conf`.                                    | Useful as a reference but not used directly by the client unless copied/renamed.                                                                                                                  |
-| `ipv4/`               | Subdirectory specifically for IPv4 DHCP client configurations.                                                                                 |                                                                                                                                                                                                   |
-| `ipv4/dhclient.conf`  | Default configuration file for the `dhclient` when operating in IPv4 mode.                                                                     | Defines parameters for requesting an IPv4 address, such as timeouts, retries, requested options (e.g., DNS servers, domain name), and interface-specific settings.                               |
-| `ipv6/`               | Subdirectory specifically for IPv6 DHCP client configurations.                                                                                 |                                                                                                                                                                                                   |
-| `ipv6/dhclient.conf`  | Default configuration file for the `dhclient` when operating in IPv6 mode (DHCPv6).                                                              | Defines parameters for requesting an IPv6 address and other IPv6 configuration details, potentially including prefix delegation requests.                                                           |
-
-### `dhcpc/`
-
-This directory appears to be related to a DHCP client, possibly a different one or supplementary to `dhclient`. The naming `dhcpc` is common for DHCP client utilities.
-
-| File                    | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                                                                            |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `synodhcpcddiag.tar.gz` | A compressed tar archive (`.tar.gz`). The name suggests it contains Synology-specific (`syno`) DHCP client (`dhcpc`) diagnostic data (`diag`). This is likely used for troubleshooting DHCP client issues. | The contents of this archive would need to be examined to understand the exact nature of the diagnostic data (e.g., log files, configuration snapshots, network state information at the time of a DHCP event). |
-
-### `dhcpd/`
-
-This directory contains default configuration files for a DHCP server daemon (likely `dhcpd` or a similar Synology-specific implementation).
-
-| File              | Probable Purpose                                                                                                                                                                                                                            | Notes                                                                                                                                                                                                                                                                                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dhcpserver.conf` | Main configuration file for the DHCP server. It defines DHCP scopes (address pools), lease times, DNS servers, gateways, and other options to be provided to DHCP clients. The format is JSON.                                               | The file defines default DHCP server configurations for interfaces `lbr0` (likely local bridge, e.g., 192.168.1.0/24) and `gbr0` (likely guest bridge, e.g., 192.168.2.0/24). For each, it specifies `enable` status, IP range (`begin`, `end`), `prefix`, `gateway`, `dns1`, `dns2`, `domain`, `lease` time, and `use_host_dns` boolean. |
-
-### `dpkg/`
-
-This directory holds default configuration files for `dpkg`, the Debian package manager.
-
-| File/Directory | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dpkg.cfg`     | Main configuration file for `dpkg`. It can specify various options that control `dpkg`'s behavior.                                                                                                         | The default file contains `refuse-downgrade` (prevents downgrading packages) and `log /var/log/dpkg.log` (specifies the log file location).                                                                                                         |
-| `dpkg.cfg.d/`  | A directory for `dpkg` configuration snippets. Files in this directory (if any) would be included by the main `dpkg.cfg` or processed by `dpkg` to provide modular configuration. This directory is **empty** in the default configuration. | This allows for easier management of configuration options by splitting them into multiple files, often used by packages to add their own `dpkg` settings without modifying the main `dpkg.cfg`. |
-
-### `firewall/`
-
-This directory is likely intended to hold default firewall configuration rules or scripts. In many Linux systems, this could relate to `iptables`, `nftables`, or a higher-level firewall management tool.
-
-| File/Directory | Probable Purpose                                      | Notes                                                           |
-| -------------- | ----------------------------------------------------- | --------------------------------------------------------------- |
-| (empty)        | No default firewall configuration files are present. | This directory is **empty** in the default configuration. User-defined or package-specific rules would be placed in the corresponding `/etc/firewall/` directory. |
-
-### `fw_security/`
-
-This directory contains default configurations related to firewall security features, likely Synology's specific implementation or extensions to a standard firewall.
-
-| File/Directory              | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `global.conf`               | Global configuration settings for firewall security features.                                                                                                                                                | Contains settings like `l2tp_passthrough_enable=yes`, `pptp_passthrough_enable=yes`, `dos_protect_enable=no`, and `ipsec_passthrough_enable=yes`. This indicates default states for VPN passthrough functionalities and Denial of Service (DoS) protection.                                                                                                                                                                                                                                                            |
-| `sysconf/`                  | A subdirectory likely holding system-level configuration files or patterns used by the firewall security scripts/rules.                                                                                      | Will be analyzed in detail below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `sysconf/dos.pattern`       | Pattern file for Denial of Service (DoS) protection rules, likely for IPv4.                                                                                                                                  | These files usually contain `iptables` or `nftables` rule snippets or parameters used by a script (like `iptables_security.sh`) to generate the actual firewall rules.                                                                                                                                                                                                                                                                                                                                                     |
-| `sysconf/dosv6.pattern`     | Pattern file for Denial of Service (DoS) protection rules, specifically for IPv6.                                                                                                                            | Similar to `dos.pattern` but for IPv6 traffic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `sysconf/ipsec_passthrough.pattern` | Pattern file for IPsec VPN passthrough rules.                                                                                                                                                              | Defines how IPsec traffic should be handled by the firewall to allow VPN connections to pass through the router.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `sysconf/iptables_security.sh`| A shell script responsible for applying security-related `iptables` rules.                                                                                                                                   | This script likely reads the `.pattern` files and other configurations to set up or update the firewall rules for DoS protection, VPN passthrough, and other security measures.                                                                                                                                                                                                                                                                                                                                         |
-| `sysconf/l2tp_passthrough.pattern`  | Pattern file for L2TP VPN passthrough rules.                                                                                                                                                               | Defines how L2TP traffic should be handled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `sysconf/pptp_passthrough.pattern`  | Pattern file for PPTP VPN passthrough rules.                                                                                                                                                               | Defines how PPTP traffic should be handled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-
-### `hostapd/`
-
-This directory is related to `hostapd`, a user space daemon for access point and authentication servers. It's used to create and manage Wi-Fi access points.
-
-| File/Directory | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                                                                            |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mac_filter/`  | This subdirectory is likely intended to store MAC address filter lists for `hostapd`. MAC filtering is a security measure to allow or deny specific devices from connecting to the Wi-Fi network based on their MAC addresses. | This directory is **empty** in the default configuration. If MAC filtering were configured, files containing lists of allowed or denied MAC addresses would typically reside here, or the main `hostapd.conf` would point to them. |
-
-### `httpd/`
-
-This directory contains the default configuration files for the Apache HTTP Server (`httpd`), which is used to serve web content, including the SRM management interface.
-
-| File/Directory         | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `conf/`                | Main configuration directory for Apache.                                                                                                                                                                     | Contains core configuration files and an `extra/` subdirectory.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `conf/httpd.conf-sys`  | System-level Apache configuration file. Likely defines global server settings, loaded modules, and default server parameters.                                                                                | This is a primary configuration file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `conf/httpd.conf-user` | User-specific Apache configuration, possibly for user-hosted web content or overrides to system defaults.                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `conf/httpd.conf-webdav`| Configuration specific to WebDAV (Web Distributed Authoring and Versioning) functionality.                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `conf/magic`           | Data file for `mod_mime_magic`, used to determine MIME types of files based on their content.                                                                                                                | Standard Apache file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `conf/mime.types`      | Defines mappings between file extensions and MIME types.                                                                                                                                                     | Standard Apache file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `conf/extra/`          | Contains supplementary configuration files that are typically included from the main `httpd.conf` files. These often handle specific aspects like SSL, MPMs (Multi-Processing Modules), language settings, etc. | Includes numerous files like `httpd-ssl.conf-*` (for SSL/TLS), `httpd-mpm.conf-*` (for MPM tuning), `httpd-default.conf-*` (server defaults), `httpd-languages.conf-*`, `httpd-alt-port-*.conf` (alternative port configurations), `httpd-template-*.conf` (configuration templates), and module-specific files like `mod_fastcgi.conf` and `mod_xsendfile.conf-*`. |
-| `sites-enabled/`       | Contains symbolic links to configuration files for enabled virtual hosts or site-specific configurations (typically from a `sites-available` directory, though not present here in defaults).                 | In this default setup, it includes `redirect-ssl.conf`, `redirect-ssl.conf.welcomeInstall`, `redirect.conf`, and `redirect.conf.welcomeInstall`, suggesting default redirection rules, possibly for initial setup or forcing HTTPS.                                                                                                                                                                                                                                                                 |
-| `sites-enabled-user/`  | Similar to `sites-enabled/`, but likely for user-defined site configurations.                                                                                                                                | Contains a `redirect.conf` file, possibly for user-specific redirections.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-
-### `init/`
-
-This directory contains default configuration files for system services and tasks, likely managed by an init system like Upstart or a similar mechanism used by Synology SRM. These `.conf` files typically define how services are started, stopped, and managed during the system lifecycle. Many of these are Synology-specific services (`syno*`).
-
-Key groups of services and individual files found:
-
-*   **Core System Services:** `apparmor.conf`, `crond.conf`, `dbus-system.conf`, `hostname.conf`, `hotplugd.conf`, `logrotate.conf`, `ntpd.conf`, `rc.conf`, `syslog-ng.conf`, `udevd.conf`.
-*   **Networking Services:**
-    *   DHCP Client/Server: `dhcp-client.conf`, `dhcp-client6.conf`, `dhcpserver.conf`, `dhcpclient_init.conf`, `dhcpserver_init.conf`.
-    *   DNS & DDNS: `ddnsd.conf`, `resolvsrmd.conf`, `mdns-repeater.conf`, `bonjour.conf` (Avahi related).
-    *   Firewall & IPsec: `firewall_init.conf`, `ipsec.conf`, `iptable-default-rules.conf`.
-    *   PPP/PPPoE: `network-pppoe.conf`, `pppoerelay.conf`.
-    *   Wi-Fi & Wireless: `beamforming.conf`, `hostap-global.conf`, `hostap.conf`, `hostapd_cli.conf`, `lbd.conf` (likely band steering), `synowifidaemon.conf`, `wpa_supplicant.conf`.
-    *   General Network Management: `lan_init.conf`, `network.conf`, `smartwan_init.conf`, `synonetd.conf`, `synoneteventd.conf`.
-*   **Synology Specific Services:** A large number of files starting with `syno*` or `dsm*` covering various aspects of the SRM operating system, including:
-    *   Authentication & Users: `syno-auth-check.conf`.
-    *   Backup: `synobackupd.conf`.
-    *   Device Management: `synobandevice.conf`, `synodeviced.conf`, `synodevicecored.conf`.
-    *   File Indexing: `fileindex.conf`, `synoindexd.conf`.
-    *   Logging: `synologd.conf`, `synologrotated.conf`, `syslog-*.conf` (various syslog configurations).
-    *   Mesh Networking: `synomeshd.conf`, `synomeshradiusd.conf`.
-    *   Package/Update Management: `autoupdate_schedule_set.conf`, `dsmupdate.conf`, `smallupdate.conf`.
-    *   Power Management: `RCPower.conf`, `poweroff.conf`, `reboot.conf`, `syno_poweroff_task.conf`.
-    *   Storage & Volumes: `grinst-create-vol.conf`, `init-internal-swap.conf`.
-    *   Web Services & UI: `httpd-sys.conf`, `httpd-user.conf`, `webdav-httpd.conf`, `php-fpm.conf`.
-*   **File Sharing Services:** `afpd-avahi.conf` (AFP), `nmbd.conf` (NetBIOS for Samba), `smbd.conf` (Samba).
-*   **Other Services:** `bluetoothd.conf`, `ftpd.conf` (FTP), `nfsd-adapter.conf` (NFS), `pgsql-adapter.conf` (PostgreSQL), `slapd.conf` (LDAP), `sshd.conf` (SSH).
-*   **Scripts and Utilities:** `checkFile.conf`, `kill-all-process.conf`, `rc-sysinit.conf`.
-*   **Subdirectory `usr/`:**
-    *   `usr/syno/etc/rc.d/S99xmkcgikey.sh`: A startup script, likely executed late in the boot process (S99 prefix), related to generating or managing a CGI key (`mkcgikey`).
-
-This directory is crucial for understanding the default services and their startup configurations on the SRM device.
-
-### `iproute2/`
-
-This directory contains configuration files for `iproute2`, a collection of utilities for controlling network configuration in Linux.
-
-| File/Directory | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `rt_protos`    | Defines human-readable names for routing protocol numbers.                                                                                                                                                   | Standard `iproute2` file.                                                                                                                                                                                                                                       |
-| `rt_realms`    | Defines human-readable names for routing realms. Realms are used in advanced routing scenarios, often with policy-based routing.                                                                               | Standard `iproute2` file.                                                                                                                                                                                                                                       |
-| `rt_scopes`    | Defines human-readable names for routing scopes (e.g., link, host, global).                                                                                                                                  | Standard `iproute2` file.                                                                                                                                                                                                                                       |
-| `rt_tables`    | Defines human-readable names for routing tables. Linux supports multiple routing tables, and this file allows assigning names to them for easier management with `ip rule` commands.                              | Standard `iproute2` file. Often includes default tables like `local`, `main`, `default`.                                                                                                                                                                    |
-| `rt_dsfield`   | Defines human-readable names for Differentiated Services Code Point (DSCP) values used in Quality of Service (QoS) marking.                                                                                  | Standard `iproute2` file.                                                                                                                                                                                                                                       |
-| `ematch_map`   | Maps extended match (ematch) names to their corresponding library files for use with `tc` (traffic control).                                                                                                 | Standard `iproute2` file, used for advanced traffic shaping and classification.                                                                                                                                                                 |
-
-### `ipsec.d/`
-
-This directory is intended for IPsec (Internet Protocol Security) configuration files, typically used for setting up VPNs. It often contains subdirectories for certificates (`cacerts/`, `certs/`, `private/`) and policy files.
-
-| File/Directory | Probable Purpose                                 | Notes                                                                          |
-| -------------- | ------------------------------------------------ | ------------------------------------------------------------------------------ |
-| (empty)        | No default IPsec configuration files are present. | This directory is **empty** in the default configuration. Specific IPsec configurations, policies, and keys would be placed in the corresponding `/etc/ipsec.d/` directory. |
-
-### `logrotate.d/`
-
-This directory contains default configuration files for `logrotate`, a utility that manages log file rotation to prevent them from growing indefinitely. Each file in this directory typically specifies how logs for a particular service or application should be handled (e.g., rotation frequency, number of old logs to keep, compression, pre/post-rotate scripts).
-
-The presence of these files indicates that the system is configured to manage logs for a variety of services. The actual log rotation is typically triggered by a cron job that runs `logrotate` with its main configuration file (usually `/etc/logrotate.conf`), which in turn includes configurations from `/etc/logrotate.d/`.
-
-| File                  | Probable Purpose                                       | Notes                                                                 |
-| --------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- |
-| `dhcp-client`         | Log rotation rules for the DHCP client.                | Manages logs related to DHCP client operations.                       |
-| `dmesg`               | Log rotation rules for kernel ring buffer messages.    | Manages `dmesg` output logs.                                          |
-| `dpkg`                | Log rotation rules for the DPKG package manager.       | Manages logs related to package installations and removals.           |
-| `gcpd`                | Log rotation rules for Google Cloud Print daemon (?).  | Likely for managing logs of a Google Cloud Print related service.     |
-| `httpd`               | Log rotation rules for the Apache HTTP server.         | Manages web server access and error logs.                             |
-| `mesh`                | Log rotation rules for Mesh network services.          | Manages logs related to Wi-Fi Mesh functionality.                     |
-| `ngfw`                | Log rotation rules for Next-Generation Firewall.       | Manages logs for firewall/security services.                          |
-| `php-fpm`             | Log rotation rules for PHP FastCGI Process Manager.    | Manages PHP-FPM logs.                                                 |
-| `postgresql`          | Log rotation rules for PostgreSQL database server.     | Manages database server logs.                                         |
-| `samba`               | Log rotation rules for Samba (SMB/CIFS file sharing).  | Manages logs for file sharing services.                               |
-| `scemd`               | Log rotation rules for SCEMD (Synology Control Engine).| Manages logs for a core Synology system daemon.                       |
-| `suphp`               | Log rotation rules for suPHP.                          | Manages logs related to suPHP execution.                              |
-| `synocacheclient`     | Log rotation rules for Synology Cache Client.          | Manages logs for a Synology caching service.                          |
-| `synocmsclient`       | Log rotation rules for Synology CMS Client.            | Manages logs for a Synology Central Management System client.         |
-| `synodevicecored`     | Log rotation rules for Synology Device Core Daemon.    | Manages logs for a core device management service.                    |
-| `synodeviced`         | Log rotation rules for Synology Device Daemon.         | Manages logs for another device-related daemon.                       |
-| `synofeasibilitycheck`| Log rotation rules for Synology Feasibility Check.     | Manages logs for a system check utility.                              |
-| `synogpoclient`       | Log rotation rules for Synology GPO Client.            | Manages logs for Group Policy Object client.                          |
-| `synolog`             | Log rotation rules for generic Synology logs.          | Could be for a central Synology logging mechanism.                    |
-| `synomesh`            | Log rotation rules for Synology Mesh services.         | Similar to `mesh`, specific to Synology's implementation.             |
-| `synonetd`            | Log rotation rules for Synology Network Daemon.        | Manages logs for a core network management service.                   |
-| `synopkg`             | Log rotation rules for Synology Package Manager.       | Manages logs related to package operations on the SRM.                |
-| `synorelayd`          | Log rotation rules for Synology Relay Daemon.          | Manages logs for a relay service (e.g., QuickConnect).                |
-| `synoservice`         | Log rotation rules for Synology Service management.    | Manages logs related to starting/stopping system services.            |
-| `synowifi`            | Log rotation rules for Synology Wi-Fi services.        | Manages logs specific to Wi-Fi functionalities.                       |
-| `synowolagentd`       | Log rotation rules for Synology Wake-on-LAN Agent.     | Manages logs for the Wake-on-LAN service.                           |
-| `syslog-ng`           | Log rotation rules for `syslog-ng` daemon.             | Manages system-wide logs collected by `syslog-ng`.                    |
-| `upstart`             | Log rotation rules for Upstart init system logs.       | Manages logs generated by the Upstart init daemon.                    |
-| `wifi`                | Log rotation rules for general Wi-Fi services.         | Potentially for lower-level Wi-Fi driver or system logs.              |
-
-### `netatalk/`
-
-This directory is intended for Netatalk configuration files. Netatalk is a free, open-source implementation of the Apple Filing Protocol (AFP), allowing Unix-like operating systems to serve as file servers for Apple Macintosh computers.
-
-| File/Directory | Probable Purpose                                    | Notes                                                                                                |
-| -------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| (empty)        | No default Netatalk configuration files are present. | This directory is **empty**. Actual configuration files like `afp.conf` would be in `/etc/netatalk/`. |
-
-### `nfs/`
-
-This directory contains default configuration files related to the Network File System (NFS) service, which allows remote clients to access files over a network as if they were local.
-
-| File/Directory   | Probable Purpose                                     | Notes                                                                                                                                                                                                                                                           |
-| ---------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `syno_nfs_conf`  | Synology-specific NFS default configuration options. | This file likely sets global default parameters for the NFS server on the SRM device. Based on its content, it defines:<ul><li>`udp_read_size=8192`: Default UDP read buffer size.</li><li>`udp_write_size=8192`: Default UDP write buffer size.</li><li>`nfsv4_enable=no`: NFS version 4 is disabled by default.</li><li>`nfs_unix_pri_enable=1`: Standard Unix permissions are enabled for NFS shares by default.</li><li>`nfs_custom_port_enable=no`: Using custom ports for NFS services (like `statd`, `mountd`) is disabled by default.</li></ul> |
-
-### `pam.d/`
-
-This directory contains default configuration files for Pluggable Authentication Modules (PAM). PAM provides a flexible framework for authenticating users and managing user sessions for various applications and services. Each file in this directory typically defines the PAM stack (a sequence of modules) for a specific service.
-
-| File          | Probable Purpose                                                                 | Notes                                                                                                                                                              |
-|---------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `findhostd`   | PAM configuration for `findhostd`, likely a Synology daemon related to host discovery or network services (e.g., "Find My Mac" equivalent, or part of network neighborhood browsing). | Defines how `findhostd` authenticates or manages sessions.                                                                                                       |
-| `ftpd`        | PAM configuration for the FTP daemon.                                            | Controls authentication for FTP user logins.                                                                                                                       |
-| `netatalk`    | PAM configuration for Netatalk (AFP service).                                    | Manages authentication for Apple Filing Protocol connections.                                                                                                      |
-| `other`       | Default PAM configuration used by services that do not have their own specific PAM configuration file. | Acts as a fallback.                                                                                                                                |
-| `rsync`       | PAM configuration for the `rsync` daemon.                                        | Controls authentication for `rsync` connections, if `rsync` is configured to use PAM.                                                                              |
-| `samba`       | PAM configuration for Samba (SMB/CIFS services).                                 | Manages authentication for Windows file sharing and related services.                                                                                              |
-| `sshd`        | PAM configuration for the SSH daemon (`sshd`).                                   | Controls authentication methods for SSH logins (e.g., password, public key, two-factor authentication if configured).                                              |
-| `sudo`        | PAM configuration for the `sudo` command.                                        | Defines how `sudo` authenticates users before granting them elevated privileges.                                                                                   |
-| `versionbackup`| PAM configuration for a service named "versionbackup". This is likely a Synology-specific backup or versioning service (e.g., related to Hyper Backup or a similar package). | Defines authentication for this specific backup service.                                                                                                           |
-| `webdav`      | PAM configuration for WebDAV services.                                           | Controls authentication for users accessing files via WebDAV.                                                                                                      |
-| `webui`       | PAM configuration for the web user interface (SRM's management interface).       | Manages login authentication for accessing the router's web-based configuration portal. This is a critical configuration for device access.                      |
-*(Further subdirectory analysis will follow)*
-### `php/`
-
-This directory contains default configuration files for PHP and PHP-FPM (FastCGI Process Manager), which is commonly used to handle PHP requests in web servers like Apache or Nginx.
-
-| File           | Probable Purpose                                                                                                | Notes                                                                                                                                                                                                                            |
-|----------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `php-fpm.conf` | Main configuration file for PHP-FPM. It defines global settings for PHP-FPM, such as process management, logging, and emergency restart thresholds.                                       | This file typically includes configurations from subdirectories like `fpm.d/` for specific process pools.                                                                                                      |
-| `php.ini`      | The primary configuration file for PHP. It controls various aspects of PHP's behavior, including error reporting, resource limits, enabled extensions, session handling, and file uploads. | This is a standard PHP configuration file. The default settings here would apply to all PHP scripts executed by the system unless overridden by more specific configurations (e.g., per-directory `php.ini` or settings in PHP-FPM pool configurations). |
-
-#### `php/conf.d/`
-
-This subdirectory contains additional PHP configuration files, often used to enable specific extensions or override settings from the main `php.ini`. Files in this directory are typically parsed after the main `php.ini`.
-
-| File              | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                                                                                            |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `extensions.ini`  | Defines which PHP extensions are loaded. PHP extensions provide additional functionality (e.g., database connectors, image manipulation, XML processing).                               | This file would typically contain lines like `extension=mysqli.so` or `extension=gd.so`. The exact content determines the capabilities of the PHP environment on the SRM device.                                                                   |
-| `opcache.ini`     | Configuration for OPcache, a PHP extension that improves performance by storing precompiled script bytecode in shared memory, thereby removing the need for PHP to load and parse scripts on each request. | Settings in this file would control OPcache's memory usage, revalidation frequency, and other tuning parameters (e.g., `opcache.enable=1`, `opcache.memory_consumption=128`).                                                                           |
-| `user-settings.ini` | A file for user-defined PHP settings. This allows administrators to add or override specific PHP directives without modifying the main `php.ini` or other default configuration files. | This provides a clean way to customize PHP behavior. For example, it could be used to set `memory_limit`, `upload_max_filesize`, or `error_reporting` levels. The exact content is user/administrator-defined. |
-
-#### `php/fpm.d/`
-
-This directory is intended to hold configuration files for individual PHP-FPM process pools. Each file in this directory (typically ending in `.conf`) would define a separate pool of PHP processes, allowing for different configurations (e.g., user/group, resource limits, PHP settings) for different websites or applications.
-
-| File/Directory | Probable Purpose                                           | Notes                                                                                                                                                                                                                            |
-|----------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| (empty)        | No default PHP-FPM pool configuration files are present. | This directory is **empty** in the default configuration. Specific pool configurations (e.g., `www.conf` for a default web server pool) would be placed in the corresponding `/etc/php/fpm.d/` directory or created by packages/users. |
-### `portforward/`
-
-This directory is intended for default configuration files related to port forwarding (Network Address Translation - NAT). Port forwarding allows external devices to connect to specific services running on internal network devices by mapping an external port to an internal IP address and port.
-
-| File/Directory | Probable Purpose                                                 | Notes                                                                                                                                                                                                                                                         |
-|----------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| (empty)        | No default port forwarding configuration files are present.      | This directory is **empty** in the default configuration. Actual port forwarding rules are typically configured by the user through the SRM web interface and stored elsewhere, or would be placed in the corresponding `/etc/portforward/` directory if managed by static files. |
-### `postgresql/`
-
-This directory contains default configuration files for the PostgreSQL database server, if it's used by the SRM system or any of its packages.
-
-| File              | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                                                                                                                                                                                                        |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `pg_hba.conf`     | (Host-Based Authentication) Controls client authentication. It defines which hosts are allowed to connect to the database, which users can connect from those hosts, and the authentication methods required (e.g., trust, password, md5). | This is a critical security file for PostgreSQL. Default settings might allow local connections via Unix domain sockets for system users or specific Synology services.                                                                                               |
-| `pg_ident.conf`   | Used for mapping external authentication identities (like operating system usernames) to PostgreSQL database usernames. This is primarily used for `ident` and `peer` authentication methods defined in `pg_hba.conf`. | This file allows, for example, an OS user "synoadmin" to be mapped to a PostgreSQL user "postgres" without needing a separate password, if `peer` authentication is configured for local connections.                                                                |
-| `postgresql.conf` | Main run-time configuration file for PostgreSQL. It controls a vast array of server settings, including connection parameters, resource usage (memory, disk), logging, replication, query tuning, and more.        | Contains default settings for the database server instance. Key parameters often include `listen_addresses`, `port`, `max_connections`, `shared_buffers`, `work_mem`, `log_destination`, `log_statement`, etc. The defaults are usually conservative and might be tuned for specific workloads. |
-### `ppp/`
-
-This directory contains default configuration files and scripts for PPP (Point-to-Point Protocol) and PPPoE (PPP over Ethernet) connections, commonly used for DSL or fiber internet connections.
-
-| File                       | Probable Purpose                                                                                                                                                             | Notes                                                                                                                                                                                             |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ip-down`                  | Script executed by `pppd` (PPP daemon) when a PPP link is terminated. It's responsible for undoing network configurations made by `ip-up` (e.g., removing routes, DNS servers). | Standard PPP script.                                                                                                                                                                                              |
-| `ip-function`              | A shell script containing common functions used by other PPP scripts like `ip-up` and `ip-down`.                                                                               | Helps to avoid code duplication in PPP connection scripts.                                                                                                                                                        |
-| `ip-up`                    | Script executed by `pppd` when a PPP link is successfully established. It configures network settings like IP addresses, routes, and DNS servers based on information from the peer. | Standard PPP script.                                                                                                                                                                                              |
-| `ipv6-down`                | Similar to `ip-down`, but specifically for IPv6 connections (PPPv6). It handles de-configuration of IPv6 settings when an IPv6 PPP link goes down.                               | Standard PPP script for IPv6.                                                                                                                                                                                     |
-| `ipv6-up`                  | Similar to `ip-up`, but for IPv6 connections. It configures IPv6 network settings (addresses, routes, DNS) when an IPv6 PPP link is established.                                 | Standard PPP script for IPv6.                                                                                                                                                                                     |
-| `options`                  | Default global options file for `pppd`. It contains common settings that apply to all PPP connections unless overridden by connection-specific option files.                      | Can include settings like authentication methods, MTU/MRU, LCP echo options, etc.                                                                                                                                 |
-| `pap-secrets`              | Stores usernames and passwords for PAP (Password Authentication Protocol) authentication.                                                                                      | Contains credentials for PPP links that use PAP. This file should have restricted permissions. The default file is typically empty or contains commented-out examples.                                          |
-| `pppoe-generate-config.py` | A Python script likely used by Synology to generate PPPoE client configuration files dynamically, possibly based on user input from the SRM web interface or other system settings. | This suggests a more automated approach to PPPoE configuration rather than relying solely on static files.                                                                                                      |
-| `pppoe.conf`               | Default configuration file for `rp-pppoe` client or a similar PPPoE client implementation. It specifies parameters for establishing PPPoE connections, such as the Ethernet interface to use, username, and demand-dialing options. | This file works in conjunction with `pppd` and its option files.                                                                                                                                      |
-### `rc.d/`
-
-This directory is part of the System V style init system. It typically contains symbolic links to scripts located in `init.d/`, organized into subdirectories named `rc0.d/`, `rc1.d/`, ..., `rc6.d/` corresponding to different runlevels. However, in this default backup, it directly contains an `init.d/` subdirectory.
-
-#### `rc.d/init.d/`
-
-This directory contains the actual initialization scripts for services managed by the System V init system. Scripts in this directory are responsible for starting, stopping, restarting, and checking the status of daemons.
-
-| File      | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                                                                                                                                                                                        |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ebtables`| Initialization script for `ebtables`. `ebtables` is a filtering tool for Ethernet bridge frames. It allows for configuring rules at the MAC layer (Layer 2), similar to how `iptables` works for IP packets (Layer 3). It can be used for MAC address filtering, VLAN tagging manipulation, and creating broutes (bridged routes). | This script would manage the `ebtables` service, loading rules at startup and potentially saving them at shutdown. Its presence indicates that the SRM device uses or has the capability for advanced Layer 2 network filtering, possibly for features like MAC filtering on bridge interfaces or transparent firewalling. |
-### `security/`
-
-This directory holds default configuration files related to system security.
-
-| File              | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                       |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `pam_winbind.conf`| Configuration file for the `pam_winbind.so` PAM module. This module integrates with Winbind, a component of the Samba suite that allows a Unix/Linux system to act as a client in a Windows domain. It enables domain user authentication and can provide information about domain users and groups to the local system. | This file would contain settings for how `pam_winbind` interacts with the Winbind daemon and the domain controller, such as Kerberos settings, password change policies, and how domain user information is mapped or cached. Its presence indicates that SRM can be configured to join an Active Directory domain for user authentication. |
-### `ssh/`
-
-This directory contains default configuration files for the SSH (Secure Shell) daemon (`sshd`), which allows secure remote login and command execution.
-
-| File                | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sshd_config`       | Standard default configuration file for the OpenSSH daemon (`sshd`). It controls various aspects of the SSH server's behavior, such as port number, allowed authentication methods (password, public key), root login permissions, protocol versions, and security options (e.g., ciphers, MACs, KEX algorithms). | This file provides the base configuration for `sshd`.                                                                                                                                                                                                                                                                                                                                                        |
-| `syno_sshd_config`  | Synology-specific SSH daemon configuration file. This file likely contains Synology's customizations or overrides to the standard `sshd_config`. It might be included by the main `sshd_config` or used as a primary configuration if Synology uses a modified SSH daemon startup process. | Its presence suggests that Synology applies its own set of default SSH settings, potentially to align with SRM's security policies, user management, or specific features. For example, it might define default allowed users/groups, enable/disable certain authentication methods by default, or set specific logging parameters tailored for SRM. The exact overrides would be visible by comparing this file with the standard `sshd_config`. |
-### `ssl/`
-
-This directory contains default configuration files and potentially default certificates/keys related to SSL/TLS (Secure Sockets Layer/Transport Layer Security) and OpenSSL.
-
-| File/Directory       | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ct_log_list.cnf`    | Configuration file for Certificate Transparency (CT) Log List. Certificate Transparency is an open framework for monitoring and auditing SSL certificates. This file likely lists trusted CT logs.             | The `.dist` version is usually the original distribution file, while the one without `.dist` might be the active configuration (potentially modified or a copy).                                                                                                                                                                                                                                                                                                                                                                        |
-| `ct_log_list.cnf.dist`| Distribution version of the CT Log List configuration file.                                                                                                                                                  | Serves as a template or backup of the original settings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `openssl.cnf`        | Default configuration file for OpenSSL. This file controls various aspects of OpenSSL's behavior, such as default paths for certificates and keys, distinguished name (DN) settings for certificate requests, extensions to add to certificates, and cryptographic algorithm parameters. | Critical for any operations involving SSL/TLS certificate generation, signing, or verification using the OpenSSL toolkit.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `openssl.cnf.dist`   | Distribution version of the OpenSSL configuration file.                                                                                                                                                      | Serves as a template or backup of the original OpenSSL settings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `certs/`             | Subdirectory intended to store SSL/TLS certificates, including CA (Certificate Authority) certificates and server/client certificates.                                                                       | Will be analyzed in detail below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `private/`           | Subdirectory intended to store private keys corresponding to SSL/TLS certificates.                                                                                                                           | **Security Note:** This directory should have very restricted permissions as private keys must be kept secret. Default backups might contain placeholder or self-signed keys. Will be analyzed in detail below.                                                                                                                                                                                                                                                                                                                      |
-
-#### `ssl/certs/`
-
-This subdirectory is intended to store SSL/TLS certificates.
-
-| File                  | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ca-certificates.crt` | A bundle file containing multiple CA (Certificate Authority) certificates. These are root certificates from trusted CAs used by the system to verify the authenticity of SSL/TLS certificates presented by remote servers or clients. | This is a common way to distribute trusted CA certificates on Linux/Unix systems. Applications that make SSL/TLS connections (e.g., web browsers, email clients, `curl`, `wget`) use this bundle to validate server certificates. The presence of this file in defaults suggests a baseline set of trusted CAs provided by Synology. The actual active bundle might be in `/etc/ssl/certs/ca-certificates.crt` and could be updated by the system or administrator. |
-
-#### `ssl/private/`
-
-This subdirectory is intended to store private keys corresponding to SSL/TLS certificates.
-
-| File/Directory | Probable Purpose                                      | Notes                                                                                                                                                                                                                                                                                                                                                        |
-|----------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| (empty)        | No default private key files are present.             | This directory is **empty** in the default configuration. Storing default private keys here would be a security risk. Actual private keys for certificates used by the system (e.g., for the web interface HTTPS) would be generated during initial setup or when a certificate is installed by the user, and stored in the corresponding `/etc/ssl/private/` directory with strict permissions. |
-### `ssmtp/`
-
-This directory contains default configuration files for SSMTP (Simple SMT P Mail Transfer Agent), a lightweight MTA used to send emails from a local system to a configured mail hub (smarthost). It's not a full-fledged MTA like Sendmail or Postfix but is useful for systems that only need to send outgoing mail.
-
-| File          | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `revaliases`  | (Reverse Aliases) This file is used to map local user accounts to email addresses. When SSMTP sends an email from a local user, it can use this file to rewrite the "From:" address to a more appropriate external email address. | For example, an email sent by user `root` could be rewritten to appear as `admin@example.com`. Each line typically contains `local_user:outgoing_address:mailhub_server[:port]`.                                                                                                                                                                                             |
-| `ssmtp.conf`  | Main configuration file for SSMTP. It specifies the mail hub (smarthost) to which emails will be relayed, authentication credentials if required by the mail hub, rewriting domains, and other operational parameters. | Key settings include `mailhub` (e.g., `smtp.gmail.com:587`), `AuthUser`, `AuthPass` (if authentication is needed), `UseTLS`/`UseSTARTTLS` for secure connections, `FromLineOverride` (to allow `revaliases` to work), and `rewriteDomain` (to set the domain for outgoing emails). The default file in SRM would likely be configured to work with Synology's notification services or allow easy configuration for common email providers. |
-### `sudoers.d/`
-
-This directory is used to store additional `sudo` configuration files. The main `sudoers` file (typically `/etc/sudoers`) can include files from this directory using an `#include` or `#includedir` directive. This allows for modular management of `sudo` rules, often used by packages to grant specific privileges without modifying the main `sudoers` file directly.
-
-| File/Directory | Probable Purpose                                                                 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|----------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| (empty)        | No default `sudo` configuration snippet files are present in this directory.     | This directory is **empty** in the default configuration. If specific packages or system components on SRM require `sudo` privileges, they might place their configuration snippets in the corresponding `/etc/sudoers.d/` directory. These snippets typically grant specific users or groups permission to run certain commands as root or another user. It's good practice for these files to have strict permissions (e.g., read-only by root) to prevent unauthorized modifications. |
-### `synosyslog/`
-
-This directory contains default configuration files for Synology's syslog services, likely `syslog-ng` or a customized version. These files define how system and application logs are collected, filtered, processed, and stored or forwarded.
-
-| File           | Probable Purpose                                                                                                                                                                                          | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `client.conf`  | Default configuration for the syslog client functionality. This would define how the SRM device sends its logs to a remote syslog server if configured to do so.                                           | Settings might include the destination server address, port, protocol (UDP, TCP, TLS), and log formatting templates.                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `mesh.conf`    | Default syslog configuration specific to Wi-Fi Mesh networking. Logs related to mesh nodes, inter-node communication, and mesh topology changes would be handled according to this configuration.             | This allows for dedicated logging and monitoring of the mesh system's health and performance.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `notify.conf`  | Default configuration for syslog-based notifications. This file likely defines rules for triggering notifications (e.g., email, push notifications via DS router app) based on specific log messages or patterns. | It would specify which log severities or facilities should trigger notifications, the content of notification messages, and potentially the recipients or notification channels.                                                                                                                                                                                                                                                                                                                                                            |
-| `notify.filter`| A filter file used in conjunction with `notify.conf`. It likely contains specific patterns or rules to include or exclude certain log messages from triggering notifications.                                  | This allows for fine-grained control over what events generate notifications, reducing noise from less critical log entries.                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `server.conf`  | Default configuration for the syslog server functionality, if the SRM device is configured to act as a central log collector for other devices on the network.                                                | Defines how the SRM device listens for incoming syslog messages (e.g., on which interfaces and ports), how it stores received logs (e.g., file paths, rotation policies), and potentially how it filters or forwards them. Even if not acting as a full remote server, it configures how local logs are processed and stored (e.g., in `/var/log/messages`, `/var/log/synolog/`, etc.). |
-### `sysconfig/`
-
-This directory typically contains system configuration files related to various aspects of the system, especially network settings and startup parameters for services, often used in Red Hat-based systems but elements can appear in other Linux distributions as well.
-
-| File/Directory    | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `clock`           | Default configuration for system clock settings.                                                                                                                                                             | May define whether the hardware clock is set to UTC or local time, and timezone settings.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `ebtables-config` | Default configuration file for `ebtables`. This file is typically sourced by the `ebtables` init script to load rules at boot time.                                                                        | It might specify where `ebtables` rules are saved and restored from, or define default policies.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `network`         | Global network configuration settings for the system.                                                                                                                                                        | Can define general networking parameters like `NETWORKING=yes` (to enable networking), `HOSTNAME`, `GATEWAY`, `NISDOMAIN`, etc.                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `network-scripts/`| Contains scripts for configuring network interfaces (e.g., `ifcfg-eth0`, `ifup`, `ifdown`).                                                                                                                    | This is a common location for network interface configuration scripts in Red Hat-like systems. Will be analyzed in detail below.                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `networking/`     | Another directory potentially related to network configuration, possibly for more specific aspects or a different style of configuration (e.g., Debian-style `interfaces` file or profiles).                   | Will be analyzed in detail below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-
-#### `sysconfig/network-scripts/`
-
-This directory contains default configuration scripts for individual network interfaces. The `ifcfg-*` files define parameters for specific network interfaces like Ethernet ports, Wi-Fi adapters, bridge interfaces, and tunnel interfaces.
-
-| File         | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ifcfg-eth0` | Default configuration for the first Ethernet interface (`eth0`).                                                                                                                                               | Typically defines settings like `DEVICE=eth0`, `BOOTPROTO=dhcp` (or `static` with IP/netmask/gateway), `ONBOOT=yes`.                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ifcfg-eth1` | Default configuration for the second Ethernet interface (`eth1`).                                                                                                                                              | Similar to `ifcfg-eth0`. SRM devices often have multiple Ethernet ports for WAN/LAN.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `ifcfg-eth2` | Default configuration for the third Ethernet interface (`eth2`).                                                                                                                                               | ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `ifcfg-eth3` | Default configuration for the fourth Ethernet interface (`eth3`).                                                                                                                                              | ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `ifcfg-eth4` | Default configuration for the fifth Ethernet interface (`eth4`).                                                                                                                                               | ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `ifcfg-gbr0` | Default configuration for a guest bridge interface (`gbr0`). This is likely used for the Guest Wi-Fi network, isolating guest traffic from the primary local network.                                        | Defines the IP addressing and other parameters for the guest network bridge.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ifcfg-lbr0` | Default configuration for a local bridge interface (`lbr0`). This is likely the primary bridge for the local LAN, combining wired Ethernet ports and the primary Wi-Fi network(s).                               | Defines the IP addressing (e.g., router's LAN IP) and other parameters for the main local network bridge.                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `ifcfg-tun`  | Default template or base configuration for a generic tunnel interface (e.g., for VPNs like OpenVPN, IPsec).                                                                                                   | Specific tunnel instances (e.g., `tun0`, `tun1`) would typically have their own configuration files or be configured dynamically by VPN daemons.                                                                                                                                                                                                                                                                                                                                                                                    |
-| `ifcfg-wlan0`| Default configuration for the first wireless LAN interface (`wlan0`).                                                                                                                                          | Defines settings for a Wi-Fi radio, such as mode (AP, client), SSID, security parameters (WPA2/3, password), channel, etc. This would be a base default; actual operational settings are usually managed by `hostapd` or similar Wi-Fi management services based on user configuration in the SRM UI.                                                                                                                                                                                                                                 |
-| `ifcfg-wlan1`| Default configuration for the second wireless LAN interface (`wlan1`).                                                                                                                                         | Similar to `ifcfg-wlan0`, for devices with multiple Wi-Fi radios (e.g., 2.4GHz and 5GHz).                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-
-#### `sysconfig/networking/`
-
-This subdirectory likely contains further network configuration files, possibly for specific profiles or less common interface types.
-
-| File       | Probable Purpose                                                                                                  | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ifcfg-lo` | Default configuration script for the loopback interface (`lo`). The loopback interface is a special virtual network interface that the system uses to communicate with itself (IP address typically `127.0.0.1` for IPv4 and `::1` for IPv6). | This file typically defines `DEVICE=lo`, `IPADDR=127.0.0.1`, `NETMASK=255.0.0.0`, `NETWORK=127.0.0.0`, `BROADCAST=127.255.255.255`, `ONBOOT=yes`, `NAME=loopback`. It's essential for proper network stack operation on any Linux/Unix system. |
-### `sysctlconf/`
-
-This directory is intended to hold configuration files for `sysctl`, a utility used to modify kernel parameters at runtime. Files in this directory, or the main `/etc/sysctl.conf` file, define kernel parameters that are set during the boot process.
-
-| File         | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                                                            |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `default.conf` | Default `sysctl` configuration file specific to this directory. It likely contains a set of default kernel parameters that Synology SRM applies. These parameters can affect various aspects of system behavior, including networking, memory management, and security. | The exact parameters would need to be inspected from the file's content. It complements or overrides settings from the main `/etc/sysctl.conf` or other snippet files in `/etc/sysctl.d/`. |
-### `syslog-ng/`
-
-This directory contains default configuration files for `syslog-ng`, an advanced logging daemon. `syslog-ng` is responsible for collecting, processing, filtering, and forwarding log messages from various sources on the system.
-
-| File/Directory   | Probable Purpose                                                                                                                                                                                             | Notes                                                                                                                                                                                                                                                           |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `syslog-ng.conf` | Main default configuration file for `syslog-ng`. It defines sources (where logs come from), destinations (where logs go), filters (to select specific messages), and log paths (how messages are routed from sources to destinations). | This file is central to `syslog-ng`'s operation. It typically includes other configuration snippets from subdirectories like `conf.d/` or, in this case, might utilize `patterndb.d/` for advanced message parsing.                                              |
-| `patterndb.d/`   | Subdirectory containing pattern database files for `syslog-ng`. Pattern databases (`patterndb`) allow `syslog-ng` to parse unstructured log messages, extract meaningful information as key-value pairs, and classify messages based on their content. | This enables more sophisticated log analysis, filtering, and correlation. Will be analyzed in detail below.                                                                                                                                   |
-
-#### `syslog-ng/patterndb.d/`
-
-This subdirectory holds default pattern database (`.conf` or `.pdb`) files used by `syslog-ng` for advanced log message parsing and classification. Each file typically defines patterns for specific applications or log types.
-
-| File                          | Probable Purpose                                                                                                                               | Notes                                                                                                                                                                                                                            |
-|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `common.conf`                 | Contains common or generic patterns that might be applicable across various log sources.                                                       |                                                                                                                                                                                                                                  |
-| `gcpd.conf`                   | Patterns for `gcpd` (Google Cloud Print daemon?) logs.                                                                                         |                                                                                                                                                                                                                                  |
-| `php-fpm.conf`                | Patterns for PHP-FPM logs.                                                                                                                     | Helps in parsing logs from PHP FastCGI Process Manager.                                                                                                                                                                            |
-| `postgresql.conf`             | Patterns for PostgreSQL database server logs.                                                                                                  |                                                                                                                                                                                                                                  |
-| `scemd.conf`                  | Patterns for SCEMD (Synology Control Engine) logs.                                                                                             |                                                                                                                                                                                                                                  |
-| `synocacheclient.conf`        | Patterns for Synology Cache Client logs.                                                                                                       |                                                                                                                                                                                                                                  |
-| `synocmsclient.conf`          | Patterns for Synology CMS (Central Management System) Client logs.                                                                             |                                                                                                                                                                                                                                  |
-| `synofeasibilitycheck.conf`   | Patterns for Synology Feasibility Check utility logs.                                                                                          |                                                                                                                                                                                                                                  |
-| `synogpoclient.conf`          | Patterns for Synology GPO (Group Policy Object) Client logs.                                                                                   |                                                                                                                                                                                                                                  |
-| `synoindex.conf`              | Patterns for Synology Indexing Service (`synoindexd`) logs.                                                                                    |                                                                                                                                                                                                                                  |
-| `synolog.conf`                | Patterns for generic Synology system logs.                                                                                                     |                                                                                                                                                                                                                                  |
-| `synoservice.conf`            | Patterns for Synology service management logs.                                                                                                 |                                                                                                                                                                                                                                  |
-| `synowifi.conf`               | Patterns for Synology Wi-Fi service logs.                                                                                                      |                                                                                                                                                                                                                                  |
-| `syslog-dhcp.conf`            | Patterns specifically for DHCP related logs processed by syslog.                                                                               |                                                                                                                                                                                                                                  |
-| `syslog-ngfw.conf`            | Patterns for Next-Generation Firewall (NGFW) logs processed by syslog.                                                                         |                                                                                                                                                                                                                                  |
-| `syslog-pipe.conf`            | Patterns related to logs received via pipes or specific syslog pipe sources.                                                                   |                                                                                                                                                                                                                                  |
-| `syslog-synodevicecored.conf` | Patterns for Synology Device Core Daemon logs processed by syslog.                                                                             |                                                                                                                                                                                                                                  |
-| `syslog-synodeviced.conf`     | Patterns for Synology Device Daemon logs processed by syslog.                                                                                  |                                                                                                                                                                                                                                  |
-| `syslog-synonetd.conf`        | Patterns for Synology Network Daemon (`synonetd`) logs processed by syslog.                                                                    |                                                                                                                                                                                                                                  |
-| `wifi.conf`                   | General patterns for Wi-Fi related logs (possibly from drivers or lower-level components).                                                   |                                                                                                                                                                                                                                  |
-### `tc/`
-
-This directory contains default configuration files for `tc` (traffic control), a command-line utility used to configure Quality of Service (QoS) and traffic shaping in the Linux kernel. Files in this directory would typically contain `tc` commands or scripts to set up queuing disciplines, classes, and filters.
-
-| File        | Probable Purpose                                                                                                                                                              | Notes                                                                                                                                                                                                                            |
-|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `default.cmd` | A default script containing `tc` commands. This script would be executed at boot time or when network interfaces are brought up to apply default traffic shaping rules. These rules could prioritize certain types of traffic (e.g., VoIP, gaming) or limit bandwidth for others. | The specific QoS policies implemented would be defined by the `tc` commands within this file. Examining its content would reveal the default traffic management strategy of the SRM device.                                      |
+# /etc.defaults Directory - Default Configuration Templates
+
+## Overview
+The `/etc.defaults` directory contains pristine default configuration templates for the Synology SRM system. These files serve as factory defaults that can be used to restore system settings, as fallback configurations, or as templates for creating new configurations. This directory follows a structure parallel to `/etc` but contains only the original, unmodified versions of configuration files.
+
+## Directory Structure
+```
+/etc.defaults/
+├── apparmor/               [AppArmor security module configs]
+├── apparmor.d/             [AppArmor profiles and abstractions]
+│   ├── abstractions/       [Reusable AppArmor policy snippets]
+│   ├── cache/              [Cached AppArmor profiles]
+│   ├── httpd/              [Apache-specific profiles]
+│   └── tunables/           [AppArmor variables]
+├── cups/                   [CUPS printing system]
+├── debsig/                 [Debian package signatures]
+├── default/                [Service environment defaults]
+├── dhclient/               [ISC DHCP client configs]
+├── dhcpc/                  [DHCP client utilities]
+├── dhcpd/                  [DHCP server configs]
+├── dpkg/                   [Debian package manager]
+├── firewall/               [Firewall rules - empty]
+├── fw_security/            [Firewall security features]
+├── hostapd/                [Wi-Fi access point daemon]
+├── httpd/                  [Apache HTTP Server]
+│   ├── conf/               [Main Apache configs]
+│   ├── sites-enabled/      [Enabled virtual hosts]
+│   └── sites-enabled-user/ [User virtual hosts]
+├── init/                   [Upstart service configs - 268 files]
+├── iproute2/               [Network configuration utilities]
+├── ipsec.d/                [IPsec VPN configs - empty]
+├── logrotate.d/            [Log rotation rules]
+├── netatalk/               [Apple Filing Protocol - empty]
+├── nfs/                    [Network File System]
+├── pam.d/                  [PAM authentication modules]
+├── php/                    [PHP configuration]
+├── portforward/            [Port forwarding - empty]
+├── postgresql/             [PostgreSQL database]
+├── ppp/                    [PPP/PPPoE configuration]
+├── rc.d/                   [System V init scripts]
+├── security/               [Security configurations]
+├── ssh/                    [SSH daemon configuration]
+├── ssl/                    [SSL/TLS certificates and configs]
+│   ├── certs/              [CA certificates bundle]
+│   └── private/            [Private keys - empty]
+├── ssmtp/                  [Simple SMTP agent]
+├── sudoers.d/              [sudo rules - empty]
+├── synosyslog/             [Synology syslog configs]
+├── sysconfig/              [System configuration]
+│   ├── network-scripts/    [Network interface configs]
+│   └── networking/         [Additional network configs]
+├── sysctlconf/             [Kernel parameters]
+├── syslog-ng/              [Advanced logging daemon]
+│   └── patterndb.d/        [Log parsing patterns]
+└── tc/                     [Traffic control/QoS]
+```
+
+## Key Components
+
+### System Configuration Files
+- **Purpose**: Core system configuration templates
+- **Key Files**:
+  - `synoinfo.conf` - Central Synology configuration (289 lines)
+  - `VERSION` - System version information
+  - `hostname` - Default device hostname
+  - `fstab` - File system mount table
+  - `hosts` - Static hostname mappings
+  - `passwd/shadow/group` - User account templates
+- **Configuration**: Defines system identity, hardware parameters, feature flags
+- **Security**: Contains default admin accounts and system users
+
+### Network Configuration
+- **Purpose**: Default network settings and services
+- **Components**:
+  - DHCP client/server configurations
+  - PPPoE connection templates
+  - Network interface definitions (eth0-4, wlan0-1, lbr0, gbr0)
+  - DNS resolver settings
+  - Traffic control rules
+- **Dependencies**: Used by network initialization scripts
+- **Configuration**: Bridge interfaces for LAN/Guest networks pre-configured
+
+### Service Initialization (/init)
+- **Purpose**: Upstart service definitions (268 .conf files)
+- **Categories**:
+  - Core system services (crond, syslog-ng, dbus)
+  - Network services (dhcp, dns, firewall, wifi)
+  - Synology services (syno*, dsm*)
+  - Storage services (samba, nfs, afp)
+  - Web services (httpd, php-fpm, webdav)
+- **Integration**: Defines service dependencies and startup order
+- **Security**: Controls service privileges and capabilities
+
+### Security Framework
+- **AppArmor Profiles**:
+  - Mandatory access control for applications
+  - Abstractions for common access patterns
+  - Cached profiles for Synology services
+  - Disabled by default (SUBDOMAIN_ENABLE_OWLSM="no")
+  
+- **PAM Configuration**:
+  - Authentication stacks for system services
+  - Includes webui, sshd, ftpd, samba, sudo
+  - Winbind integration for AD domains
+  
+- **SSL/TLS**:
+  - CA certificates bundle (138 root CAs)
+  - OpenSSL configuration templates
+  - Certificate Transparency log configuration
+
+### Web Services (/httpd)
+- **Purpose**: Apache HTTP Server default configuration
+- **Structure**:
+  - System-level config (httpd.conf-sys)
+  - User-level config (httpd.conf-user)
+  - WebDAV config (httpd.conf-webdav)
+  - SSL/TLS configurations
+  - Virtual host templates
+- **Security**: Default SSL redirection rules
+- **Integration**: PHP-FPM for dynamic content
+
+## Configuration Files
+
+### Critical System Files
+- **synoinfo.conf**: Master configuration with hardware specs, feature flags, limits
+- **sysctl.conf**: Kernel parameters for performance and security
+- **logrotate.conf**: System-wide log rotation (4 rotations, 1MB size, XZ compression)
+- **nsswitch.conf**: Name service resolution order
+- **resolv.conf**: DNS resolver configuration
+
+### Service-Specific Configs
+- **sshd_config**: SSH daemon settings
+- **syno_sshd_config**: Synology SSH customizations
+- **cupsd.conf**: CUPS printing service
+- **postgresql.conf**: Database server settings
+- **php.ini**: PHP interpreter configuration
+
+## Scripts and Executables
+
+### System Scripts
+- **rc.*** scripts: System initialization and service management
+  - `rc.network` - Network initialization
+  - `rc.wifi` - Wireless configuration
+  - `rc.volume` - Storage volume management
+  - `rc.fan` - Thermal management
+  
+### Installation Scripts
+- **synogrinst.sh**: Generic installation framework
+- **installer.sh**: Package installation handler
+- **upgrade.sh**: System upgrade procedures
+- **newdisk.sh**: New disk initialization
+
+### Utility Scripts
+- **pppoe-generate-config.py**: Dynamic PPPoE configuration
+- **dhclient-script**: DHCP client hooks
+
+## Integration Points
+
+### Configuration Hierarchy
+1. System reads defaults from `/etc.defaults`
+2. Applies overrides from `/etc`
+3. Runtime modifications stored in `/etc`
+4. Factory reset restores from `/etc.defaults`
+
+### Service Dependencies
+- Upstart manages service lifecycle
+- PAM handles authentication
+- AppArmor provides MAC
+- syslog-ng centralizes logging
+
+### Package Management
+- dpkg tracks installed packages
+- Package-specific configs in subdirectories
+- Synology packages use .override files
+
+## Security Considerations
+
+### Default Security Posture
+1. **Restrictive Permissions**: All files 700 (owner-only)
+2. **Disabled Services**: Many security features off by default
+3. **Template Keys**: No actual private keys in defaults
+4. **Basic Authentication**: PAM stacks pre-configured
+
+### Vulnerabilities
+1. **Known Defaults**: Predictable initial configurations
+2. **Weak Protocols**: Some legacy protocols enabled
+3. **Information Disclosure**: Hardware details in synoinfo.conf
+
+### Hardening Opportunities
+1. Enable AppArmor profiles
+2. Restrict service configurations
+3. Update SSL/TLS settings
+4. Implement stricter PAM policies
+
+## Network Services
+- **DHCP**: Client and server configurations
+- **DNS**: Resolver and DDNS settings
+- **Firewall**: iptables/ebtables templates
+- **VPN**: IPsec/PPP configurations ready
+- **Wi-Fi**: hostapd for access point mode
+
+## Maintenance Notes
+
+### Configuration Management
+- Always backup `/etc` before applying defaults
+- Use diff to compare active vs default configs
+- Version control custom modifications
+- Document deviations from defaults
+
+### Update Considerations
+- System updates may modify defaults
+- Preserve custom configurations separately
+- Review new defaults after updates
+- Test restoration procedures
+
+### Best Practices
+1. **Minimal Modifications**: Change only necessary settings
+2. **Documentation**: Record all customizations
+3. **Regular Audits**: Compare with defaults periodically
+4. **Backup Strategy**: Include both `/etc` and `/etc.defaults`
+
+## Relationship with /etc
+
+### Usage Patterns
+1. **Initial Setup**: Copies from defaults to active
+2. **Factory Reset**: Restores from defaults
+3. **Fallback**: Uses defaults if active config missing
+4. **Templates**: Reference for new configurations
+
+### Key Differences Found
+- `/etc` has 145 unique files (runtime-generated)
+- `/etc.defaults` has 3 unique files (updater configs)
+- 583 files exist in both directories
+- `/etc` contains .override files for customization
+- Runtime state (PIDs, caches) only in `/etc`
+
+### Configuration Flow
+```
+/etc.defaults → [Copy/Reference] → /etc → [Runtime Modifications] → Active Config
+                        ↑                            ↓
+                   [Factory Reset]           [User Customization]
+```
