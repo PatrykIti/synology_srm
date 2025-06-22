@@ -72,7 +72,10 @@
       "TodoWrite",
       "WebSearch",
       "WebFetch",
-      "Bash(*)"
+      "Bash(*)",
+      "Bash(comm:*)",
+      "mcp__zen__thinkdeep",
+      "Bash(diff:*)"
     ]
   },
   "enabledMcpjsonServers": [
