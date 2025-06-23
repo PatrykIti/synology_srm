@@ -90,7 +90,7 @@ Complete technical documentation for all major system directories:
 - ✅ **Template Compliance**: 100% (all files follow template)
 - ✅ **Cross-References**: All links fixed and validated
 - ✅ **Technical Accuracy**: Based on actual system analysis
-- ⚠️ **Completeness**: ~85% (missing /proc, /boot, /opt)
+- ⚠️ **Completeness**: ~87% (missing /proc, /boot, /opt - not in backup)
 - ✅ **Consistency**: Excellent structure and style
 
 ### Automated Validation
@@ -99,8 +99,9 @@ Complete technical documentation for all major system directories:
 python _documentation/tools/validate_docs.py
 
 # Fix common issues
-python _documentation/tools/fix_whitespace.py
-python _documentation/tools/fix_broken_links.py
+cd _documentation/tools/
+python fix_whitespace.py
+python fix_broken_links.py
 ```
 
 ## Navigation
