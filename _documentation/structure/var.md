@@ -1,7 +1,7 @@
 # /var Directory - Variable Data Storage
 
 ## Overview
-The `/var` directory serves as the primary location for variable data in Synology SRM. It contains system logs, runtime information, package data, and temporary files that change during normal system operation. This directory follows the Filesystem Hierarchy Standard (FHS) with some Synology-specific adaptations.
+The `/var` directory serves as the primary location for variable data in Synology SRM. It contains system logs, runtime information, package data, and temporary files that change during normal system operation. This directory follows the Filesystem Hierarchy Standard (FHS) with some Synology-specific adaptations. The directory contains approximately 397 files across all subdirectories, with the majority in logging (115 files) and package management (172 files).
 
 ## Directory Structure
 ```
@@ -50,6 +50,12 @@ The `/var` directory serves as the primary location for variable data in Synolog
   - `safeaccess.log` - Content filtering and threat blocking
   - `wifi.log` - Wireless subsystem and DFS events
   - `dhcp-client.log` - DHCP negotiations and IP assignments
+- **Specialized Directories**:
+  - `mesh/` - Mesh networking logs (CAP/RE topology, HYD system)
+  - `synolog/` - Synology-specific component logs
+  - `httpd/` - Web server access and error logs
+  - `samba/` - SMB/CIFS service logs
+  - `upstart/` - Service initialization logs (66 files)
 - **Management**: 
   - syslog-ng v3.5.5 for centralized collection
   - logrotate with XZ compression (90% ratio)
