@@ -88,7 +88,9 @@
       "Bash(sqlite3:*)",
       "Bash(for:*)",
       "Bash(do echo \"=== $file ===\")",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(do if ! grep -q \"## Cross-References\" \"$file\")",
+      "Bash(then echo \"Missing Cross-References: $file\")"
     ]
   },
   "enabledMcpjsonServers": [

@@ -259,6 +259,15 @@ The `/var` directory serves as the primary location for variable data in Synolog
 - SQLite heap limited to 42MB for NGFW
 - Consider external storage for long-term logs
 
+## Cross-References
+- Default templates: [/var.defaults/](var.defaults.md)
+- System configuration: [/etc/](etc.md)
+- Service definitions: [/etc/init/](etc.md#upstart-services)
+- Synology packages: [/volume1/@appstore/](volume1.md#application-packages)
+- Security tools: [/usr/syno/bin/](usr.syno.md#security-tools)
+- Log rotation: [/etc/logrotate.d/](etc.md#log-rotation)
+- Package binaries: [/usr/bin/](usr.bin.md)
+
 ## Version Information
 - **Document Version**: 2.1
 - **Last Updated**: 2025-06-23
