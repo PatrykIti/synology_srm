@@ -84,7 +84,8 @@
       "Bash(elif [ -d \"$file\" ])",
       "Bash(then echo \"DIR: $file\")",
       "Bash(fi)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(sqlite3:*)"
     ]
   },
   "enabledMcpjsonServers": [
