@@ -147,6 +147,30 @@ Important information for system maintenance
 4. Review with consensus tool
 5. Update documentation files
 
+### 2.1 Directory Analysis Workflow (Updated 2025-06-23)
+For directory analysis tasks, follow this specific workflow:
+
+1. **Initial Analysis with Zen Gemini**
+   - Use `mcp__zen__analyze` with Gemini model for directory analysis
+   - Let Gemini perform the complete directory exploration
+   - Do NOT analyze directories manually
+
+2. **Review and Verification**
+   - Receive the analysis from Gemini
+   - Review the findings for completeness and accuracy
+   - Verify key findings if needed
+
+3. **Documentation Generation**
+   - Use Gemini again to create the full documentation content
+   - If Gemini can write files directly, let it do so
+   - Otherwise, take the generated content and save it yourself
+
+4. **Benefits of this approach**:
+   - Leverages Gemini's comprehensive analysis capabilities
+   - Ensures consistent depth of analysis
+   - Reduces manual work and potential oversights
+   - Maintains high quality documentation standards
+
 ### 3. Quality Assurance
 - Review each documentation file
 - Ensure consistency across files
@@ -218,4 +242,4 @@ Tasks suitable for parallel delegation using the Task tool:
 - Consistency is paramount
 
 ---
-Last Updated: 2025-06-20
+Last Updated: 2025-06-23
