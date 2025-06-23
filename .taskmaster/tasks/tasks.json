@@ -529,7 +529,7 @@
           1,
           2
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -537,7 +537,7 @@
             "description": "Document the conventional role of /mnt as a temporary mount point in Unix-like systems.",
             "dependencies": [],
             "details": "Research and document the standard, conventional use of the /mnt directory in Linux/Unix-like systems. Focus on its historical and common role as a temporary mount point for filesystems by system administrators.",
-            "status": "pending"
+            "status": "done"
           },
           {
             "id": 2,
@@ -547,7 +547,7 @@
               1
             ],
             "details": "Investigate and document how Synology Router Manager (SRM) specifically uses the /mnt directory. This includes identifying any standard subdirectories created or used by SRM under /mnt, and detailing the processes for how external storage devices (like USB drives) are automatically or manually mounted and accessed via /mnt within the SRM environment.",
-            "status": "pending"
+            "status": "done"
           }
         ]
       },
@@ -562,7 +562,7 @@
           1,
           2
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": []
       },
       {
@@ -961,7 +961,7 @@
     ],
     "metadata": {
       "created": "2025-06-20T19:30:39.187Z",
-      "updated": "2025-06-23T08:04:27.471Z",
+      "updated": "2025-06-23T08:34:57.449Z",
       "description": "Tasks for master context"
     }
   }
