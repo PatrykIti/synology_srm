@@ -1,5 +1,9 @@
 # /root Directory
 
+[← Back to Documentation Index](../README.md) | [← Previous: /mnt](mnt.md) | [→ Next: /run](run.md)
+
+---
+
 ## Overview
 The `/root` directory in Synology SRM is the home directory for the `root` user. It is not intended for interactive use but serves as a configuration and state storage location for system-level processes, primarily related to shell environment setup and the secure update mechanism. Its minimal contents reflect the appliance-based design of SRM, prioritizing security and stability over user customization at the root level.
 
@@ -107,6 +111,26 @@ $ gpg --no-default-keyring --keyring /root/.gnupg/pubring.kbx --list-keys
 **Intentionally Blank.**
 
 The `/root` directory itself does not configure or expose any network services. Its contents are used to support client-side operations (like `wget`) initiated by other system processes.
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Minimal (~1MB)
+- **Memory**: No runtime memory usage
+- **CPU**: No CPU usage
+- **I/O**: Minimal - only during updates
+
+### Performance Impact
+- **System Updates**: GPG verification overhead
+- **HTTPS Connections**: HSTS cache improves speed
+- **Shell Startup**: .profile parsing negligible
+- **Security Operations**: GPG operations when needed
+
+### Optimization Notes
+- GPG keyring kept minimal
+- HSTS cache reduces SSL handshakes
+- Profile kept simple for fast login
+- No user customization overhead
 
 ## Maintenance Notes
 

@@ -1,5 +1,9 @@
 # /var.defaults Directory - Variable Data Templates
 
+[← Back to Documentation Index](../README.md) | [← Previous: /var](var.md) | [→ Next: /volume1](volume1.md)
+
+---
+
 ## Overview
 The `/var.defaults` directory serves as a factory reset template for the `/var` directory structure in Synology SRM. It contains pristine default versions of directories and files that initialize the system's variable data storage. This separation between immutable defaults and mutable runtime data enhances system reliability and enables clean factory resets.
 
@@ -151,6 +155,26 @@ The `/var.defaults` directory serves as a factory reset template for the `/var` 
 - No active network services in defaults
 - Templates ready for service activation
 - Security rules check network configurations
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: ~50MB for default logs/data
+- **Memory**: No runtime memory usage
+- **CPU**: No CPU usage
+- **I/O**: Read-only reference data
+
+### Performance Impact
+- **Factory Reset**: Fast restoration source
+- **Template Access**: Quick configuration reset
+- **Update Operations**: Efficient defaults update
+- **Recovery Time**: Reduces downtime
+
+### Optimization Notes
+- Read-only prevents fragmentation
+- Organized structure for fast access
+- Minimal size reduces update time
+- No runtime overhead
 
 ## Maintenance Notes
 

@@ -1,5 +1,9 @@
 # `/srm_backup/lost+found/`
 
+[← Back to Documentation Index](../README.md) | [← Previous: /libexec](libexec.md) | [→ Next: /mnt](mnt.md)
+
+---
+
 **Purpose:**
 
 The `lost+found` directory is a standard component of Unix-like file systems, including those used by Synology SRM devices. Its primary purpose is to store recovered data fragments after a file system check (e.g., using the `fsck` utility).

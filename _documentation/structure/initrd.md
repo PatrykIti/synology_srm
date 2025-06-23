@@ -1,5 +1,9 @@
 # /initrd Directory - Initial RAM Disk Mount Point
 
+[← Back to Documentation Index](../README.md) | [← Previous: /ini](ini.md) | [→ Next: /lib](lib.md)
+
+---
+
 ## Overview
 The `/initrd` directory serves as a mount point for the initial RAM disk (initramfs) during the early boot process of Synology SRM. While this directory appears empty in the backup, it plays a critical role during system initialization. The initramfs provides a temporary root filesystem that enables the kernel to load necessary drivers and mount the actual root filesystem.
 
@@ -126,6 +130,26 @@ umount /initrd && freeramdisk /dev/ram0
 
 ## Network Services
 Not applicable - /initrd is unmounted before network services start
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Zero (empty mount point)
+- **Memory**: ~5.5MB during boot (freed after)
+- **CPU**: Minimal during early boot phase
+- **I/O**: RAM-based operations only
+
+### Performance Impact
+- **Boot Time**: Critical path - affects total boot duration
+- **Module Loading**: Early driver initialization overhead
+- **Memory Footprint**: Temporary 5.5MB allocation
+- **Hardware Detection**: USB enumeration time
+
+### Optimization Notes
+- Initramfs size directly impacts boot speed
+- Smaller initramfs = faster decompression
+- Module selection affects boot time
+- Early boot cannot be optimized by users
 
 ## Maintenance Notes
 

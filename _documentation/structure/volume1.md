@@ -1,5 +1,9 @@
 # /volume1 Directory - Primary Data Storage Volume
 
+[← Back to Documentation Index](../README.md) | [← Previous: /var defaults](var.defaults.md)
+
+---
+
 ## Overview
 The `/volume1` directory is the primary data storage volume on Synology SRM devices. It serves as the root for user-installed applications, system-wide databases, and temporary files. Its modular structure, centered around the `@appstore` and `@db` directories, allows for package-based functionality, but its operational characteristics present significant scalability and maintenance considerations.
 
@@ -165,6 +169,26 @@ Multiple HTTP services on high ports serve different block pages:
 - WebAPI endpoints for configuration management
 - Real-time traffic monitoring APIs
 - Device management interfaces
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Primary storage consumption
+- **Memory**: Application and database caches
+- **CPU**: Package-specific processing
+- **I/O**: Highest I/O activity location
+
+### Performance Impact
+- **Database Growth**: Unbounded growth affects speed
+- **SQLite Performance**: Degrades with size
+- **Search Indexes**: Xapian can be resource-intensive
+- **Concurrent Access**: Lock contention issues
+
+### Optimization Notes
+- Regular database maintenance critical
+- Monitor Traffic/SafeAccess DB growth
+- Consider database size limits
+- Implement data retention policies
 
 ## Maintenance Notes
 

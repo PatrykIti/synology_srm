@@ -1,5 +1,9 @@
 # /lib64 Directory - 64-bit Library Symbolic Link
 
+[← Back to Documentation Index](../README.md) | [← Previous: /lib](lib.md) | [→ Next: /libexec](libexec.md)
+
+---
+
 ## Overview
 The `/lib64` directory in Synology SRM is a symbolic link pointing to the `/lib` directory. This is a standard multiarch compatibility approach used in modern Linux systems to ensure that both 32-bit and 64-bit applications can find their required libraries without hardcoded paths. In the RT6600ax system (ARM aarch64 architecture), all libraries are 64-bit, making this symlink primarily for compatibility with software expecting the traditional `/lib64` path.
 
@@ -82,6 +86,26 @@ All subdirectories accessed through `/lib64/` are actually in `/lib/`:
 - `samba/` - SMB/CIFS components
 - `python2.7/` - Python standard library
 - And 40+ other service-specific directories
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: ~100MB for 64-bit libraries
+- **Memory**: Libraries loaded on-demand
+- **CPU**: No direct CPU usage
+- **I/O**: Initial library loading only
+
+### Performance Impact
+- **Application Startup**: 64-bit library loading time
+- **Memory Usage**: Shared libraries reduce total memory
+- **Cache Efficiency**: Better performance with 64-bit code
+- **Binary Compatibility**: Native 64-bit execution
+
+### Optimization Notes
+- Prelinked libraries improve load times
+- Shared libraries reduce memory footprint
+- Library cache maintained by ldconfig
+- Symbol resolution overhead minimal
 
 ## Maintenance Notes
 
