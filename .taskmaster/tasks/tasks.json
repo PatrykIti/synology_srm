@@ -388,7 +388,7 @@
           1,
           2
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -396,7 +396,7 @@
             "description": "Document the purpose of the /run directory, its volatile nature (being a tmpfs), and the typical lifecycle of its contents.",
             "dependencies": [],
             "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
-            "status": "pending"
+            "status": "done"
           },
           {
             "id": 2,
@@ -406,7 +406,7 @@
               1
             ],
             "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
-            "status": "pending"
+            "status": "done"
           },
           {
             "id": 3,
@@ -417,7 +417,7 @@
               2
             ],
             "details": "While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.",
-            "status": "pending"
+            "status": "done"
           }
         ]
       },
@@ -961,7 +961,7 @@
     ],
     "metadata": {
       "created": "2025-06-20T19:30:39.187Z",
-      "updated": "2025-06-23T05:46:57.557Z",
+      "updated": "2025-06-23T06:21:04.020Z",
       "description": "Tasks for master context"
     }
   }
