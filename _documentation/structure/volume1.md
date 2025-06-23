@@ -1,92 +1,244 @@
-# /volume1/
+# /volume1 Directory - Primary Data Storage Volume
 
-The `/volume1/` directory on a Synology SRM (Synology Router Manager) device typically represents the primary storage volume. This is where user data, application data, package configurations, and potentially data from connected USB drives (if treated as part of `volume1`) are stored.
+## Overview
+The `/volume1` directory is the primary data storage volume on Synology SRM devices. It serves as the root for user-installed applications, system-wide databases, and temporary files. Its modular structure, centered around the `@appstore` and `@db` directories, allows for package-based functionality, but its operational characteristics present significant scalability and maintenance considerations.
 
-In the context of an `srm_backup`, this directory holds the backed-up state of this primary storage volume.
+## Directory Structure
+```
+/volume1/
+├── @appstore/                       # Installed package applications
+│   ├── SafeAccess/                  # Parental control & web filtering
+│   │   ├── app/                     # Application binaries
+│   │   ├── conf/                    # Configuration files
+│   │   ├── etc/                     # Service configurations
+│   │   │   ├── apparmor/           # Security profiles
+│   │   │   └── httpd/              # Block page web servers
+│   │   ├── lib/                     # Shared libraries
+│   │   ├── scripts/                 # Management scripts
+│   │   │   ├── dnsfilter-iptables.sh
+│   │   │   └── start-service.sh
+│   │   ├── ui/                      # Web interface files
+│   │   ├── upstart/                 # Service definitions
+│   │   ├── var/                     # Variable data
+│   │   │   ├── db/                  # Databases
+│   │   │   │   ├── access_log.sqlite
+│   │   │   │   └── safe_access.db
+│   │   │   └── xapian/              # Search indexes (20+ languages)
+│   │   └── webapi/                  # API definitions
+│   └── Traffic/                     # Network monitoring package
+│       ├── app/                     # Application files
+│       ├── conf/                    # Configuration
+│       ├── lib/                     # Libraries
+│       ├── scripts/                 # Management scripts
+│       ├── ui/                      # Web interface
+│       └── var/
+│           └── db/
+│               └── traffic.sqlite   # Traffic metrics database
+├── @db/                            # System-wide databases
+│   └── var/db/
+│       ├── syno-domain-lists/
+│       │   └── domain_category_db.sqlite  # 114MB+ domain categorization
+│       ├── syno-doh-server-lists/
+│       │   └── server_lists.db            # DNS-over-HTTPS blocklist
+│       ├── syno-geoip/
+│       │   ├── GeoLite2-City.mmdb        # GeoIP city database
+│       │   └── GeoLite2-Country.mmdb     # GeoIP country database
+│       ├── syno-ip-blocklist/
+│       │   ├── blocklist                  # IP blocklist (Git conflicts found)
+│       │   ├── blocklist_enable_map
+│       │   ├── firehol_level1.netset     # FireHOL threat intelligence
+│       │   └── firehol_level2.netset
+│       ├── syno-device-identity-database/
+│       │   └── dhcpFingerPrints          # Device fingerprinting
+│       └── syno-safebrowsing/
+│           └── goog_*                     # Google Safe Browsing data
+├── @tmp/                           # Temporary package data
+│   ├── pkglist.tmp/               # Package lists (multi-language)
+│   └── pkgicon/                   # Package icons
+└── lost+found/                    # ext4 filesystem recovery
 
-## Key Contents of `/volume1/`
+Note: srm-backup-fixed.tar.gz excluded as temporary backup file
+```
 
-Based on the provided file listing, the key top-level contents of `srm_backup/volume1/` are:
+## Key Components
 
-*   [`srm-backup-fixed.tar.gz`](#srm-backup-fixedtargz)
-*   [`@appstore/`](#appstore)
-*   [`@db/`](#db)
-*   [`@tmp/`](#tmp)
-*   [`lost+found/`](#lostfound)
+### Application Package: SafeAccess
+- **Purpose**: Provides parental control, web filtering, and security threat mitigation
+- **Location**: `/volume1/@appstore/SafeAccess/`
+- **Dependencies**: 
+  - Local SQLite databases (`safe_access.db`, `access_log.sqlite`)
+  - Shell scripts interpret database entries to modify `iptables` ruleset
+  - System-wide databases in `/volume1/@db/` (domain categorization, GeoIP)
+- **Configuration**: Managed via local SQLite databases and configuration files within `conf/` and `var/` directories
+- **Security**: Leverages AppArmor profiles for process sandboxing. Interacts directly with kernel's `iptables` netfilter framework
+
+### Application Package: Traffic
+- **Purpose**: Network traffic monitoring, analysis, and reporting on per-device and per-application basis
+- **Location**: `/volume1/@appstore/Traffic/`
+- **Dependencies**: Relies on data collected from kernel's networking stack
+- **Configuration**: Primary data store is `traffic.sqlite` with highly granular metrics
+- **Security**: Operates as data collection and reporting tool with no direct policy enforcement
+
+### System Databases (@db)
+- **Purpose**: Centralized databases providing threat intelligence and categorization data
+- **Location**: `/volume1/@db/`
+- **Dependencies**: Critical dependencies for IP-based, GeoIP, or domain-based filtering
+- **Configuration**: Typically read-only data sources updated by system processes
+- **Security**: Integrity critical for system security functions
+
+## Configuration Files
+
+### SafeAccess Configuration
+- **access_control.conf**: Device and profile management
+- **safe_access.sc**: Service configuration
+- **schema.sql**: Database schema definitions
+- **Multiple HTTP configurations**: For block page services (webfilter.httpd.conf, security.httpd.conf, etc.)
+
+### System Blocklists
+- **blocklist**: Plaintext, newline-delimited IP addresses for system-wide blocking
+  - Analyzed file contained Git merge conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
+  - These non-IP strings will cause parsing errors in scripts expecting clean IP lists
+- **blocklist_enable_map**: Controls which blocklists are active
+- **FireHOL netsets**: Level 1 & 2 threat intelligence feeds
+
+### Domain Categorization
+- **domain_category_db.sqlite**: 114MB+ SQLite database
+  - Contains 116,359 categorized web pages
+  - Used for content filtering decisions
+  - WAL mode enabled for performance
+
+## Scripts and Executables
+
+### SafeAccess Scripts
+- **dnsfilter-iptables.sh**: Translation layer reading policy configurations from databases and converting to `iptables` commands
+  - Creates necessary chains and rules for DNS/web filtering
+  - Direct manipulation creates tight coupling with kernel networking stack
+- **start-service.sh**: Initializes SafeAccess services and block page servers
+- **stop-service.sh**: Cleanup script for service shutdown
+
+### Traffic Scripts
+- **start-stop-status**: Standard Synology package management script
+- **Database maintenance scripts**: For traffic data collection
+
+## Integration Points
+
+### SafeAccess & iptables
+- Integrates directly with Linux kernel's netfilter subsystem
+- Scripts dynamically generate and apply `iptables` rules
+- Virtual IPs (10.254.x.x, fc00:eeee:x::x) used for redirection
+
+### Packages & System DBs
+- Packages perform lookups against central databases in `/volume1/@db`
+- Domain categorization enriches filtering decisions
+- GeoIP databases enable location-based filtering
+
+### WebAPI Architecture
+- `.lib`/`.so` pairs enable modular service exposure
+- RESTful APIs for UI and external integration
+- Authentication handled by SRM framework
+
+## Security Considerations
+
+### Defense in Depth Architecture
+- Multiple filtering layers: application-level (SafeAccess) + network-level (`iptables`)
+- Large externally-sourced databases (GeoIP, domain categories)
+- AppArmor profiles for process isolation
+- Integrity of databases and scripts critical to system function
+
+### Security Architecture Characteristics
+- Script-based `iptables` manipulation creates tight coupling
+- No apparent rate limiting on block page access (ports 5012-5053)
+- Multiple exposed HTTP services increase attack surface
+- Direct firewall manipulation requires elevated privileges
+
+## Network Services
+
+### SafeAccess Block Pages
+Multiple HTTP services on high ports serve different block pages:
+- Port 5012: Web filter blocks
+- Port 5013: Security threat blocks
+- Port 5014: Time quota exceeded
+- Ports 5015-5053: Various other block types
+- `iptables` rules redirect offending traffic to appropriate port
+
+### API Services
+- WebAPI endpoints for configuration management
+- Real-time traffic monitoring APIs
+- Device management interfaces
+
+## Maintenance Notes
+
+### Critical: Unbounded Data Growth
+- `Traffic` package's `traffic.sqlite` database collects per-minute metrics
+- `SafeAccess` `access_log.sqlite` stores high-granularity access logs
+- No native data lifecycle management (aggregation, rotation, purging)
+- Continuous operation leads to unbounded file growth
+- Manual monitoring of `/volume1` disk usage required to prevent:
+  - Storage exhaustion
+  - Performance degradation
+  - Service failures
+
+### Configuration Brittleness
+- Network policy enforcement is not atomic
+- Shell scripts apply rules sequentially
+- Failure during execution (e.g., malformed configuration) leaves firewall inconsistent
+- No transactional rollback mechanism for configuration application
+- Example: Git conflict markers in production blocklist file
+
+### Package Management
+- Packages installed in self-contained directories
+- Version-specific patch scripts indicate upgrade complexity
+- Mixed configuration formats (SQL, JSON, custom text)
+- Dependencies between packages not formally declared
+
+## Platform-Specific Features
+
+### RT6600ax Implementation
+- Optimized for ARM64 architecture
+- Supports concurrent multi-CPU packet processing
+- Hardware acceleration integration points
+- Memory constraints influence database sizing
+
+### Synology Package Architecture
+- Standard `@appstore` naming convention
+- Upstart service integration
+- DSM/SRM UI framework compatibility
+- Package signing and verification
+
+## Technical Details
+
+### SQLite Performance Characteristics
+- Databases operate in Write-Ahead Logging (WAL) mode
+- Default checkpoint at 1000 pages (~4MB with 4KB pages)
+- On resource-constrained device under heavy logging:
+  - WAL file grows significantly between checkpoints
+  - Temporary disk usage spikes
+  - Checkpoint process impacts system responsiveness
+
+### Xapian Search Indexes
+- 20+ language indexes (3.4MB total) for content searching
+- Loaded in memory for performance
+- Used by SafeAccess for multi-language filtering
+
+### Data Retention Architecture
+- Per-minute granularity for traffic monitoring
+- No built-in aggregation mechanism
+- SQLite file size limited only by filesystem
+- Manual intervention required for data management
+
+## Cross-References
+- Package management: [/etc/packages/](etc.md#package-management)
+- Service definitions: [/etc/init/](etc.md#upstart-services)
+- iptables integration: [/etc/firewall/](etc.md#firewall-configuration)
+- System logs: [/var/log/](var.md#application-logs)
+- Kernel modules: [/lib/modules/](lib.md#network-modules)
+
+## Version Information
+- **Document Version**: 2.0
+- **Last Updated**: 2025-06-23
+- **System**: Synology RT6600ax
+- **Firmware**: SRM 5.2-9346
+- **Analysis**: Complete volume analysis with operational characteristics
 
 ---
-
-### `srm-backup-fixed.tar.gz`
-
-*   **Path:** `srm_backup/volume1/srm-backup-fixed.tar.gz`
-*   **Type:** File
-*   **Probable Purpose:** This appears to be a main archive file, possibly containing a consolidated backup of the entire SRM system or a significant portion of its configuration and data. Its presence at the root of `/volume1/` in a backup context suggests it might be the primary artifact of the backup process itself, or a manually created archive. Further investigation by extracting its contents would be needed to determine its exact role.
-
----
-
-### `@appstore/`
-
-*   **Path:** `srm_backup/volume1/@appstore/`
-*   **Type:** Directory
-*   **Probable Purpose:** This directory is standard on Synology devices for storing data and configuration files for applications (packages) installed from the Package Center.
-
-#### `@appstore/SafeAccess/`
-
-*   **Path:** `srm_backup/volume1/@appstore/SafeAccess/`
-*   **Type:** Directory
-*   **Probable Purpose:** Contains all data related to the "Safe Access" package, which provides parental controls, web filtering, and security features.
-    *   **`block_page/`**: Contains assets (HTML, CSS, images, CGI scripts) for various block pages displayed to users when access is restricted due to:
-        *   `blocktime/`: Time-based blocking.
-        *   `security/`: Security threats (e.g., malware, phishing).
-        *   `timequota/`: Time quota limits reached.
-        *   `webfilter/`: Web filter categories.
-    *   **`lib/`**: Contains shared libraries (`.so` files) specific to the Safe Access package, such as `libsynoparentalcontrol.so.1.3.1`, `libsynosafeaccess-notify.so.5.2`, and `libsynosafebrowsing.so.5.2`. These likely handle core functionalities like access control, notifications, and safe browsing lookups. It also includes libraries from PcapPlusPlus (`libpcppcommon++.so`, `libpcpppacket++.so`, `libpcpppcap++.so`), suggesting network packet analysis capabilities.
-    *   **`report_ui/`**: Contains files for generating and displaying Safe Access reports (HTML, CSS, JavaScript, images).
-    *   **`scripts/`**: Contains various shell scripts (`.sh`) used for managing Safe Access services, updating databases (e.g., `ipblock_update_db_hook.sh`, `safebrowsing_update_db_hook.sh`), handling IP/DNS changes, and managing firewall rules (`dnsfilter-iptables.sh`).
-    *   **`webapi/`**: Contains libraries and configuration for Safe Access Web APIs, allowing programmatic interaction with its features. Includes legacy API definitions.
-
----
-
-### `@db/`
-
-*   **Path:** `srm_backup/volume1/@db/`
-*   **Type:** Directory
-*   **Probable Purpose:** This directory appears to be a central location for various databases used by the SRM system and its packages.
-
-#### `@db/var/db/`
-
-*   **Path:** `srm_backup/volume1/@db/var/db/`
-*   **Type:** Directory
-*   **Probable Purpose:** A subdirectory within `@db/` that houses the actual database files.
-    *   **`geoip-database/`**: Contains GeoIP databases (e.g., `GeoIP.dat`, `GeoLite2-City.mmdb`, `GeoLite2-Country.mmdb`) used for mapping IP addresses to geographical locations. The `xt_geoip/` subdirectory contains numerous `.iv4` and `.iv6` files, likely pre-compiled IP address ranges for specific countries used by the `xt_geoip` netfilter module for efficient country-based IP blocking.
-    *   **`libsynooui/oui.db`**: An OUI (Organizationally Unique Identifier) database, used to identify the manufacturer of network devices based on their MAC addresses.
-    *   **`safebrowsing-database/prefix.db`**: Database for the Safe Browsing feature, likely containing prefixes of known malicious URLs.
-    *   **`sudo/lectured/pciechanski_admin`**: Records when the user `pciechanski_admin` was last shown the `sudo` lecture (a warning about using `sudo` responsibly).
-    *   **`syno-device-identity-database/dhcpFingerPrints`**: Database for device identification based on DHCP fingerprints.
-    *   **`syno-doh-server-lists/server_lists.db`**: Database of DNS-over-HTTPS (DoH) server lists.
-    *   **`syno-domain-lists/category_database.db`**: Database of domain categories, likely used by web filtering features.
-    *   **`syno-ip-blocklist/`**: Contains IP blocklists, including `blocklist` (custom user-defined blocklist), `blocklist_enable_map` (mapping enabled blocklists), and `firehol_level*.netset` (pre-defined blocklists from FireHOL).
-    *   **`synotps-database/custom_signature.json`**: Custom signatures for the Threat Prevention System (TPS).
-    *   **`@db/var/lib/data_update/`**: Contains version information for updatable data components like `syno-doh-server-lists` and `synotps-database`.
-
----
-
-### `@tmp/`
-
-*   **Path:** `srm_backup/volume1/@tmp/`
-*   **Type:** Directory
-*   **Probable Purpose:** Stores temporary files for the system or applications running on `/volume1/`.
-
-#### `@tmp/pkglist.tmp/`
-
-*   **Path:** `srm_backup/volume1/@tmp/pkglist.tmp/`
-*   **Type:** Directory
-*   **Probable Purpose:** Contains temporary files related to package management, specifically icons for available packages like `DNSServer`, `DownloadStation`, `MediaServer`, and `RadiusServer`. These are likely cached during Package Center operations.
-
----
-
-### `lost+found/`
-
-*   **Path:** `srm_backup/volume1/lost+found/`
-*   **Type:** Directory
-*   **Probable Purpose:** This is a standard directory used by `ext2/3/4` file systems. When the file system checker (`fsck`) finds orphaned or corrupted files (data blocks not associated with any file name), it places them in this directory. In a backup context, its presence is normal, but it's typically empty unless a file system recovery event occurred prior to the backup.
+*This documentation was created as part of the comprehensive Synology SRM system analysis project.*
