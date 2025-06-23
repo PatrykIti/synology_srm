@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /lost+found](lost+found.md) | [→ Next: /root](root.md)
 
 ---
+---
 
 ## Overview
 
@@ -104,6 +105,26 @@ uid=1024,gid=100,dmask=000,fmask=111
 - **Surveillance Station**: Security camera storage
 - **SMB/AFP**: Network file sharing protocols
 
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Zero (empty mount point)
+- **Memory**: No memory usage
+- **CPU**: No CPU usage
+- **I/O**: No I/O activity
+
+### Performance Impact
+- **Mount Operations**: Manual mounts only
+- **External Storage**: Not used by auto-mount
+- **System Performance**: Zero impact
+- **Resource Usage**: Completely passive
+
+### Optimization Notes
+- Directory exists for compatibility only
+- Auto-mounts use /volumeUSB{N} instead
+- No optimization needed or possible
+- Consider removing if never used
+
 ## Security Considerations
 
 ### Mount Security
@@ -148,3 +169,7 @@ To debug issues with the automatic mounting of external drives, follow this sequ
 3. **Inspect System Logs**: Check the main system log for entries from Synology's services. The exact log file may vary, but `/var/log/messages` is a common location. Use a command like `tail -f /var/log/messages | grep -iE 'syno|usb|mount'` to watch for relevant events from storage-related daemons (e.g., `synostgmond`). This should reveal how the storage daemon is reacting to the udev event.
 
 4. **Verify Mounts**: Once mounted, use `mount | grep /volume` to see the actual device, mount point (e.g., `/volumeUSB1`), filesystem type, and mount options applied by SRM.
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /lost+found](lost+found.md) | [→ Next: /root](root.md)

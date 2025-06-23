@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /usr](usr.md) | [→ Next: /var defaults](var.defaults.md)
 
 ---
+---
 
 ## Overview
 The `/var` directory serves as the primary location for variable data in Synology SRM. It contains system logs, runtime information, package data, and temporary files that change during normal system operation. This directory follows the Filesystem Hierarchy Standard (FHS) with some Synology-specific adaptations. The directory contains approximately 397 files across all subdirectories, with the majority in logging (115 files) and package management (172 files).
@@ -264,6 +265,10 @@ The `/var` directory serves as the primary location for variable data in Synolog
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete variable data analysis with mesh networking details
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /usr](usr.md) | [→ Next: /var defaults](var.defaults.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
