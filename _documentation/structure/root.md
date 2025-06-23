@@ -1,31 +1,114 @@
-# `/root/` Directory Documentation
+# /root Directory
 
-## Location
+## Overview
+The `/root` directory in Synology SRM is the home directory for the `root` user. It is not intended for interactive use but serves as a configuration and state storage location for system-level processes, primarily related to shell environment setup and the secure update mechanism. Its minimal contents reflect the appliance-based design of SRM, prioritizing security and stability over user customization at the root level.
 
-`srm_backup/root/`
+## Directory Structure
+```
+/root/
+├── .gnupg/
+│   ├── pubring.kbx
+│   └── trustdb.gpg
+├── .profile
+└── .wget-hsts
+```
 
-## Purpose
+## Key Components
 
-The `/root/` directory in Unix-like operating systems, including Synology SRM, is the **home directory for the root user**. The root user is the superuser or administrator of the system, having unrestricted access to all commands and files.
+### Shell Environment
+- **Purpose**: Defines the root user's shell environment.
+- **Location**: `/root/.profile`
+- **Dependencies**: The `ash` shell (default for root).
+- **Configuration**: Sets the `PATH` variable, aliases, and a custom prompt.
+- **Security**: The `PATH` is configured to prioritize standard system binaries over Synology-specific or locally installed binaries, which is a secure default.
 
-This directory typically stores user-specific configuration files, scripts, logs, or other data related to the root user's activities and environment.
+### Update Transport Security
+- **Purpose**: Caches HTTP Strict Transport Security (HSTS) policies for system update domains, forcing clients to use secure HTTPS connections. This is not a static configuration file but a stateful cache populated by `wget` after its first successful HTTPS connection to the specified domains.
+- **Location**: `/root/.wget-hsts`
+- **Dependencies**: System processes using `wget` for updates (e.g., the SRM update checker).
+- **Configuration**: Populated automatically by `wget`. Contains entries for Synology update servers with a long `max-age`.
+- **Security**: Mitigates downgrade attacks and SSL stripping during the system update process.
 
-## Contents
+### Package Authenticity
+- **Purpose**: Stores the GPG keyring used to verify the authenticity and integrity of downloaded SRM firmware and package updates.
+- **Location**: `/root/.gnupg/`
+- **Dependencies**: The system's package management and update services.
+- **Configuration**: Contains Synology's public GPG key.
+- **Security**: Ensures that only officially signed packages from Synology can be installed, preventing tampering and malicious software installation.
 
-Based on the analysis of the `srm_backup/root/` directory, the following files were found:
+## Configuration Files
 
-*   **`.profile`**:
-    *   **Type**: Shell configuration file.
-    *   **Probable Purpose**: This is a standard file executed when the root user logs in via a shell (e.g., Bourne shell, Bash, Korn shell). It's used to set up the user's environment by defining environment variables, aliases, functions, and other shell-specific settings. For example, it might customize the command prompt, set the `PATH` variable, or define convenient shortcuts.
-*   **`.wget-hsts`**:
-    *   **Type**: Data file for `wget`.
-    *   **Probable Purpose**: This file is likely used by the `wget` command-line utility to store information related to HTTP Strict Transport Security (HSTS). HSTS is a web security policy mechanism that helps to protect websites against protocol downgrade attacks and cookie hijacking. The `.wget-hsts` file would typically store a list of hostnames that have requested HSTS, along with associated HSTS policy details (e.g., max-age). This allows `wget` to remember to connect to these sites using HTTPS only in future requests, enhancing security.
+### .profile
+This file configures the root user's shell session.
 
-## Significance in Backup
+```sh
+# .profile
 
-The presence of these files in the backup indicates:
+# PATH
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin
+export PATH
 
-*   **Root User Configuration**: The `.profile` file suggests that there might be specific environment customizations for the root user on this Synology SRM device. Restoring this file would restore these customizations.
-*   **wget Usage History/Security**: The `.wget-hsts` file implies that the `wget` utility has been used by the root user (or a process running as root) to access websites that enforce HSTS. This file helps maintain the security context for `wget` across sessions.
+# See if we are running in linuxrc.syno
+if [ "$SYNOLINUXRC" = "1" ]; then
+    # running in linuxrc.syno
+    PS1='linuxrc#'
+else
+    # not running in linuxrc.syno
+    PS1='`hostname`> '
+fi
 
-While the directory itself is standard, the specific files within it provide insights into the root user's environment and activity on the SRM device.
+# Alias
+alias dir="ls -l"
+alias ll="ls -la"
+```
+
+**Analysis**:
+- **`PATH` Variable**: The `PATH` is set to `/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin`. This ordering ensures that standard, core Linux binaries are found before Synology's custom binaries (`/usr/syno/bin`) and any locally installed binaries (`/usr/local/bin`). This provides a predictable and secure execution environment, reducing the risk of `PATH` manipulation attacks.
+- **`SYNOLINUXRC` Check**: The script checks for an environment variable `SYNOLINUXRC`. This indicates the shell is running in a special context, likely during the early boot process (`linuxrc.syno`), and adjusts the prompt accordingly. This highlights an integration with the system's startup sequence.
+- **Aliases**: Standard convenience aliases (`dir`, `ll`) are defined for `ls`.
+
+## Scripts and Executables
+
+**Intentionally Blank.**
+
+The `/root` directory does not contain any executable scripts by default. This is a deliberate security choice ("security by absence") to minimize the attack surface. Placing scripts here is strongly discouraged as it deviates from the system's design and they may be removed by firmware updates.
+
+## Integration Points
+
+### Secure Update Workflow
+The files within `/root` are critical components of SRM's end-to-end secure update workflow. They work together to ensure both the transport and the payload of system updates are secure.
+
+1.  **Initiation**: A system process, likely using a tool like `wget`, initiates a connection to a Synology update server (e.g., `update.synology.com`).
+2.  **Transport Security (HSTS)**: The server responds with an HSTS header. `wget` caches this policy in `/root/.wget-hsts`. On all subsequent connections, `wget` will enforce a secure HTTPS connection, preventing an attacker from downgrading the connection to plaintext HTTP (SSL stripping).
+3.  **Payload Integrity (GPG Signature)**: The downloaded update package or manifest is cryptographically signed by Synology.
+4.  **Authenticity Verification (GPG Keyring)**: The update mechanism uses the GPG keyring located at `/root/.gnupg/pubring.kbx` to verify the signature on the downloaded file. This keyring contains Synology's trusted public key. A valid signature confirms the package is authentic (it truly came from Synology) and has not been tampered with in transit.
+
+This multi-layered process provides robust protection against man-in-the-middle (MITM) attacks and the installation of malicious firmware.
+
+## Security Considerations
+
+### Appliance Model & Security by Absence
+The minimal nature of the `/root` directory is a key feature of SRM's security posture. It treats the device as a sealed appliance, not a general-purpose Linux server.
+-   **Pro**: By not including user scripts, cron jobs, SSH `authorized_keys`, or other common configuration files, the potential for misconfiguration or persistent threats in the root account's home directory is drastically reduced.
+-   **Con/Implication**: This model is not designed for advanced administrator customization. Adding files (like an `authorized_keys` file for passwordless SSH) deviates from the intended security model and is not guaranteed to persist across firmware updates.
+
+### GPG Trust Anchor
+The entire package verification process relies on the integrity of the GPG public key stored in `/root/.gnupg/pubring.kbx`. This file acts as the ultimate root of trust for all system software.
+
+It is possible to inspect the key to verify its fingerprint:
+```bash
+# Note: This command must be run on the device itself.
+$ gpg --no-default-keyring --keyring /root/.gnupg/pubring.kbx --list-keys
+```
+**Operational Note:** It is recommended to periodically re-run this command, especially after a major firmware update, to verify that the trusted key has not changed unexpectedly. Any change to the key fingerprint should be cross-referenced with official Synology security advisories.
+
+## Network Services
+
+**Intentionally Blank.**
+
+The `/root` directory itself does not configure or expose any network services. Its contents are used to support client-side operations (like `wget`) initiated by other system processes.
+
+## Maintenance Notes
+
+-   **Do Not Modify**: The contents of the `/root` directory should be considered system-managed and should not be modified.
+-   **No Persistence Guarantee**: Any manual additions or modifications to this directory (e.g., adding scripts, SSH keys, or custom profile settings) are not guaranteed to survive a firmware update and may be overwritten. Such changes can also lead to unforeseen security vulnerabilities by deviating from the tested, default state of the appliance.
