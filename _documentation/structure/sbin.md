@@ -234,7 +234,7 @@ The `/sbin` directory contains essential system administration binaries crucial 
 - Libraries: [/lib/](lib.md)
 - Configuration: [/etc/](etc.md)
 - Kernel modules: [/lib/modules/](lib.md#kernel-modules)
-- Services: [/etc/init/](etc/init.md)
+- Services: [/etc/init/](etc.md#upstart-services)
 
 ## Version Information
 - **Document Version**: 1.0

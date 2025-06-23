@@ -225,9 +225,9 @@ The `/var.defaults` directory serves as a factory reset template for the `/var` 
 
 ## Cross-References
 - Runtime directory: [/var/](var.md)
-- Package management: [/usr/syno/](usr.syno.md)
+- Package management: [/usr/syno/](usr.md)
 - Service definitions: [/etc/init/](etc.md#upstart-services)
-- Security tools: [/usr/syno/bin/](usr.syno.md#security-tools)
+- Security tools: [/usr/syno/bin/](usr.md#synology-specific-tools)
 - Default configs: [/etc.defaults/](etc.defaults.md)
 - System logs: [/var/log/](var.md#system-logs)
 - Package storage: [/volume1/@appstore/](volume1.md#application-packages)

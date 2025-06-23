@@ -267,8 +267,8 @@ The `/etc.defaults` directory contains pristine default configuration templates 
 
 ## Cross-References
 - Active configurations: [/etc/](etc.md)
-- Service executables: [/usr/sbin/](usr.sbin.md)
-- Synology scripts: [/usr/syno/](usr.syno.md)
+- Service executables: [/usr/sbin/](usr.md#system-binaries)
+- Synology scripts: [/usr/syno/](usr.md)
 - System libraries: [/lib/](lib.md)
 - Kernel modules: [/lib/modules/](lib.md#kernel-modules)
 - Log files: [/var/log/](var.md#system-logs)

@@ -172,10 +172,10 @@ To debug issues with the automatic mounting of external drives, follow this sequ
 
 ## Cross-References
 - Volume storage: [/volume1/](volume1.md)
-- Device management: [/dev/](dev.md)
+- Device management: /dev/ <!-- Link to dev.md removed until documented -->
 - Kernel modules: [/lib/modules/](lib.md#kernel-modules)
 - System binaries: [/sbin/](sbin.md)
-- Synology tools: [/usr/syno/](usr.syno.md)
+- Synology tools: [/usr/syno/](usr.md)
 - Configuration: [/etc/](etc.md)
 - Logs: [/var/log/](var.md#system-logs)
 
