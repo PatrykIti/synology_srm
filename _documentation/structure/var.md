@@ -65,7 +65,7 @@ The `/var` directory serves as the primary location for variable data in Synolog
   - `httpd/` - Web server access and error logs
   - `samba/` - SMB/CIFS service logs
   - `upstart/` - Service initialization logs (66 files)
-- **Management**: 
+- **Management**:
   - syslog-ng v3.5.5 for centralized collection
   - logrotate with XZ compression (90% ratio)
   - Size-based rotation: 1M default, 10M for system logs
@@ -117,7 +117,7 @@ The `/var` directory serves as the primary location for variable data in Synolog
   - Sources: /dev/log (unix socket), /proc/kmsg (kernel)
   - Extensive filtering by facility/severity
   - Separate destinations for different log types
-  
+
 ### Log Rotation
 - **logrotate.conf**: Main rotation configuration
   ```
@@ -183,16 +183,16 @@ The `/var` directory serves as the primary location for variable data in Synolog
 ### Vulnerabilities Identified
 1. **Critical**:
    - Linux kernel 4.4.60 (EOL since Feb 2022)
-   
+
 2. **High Risk**:
    - Failed root login attempts detected (192.168.1.24)
    - No remote syslog forwarding configured
-   
+
 3. **Medium Risk**:
    - Firewall initialization errors (synonet command failures)
    - Software versions exposed in dpkg database
    - SQLite scalability limits for NGFW
-   
+
 4. **Low Risk**:
    - Verbose logging reveals network topology
    - Security rules expose monitoring patterns
@@ -202,7 +202,7 @@ The `/var` directory serves as the primary location for variable data in Synolog
    - Configure remote syslog for security logs
    - Investigate failed authentication attempts
    - Fix firewall initialization errors
-   
+
 2. **Strategic Improvements**:
    - Implement SIEM integration
    - Enable file integrity monitoring

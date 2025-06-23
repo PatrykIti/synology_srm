@@ -1,0 +1,102 @@
+# Documentation Validation Configuration
+
+# Link checking settings
+link_checking:
+  # Check external URLs (slower but more thorough)
+  check_external: false
+  
+  # Timeout for external URL checks (seconds)
+  external_timeout: 5
+  
+  # URLs to ignore (regex patterns)
+  ignore_patterns:
+    - "^mailto:"
+    - "^#"
+    - "example\\.com"
+    
+  # Allowed URL schemes
+  allowed_schemes:
+    - http
+    - https
+    - ftp
+    - file
+    
+# Template compliance settings
+template_compliance:
+  # Required sections that must be present
+  required_sections:
+    - "## Overview"
+    - "## Directory Structure"
+    - "## Key Components"
+    - "## Configuration Files"
+    - "## Scripts and Executables"
+    - "## Integration Points"
+    - "## Security Considerations"
+    - "## Network Services"
+    - "## Performance Considerations"
+    - "## Maintenance Notes"
+    - "## Cross-References"
+    
+  # Optional but recommended sections
+  optional_sections:
+    - "## Version Information"
+    - "## Platform-Specific Features"
+    - "## Troubleshooting"
+    
+  # Required elements
+  required_elements:
+    - breadcrumb_navigation: true
+    - h1_title: true
+    - cross_references: true
+    
+# Formatting rules
+formatting:
+  # Maximum line length (0 = no limit)
+  max_line_length: 0
+  
+  # Indentation
+  indent_style: spaces
+  indent_size: 2
+  
+  # Disallow tabs except in code blocks
+  no_tabs: true
+  
+  # Require trailing newline
+  trailing_newline: true
+  
+  # No trailing whitespace
+  no_trailing_spaces: true
+  
+# File naming conventions
+naming:
+  # Pattern for structure documentation files
+  structure_pattern: "^[a-z0-9._-]+\\.md$"
+  
+  # Disallowed characters in filenames
+  disallowed_chars: " ()[]{}!@#$%^&*"
+  
+# Severity levels for different violations
+severity:
+  broken_internal_link: error
+  broken_external_link: warning
+  missing_required_section: error
+  missing_optional_section: info
+  formatting_violation: warning
+  naming_violation: error
+  
+# CI/CD specific settings
+ci:
+  # Fail build on errors
+  fail_on_error: true
+  
+  # Fail build on warnings
+  fail_on_warning: false
+  
+  # Generate JSON report
+  json_report: true
+  
+  # Generate HTML report
+  html_report: false
+  
+  # Upload artifacts
+  upload_artifacts: true
