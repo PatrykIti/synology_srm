@@ -302,16 +302,80 @@
       {
         "id": 11,
         "title": "Analyze and Document /usr Directory Structure and Key Components",
-        "description": "Provide an overview of the /usr directory structure (e.g., /usr/bin, /usr/sbin, /usr/lib, /usr/local, /usr/share) and document key components, applications, and libraries within.",
-        "details": "Document the purpose of major subdirectories within /usr (e.g., /usr/bin for non-essential command-line programs, /usr/sbin for non-essential system administration binaries, /usr/lib for non-essential libraries, /usr/share for architecture-independent data, /usr/local for locally installed software). Identify and document key applications, utilities, and libraries specific to /usr, particularly those related to SRM's extended functionality. Use MCP Zen tools. Follow the standard documentation template (Task 2).",
-        "testStrategy": "Review documentation for comprehensive coverage of /usr's structure and significant contents. Ensure clarity and accuracy. Adherence to template.",
-        "priority": "medium",
+        "description": "Provide a comprehensive overview of the /usr directory structure. This task involves documenting key components, applications, and libraries within /usr, building upon the completed analysis of /usr/share and /usr/libexec. The documentation will cover /usr/bin, /usr/sbin, /usr/lib, /usr/local, and integrate detailed findings for /usr/share and /usr/libexec.",
+        "status": "done",
         "dependencies": [
           1,
           2
         ],
-        "status": "in-progress",
-        "subtasks": []
+        "priority": "medium",
+        "details": "Leverage the completed analysis of /usr/share and /usr/libexec (SRM backup) which revealed significant components. The documentation effort will:\n1. Formally document the findings for /usr/share, including its role in storing CA certificates (141 Mozilla), captive portal web application (CGI, CSS, JS, HTML), CUPS charset/MIME configurations, FreeRADIUS dictionary files (222), OpenSSL documentation (HTML, man pages), NTP pool/time server configurations, PostgreSQL initialization/configuration templates, and shared data (ICU, Apache icons, zone info).\n2. Formally document the findings for /usr/libexec, detailing its extensive event-based network hooks (interface link up/down, IP address changes, gateway changes, topology changes, DHCP server changes, network isolation changes), service integration hooks (volume mount/unmount, share management, user/group management, service start/stop/restart, database auto-updates), Synology-specific SDK integration patterns, and security-relevant scripts (firewall reload, policy routing, VPN client hooks). Emphasize how these provide deep integration for network management and service orchestration.\n3. Analyze and document the purpose and key contents of other major subdirectories: /usr/bin (non-essential command-line programs), /usr/sbin (non-essential system administration binaries), /usr/lib (non-essential libraries), and /usr/local (locally installed software).\n4. Identify and document key applications, utilities, and libraries specific to the overall /usr directory, particularly those related to SRM's extended functionality, highlighting the integration points revealed in /usr/libexec.\n5. Utilize MCP Zen tools for analysis where applicable for the remaining directories.\n6. All documentation must follow the standard documentation template (Task 2).",
+        "testStrategy": "Review documentation for comprehensive coverage of /usr's structure and significant contents, including detailed findings for /usr/share and /usr/libexec, and analysis of /usr/bin, /usr/sbin, /usr/lib, and /usr/local. Ensure clarity, accuracy, and proper integration of all components. Verify adherence to the standard documentation template (Task 2).",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Document findings for /usr/share based on completed analysis",
+            "description": "Incorporate and detail the already analyzed findings for /usr/share: 141 Mozilla CA certificates, captive portal web application (CGI, CSS, JS, HTML), CUPS charset/MIME configurations, 222 FreeRADIUS dictionary files, OpenSSL documentation (HTML, man pages), NTP pool/time server configuration files, PostgreSQL initialization/configuration templates, and shared data (ICU, Apache icons, zone info). Follow standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Document findings for /usr/libexec based on completed analysis",
+            "description": "Incorporate and detail the already analyzed findings for /usr/libexec: extensive network hook scripts (interface link, IP address, gateway, topology, DHCP server, network isolation changes), service integration hooks (volume, share, user/group, service lifecycle, DB auto-updates), Synology-specific SDK integration, and security-relevant scripts (firewall reload, policy routing, VPN client). Highlight its role in network management and service orchestration. Follow standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Analyze and Document /usr/bin directory",
+            "description": "Analyze the /usr/bin directory to identify its purpose, key non-essential command-line programs, and any utilities specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Analyze and Document /usr/sbin directory",
+            "description": "Analyze the /usr/sbin directory to identify its purpose, key non-essential system administration binaries, and any utilities specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Analyze and Document /usr/lib directory",
+            "description": "Analyze the /usr/lib directory to identify its purpose, key non-essential libraries, and any libraries specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Analyze and Document /usr/local directory",
+            "description": "Analyze the /usr/local directory to identify its purpose, structure for locally installed software, and any SRM-specific configurations or software residing within. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Consolidate and Review Overall /usr Documentation",
+            "description": "Merge all documented sections (/usr/share, /usr/libexec, /usr/bin, /usr/sbin, /usr/lib, /usr/local) into a single, coherent document. Ensure consistency, accuracy, comprehensive coverage of SRM-specific aspects, and strict adherence to the standard documentation template (Task 2).",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          }
+        ]
       },
       {
         "id": 12,
@@ -897,7 +961,7 @@
     ],
     "metadata": {
       "created": "2025-06-20T19:30:39.187Z",
-      "updated": "2025-06-23T04:56:48.074Z",
+      "updated": "2025-06-23T05:46:57.557Z",
       "description": "Tasks for master context"
     }
   }
