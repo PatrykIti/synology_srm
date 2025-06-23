@@ -1,5 +1,9 @@
 # /etc.defaults Directory - Default Configuration Templates
 
+[← Back to Documentation Index](../README.md) | [← Previous: /etc](etc.md) | [→ Next: /ini](ini.md)
+
+---
+
 ## Overview
 The `/etc.defaults` directory contains pristine default configuration templates for the Synology SRM system. These files serve as factory defaults that can be used to restore system settings, as fallback configurations, or as templates for creating new configurations. This directory follows a structure parallel to `/etc` but contains only the original, unmodified versions of configuration files.
 
@@ -199,6 +203,26 @@ The `/etc.defaults` directory contains pristine default configuration templates 
 - **VPN**: IPsec/PPP configurations ready
 - **Wi-Fi**: hostapd for access point mode
 
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: ~50MB for complete default configurations
+- **Memory**: No runtime memory usage (reference only)
+- **CPU**: No CPU impact (passive storage)
+- **I/O**: Minimal - only during factory reset or template access
+
+### Performance Impact
+- **Boot Time**: No impact unless factory reset triggered
+- **Runtime**: Zero performance overhead
+- **Updates**: Fast system updates due to template separation
+- **Recovery**: Quick factory reset capability
+
+### Optimization Notes
+- Files are read-only, preventing fragmentation
+- Organized directory structure enables fast lookups
+- Template approach reduces configuration parsing overhead
+- Separation from `/etc` prevents accidental modifications
+
 ## Maintenance Notes
 
 ### Configuration Management
@@ -240,3 +264,7 @@ The `/etc.defaults` directory contains pristine default configuration templates 
                         ↑                            ↓
                    [Factory Reset]           [User Customization]
 ```
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /etc](etc.md) | [→ Next: /ini](ini.md)

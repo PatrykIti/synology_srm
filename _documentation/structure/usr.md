@@ -1,5 +1,9 @@
 # /usr Directory - User Programs and Libraries
 
+[← Back to Documentation Index](../README.md) | [← Previous: /sbin](sbin.md) | [→ Next: /var](var.md)
+
+---
+
 ## Overview
 The `/usr` directory contains user-space applications, libraries, and architecture-independent data for the Synology SRM router system. This directory represents the bulk of the router's feature-rich functionality, dominated by Synology's proprietary Router Manager software suite in `/usr/syno/`. The ARM aarch64-optimized structure reflects deliberate design choices for an embedded router system prioritizing stability, security, and performance.
 

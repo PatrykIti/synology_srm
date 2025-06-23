@@ -1,5 +1,9 @@
 # /mnt Directory
 
+[← Back to Documentation Index](../README.md) | [← Previous: /lost+found](lost+found.md) | [→ Next: /root](root.md)
+
+---
+
 ## Overview
 
 The `/mnt` directory is a traditional Unix mount point that exists in Synology SRM RT6600ax but is **not actively used** by the system's automatic mount functionality. While present for compatibility and potential manual administrative use, all dynamically mounted external storage devices are handled by Synology's proprietary storage management system, which mounts devices to `/volumeUSB{N}` or `/volumeSATA{N}` directories instead. This architectural decision ensures consistent naming, proper integration with Synology services, and centralized management of external storage.

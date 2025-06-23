@@ -1,5 +1,9 @@
 # /libexec Directory - Not Present in SRM
 
+[← Back to Documentation Index](../README.md) | [← Previous: /lib64](lib64.md) | [→ Next: /lost+found](lost+found.md)
+
+---
+
 ## Overview
 The `/libexec` directory **does not exist** in the Synology SRM RT6600ax system. This is notable because `/libexec` is a standard directory in many Unix-like systems used for storing internal executables that are not intended to be executed directly by users but rather called by other programs.
 
@@ -81,6 +85,26 @@ Services expecting `/libexec` helpers must be configured to use alternative path
 - Configure scripts use `--libexecdir=/usr/lib`
 - Makefiles adjusted for Synology layout
 - Package specs modified for correct paths
+
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Varies by installed helpers
+- **Memory**: Helper programs loaded on-demand
+- **CPU**: Only when helpers are invoked
+- **I/O**: Minimal - program loading only
+
+### Performance Impact
+- **Service Startup**: Helper execution adds overhead
+- **System Calls**: Additional process creation cost
+- **Security Checks**: Authentication helper latency
+- **Resource Limits**: Per-helper resource consumption
+
+### Optimization Notes
+- Helpers should be lightweight and fast
+- Avoid unnecessary helper invocations
+- Cache helper results when possible
+- Monitor helper execution times
 
 ## Maintenance Notes
 

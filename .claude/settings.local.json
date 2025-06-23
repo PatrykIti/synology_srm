@@ -87,7 +87,8 @@
       "Bash(done)",
       "Bash(sqlite3:*)",
       "Bash(for:*)",
-      "Bash(do echo \"=== $file ===\")"
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(python3:*)"
     ]
   },
   "enabledMcpjsonServers": [

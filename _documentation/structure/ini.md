@@ -1,5 +1,9 @@
 # /ini Directory - WiFi Hardware Configuration
 
+[← Back to Documentation Index](../README.md) | [← Previous: /etc.defaults](etc.defaults.md) | [→ Next: /initrd](initrd.md)
+
+---
+
 ## Overview
 The `/ini` directory contains critical WiFi hardware configuration files for Synology SRM's wireless subsystem. This directory stores initialization parameters for Qualcomm Atheros WiFi chipsets (QCA6018 and QCN9000) used in the RT6600ax router. The configuration files control hardware-level WiFi operations, 802.11ax (WiFi 6) features, network subsystem offloading, and advanced wireless capabilities.
 
@@ -144,6 +148,26 @@ These configurations enable:
 - WPS (WiFi Protected Setup)
 - Band steering between radios
 
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Minimal (~1MB for all INI files)
+- **Memory**: Configuration cached in driver memory (~10MB)
+- **CPU**: One-time parsing during module load
+- **I/O**: Single read operation per boot
+
+### Performance Impact
+- **WiFi Throughput**: NSS offload settings directly impact max speeds
+- **Latency**: Buffer configurations affect packet processing time
+- **Concurrent Clients**: Queue depths determine connection limits
+- **Channel Efficiency**: OFDMA/MU-MIMO settings affect airtime usage
+
+### Optimization Notes
+- NSS offload parameters critical for gigabit speeds
+- Ring buffer sizes balance memory vs performance
+- Interrupt coalescing reduces CPU overhead
+- Proper DBS/SBS mode selection optimizes dual-band performance
+
 ## Maintenance Notes
 
 ### Configuration Updates
@@ -190,6 +214,10 @@ These configurations enable:
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete WiFi configuration analysis
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /etc.defaults](etc.defaults.md) | [→ Next: /initrd](initrd.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
