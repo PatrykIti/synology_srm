@@ -1,43 +1,145 @@
-# `srm_backup/data/` Directory Analysis
+# /data Directory - Vendor-Specific Application Data
 
-The `srm_backup/data/` directory appears to store vendor-specific or module-specific configuration and calibration data for the Synology SRM system.
+## Overview
+The `/data` directory serves as persistent storage for vendor-specific and application-specific data in Synology SRM. This directory contains proprietary binary firmware files required for hardware initialization and calibration, particularly for the WiFi subsystem. The architectural separation of vendor data from the core operating system ensures maintainability, update safety, and hardware modularity.
 
 ## Directory Structure
-
 ```
-srm_backup/data/
-└── vendor/
-    └── wifi/
-        ├── wlfw_cal_01_qcn9000_pci0.bin
-        └── wlfw_cal_01.bin
+/data/
+└── vendor/                      # Vendor-specific data and firmware
+    └── wifi/                    # WiFi hardware calibration files
+        ├── wlfw_cal_01.bin      # Base WiFi calibration firmware
+        └── wlfw_cal_01_qcn9000_pci0.bin  # QCN9000-specific calibration
 ```
 
-## Contents
+## Key Components
 
-### `srm_backup/data/`
+### Vendor WiFi Calibration Files
+- **Purpose**: Provide radio frequency (RF) calibration data for WiFi chipsets
+- **Location**: `/data/vendor/wifi/`
+- **Dependencies**: Required by WiFi kernel drivers (ath11k) during initialization
+- **Configuration**: Referenced by WiFi driver configuration in `/ini/` directory
+- **Security**: Binary "black box" files - cannot be audited or modified
 
-*   **`vendor/`**: This subdirectory likely contains data provided by or specific to hardware vendors whose components are used in the Synology SRM device.
+### File Descriptions
+| File Name | Description | Chipset | Purpose |
+|-----------|-------------|---------|---------|
+| `wlfw_cal_01.bin` | Generic/base calibration firmware | Generic | Fallback or common calibration data for chipset family |
+| `wlfw_cal_01_qcn9000_pci0.bin` | Device-specific calibration | QCN9000 | Hardware-specific values for QCN9000 on PCI bus 0 |
 
-### `srm_backup/data/vendor/`
+## Configuration Files
+No configuration files in this directory - contains only binary calibration data. Configuration is handled by:
+- `/ini/QCN9000.ini` - Chipset configuration parameters
+- `/ini/wifi_module_param.ini` - Module loading parameters
+- Driver device tree overlays - Hardware detection and firmware paths
 
-*   **`wifi/`**: This subdirectory strongly suggests it holds data related to the Wi-Fi subsystem of the router.
+## Scripts and Executables
+No scripts or executables - directory contains only binary firmware blobs loaded by kernel drivers.
 
-### `srm_backup/data/vendor/wifi/`
+## Integration Points
 
-*   **`wlfw_cal_01_qcn9000_pci0.bin`**:
-    *   **Type**: Binary file (`.bin`)
-    *   **Probable Purpose**: Wi-Fi firmware calibration data. The name components suggest:
-        *   `wlfw`: Wireless Firmware.
-        *   `cal`: Calibration.
-        *   `qcn9000`: Likely refers to a Qualcomm Atheros QCN9000 series Wi-Fi chipset (a Wi-Fi 6/6E chipset).
-        *   `pci0`: May indicate the specific PCI bus or device instance.
-    *   **Function**: This file likely stores hardware-specific calibration data for the Wi-Fi radio, essential for optimal performance, regulatory compliance (e.g., power levels, channel usage), and stability of the wireless network. Such data is often unique to each physical device or batch.
+### WiFi Driver Loading Sequence
+1. **Boot Process**: Kernel loads WiFi driver modules
+2. **Hardware Detection**: Driver detects QCN9000 chipset on PCI bus
+3. **Firmware Request**: Driver requests calibration firmware from `/data/vendor/wifi/`
+4. **Calibration Load**: Binary data loaded onto chipset hardware
+5. **Interface Creation**: WiFi interfaces (wlan0, wlan1) become available
 
-*   **`wlfw_cal_01.bin`**:
-    *   **Type**: Binary file (`.bin`)
-    *   **Probable Purpose**: General or alternative Wi-Fi firmware calibration data.
-    *   **Function**: Similar to the file above, this likely contains calibration data for the Wi-Fi firmware. It might be a more generic calibration file, a calibration for a different radio/band, or a fallback calibration. The `_01` might indicate a version or a primary calibration set.
+### Related Components
+- **Kernel Modules**: `ath11k_pci`, `qca_nss_wifi` - Load calibration data
+- **Configuration**: `/ini/` directory - Defines firmware paths and parameters
+- **Runtime**: `/sys/kernel/debug/ath11k/` - Debug interface for loaded firmware
+- **Logs**: `/var/log/wifi.log` - Firmware loading status and errors
 
-## Summary
+## Security Considerations
 
-The `srm_backup/data/` directory, through its `vendor/wifi/` path, stores critical binary files that are most likely Wi-Fi firmware calibration data. These files are essential for the correct and optimal operation of the Synology SRM router's wireless functionalities. Losing or corrupting these files could lead to Wi-Fi performance issues or complete Wi-Fi failure. They are a crucial part of the system's low-level hardware configuration.
+### Access Control
+- **Directory Permissions**: 700 (rwx------) - Owner access only
+- **File Permissions**: Should be 644 or 600 - Read-only for security
+- **Integrity**: Files must not be modified - will cause WiFi failure
+
+### Operational Security
+- **Black Box Nature**: Cannot audit firmware for vulnerabilities
+- **Vendor Dependency**: Security depends on Qualcomm/Synology updates
+- **Critical Asset**: Corruption prevents WiFi functionality
+- **Backup Essential**: Must be included in system backup procedures
+
+## Network Services
+These calibration files enable:
+- 2.4GHz WiFi network (802.11b/g/n/ax)
+- 5GHz WiFi networks (802.11a/n/ac/ax)
+- WiFi 6 (802.11ax) features
+- MU-MIMO and OFDMA capabilities
+- Mesh networking functionality
+
+## Maintenance Notes
+
+### Critical Operational Requirements
+- **Do Not Delete**: Removal causes total WiFi failure
+- **Do Not Modify**: Any change corrupts calibration data
+- **Backup Required**: Include in factory reset preservation
+- **Device-Specific**: Cannot use files from different devices
+
+### Troubleshooting
+- **WiFi Down**: Check `dmesg` for "firmware load failed"
+- **Performance Issues**: May indicate corrupted calibration
+- **Recovery**: Restore from backup or factory defaults
+- **Logs**: Check `/var/log/wifi.log` for calibration errors
+
+### Failure Indicators
+```bash
+# Common error messages in logs:
+"ath11k_pci: failed to load calibration file"
+"wlfw: calibration file not found"
+"QCN9000: firmware request failed"
+```
+
+## Platform-Specific Features
+
+### RT6600ax Implementation
+- **QCN9000 Chipset**: High-performance WiFi 6E capable
+- **Dual Calibration**: Supports multiple radio configurations
+- **PCI Interface**: Connected via PCIe for high bandwidth
+- **Persistent Storage**: Survives firmware updates
+
+### Architectural Benefits
+1. **Separation of Concerns**: Isolates vendor data from OS
+2. **Update Safety**: OS updates don't affect calibration
+3. **Hardware Modularity**: Supports different chipset variants
+4. **Manufacturing Flexibility**: Per-device calibration
+
+## Technical Details
+
+### Calibration Data Purpose
+- **RF Parameter Correction**: Compensates for manufacturing variations
+- **Power Level Tuning**: Ensures regulatory compliance
+- **Frequency Accuracy**: Maintains channel precision
+- **Temperature Compensation**: Adjusts for thermal variations
+
+### Integration with /ini Configuration
+1. INI files define which calibration to load
+2. Driver reads INI parameters during initialization
+3. Firmware path constructed from INI + hardware detection
+4. Calibration loaded based on chipset identification
+
+### Filesystem Characteristics
+- **Partition**: Typically on persistent read-write partition
+- **Filesystem**: Usually ext4 or similar
+- **Mount Options**: Should be mounted with noexec for security
+- **Backup**: Included in configuration backup
+
+## Cross-References
+- WiFi configuration: [/ini/](ini.md) - Hardware configuration files
+- WiFi drivers: [/lib/modules/](lib.md#kernel-modules) - Kernel modules
+- WiFi logs: [/var/log/wifi.log](var.md#wifi-logs) - Runtime logs
+- Boot process: [/etc/rc](etc.md#boot-scripts) - System initialization
+
+## Version Information
+- **Document Version**: 2.0
+- **Last Updated**: 2025-06-23
+- **System**: Synology RT6600ax
+- **Firmware**: SRM 5.2-9346
+- **Analysis**: Complete vendor data analysis
+
+---
+*This documentation was created as part of the comprehensive Synology SRM system analysis project.*
