@@ -90,7 +90,8 @@
       "Bash(do echo \"=== $file ===\")",
       "Bash(python3:*)",
       "Bash(do if ! grep -q \"## Cross-References\" \"$file\")",
-      "Bash(then echo \"Missing Cross-References: $file\")"
+      "Bash(then echo \"Missing Cross-References: $file\")",
+      "Bash(mv:*)"
     ]
   },
   "enabledMcpjsonServers": [
