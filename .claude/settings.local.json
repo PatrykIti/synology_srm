@@ -91,7 +91,12 @@
       "Bash(python3:*)",
       "Bash(do if ! grep -q \"## Cross-References\" \"$file\")",
       "Bash(then echo \"Missing Cross-References: $file\")",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh api:*)",
+      "Bash(gh workflow:*)"
     ]
   },
   "enabledMcpjsonServers": [
