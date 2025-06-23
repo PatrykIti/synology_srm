@@ -223,6 +223,15 @@ The `/var.defaults` directory serves as a factory reset template for the `/var` 
 5. Services restart with clean state
 6. User data preserved on `/volume1`
 
+## Cross-References
+- Runtime directory: [/var/](var.md)
+- Package management: [/usr/syno/](usr.syno.md)
+- Service definitions: [/etc/init/](etc.md#upstart-services)
+- Security tools: [/usr/syno/bin/](usr.syno.md#security-tools)
+- Default configs: [/etc.defaults/](etc.defaults.md)
+- System logs: [/var/log/](var.md#system-logs)
+- Package storage: [/volume1/@appstore/](volume1.md#application-packages)
+
 ---
 
 [← Back to Documentation Index](../README.md) | [← Previous: /var](var.md) | [→ Next: /volume1](volume1.md)

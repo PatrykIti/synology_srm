@@ -170,6 +170,15 @@ To debug issues with the automatic mounting of external drives, follow this sequ
 
 4. **Verify Mounts**: Once mounted, use `mount | grep /volume` to see the actual device, mount point (e.g., `/volumeUSB1`), filesystem type, and mount options applied by SRM.
 
+## Cross-References
+- Volume storage: [/volume1/](volume1.md)
+- Device management: [/dev/](dev.md)
+- Kernel modules: [/lib/modules/](lib.md#kernel-modules)
+- System binaries: [/sbin/](sbin.md)
+- Synology tools: [/usr/syno/](usr.syno.md)
+- Configuration: [/etc/](etc.md)
+- Logs: [/var/log/](var.md#system-logs)
+
 ---
 
 [← Back to Documentation Index](../README.md) | [← Previous: /lost+found](lost+found.md) | [→ Next: /root](root.md)

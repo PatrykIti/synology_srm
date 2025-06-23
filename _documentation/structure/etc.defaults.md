@@ -265,6 +265,15 @@ The `/etc.defaults` directory contains pristine default configuration templates 
                    [Factory Reset]           [User Customization]
 ```
 
+## Cross-References
+- Active configurations: [/etc/](etc.md)
+- Service executables: [/usr/sbin/](usr.sbin.md)
+- Synology scripts: [/usr/syno/](usr.syno.md)
+- System libraries: [/lib/](lib.md)
+- Kernel modules: [/lib/modules/](lib.md#kernel-modules)
+- Log files: [/var/log/](var.md#system-logs)
+- Runtime data: [/var/](var.md)
+
 ---
 
 [← Back to Documentation Index](../README.md) | [← Previous: /etc](etc.md) | [→ Next: /ini](ini.md)
