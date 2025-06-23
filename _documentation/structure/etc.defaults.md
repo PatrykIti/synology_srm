@@ -101,12 +101,12 @@ The `/etc.defaults` directory contains pristine default configuration templates 
   - Abstractions for common access patterns
   - Cached profiles for Synology services
   - Disabled by default (SUBDOMAIN_ENABLE_OWLSM="no")
-  
+
 - **PAM Configuration**:
   - Authentication stacks for system services
   - Includes webui, sshd, ftpd, samba, sudo
   - Winbind integration for AD domains
-  
+
 - **SSL/TLS**:
   - CA certificates bundle (138 root CAs)
   - OpenSSL configuration templates
@@ -147,7 +147,7 @@ The `/etc.defaults` directory contains pristine default configuration templates 
   - `rc.wifi` - Wireless configuration
   - `rc.volume` - Storage volume management
   - `rc.fan` - Thermal management
-  
+
 ### Installation Scripts
 - **synogrinst.sh**: Generic installation framework
 - **installer.sh**: Package installation handler

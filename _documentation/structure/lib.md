@@ -120,7 +120,7 @@ The `/lib` directory contains essential shared libraries, kernel modules, and fi
 - Services load specific library sets
 - Web UI uses PHP/Python libraries
 
-### Outgoing Dependencies  
+### Outgoing Dependencies
 - Libraries call kernel via syscalls
 - Network libs use kernel netfilter
 - Crypto libs may use hardware acceleration

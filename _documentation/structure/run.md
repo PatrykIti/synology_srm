@@ -114,7 +114,7 @@ Dynamic firewall rule management:
 ```
 Boot Timeline:
 - rootfs_ready: 76.78s
-- runlevel1: 125.99s  
+- runlevel1: 125.99s
 - network_ready: 134.49s
 - service_ready: 171.60s
 - package_ready: 177.24s
@@ -248,7 +248,7 @@ kill -TERM $(cat /run/crond.pid)
 3. Clean up runtime files on exit
 4. Use service-specific subdirectories
 
-### For Administrators  
+### For Administrators
 1. Monitor failed service jobs
 2. Check lock files for stale entries
 3. Review boot timing for issues

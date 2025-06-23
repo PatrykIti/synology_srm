@@ -12,7 +12,7 @@ The `/ini` directory contains critical WiFi hardware configuration files for Syn
 /ini/
 ├── global.ini              # Global WiFi configuration parameters
 ├── QCA6018.ini            # QCA6018 chipset-specific configuration
-├── QCN9000.ini            # QCN9000 chipset-specific configuration  
+├── QCN9000.ini            # QCN9000 chipset-specific configuration
 ├── wifi_module_param.ini   # WiFi module loading parameters
 └── internal/              # Internal/advanced configurations
     ├── global_i.ini       # Internal global parameters

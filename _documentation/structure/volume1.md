@@ -70,7 +70,7 @@ Note: srm-backup-fixed.tar.gz excluded as temporary backup file
 ### Application Package: SafeAccess
 - **Purpose**: Provides parental control, web filtering, and security threat mitigation
 - **Location**: `/volume1/@appstore/SafeAccess/`
-- **Dependencies**: 
+- **Dependencies**:
   - Local SQLite databases (`safe_access.db`, `access_log.sqlite`)
   - Shell scripts interpret database entries to modify `iptables` ruleset
   - System-wide databases in `/volume1/@db/` (domain categorization, GeoIP)
