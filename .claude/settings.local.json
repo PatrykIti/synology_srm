@@ -85,7 +85,9 @@
       "Bash(then echo \"DIR: $file\")",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(sqlite3:*)"
+      "Bash(sqlite3:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $file ===\")"
     ]
   },
   "enabledMcpjsonServers": [

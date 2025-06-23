@@ -1,5 +1,9 @@
 # /data Directory - Vendor-Specific Application Data
 
+[← Back to Documentation Index](../README.md) | [← Previous: /bin](bin.md) | [→ Next: /etc](etc.md)
+
+---
+
 ## Overview
 The `/data` directory serves as persistent storage for vendor-specific and application-specific data in Synology SRM. This directory contains proprietary binary firmware files required for hardware initialization and calibration, particularly for the WiFi subsystem. The architectural separation of vendor data from the core operating system ensures maintainability, update safety, and hardware modularity.
 
@@ -72,6 +76,26 @@ These calibration files enable:
 - MU-MIMO and OFDMA capabilities
 - Mesh networking functionality
 
+## Performance Considerations
+
+### Resource Usage
+- **Disk Space**: Minimal (~100KB for calibration files)
+- **Memory**: No runtime memory usage (loaded once to hardware)
+- **CPU**: No CPU impact after initial loading
+- **I/O**: Single read operation during boot
+
+### Performance Impact
+- **WiFi Throughput**: Calibration quality directly affects maximum speeds
+- **Range**: Proper calibration ensures optimal transmission power
+- **Stability**: Correct calibration prevents connection drops
+- **Channel Efficiency**: Affects spectral efficiency and interference
+
+### Optimization Notes
+- Files are pre-optimized at manufacturing
+- No user-serviceable performance tuning
+- Performance degradation indicates corruption
+- Monitor WiFi metrics for calibration health
+
 ## Maintenance Notes
 
 ### Critical Operational Requirements
@@ -140,6 +164,10 @@ These calibration files enable:
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete vendor data analysis
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /bin](bin.md) | [→ Next: /etc](etc.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
