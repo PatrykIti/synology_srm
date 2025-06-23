@@ -52,6 +52,10 @@ The `/var` directory serves as the primary location for variable data in Synolog
   - `dhcp-client.log` - DHCP negotiations and IP assignments
 - **Specialized Directories**:
   - `mesh/` - Mesh networking logs (CAP/RE topology, HYD system)
+    - Tracks synomeshd daemon operations
+    - Monitors node connectivity and upgrade checks
+    - Records HYD topology on port 7777
+    - Logs WebAPI mesh operations
   - `synolog/` - Synology-specific component logs
   - `httpd/` - Web server access and error logs
   - `samba/` - SMB/CIFS service logs
@@ -229,3 +233,13 @@ The `/var` directory serves as the primary location for variable data in Synolog
 - Multi-CPU packet processing scales to 4 cores
 - SQLite heap limited to 42MB for NGFW
 - Consider external storage for long-term logs
+
+## Version Information
+- **Document Version**: 2.1
+- **Last Updated**: 2025-06-23
+- **System**: Synology RT6600ax
+- **Firmware**: SRM 5.2-9346
+- **Analysis**: Complete variable data analysis with mesh networking details
+
+---
+*This documentation was created as part of the comprehensive Synology SRM system analysis project.*
