@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /lib64](lib64.md) | [→ Next: /lost+found](lost+found.md)
 
 ---
+---
 
 ## Overview
 The `/libexec` directory **does not exist** in the Synology SRM RT6600ax system. This is notable because `/libexec` is a standard directory in many Unix-like systems used for storing internal executables that are not intended to be executed directly by users but rather called by other programs.
@@ -167,6 +168,10 @@ When installing third-party software:
 - **Firmware**: SRM 5.2-9346
 - **Architecture**: ARM aarch64
 - **Analysis Note**: Confirmed directory does not exist
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /lib64](lib64.md) | [→ Next: /lost+found](lost+found.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

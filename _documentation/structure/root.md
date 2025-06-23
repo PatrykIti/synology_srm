@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /mnt](mnt.md) | [→ Next: /run](run.md)
 
 ---
+---
 
 ## Overview
 The `/root` directory in Synology SRM is the home directory for the `root` user. It is not intended for interactive use but serves as a configuration and state storage location for system-level processes, primarily related to shell environment setup and the secure update mechanism. Its minimal contents reflect the appliance-based design of SRM, prioritizing security and stability over user customization at the root level.
@@ -136,3 +137,7 @@ The `/root` directory itself does not configure or expose any network services. 
 
 -   **Do Not Modify**: The contents of the `/root` directory should be considered system-managed and should not be modified.
 -   **No Persistence Guarantee**: Any manual additions or modifications to this directory (e.g., adding scripts, SSH keys, or custom profile settings) are not guaranteed to survive a firmware update and may be overwritten. Such changes can also lead to unforeseen security vulnerabilities by deviating from the tested, default state of the appliance.
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /mnt](mnt.md) | [→ Next: /run](run.md)

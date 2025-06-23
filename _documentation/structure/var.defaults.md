@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /var](var.md) | [→ Next: /volume1](volume1.md)
 
 ---
+---
 
 ## Overview
 The `/var.defaults` directory serves as a factory reset template for the `/var` directory structure in Synology SRM. It contains pristine default versions of directories and files that initialize the system's variable data storage. This separation between immutable defaults and mutable runtime data enhances system reliability and enables clean factory resets.
@@ -221,3 +222,7 @@ The `/var.defaults` directory serves as a factory reset template for the `/var` 
 4. `/var.defaults` copied to `/var`
 5. Services restart with clean state
 6. User data preserved on `/volume1`
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /var](var.md) | [→ Next: /volume1](volume1.md)

@@ -341,29 +341,57 @@ def fix_file(filepath, filename):
     
     # Check and add bottom breadcrumb
     breadcrumb_bottom = get_breadcrumb(filename, "bottom")
-    if breadcrumb_bottom not in content:
-        lines = content.split('\n')
+    
+    # Remove any existing bottom breadcrumb to avoid duplicates
+    lines = content.split('\n')
+    
+    # Find and remove existing bottom breadcrumb if present
+    for i in range(len(lines)-1, -1, -1):
+        if lines[i].startswith("[← Back to Documentation Index]"):
+            # Remove this line and surrounding empty lines
+            lines.pop(i)
+            if i < len(lines) and lines[i] == '':
+                lines.pop(i)
+            if i > 0 and lines[i-1] == '':
+                lines.pop(i-1)
+            break
+    
+    # Now add the bottom breadcrumb properly
+    # Find where to insert (before footer line or at end)
+    footer_idx = -1
+    for i in range(len(lines)-1, -1, -1):
+        if lines[i].startswith('*') and 'documentation' in lines[i].lower():
+            footer_idx = i
+            break
+    
+    if footer_idx > 0:
+        # Insert breadcrumb before footer
+        insert_idx = footer_idx
+        # Check if there's a --- separator before footer
+        if footer_idx > 1 and lines[footer_idx-2] == '---':
+            insert_idx = footer_idx - 2
+        elif footer_idx > 0 and lines[footer_idx-1] == '---':
+            insert_idx = footer_idx - 1
         
-        # Find where to insert (before footer line)
-        footer_idx = -1
-        for i in range(len(lines)-1, -1, -1):
-            if lines[i].startswith('*This documentation was created'):
-                footer_idx = i
-                break
-        
+        # Insert breadcrumb with proper spacing
+        if insert_idx > 0 and lines[insert_idx-1] != '':
+            lines.insert(insert_idx, '')
+            insert_idx += 1
+        lines.insert(insert_idx, '---')
+        lines.insert(insert_idx+1, '')
+        lines.insert(insert_idx+2, breadcrumb_bottom)
         if footer_idx > 0:
-            # Check if there's already a --- before footer
-            if footer_idx > 0 and lines[footer_idx-1] == '---':
-                lines.insert(footer_idx, '')
-                lines.insert(footer_idx+1, breadcrumb_bottom)
-                lines.insert(footer_idx+2, '')
-            else:
-                lines.insert(footer_idx, '---')
-                lines.insert(footer_idx+1, '')
-                lines.insert(footer_idx+2, breadcrumb_bottom)
-                lines.insert(footer_idx+3, '')
-        content = '\n'.join(lines)
-        print(f"  Added bottom breadcrumb")
+            lines.insert(insert_idx+3, '')
+    else:
+        # No footer found, add at end
+        if lines and lines[-1] != '':
+            lines.append('')
+        lines.append('---')
+        lines.append('')
+        lines.append(breadcrumb_bottom)
+    
+    content = '\n'.join(lines)
+    print(f"  Added bottom breadcrumb")
     
     # Write back
     try:

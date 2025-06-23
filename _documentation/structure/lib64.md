@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /lib](lib.md) | [→ Next: /libexec](libexec.md)
 
 ---
+---
 
 ## Overview
 The `/lib64` directory in Synology SRM is a symbolic link pointing to the `/lib` directory. This is a standard multiarch compatibility approach used in modern Linux systems to ensure that both 32-bit and 64-bit applications can find their required libraries without hardcoded paths. In the RT6600ax system (ARM aarch64 architecture), all libraries are 64-bit, making this symlink primarily for compatibility with software expecting the traditional `/lib64` path.
@@ -172,6 +173,10 @@ For Synology SRM:
 - **Firmware**: SRM 5.2-9346
 - **Architecture**: ARM aarch64
 - **Analysis Note**: Complete rewrite to document symlink nature
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /lib](lib.md) | [→ Next: /libexec](libexec.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

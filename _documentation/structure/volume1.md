@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /var defaults](var.defaults.md)
 
 ---
+---
 
 ## Overview
 The `/volume1` directory is the primary data storage volume on Synology SRM devices. It serves as the root for user-installed applications, system-wide databases, and temporary files. Its modular structure, centered around the `@appstore` and `@db` directories, allows for package-based functionality, but its operational characteristics present significant scalability and maintenance considerations.
@@ -263,6 +264,10 @@ Multiple HTTP services on high ports serve different block pages:
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete volume analysis with operational characteristics
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /var defaults](var.defaults.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

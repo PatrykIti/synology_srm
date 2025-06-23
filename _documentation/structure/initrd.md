@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /ini](ini.md) | [→ Next: /lib](lib.md)
 
 ---
+---
 
 ## Overview
 The `/initrd` directory serves as a mount point for the initial RAM disk (initramfs) during the early boot process of Synology SRM. While this directory appears empty in the backup, it plays a critical role during system initialization. The initramfs provides a temporary root filesystem that enables the kernel to load necessary drivers and mount the actual root filesystem.
@@ -211,6 +212,10 @@ Not applicable - /initrd is unmounted before network services start
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete initrd analysis
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /ini](ini.md) | [→ Next: /lib](lib.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*

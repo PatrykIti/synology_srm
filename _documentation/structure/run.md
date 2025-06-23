@@ -3,6 +3,7 @@
 [← Back to Documentation Index](../README.md) | [← Previous: /root](root.md) | [→ Next: /sbin](sbin.md)
 
 ---
+---
 
 ## Overview
 The `/run` directory is a standard location for storing volatile runtime data in the Synology SRM system. As a tmpfs (temporary filesystem) mount residing in RAM, it provides fast access to process IDs, lock files, sockets, and service state information that are cleared upon system restart. In the RT6600ax router, this directory orchestrates the runtime coordination of 28+ system services and manages critical inter-process communication.
@@ -265,6 +266,10 @@ kill -TERM $(cat /run/crond.pid)
 - **System**: Synology RT6600ax
 - **Firmware**: SRM 5.2-9346
 - **Analysis**: Complete runtime state analysis
+
+---
+
+[← Back to Documentation Index](../README.md) | [← Previous: /root](root.md) | [→ Next: /sbin](sbin.md)
 
 ---
 *This documentation was created as part of the comprehensive Synology SRM system analysis project.*
