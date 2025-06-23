@@ -183,7 +183,7 @@ The `/bin` directory contains essential system binaries required for basic syste
 - System administration: [/sbin/](sbin.md)
 - Libraries: [/lib/](lib.md)
 - Configuration: [/etc/](etc.md)
-- Services: [/etc/init/](etc/init.md)
+- Services: [/etc/init/](etc.md#upstart-services)
 
 ## Version Information
 - **Document Version**: 1.0

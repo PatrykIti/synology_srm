@@ -245,10 +245,10 @@ ipsec_passthrough_enable=yes
 - Network issues: check routing tables
 
 ## Cross-References
-- Service definitions: [/etc/init/](init.md)
-- Network scripts: [/sbin/](../sbin.md)
-- Libraries: [/lib/](../lib.md)
-- Defaults: [/etc.defaults/](../etc.defaults.md)
+- Service definitions: [/etc/init/](etc.md#upstart-services)
+- Network scripts: [/sbin/](sbin.md)
+- Libraries: [/lib/](lib.md)
+- Defaults: [/etc.defaults/](etc.defaults.md)
 
 ## Version Information
 - **Document Version**: 1.0

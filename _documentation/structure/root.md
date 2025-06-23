@@ -140,9 +140,9 @@ The `/root` directory itself does not configure or expose any network services. 
 
 ## Cross-References
 - System binaries: [/sbin/](sbin.md) and [/bin/](bin.md)
-- Synology binaries: [/usr/syno/](usr.syno.md)
-- Update system: [/usr/syno/bin/](usr.syno.md#update-system)
-- GPG tools: [/usr/bin/gpg](usr.bin.md)
+- Synology binaries: [/usr/syno/](usr.md)
+- Update system: [/usr/syno/bin/](usr.md#synology-specific-tools)
+- GPG tools: [/usr/bin/gpg](usr.md#user-binaries)
 - Configuration defaults: [/etc.defaults/](etc.defaults.md)
 - System logs: [/var/log/](var.md#system-logs)
 

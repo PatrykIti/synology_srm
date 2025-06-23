@@ -264,9 +264,9 @@ The `/var` directory serves as the primary location for variable data in Synolog
 - System configuration: [/etc/](etc.md)
 - Service definitions: [/etc/init/](etc.md#upstart-services)
 - Synology packages: [/volume1/@appstore/](volume1.md#application-packages)
-- Security tools: [/usr/syno/bin/](usr.syno.md#security-tools)
+- Security tools: [/usr/syno/bin/](usr.md#synology-specific-tools)
 - Log rotation: [/etc/logrotate.d/](etc.md#log-rotation)
-- Package binaries: [/usr/bin/](usr.bin.md)
+- Package binaries: [/usr/bin/](usr.md#user-binaries)
 
 ## Version Information
 - **Document Version**: 2.1

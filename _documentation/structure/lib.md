@@ -237,7 +237,7 @@ The `/lib` directory contains essential shared libraries, kernel modules, and fi
 - Configuration: [/etc/](etc.md)
 - Library config: [/etc/ld.so.conf](etc.md#library-configuration)
 - PAM config: [/etc/pam.d/](etc.md#pam-configuration)
-- Security analysis: [Library Vulnerabilities](../security/library_vulnerabilities.md)
+- Security analysis: <!-- [Library Vulnerabilities](../security/library_vulnerabilities.md) - To be created -->
 
 
 ## Version Information

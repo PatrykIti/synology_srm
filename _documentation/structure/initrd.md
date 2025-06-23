@@ -203,7 +203,7 @@ Not applicable - /initrd is unmounted before network services start
 ## Cross-References
 - Boot process: [/etc/rc](etc.md#boot-scripts)
 - Kernel modules: [/lib/modules/](lib.md#kernel-modules)
-- USB management: [/sys/bus/usb/](sys.md#usb-subsystem)
+- USB management: /sys/bus/usb/ <!-- Link to sys.md#usb-subsystem removed until documented -->
 - Boot logs: [/var/log/](var.md#boot-logs)
 
 ## Version Information
