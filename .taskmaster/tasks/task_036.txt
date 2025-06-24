@@ -1,0 +1,117 @@
+# Task ID: 36
+# Title: Implement Automated Documentation Validation System
+# Status: done
+# Dependencies: 1, 2, 23
+# Priority: high
+# Description: Develop an automated system to validate documentation quality, including markdown link checking, template compliance, and CI/CD integration to prevent documentation decay.
+# Details:
+1. **Markdown Link Checker Implementation:**
+   - Research and select a suitable markdown link checking tool or library (e.g., `markdown-link-check`, `lychee`, or a custom script using Python libraries like `requests` and `beautifulsoup` or `markdown-it-py`).
+   - Configure the tool to recursively scan all markdown files within the `_documentation/` directory.
+   - Ensure the checker validates both internal relative links (to other documents or sections) and external absolute URLs.
+   - Implement mechanisms to handle or ignore links requiring authentication if full checking is not feasible, or configure necessary credentials securely if it is.
+   - Allow configuration for retries and timeouts for external links.
+
+2. **Template Compliance Validator Development:**
+   - Define a set of rules based on the standard documentation template established in Task 2. These rules should verify:
+     - Presence of all mandatory sections (e.g., "Overview & Purpose", "Key Files & Subdirectories", "Security Implications").
+     - Correct formatting and naming of section headers.
+     - Adherence to any specified structural requirements within sections (e.g., use of lists, code blocks for specific information).
+   - Develop scripts (e.g., Python with a markdown parsing library like `mistune` or `CommonMark`) to parse markdown files and enforce these template rules.
+   - The validator must output clear, actionable error messages indicating the file, line number (if possible), and nature of the template deviation.
+
+3. **CI/CD Pipeline Integration:**
+   - Integrate both the markdown link checker and the template compliance validator into the project's Continuous Integration/Continuous Deployment (CI/CD) pipeline (e.g., GitHub Actions, GitLab CI, Jenkins).
+   - Configure the CI/CD pipeline to trigger these validation checks automatically on every commit to feature branches and/or on every pull request targeting the main documentation branch.
+   - Ensure that the CI/CD build fails if either the link checker or the template validator reports errors, thus preventing the merge of non-compliant documentation.
+   - CI/CD logs should clearly display the output from the validation tools, making it easy for authors to identify and fix issues.
+
+4. **Configuration and Customization:**
+   - Allow for configuration of the validation tools (e.g., allowlisting certain URLs for the link checker, defining severity levels for template violations).
+   - Store configurations in a version-controlled file (e.g., YAML, JSON).
+
+5. **Documentation for the Validation System:**
+   - Create documentation for the automated validation system itself.
+   - This documentation should explain how to run the validation tools locally for pre-commit checks.
+   - Detail the CI/CD integration, how to interpret validation failures, and common troubleshooting steps.
+   - Provide guidance on fixing common validation errors reported by the system.
+
+# Test Strategy:
+1. **Markdown Link Checker Verification:**
+   - Create a set of test markdown files within a dedicated test directory.
+   - Include files with:
+     - Valid internal relative links.
+     - Valid external URLs (HTTP and HTTPS).
+     - Broken internal links (pointing to non-existent files or anchors).
+     - Broken external URLs (e.g., 404 Not Found, DNS resolution failure).
+     - Links to resources that might require special handling (e.g., redirects, authentication - if supported).
+   - Execute the link checker against these test files and verify that it accurately identifies all broken links and passes all valid ones, reporting as expected.
+
+2. **Template Compliance Validator Verification:**
+   - Create test markdown files that:
+     - Perfectly adhere to the standard documentation template (from Task 2).
+     - Violate template rules by missing one or more mandatory sections.
+     - Contain incorrectly formatted or misspelled section headers.
+     - Deviate from any defined structural expectations within sections.
+   - Run the template compliance validator against these test files. Verify that it correctly identifies all instances of non-compliance and passes compliant files, with error messages clearly pointing to the issues.
+
+3. **CI/CD Integration Test:**
+   - Create a feature branch and make documentation changes that intentionally introduce:
+     - At least one broken link.
+     - At least one template compliance issue.
+   - Push the changes and create a pull request (or trigger the CI pipeline as configured).
+   - Verify that the CI/CD pipeline executes the validation checks and correctly fails the build, clearly reporting the specific errors from both the link checker and template validator.
+   - Create a subsequent commit on the same branch that fixes all reported issues.
+   - Push the fixes and verify that the CI/CD pipeline now runs successfully and the build passes.
+
+4. **Reporting and Usability Testing:**
+   - Review the error messages and reports generated by both validators (locally and in CI/CD logs) for clarity, accuracy, and actionability. Ensure they provide enough information for a user to easily locate and fix the problem.
+
+5. **Documentation Review for Validation System:**
+   - Review the documentation created for the automated validation system itself. Verify its completeness, accuracy, and clarity in explaining how to use the tools and interpret results.
+
+# Subtasks:
+## 1. Implement Markdown Link Checker [done]
+### Dependencies: None
+### Description: Develop and configure a tool to automatically check for broken links (both internal and external) within all markdown files in the `_documentation/` directory.
+### Details:
+1. Research and select a suitable markdown link checking tool (e.g., `markdown-link-check`, `lychee`) or develop a custom script (e.g., Python with `requests`, `beautifulsoup`, or `markdown-it-py`).
+2. Configure the chosen tool to recursively scan all `.md` files within the `_documentation/` directory.
+3. Ensure the checker validates both internal relative links (to other documents or sections) and external absolute URLs.
+4. Implement strategies for handling links requiring authentication (e.g., ignore them, or configure necessary credentials securely if feasible and required).
+5. Allow configuration for retries and timeouts for external link checks to handle network flakiness.
+6. The checker should output a clear report of broken links, including the file path and line number if possible.
+
+## 2. Develop Documentation Template Compliance Validator [done]
+### Dependencies: None
+### Description: Create scripts to parse markdown documentation files and verify their adherence to predefined template standards, ensuring structural consistency and presence of mandatory sections.
+### Details:
+1. Define a comprehensive set of rules based on the established documentation template (as per Task 2, e.g., presence of "Overview & Purpose", "Key Files & Subdirectories", "Security Implications").
+2. Rules should cover: presence of all mandatory sections, correct formatting and naming of section headers, and adherence to specified structural requirements within sections (e.g., use of lists, code blocks for specific information).
+3. Develop scripts (e.g., using Python with a markdown parsing library like `mistune` or `CommonMark`) to parse markdown files and enforce these template rules.
+4. The validator must output clear, actionable error messages indicating the file, line number (if possible), and the specific nature of the template deviation.
+
+## 3. Integrate Validators into CI/CD Pipeline [done]
+### Dependencies: 36.1, 36.2
+### Description: Set up the Continuous Integration/Continuous Deployment (CI/CD) pipeline to automatically run both the markdown link checker and the template compliance validator on relevant code changes, failing the build if documentation issues are found.
+### Details:
+1. Integrate the markdown link checker (from subtask 1) and the template compliance validator (from subtask 2) into the project's CI/CD pipeline (e.g., GitHub Actions, GitLab CI, Jenkins).
+2. Configure the CI/CD pipeline to trigger these validation checks automatically on every commit to feature branches and/or on every pull request targeting the main documentation branch.
+3. Ensure that the CI/CD build fails if either the link checker or the template validator reports errors, thus preventing the merge of non-compliant documentation.
+4. CI/CD logs should clearly display the output from both validation tools, making it easy for authors to identify and fix issues.
+
+## 4. Implement Configuration Management and Document the Validation System [done]
+### Dependencies: 36.3
+### Description: Develop a flexible configuration mechanism for the validation tools and create comprehensive documentation for using, maintaining, and troubleshooting the automated documentation validation system.
+### Details:
+1. **Configuration Management:**
+   - Design and implement a system to allow configuration of the validation tools (e.g., allowlisting specific URLs or domains for the link checker, defining severity levels for template violations, enabling/disabling specific template rules).
+   - Store these configurations in a version-controlled file (e.g., YAML, JSON) that is easy for users to understand and modify.
+   - Ensure both the link checker and template validator read their configurations from this central file.
+2. **System Documentation:**
+   - Create comprehensive documentation for the automated validation system itself.
+   - Explain how to run the validation tools locally for pre-commit checks by developers.
+   - Detail the CI/CD integration: how it works, how to interpret validation failures from CI logs.
+   - Provide common troubleshooting steps and guidance on fixing common validation errors reported by the system (e.g., how to add a URL to the allowlist, how to fix common template issues).
+   - Document how to update or extend the validation rules or configurations.
+

@@ -1,0 +1,27 @@
+# Task ID: 23
+# Title: Create Central README.md in _documentation/ and Remove _TASK_LIST.md
+# Status: done
+# Dependencies: 22
+# Priority: high
+# Description: Replace the _TASK_LIST.md file in the _documentation/ directory with a new README.md. This new file will provide an overview of the documentation structure and include links to detailed documentation for each system component or directory.
+# Details:
+1. Navigate to the `_documentation/` directory.
+2. Delete the `_TASK_LIST.md` file.
+3. Create a new file named `README.md` within the `_documentation/` directory.
+4. Populate `_documentation/README.md` with the following sections:
+    a. **Introduction**: Briefly describe the purpose and scope of the overall SRM documentation set.
+    b. **Documentation Structure**: Explain how the documentation is organized (e.g., by system directory, by component, etc.).
+    c. **Directory Documentation Links**: Provide a list of direct links to the primary documentation file (e.g., `README.md` or main document) for each major documented directory or component. Example format: `[Documentation for /etc](./etc/README.md)`. Ensure these links point to the finalized documentation artifacts from Task 22.
+    d. **Note**: Briefly mention that this README.md replaces the former `_TASK_LIST.md`.
+5. Ensure all links are functional and relative paths are used where appropriate.
+6. Use clear, concise language and maintain a professional tone, consistent with other documentation.
+
+# Test Strategy:
+1. Verify that the `_documentation/_TASK_LIST.md` file has been successfully removed.
+2. Confirm that the `_documentation/README.md` file has been created in the specified location.
+3. Review the content of `_documentation/README.md`:
+    a. Check for an accurate and informative introduction and a clear explanation of the documentation structure.
+    b. Verify that the list of links to per-directory/component documentation is present, comprehensive, and correctly formatted.
+    c. Test each link to ensure it navigates to the correct and existing documentation file and that there are no broken links.
+    d. Confirm the note regarding the replacement of `_TASK_LIST.md` is present.
+4. Ensure the overall presentation of the README.md is clear, well-organized, and effectively guides users in navigating the documentation set.

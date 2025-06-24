@@ -1,0 +1,22 @@
+# Task ID: 40
+# Title: Verify Project README.md Files for Accuracy and Link Integrity
+# Status: done
+# Dependencies: 2, 23, 25, 36
+# Priority: high
+# Description: Conduct a comprehensive review of all README.md files across the project to ensure link integrity, up-to-date information, and accurate reflection of the current project state, utilizing Zen Gemini for analysis.
+# Details:
+1. **Scope Definition & README Inventory:** Clearly define the scope to include all `README.md` files within the project repository. Generate a comprehensive list of all `README.md` files to be reviewed, potentially using a script (e.g., `find . -name README.md`).
+2. **Zen Gemini Analysis Configuration:** Prepare Zen Gemini (or the specified analysis tool) for processing markdown files. Configure analysis parameters to focus on: Link Integrity (broken internal/external links, anchors), Information Timeliness (outdated versions, deprecated features, past dates), Content Relevance (accuracy of descriptions against directory/module/project scope), and Consistency Check (comparison with other documentation and recent project changes).
+3. **Execution of Analysis:** Systematically process each identified `README.md` file through Zen Gemini. Collect and organize the raw analysis output for each file.
+4. **Manual Review and Verification:** Review Zen Gemini's findings for each README. Manually verify flagged issues, especially those concerning content accuracy and timeliness, which require domain knowledge. Perform manual spot-checks for clarity, grammar, and adherence to documentation standards (referencing outputs of Task 2 and Task 37 where applicable).
+5. **Consolidated Reporting and Prioritization:** Compile a single report detailing all findings, categorized by `README.md` file. For each issue, describe the problem, its location, and suggest a correction. Prioritize issues based on the README's importance and the severity of the issue.
+6. **Remediation (Issue Tracking/Pull Requests):** For each confirmed issue, create a corresponding task in the project's issue tracker or prepare and submit pull requests with necessary corrections, adhering to contribution guidelines.
+
+# Test Strategy:
+1. **Inventory Verification:** Confirm that the list of analyzed `README.md` files matches a complete scan of the repository.
+2. **Analysis Tool Output Review:** Verify that Zen Gemini (or equivalent) was executed on all scoped `README.md` files. Review a sample of the analysis output to ensure it covers link checking, outdated information flags, and content relevance metrics as specified.
+3. **Broken Link Resolution:** Confirm the final report lists all identified broken links. After remediation, re-run link checking on affected files to confirm fixes; all critical links must be functional.
+4. **Outdated Information Correction:** Select a sample of READMEs flagged for outdated information. Manually verify that the information has been updated to accurately reflect the current project state (e.g., compare against latest code, official documentation, release notes).
+5. **Content Accuracy Validation:** For key READMEs (e.g., project root, `_documentation/README.md`), confirm that descriptions of purpose, functionality, and structure are accurate and clear.
+6. **Report Validation:** Ensure the consolidated report is comprehensive, clear, and that all high-priority issues have a documented resolution plan or have been addressed.
+7. **Remediation Check:** If issues were tracked, verify that corresponding tasks are closed or pull requests are merged. Spot-check several updated `README.md` files to confirm corrections were applied accurately.

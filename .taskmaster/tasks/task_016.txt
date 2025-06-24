@@ -1,0 +1,37 @@
+# Task ID: 16
+# Title: Analyze and Document /data Directory (Application Data and Vendor Components)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document the /data directory, focusing on application-specific data, databases, and third-party/vendor components stored here.
+# Details:
+Identify subdirectories within /data that relate to specific SRM applications or packages (e.g., Threat Prevention, VPN Plus data). Document data formats, storage mechanisms (e.g., SQLite databases, proprietary formats), and configurations if discernible. Note any vendor-specific components and their roles. Use MCP Zen tools. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Review documentation for coverage of key application data and vendor components in /data. Accuracy and adherence to template.
+
+# Subtasks:
+## 1. Identify Major Subdirectories in /data [done]
+### Dependencies: None
+### Description: Scan the /data directory to list and identify major subdirectories, focusing on those related to specific SRM applications or software packages.
+### Details:
+Focus on subdirectories that appear to contain application-specific data or configurations. Note any naming conventions that suggest application or package association. The output should be a list of identified subdirectories with brief notes on their suspected purpose.
+
+## 2. Document Data Formats and Storage Mechanisms [done]
+### Dependencies: 16.1
+### Description: For each major subdirectory identified in subtask 1, investigate and document the data formats (e.g., CSV, JSON, XML, binary) and storage mechanisms (e.g., SQLite, flat files, proprietary databases) used.
+### Details:
+This involves inspecting file types, looking for database files (e.g., .db, .sqlite), and potentially analyzing file headers or contents to infer format. Document findings for each relevant subdirectory.
+
+## 3. Document Data Storage and Application Configurations [done]
+### Dependencies: 16.1
+### Description: Within the identified subdirectories (from subtask 1), locate and document any configuration files or settings related to data storage (e.g., database connection strings, storage paths) or general application behavior.
+### Details:
+Look for common configuration file extensions (e.g., .conf, .ini, .xml, .yaml, .properties). Document key parameters and their values, especially those impacting data handling, storage locations, or application operational settings.
+
+## 4. Identify and Document Vendor-Specific Components [done]
+### Dependencies: 16.1, 16.2, 16.3
+### Description: Based on the findings from previous subtasks, identify any vendor-specific components, libraries, or executables within the /data directory or its subdirectories, and document their apparent roles or functions in relation to the SRM applications.
+### Details:
+This may involve researching component names online, checking for embedded version information, or inferring roles based on file names, locations, and observed interactions with other application data or configurations. Note any dependencies or licensing information if discoverable.
+

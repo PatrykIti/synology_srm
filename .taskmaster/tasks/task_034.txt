@@ -1,0 +1,32 @@
+# Task ID: 34
+# Title: Document /sys Directory (Kernel Interface and sysfs)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document the /sys directory, focusing on its role as an interface to kernel data structures and the sysfs virtual filesystem. This is crucial for understanding hardware abstraction, device management, and kernel parameters.
+# Details:
+Document the /sys directory, a virtual filesystem (sysfs) that exports information about kernel subsystems, hardware devices, and device drivers from the kernel's device model to userspace. Explain its hierarchical structure, which mirrors the internal organization of devices and drivers within the kernel.
+Key areas to cover:
+1.  **Purpose of sysfs**: How it differs from /proc, its role in the udev system for dynamic device management.
+2.  **Top-level directories**:
+    *   `/sys/block`: Detailed information and statistics for block devices (e.g., disks, partitions).
+    *   `/sys/bus`: Devices organized by the bus they are attached to (e.g., `pci`, `usb`, `i2c`, `platform`). Document how to find devices and their drivers here.
+    *   `/sys/class`: Devices grouped by functional class (e.g., `net` for network interfaces, `input` for input devices, `graphics`, `sound`). Explain how classes provide a standardized interface.
+    *   `/sys/devices`: The canonical representation of all devices in the system, showing their hierarchical relationship (e.g., `/sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0/block/sda`). Explain how other directories in `/sys` often contain symbolic links pointing into `/sys/devices`.
+    *   `/sys/firmware`: Interface to firmware-specific objects and attributes (e.g., ACPI tables, EFI variables).
+    *   `/sys/fs`: Information and control points for specific filesystems (e.g., cgroup, fuse).
+    *   `/sys/kernel`: Kernel-wide information and tunables. Includes subdirectories like `mm` (memory management), `debug`, `profiling`, and `uevent_helper`.
+    *   `/sys/module`: Information about currently loaded kernel modules. Each module subdirectory allows inspection of parameters, sections, and reference counts. Explain how module parameters can sometimes be modified here.
+3.  **Attributes**: Explain that files within these directories represent device or kernel attributes. Reading a file shows its value; writing to some files can change the attribute (e.g., trigger an action, modify a parameter). Provide examples.
+4.  **Interaction with Userspace**: How tools like `udev`, `lspci`, `lsusb`, `lshw` utilize `/sys`.
+5.  **SRM Specifics**: Investigate if SRM has any custom structures, device representations, or specific kernel modules whose parameters are exposed uniquely via `/sys`.
+Methodology: Use `tree -L 3 /sys` (or deeper where relevant), `ls -lR /sys`, `cat` to inspect attribute files. Consult official Linux kernel documentation on sysfs. Adhere to the standard documentation template (Task 2).
+
+# Test Strategy:
+1. Verify the documentation accurately explains the overall purpose of `/sys` as a kernel-userspace interface and the sysfs virtual filesystem.
+2.  Confirm that the structure of `/sys` is well-described, including the roles of major subdirectories: `/sys/block`, `/sys/bus`, `/sys/class`, `/sys/devices`, `/sys/firmware`, `/sys/fs`, `/sys/kernel`, and `/sys/module`.
+3.  Ensure the concept of attributes (files representing kernel object properties) and their read/write nature (where applicable) is clearly explained with examples.
+4.  Check that the documentation illustrates how `/sys` is used for device discovery, hardware information retrieval, and potentially kernel parameter tuning.
+5.  Validate that the relationship between `/sys` and userspace tools (e.g., udev) is mentioned.
+6.  Confirm any SRM-specific aspects of `/sys` (if found) are documented.
+7.  Ensure adherence to the project's standard documentation template (Task 2) and that the information is technically accurate and clearly presented.

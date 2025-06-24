@@ -1,0 +1,24 @@
+# Task ID: 24
+# Title: Enhance Documentation Template with Navigation Links
+# Status: done
+# Dependencies: 2, 23
+# Priority: high
+# Description: Update the `TEMPLATE.MD` to include standardized navigation sections at the top and bottom. These sections will feature a link back to the main table of contents (`../README.md`) and placeholders for links to the previous and next documents in the documentation sequence.
+# Details:
+1. Locate and modify the `TEMPLATE.MD` file, which is the standard documentation template established in Task 2.
+2. Add a navigation bar at the very top of the `TEMPLATE.MD` structure. This bar should contain:
+    a. The literal link: `[← Powrót do spisu treści](../README.md)`. This link is intended to point to the central `README.md` file created in Task 23, assuming generated documents will reside in subdirectories.
+    b. A placeholder for the 'previous document' link, formatted as: `[← Poprzedni dokument](PLACEHOLDER_PREVIOUS.md)`.
+    c. A placeholder for the 'next document' link, formatted as: `[Następny dokument →](PLACEHOLDER_NEXT.md)`.
+3. Add an identical navigation bar at the very bottom of the `TEMPLATE.MD` structure.
+4. Ensure these navigation elements are clearly separated from the main content, for example, by using Markdown horizontal rules (`---`) above and below each navigation bar.
+5. The placeholders (`PLACEHOLDER_PREVIOUS.md`, `PLACEHOLDER_NEXT.md`) are indicative and should be designed for easy identification and replacement with actual relative file paths when individual documents are finalized and their sequence within the documentation set is determined.
+
+# Test Strategy:
+1. Retrieve the `TEMPLATE.MD` file after modifications.
+2. Verify that a navigation bar containing the specified three link structures (Table of Contents, Previous, Next) is present at the very top of the template content.
+3. Verify that an identical navigation bar is present at the very bottom of the template content.
+4. Confirm that the link `[← Powrót do spisu treści](../README.md)` is implemented exactly as specified in both navigation bars.
+5. Check for the presence of clear and distinct placeholders for 'previous document' (e.g., `[← Poprzedni dokument](PLACEHOLDER_PREVIOUS.md)`) and 'next document' (e.g., `[Następny dokument →](PLACEHOLDER_NEXT.md)`) links in both navigation bars.
+6. Create a test Markdown document using the updated `TEMPLATE.MD` and place it in a hypothetical subdirectory structure (e.g., `_documentation/sample_component/test_doc.md`). Open this test document in a Markdown previewer and confirm that the `../README.md` link correctly resolves or would resolve to `_documentation/README.md`.
+7. Assess if the placeholder mechanism for previous/next links is straightforward for future replacement with actual document links.

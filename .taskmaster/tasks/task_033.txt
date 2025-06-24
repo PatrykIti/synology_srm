@@ -1,0 +1,57 @@
+# Task ID: 33
+# Title: Analyze and Document /usr Directory (User Programs and Libraries)
+# Status: done
+# Dependencies: 1, 2, 7, 8
+# Priority: high
+# Description: Analyze and document the /usr directory, focusing on its standard subdirectories like /usr/bin, /usr/sbin, /usr/lib, and the Synology-specific /usr/syno, which contains critical system programs, libraries, and vendor-specific tools.
+# Details:
+This task involves a comprehensive analysis and documentation of the /usr directory and its critical subdirectories within the SRM filesystem.
+1.  **General Overview:** Document the purpose of the /usr directory as per Filesystem Hierarchy Standard (FHS) guidelines, noting it typically contains shareable, read-only data, including user utilities and applications.
+2.  **/usr/bin:** Identify and list common user executable programs. Differentiate its contents from /bin (essential system binaries). Document purpose, common usage, and any SRM-specific binaries or behaviors.
+3.  **/usr/sbin:** Identify and list system administration binaries not essential for booting or repair. Differentiate its contents from /sbin (essential system administration binaries). Document purpose, common usage, and any SRM-specific binaries or behaviors.
+4.  **/usr/lib:** Document the libraries required by binaries in /usr/bin and /usr/sbin. Identify types of libraries (e.g., .so files) and their purpose. Note any SRM-specific libraries or library management practices.
+5.  **/usr/syno:** Conduct an in-depth investigation of this Synology-specific directory. Map out its subdirectory structure (e.g., /usr/syno/bin, /usr/syno/sbin, /usr/syno/lib, /usr/syno/etc, /usr/syno/share). Document the purpose of key Synology-specific applications, daemons, scripts, libraries, and configuration files found here. This is a critical area for understanding SRM customizations.
+6.  **Other /usr Subdirectories:** Briefly document other standard subdirectories if present and significant (e.g., /usr/share for architecture-independent data, /usr/include for header files, /usr/local for locally installed software).
+7.  **Tools and Methodology:** Utilize MCP Zen tools, `ls`, `file`, `strings`, `ldd`, and script analysis to understand the contents and functionality.
+8.  **Documentation Standards:** Adhere to the established documentation template (Task 2) for structure, formatting, and level of detail.
+
+# Test Strategy:
+1.  **Comprehensive Coverage:** Verify that the documentation thoroughly covers the /usr directory and its main subdirectories (/usr/bin, /usr/sbin, /usr/lib, /usr/syno).
+2.  **Accuracy of /usr/syno:** Confirm that the documentation for the /usr/syno directory accurately reflects its structure and the purpose of its Synology-specific components. This is a key validation point.
+3.  **Distinction from Root Counterparts:** Ensure the documentation clearly distinguishes the roles and contents of /usr/bin from /bin, and /usr/sbin from /sbin, referencing documentation from Task 7 and Task 8.
+4.  **Library Information:** Check that /usr/lib documentation correctly identifies key libraries and their roles.
+5.  **Tool Usage Evidence:** Confirm that analysis methods (e.g., output from tools, script deconstruction) are appropriately referenced or summarized in the documentation.
+6.  **Template Adherence:** Validate that the document conforms to the standard documentation template (Task 2).
+7.  **Clarity and Readability:** Ensure the documentation is clear, concise, and understandable to the target audience.
+
+# Subtasks:
+## 1. Document /usr Directory Overview and Analyze /usr/bin Contents [done]
+### Dependencies: None
+### Description: Document the general purpose of the /usr directory as per Filesystem Hierarchy Standard (FHS) guidelines. Concurrently, analyze and document the contents of the /usr/bin subdirectory, identifying common user executable programs, differentiating its contents from /bin, and noting any SRM-specific binaries or behaviors.
+### Details:
+Begin by researching and summarizing the role of /usr according to FHS. For /usr/bin, use commands like `ls -la /usr/bin`, `file /usr/bin/*`, and `strings` on selected binaries to identify their types and potential functions. Document purpose, common usage patterns, and any observed SRM-specific binaries or deviations from standard behavior. Adhere to the established documentation template (Task 2).
+
+## 2. Analyze and Document /usr/sbin Contents [done]
+### Dependencies: 33.1
+### Description: Analyze and document the /usr/sbin subdirectory. Identify system administration binaries that are not essential for booting or system repair. Differentiate its contents from /sbin, and document the purpose, common usage, and any SRM-specific binaries or behaviors found within /usr/sbin.
+### Details:
+Use tools such as `ls -la /usr/sbin`, `file /usr/sbin/*`, and `strings` on selected binaries within /usr/sbin. Compare findings with the characteristics of /sbin to highlight differences. Document the purpose, typical usage scenarios, and any SRM-specific system administration tools or modified behaviors. Follow the documentation template (Task 2).
+
+## 3. Analyze and Document /usr/lib Contents and Libraries [done]
+### Dependencies: 33.2
+### Description: Document the libraries located in the /usr/lib subdirectory, with a focus on those required by binaries in /usr/bin and /usr/sbin. Identify types of libraries (e.g., .so shared object files), their general purpose, and note any SRM-specific libraries or library management practices.
+### Details:
+Explore /usr/lib using `ls -la /usr/lib` and `file /usr/lib/*`. Employ `ldd` on a representative sample of binaries from /usr/bin and /usr/sbin to identify dynamically linked libraries. Document common library types, their functions, naming conventions, and any observed SRM-specific libraries or unique library management approaches. Adhere to the documentation template (Task 2).
+
+## 4. In-depth Investigation and Documentation of /usr/syno Directory [done]
+### Dependencies: 33.3
+### Description: Conduct a comprehensive investigation of the Synology-specific /usr/syno directory. Systematically map out its subdirectory structure (e.g., /usr/syno/bin, /usr/syno/sbin, /usr/syno/lib, /usr/syno/etc, /usr/syno/share). Document the purpose of key Synology-specific applications, daemons, scripts, libraries, and configuration files found within this critical directory.
+### Details:
+Systematically explore /usr/syno and its primary subdirectories (/usr/syno/bin, /usr/syno/sbin, /usr/syno/lib, /usr/syno/etc, /usr/syno/share, etc.) using `ls -R`, `tree`, `file`, `strings`, and `ldd`. Analyze shell scripts and examine configuration files. Focus on identifying and documenting the role and significance of key Synology-specific components, particularly those related to SRM's core functionality and customizations. Adhere to the documentation template (Task 2).
+
+## 5. Document Other /usr Subdirectories and Consolidate Full /usr Documentation [done]
+### Dependencies: 33.4
+### Description: Briefly document other standard /usr subdirectories (e.g., /usr/share for architecture-independent data, /usr/include for header files, /usr/local for locally installed software) if present and significant. Consolidate all findings from subtasks 1-4 into a single, comprehensive document for the entire /usr directory, ensuring strict adherence to established documentation standards (Task 2).
+### Details:
+Investigate directories like /usr/share, /usr/include, /usr/local, /usr/libexec, etc., using `ls`, `file`, and by examining their contents. Document their purpose briefly, focusing on significant content relevant to SRM. Compile all previously generated documentation sections (general /usr, /usr/bin, /usr/sbin, /usr/lib, /usr/syno, and other subdirectories) into a final, coherent document. Perform a thorough review for consistency in formatting, terminology, level of detail, and complete adherence to the documentation template (Task 2).
+

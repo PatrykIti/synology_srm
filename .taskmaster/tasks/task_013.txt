@@ -1,0 +1,11 @@
+# Task ID: 13
+# Title: Analyze and Document /var and /var.defaults Directories (Variable Data)
+# Status: done
+# Dependencies: 1, 2
+# Priority: high
+# Description: Analyze and document the /var directory for variable data like logs, caches, spools, and /var.defaults for their initial state or templates.
+# Details:
+Document key subdirectories within /var (e.g., /var/log for system and application logs, /var/run (often a symlink to /run), /var/tmp for temporary files persisting across reboots, /var/cache for cached application data, /var/spool for queued tasks). Explain the purpose of data stored in these locations. Discuss log rotation mechanisms or cache management if evident from scripts or configurations. Document /var.defaults and its relation to /var, if it provides initial structures or content. Use MCP Zen tools. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Review documentation for coverage of important variable data locations and their management (logs, cache). Accuracy and adherence to template.

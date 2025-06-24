@@ -1,0 +1,48 @@
+# Task ID: 28
+# Title: Analyze and Update Documentation for Special Directories with Customization Focus
+# Status: done
+# Dependencies: 1, 2, 3, 4, 9, 10, 13, 27
+# Priority: medium
+# Description: Analyze and update documentation for the `/etc.defaults`, `/var.defaults`, `/lib64`, and `/libexec` directories. This task focuses on using Zen MCP consensus to compare default/active versions and identify Synology-specific customizations.
+# Details:
+1.  **Preparation:**
+    *   Ensure Zen MCP tools are configured and accessible (related to Task 1).
+    *   Familiarize with the standard documentation template (Task 2).
+2.  **Analysis of `/etc.defaults`:**
+    *   Leverage baseline analysis from Task 4.
+    *   Use Zen MCP consensus to compare files in `/etc.defaults` with their counterparts in `/etc` (referencing analysis from Task 3).
+    *   Identify and document any Synology-specific configurations or deviations from standard defaults.
+    *   Document the role of these defaults in system initialization, factory resets, or as fallbacks.
+3.  **Analysis of `/var.defaults`:**
+    *   Leverage baseline analysis from Task 13.
+    *   Use Zen MCP consensus to compare contents/structures in `/var.defaults` with the active `/var` directory (referencing analysis from Task 13 and Task 27).
+    *   Identify and document Synology-specific initial data, templates, or structures.
+    *   Document their purpose, particularly for initial setup or system reset scenarios.
+4.  **Analysis of `/lib64`:**
+    *   Build upon the completed analysis of `/lib64` from Task 9.
+    *   Specifically identify any alternative libraries, Synology-proprietary libraries, or custom versions within `/lib64` not covered or highlighted in Task 9.
+    *   Use Zen MCP tools if applicable for binary comparison or property analysis to identify customizations.
+    *   Document their purpose, versions, dependencies, and the specific system binaries or services they support, emphasizing Synology's role.
+5.  **Analysis of `/libexec`:**
+    *   Leverage baseline analysis from Task 10.
+    *   Analyze executables in `/libexec` using Zen MCP tools and `strings` to understand their functionality and identify Synology-specific helper programs or customizations.
+    *   Document their function, how they are called by other programs/services, and their role in the system, focusing on Synology-specific aspects.
+6.  **Documentation Update:**
+    *   For each directory, update or create comprehensive documentation adhering to the standard template (Task 2).
+    *   Clearly articulate the findings regarding default vs. active states, the results of Zen MCP consensus comparisons, and all identified Synology customizations.
+    *   Ensure documentation includes the purpose of these directories and their contents within the SRM ecosystem.
+
+# Test Strategy:
+1.  **Documentation Completeness and Adherence:**
+    *   Verify that dedicated documentation sections for `/etc.defaults`, `/var.defaults`, `/lib64`, and `/libexec` are present, comprehensive, and adhere to the standard template (Task 2).
+2.  **Accuracy of Analysis:**
+    *   Confirm that the analysis for each directory is accurate and technically sound.
+    *   Ensure the comparison between default (`/etc.defaults`, `/var.defaults`) and active (`/etc`, `/var`) states is clearly documented, highlighting differences.
+3.  **Zen MCP Consensus Application:**
+    *   Verify that the methodology and findings from using Zen MCP consensus are explicitly mentioned and reflected in the documentation for relevant comparisons (especially for `/etc.defaults` and `/var.defaults`).
+4.  **Identification of Synology Customizations:**
+    *   Critically review the documentation to ensure that Synology-specific configurations, libraries, executables, or behaviors within these four directories are clearly identified, explained, and highlighted.
+5.  **Contextual Relevance:**
+    *   Ensure the documentation explains the role and significance of these directories and their Synology-specific aspects within the overall SRM system architecture.
+6.  **Cross-Referencing:**
+    *   Check for appropriate cross-references to related documentation (e.g., Task 3 for `/etc`, Task 4 for `/etc.defaults` base, Task 9 for `/lib64` base, Task 10 for `/libexec` base, Task 13 for `/var.defaults` base, Task 27 for `/var`).

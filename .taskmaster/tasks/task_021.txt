@@ -1,0 +1,11 @@
+# Task ID: 21
+# Title: Compile Configuration Management Guide
+# Status: done
+# Dependencies: 1, 2, 3, 4, 6, 14
+# Priority: high
+# Description: Create a comprehensive guide detailing how system configuration is managed in SRM, covering key files, tools (if any), hierarchy, precedence, and best practices for modification and persistence.
+# Details:
+Synthesize information from tasks related to configuration (especially /etc, /etc.defaults, /ini, and service configurations). Explain the hierarchy and precedence of configuration files. Detail how configurations are applied (e.g., on boot, service restart). Provide guidance on making and persisting changes, if possible, or highlight where changes are typically made through the SRM web UI and how those translate to backend files. Produce the 'Configuration management guide' deliverable.
+
+# Test Strategy:
+Review the guide for practical usability, technical accuracy, and completeness in covering SRM configuration management. Ensure it's a valuable resource for administrators.

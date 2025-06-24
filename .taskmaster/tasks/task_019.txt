@@ -1,0 +1,11 @@
+# Task ID: 19
+# Title: Analyze and Document /volume1 Directory (Volume-Specific Data)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Document the structure and purpose of /volume1 (and similar, e.g., /volumeUSB1), focusing on how user data, installed packages, and applications are stored on SRM volumes.
+# Details:
+Explain the concept of volumes in SRM (if applicable, similar to Synology NAS). Document common subdirectories found on /volume1 (e.g., for installed application packages, shared folders if SRM supports them directly, system data related to the volume). Note how this directory relates to user-accessible storage and package management. Use MCP Zen tools. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Verify documentation clearly explains the role and structure of /volume1 and its significance for persistent data and applications. Adherence to template.

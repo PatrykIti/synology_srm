@@ -1,0 +1,18 @@
+# Task ID: 44
+# Title: Identify and Document Default SRM Packages (Excluding Safe Access)
+# Status: pending
+# Dependencies: 1, 2, 42, 43
+# Priority: medium
+# Description: Discover, prioritize, and document all default software packages installed on the SRM system, apart from Safe Access. Utilize Zen Gemini tools for discovery and the established package analysis template for documentation.
+# Details:
+1. **Package Discovery:** Employ Zen Gemini tools and system exploration techniques (e.g., examining `/var/packages`, `/usr/syno/pkgscripts`, `/usr/local/packages/@appstore`, package manager databases if any) to compile a comprehensive list of all pre-installed software packages on the SRM system. Explicitly exclude the "Safe Access" package, as it is covered by Task 41.
+2. **Prioritization:** Analyze the identified packages to determine their importance to core system functionality, user-facing features, or security. Categorize packages (e.g., critical system component, essential service, utility, optional application). Create a prioritized list to guide the documentation effort, focusing on the most impactful packages first.
+3. **Documentation:** For each prioritized package (or all, if feasible within scope): Locate its installation directories, configuration files, data storage locations, and related processes/services. Utilize the specialized package analysis template created in Task 42. Document package metadata (version, vendor), structure, key executables, libraries, dependencies (on other packages or system libraries), primary functionality, user interface components (if any), and known security considerations. Store the documentation for each package in the structure defined by Task 43 (e.g., `_documentation/packages/<package_name>/README.md`).
+4. **Update Package Index:** Update the `_documentation/packages/index.md` (from Task 43) to include links to the newly created documentation for each analyzed package.
+
+# Test Strategy:
+1. **Package List Verification:** Cross-reference the discovered list of packages with any available system information or known SRM features to ensure completeness (excluding Safe Access). Confirm that Zen Gemini tools were effectively used for discovery.
+2. **Prioritization Review:** Review the package prioritization to ensure it logically reflects system importance.
+3. **Documentation Content Review:** For a selection of documented packages (and all critical ones): Verify that all sections of the package analysis template (from Task 42) are accurately and comprehensively filled. Confirm the documented file locations, functionalities, and dependencies are correct. Check for clarity and technical accuracy.
+4. **Documentation Storage and Linking:** Ensure each package's documentation is stored in the correct subdirectory within `_documentation/packages/`. Verify that the `_documentation/packages/index.md` is updated and all links to individual package documentation are functional.
+5. **Exclusion Check:** Confirm that "Safe Access" package documentation was not duplicated and that this task focused on other packages.

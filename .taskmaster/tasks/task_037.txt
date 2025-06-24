@@ -1,0 +1,68 @@
+# Task ID: 37
+# Title: Create CONTRIBUTING.md for Documentation Guidelines
+# Status: done
+# Dependencies: 2, 23, 36
+# Priority: medium
+# Description: Develop a comprehensive CONTRIBUTING.md file detailing documentation standards, linking conventions, template usage, and the complete workflow for contributing to project documentation.
+# Details:
+The CONTRIBUTING.md file will serve as the primary guide for anyone wishing to contribute to the project's documentation. It should be placed in the `_documentation/` directory or the project root, as appropriate for visibility.
+
+The file must include the following sections:
+
+1.  **Introduction**:
+    *   Briefly state the purpose of the CONTRIBUTING.md.
+    *   Emphasize the importance of high-quality documentation and community contributions.
+
+2.  **Getting Started**:
+    *   Prerequisites for contributing (e.g., Git, Markdown editor).
+    *   How to get the latest version of the documentation.
+
+3.  **Documentation Standards**:
+    *   **Writing Style**: Tone (e.g., professional, clear, concise), voice (e.g., active), and target audience.
+    *   **Formatting**: Markdown syntax guidelines (headings, lists, bold, italics, etc.), use of code blocks (with language specification), tables, and images.
+    *   **File Naming Conventions**: Rules for naming new documentation files (e.g., lowercase, hyphens).
+    *   **Directory Structure**: Brief overview of where different types of documentation should reside, referencing the main `_documentation/README.md` (from Task 23) for details.
+
+4.  **Linking Conventions**:
+    *   **Internal Links**: How to create relative links to other documents within the `_documentation/` directory.
+    *   **Anchor Links**: How to link to specific sections within the same or other documents.
+    *   **External Links**: Guidelines for using external URLs (e.g., when appropriate, how to ensure they are stable).
+
+5.  **Using the Documentation Template**:
+    *   Reference and link to the standard documentation template defined in Task 2.
+    *   Explain how to correctly use each section of the template when creating new component documentation.
+    *   Provide examples or best practices for filling out key template sections.
+
+6.  **Contribution Workflow**:
+    *   **Finding Something to Work On**: How to identify areas needing documentation (e.g., issues, planned tasks).
+    *   **Branching Strategy**: Recommended Git branching model for documentation changes (e.g., `feature/doc-fix-xyz` or `docs/update-component-abc`).
+    *   **Making Changes**: Local development process.
+    *   **Committing Changes**: Guidelines for writing clear and informative commit messages.
+    *   **Automated Validation (referencing Task 36)**: Explain that contributions will be subject to automated checks (link checking, template compliance). Describe how contributors can run these checks locally if possible, or what to expect from the CI system.
+    *   **Submitting Changes**: How to create a Pull Request (PR) against the main documentation branch.
+    *   **Review Process**: Who reviews the PR, what criteria are used for review (referencing standards in this document), and expected turnaround time.
+    *   **Merging**: Process after approval.
+
+7.  **Code of Conduct**:
+    *   Link to the project's Code of Conduct if one exists, or a brief statement on respectful collaboration.
+
+8.  **Questions and Help**:
+    *   Where to ask questions or seek help regarding documentation contributions.
+
+# Test Strategy:
+1. Verify that the `CONTRIBUTING.md` file is created in the designated location (e.g., `_documentation/` or project root).
+2.  Review the content of `CONTRIBUTING.md` for completeness, ensuring all sections outlined in the 'Details' are present and comprehensive.
+3.  **Clarity and Actionability**:
+    *   Assess if the documentation standards (writing style, formatting) are clear and easy for a new contributor to follow.
+    *   Check if linking conventions are unambiguous and provide correct examples.
+    *   Ensure the template usage guide effectively explains how to use the standard template (from Task 2) and provides useful guidance.
+4.  **Workflow Integrity**:
+    *   Confirm the contribution workflow is logical, complete, and practical for contributors.
+    *   Verify that the workflow accurately describes interaction with automated validation systems (from Task 36).
+    *   Ensure the PR and review process is clearly explained.
+5.  **Accuracy and Links**:
+    *   Validate that all internal links within `CONTRIBUTING.md` (e.g., to the documentation template, Code of Conduct) are correct.
+    *   Confirm that references to other tasks (e.g., Task 2, Task 23, Task 36) are appropriate and reflect their purpose.
+6.  **Contributor Perspective**:
+    *   Perform a mock contribution attempt following the guidelines in `CONTRIBUTING.md` to identify any ambiguities or missing information.
+    *   Consider a peer review by someone unfamiliar with the project's documentation process to test its effectiveness for new contributors.

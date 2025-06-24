@@ -1,0 +1,31 @@
+# Task ID: 12
+# Title: Analyze and Document /run Directory (Runtime Data)
+# Status: done
+# Dependencies: 1, 2
+# Priority: high
+# Description: Analyze and document the /run directory, focusing on runtime variable data, PID files, sockets, and their significance in inter-process communication and service management.
+# Details:
+Explain the volatile nature of /run (typically a tmpfs mount). Identify common file types found here: PID files for running daemons, Unix domain sockets for IPC, lock files. Document how services utilize this directory for runtime state management. Use MCP Zen tools to inspect typical contents if available from a snapshot. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Verify documentation accurately describes the purpose and typical contents of /run and its role in a running system. Adherence to template.
+
+# Subtasks:
+## 1. Document /run Directory Fundamentals [done]
+### Dependencies: None
+### Description: Document the purpose of the /run directory, its volatile nature (being a tmpfs), and the typical lifecycle of its contents.
+### Details:
+While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.
+
+## 2. Identify Common File Types in /run and Their Significance [done]
+### Dependencies: 12.1
+### Description: Identify and document common file types found within the /run directory, such as PID files, Unix domain sockets, and lock files, explaining their significance in system operation and inter-process communication.
+### Details:
+While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.
+
+## 3. Analyze SRM Service Utilization of /run for Runtime State [done]
+### Dependencies: 12.1, 12.2
+### Description: Provide specific examples of how System Resource Management (SRM) services utilize the /run directory for managing their runtime state.
+### Details:
+While its contents are volatile, understanding the types of data (PIDs, sockets) and their role in inter-process communication and service management is important. Analysis relies on general system knowledge and patterns.
+

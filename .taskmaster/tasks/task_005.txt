@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Comprehensive Security Analysis and Report Generation
+# Status: cancelled
+# Dependencies: 1, 2
+# Priority: high
+# Description: Conduct a focused analysis to identify all security-related components, configurations, and potential vulnerabilities across the entire SRM system. Produce a dedicated Security Analysis Report.
+# Details:
+Systematically scan the srm_backup for security components: authentication mechanisms (PAM, shadow files), authorization controls, firewall configurations (iptables, nftables), VPN services, daemons handling sensitive data, known vulnerable software versions (check /lib, /usr/lib). Use MCP Zen tools and Gemini Pro for this analysis. Document findings, potential vulnerabilities, and recommended hardening practices. This information will feed into the 'Security Implications' section of other documentation tasks. Compile findings into a standalone Security Analysis Report as a key deliverable. Research common vulnerabilities for embedded systems and routers.
+
+# Test Strategy:
+Review the Security Analysis Report for thoroughness, accuracy, and actionable insights. Ensure security implications are consistently integrated into individual component documentation. Verify report covers key security areas mentioned in PRD.

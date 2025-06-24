@@ -1,0 +1,69 @@
+# Task ID: 20
+# Title: Develop System Architecture Diagrams and Map Component Relationships
+# Status: done
+# Dependencies: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19
+# Priority: high
+# Description: Synthesize information from all analyzed components to create descriptive system architecture diagrams and document cross-component relationships, illustrating data flow and control flow.
+# Details:
+Based on the detailed analysis of individual directories and components, create high-level system architecture diagrams. These diagrams should be descriptive (text-based or simple graphical representations) illustrating: 1. Key SRM services and their interactions. 2. Configuration data flow (e.g., from defaults to active configs). 3. Major data storage locations and their purpose. 4. Network traffic flow for key services. Produce the 'Cross-component relationship documentation' and 'System architecture diagrams (descriptive)' deliverables. Use tools like draw.io (for diagrams if desired) or structured text/markdown.
+
+# Test Strategy:
+Review diagrams and relationship documentation for clarity, accuracy, and completeness. Ensure they provide a good overview of the SRM system architecture and how components interact. Verify they meet PRD deliverable requirements.
+
+# Subtasks:
+## 1. Consolidate and Review Inputs from Prior Analyses (Tasks 1-4) [done]
+### Dependencies: None
+### Description: Gather and meticulously review all outputs from the preceding four analysis tasks (SRM service interactions, configuration data flow, data storage mapping, network traffic flow) to ensure a complete and understood foundation for synthesis.
+### Details:
+Outputs include diagrams, descriptions, and mappings from tasks 1-4 mentioned in the broader context. Check for consistency and any immediate gaps before synthesis.
+
+## 2. Analyze and Map Interdependencies for Cross-Component View [done]
+### Dependencies: 20.1
+### Description: Synthesize the consolidated information from Subtask 1 to identify, analyze, and explicitly map the complex interdependencies and relationships between different system components (services, data, configuration, network).
+### Details:
+This involves connecting insights from service interactions, config flow, data storage, and network traffic (from the outputs of tasks 1-4) to build a holistic understanding required for the deliverables.
+
+## 3. Draft 'Cross-Component Relationship Documentation' [done]
+### Dependencies: 20.2
+### Description: Develop the initial draft of the 'Cross-component relationship documentation' by structuring and articulating the synthesized interdependencies and relationships identified in Subtask 2.
+### Details:
+This document will narrate how various system parts work together, their reliance on each other, and the overall flow of information and control across components, based on the holistic analysis.
+
+## 4. Create Draft 'System Architecture Diagrams' [done]
+### Dependencies: 20.2
+### Description: Design and produce a set of draft 'System architecture diagrams' that visually represent the synthesized understanding of component interactions, data flows, and overall system structure, based on the analysis from Subtask 2.
+### Details:
+Diagrams should integrate aspects from all prior analyses (service interactions, config data flow, data storage, network traffic) into coherent visual representations. May include multiple diagram types (e.g., deployment, logical, data flow).
+
+## 5. Review, Iterate, and Finalize Documentation and Diagrams [done]
+### Dependencies: 20.3, 20.4
+### Description: Conduct a comprehensive review of both the 'Cross-component relationship documentation' (from Subtask 3) and 'System architecture diagrams' (from Subtask 4). Incorporate feedback, iterate on content and visuals, and finalize both deliverables for accuracy, clarity, and completeness.
+### Details:
+Ensure alignment between the textual documentation and visual diagrams, and that they collectively meet the goal of providing a holistic architectural view as per the main task's objective.
+
+## 6. Fix Template Compliance Issues in Documentation [done]
+### Dependencies: None
+### Description: Fix critical template compliance issues found in 14 of 18 documentation files. Add missing breadcrumb navigation at top and bottom, add Performance Considerations sections, and ensure all 17 required template elements are present.
+### Details:
+Issues to fix:
+1. Add breadcrumb navigation to 14 files: data.md, etc.defaults.md, ini.md, initrd.md, lib64.md, libexec.md, lost+found.md, mnt.md, root.md, run.md, usr.md, var.defaults.md, var.md, volume1.md
+2. Add Performance Considerations section to files missing it
+3. Ensure navigation follows logical directory order
+4. Template requires these 17 elements in order:
+   - Breadcrumb navigation (top)
+   - Title
+   - Overview
+   - Directory Structure
+   - Key Components
+   - Configuration Files
+   - Scripts and Executables
+   - Integration Points
+   - Security Considerations
+   - Network Services
+   - Performance Considerations
+   - Maintenance Notes
+   - Cross-References
+   - Version Information
+   - Breadcrumb navigation (bottom)
+   - Footer line
+

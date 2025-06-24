@@ -1203,11 +1203,270 @@
         ],
         "priority": "high",
         "subtasks": []
+      },
+      {
+        "id": 41,
+        "title": "Analyze Safe Access Package and Document Findings",
+        "description": "Perform a comprehensive analysis of the default Safe Access package on the SRM system. This involves locating its files, understanding its structure, analyzing digital signatures, identifying technologies used, and documenting all findings.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2,
+          13,
+          16,
+          42,
+          43
+        ],
+        "priority": "high",
+        "details": "1. **Package Location:** Identify the installation directory of the Safe Access package (e.g., `/var/packages/SafeAccess`, `/usr/local/packages/@appstore/SafeAccess`, or under `/usr/syno/`). Use file system exploration tools and package management information if available. Document all significant file locations. \n2. **Package Structure Analysis:** Examine the package directory contents. Identify and document metadata files (e.g., `INFO`), installation/uninstallation scripts, binary executables and libraries, web interface components (HTML, CSS, JS), and default configuration files. Describe the overall structure and purpose of key components. \n3. **Digital Signature Analysis:** If the package is in a format like `.spk`, attempt to verify its digital signature. Check individual binaries for embedded signatures. Document findings regarding signature presence, validity, and signing authority. \n4. **Technology Stack Identification:** For binaries, use `file`, `strings`, `ldd` to infer languages (C, C++, Go) and dependencies. For scripts, check shebang lines and content (shell, Python, Perl). For web components, analyze HTML/CSS/JS for frameworks/libraries. Identify configuration file formats (JSON, XML, etc.) and any databases/storage mechanisms used (e.g., SQLite). \n5. **Functional Analysis (High-Level):** Deduce primary functionalities (e.g., parental controls, web filtering) from file names, strings, and configurations. Identify key processes/daemons and interactions with other system services or kernel modules. \n6. **Comprehensive Documentation:** Compile all findings into a report using the standard documentation template (Task 2, now also informed by Task 42 and Task 43). Include package purpose, installation paths, structure, technologies, security considerations (permissions, network ports), and configuration options. Cross-reference with relevant findings from other tasks.",
+        "testStrategy": "1. **Package Location Verification:** Confirm documented package file locations are accurate and complete. \n2. **Structure Documentation Review:** Verify the package's internal structure (metadata, scripts, binaries, UI) is accurately described. \n3. **Signature Analysis Validation:** Check that digital signature analysis methods and findings are documented correctly. \n4. **Technology Stack Confirmation:** Ensure identified programming languages, libraries, and data formats are plausible and supported by evidence. \n5. **Functional Overview Accuracy:** Review the documented high-level functionality of Safe Access for correctness. \n6. **Documentation Adherence:** Confirm the final documentation uses the standard template (Task 2) and aligns with the documentation structure (Task 43) and package template (Task 42). Ensure all required sections are included. \n7. **Completeness Check:** Ensure all aspects of the task (locating files, structure, signatures, language/tech, documentation) have been addressed.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Locate Safe Access Package Files via Zen Gemini File Explorer",
+            "description": "Use Zen Gemini File System Explorer to identify the Safe Access package installation directory and all significant files on the SRM system.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Focus on common SRM package locations (e.g., `/var/packages/SafeAccess`, `/usr/local/packages/@appstore/SafeAccess`, `/usr/syno/`). Document all identified paths using Zen Gemini's logging and export features.",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Analyze Package Metadata & Scripts with Zen Gemini Text Analyzer",
+            "description": "Employ Zen Gemini Text Analyzer to examine Safe Access metadata files (e.g., `INFO`, `PACKAGE_ICON.PNG`) and installation/uninstallation scripts.",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "details": "Extract package version, dependencies, maintainer information, and script logic (pre/post install/uninstall) using Zen Gemini's parsing capabilities. Document the purpose and flow of these scripts.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Map Package Structure & Key Components with Zen Gemini Visualizer",
+            "description": "Utilize Zen Gemini Visualizer and file analysis tools to map the Safe Access package directory structure. Identify binary executables, libraries, web interface components (HTML, CSS, JS), and default configuration files.",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "details": "Document the overall layout and the presumed purpose of key directories (e.g., `bin`, `lib`, `ui`, `conf`) and files, leveraging Zen Gemini's structural analysis insights.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Verify Package & Binary Signatures using Zen Gemini Security Toolkit",
+            "description": "Use Zen Gemini Security Toolkit to attempt verification of the Safe Access package's digital signature (if in `.spk` format) and check individual binaries for embedded digital signatures.",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "details": "Document the presence, validity, and signing authority of any found signatures. Note any anomalies, unsigned components, or certificate issues identified by Zen Gemini tools.",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Identify Binary & Script Technologies with Zen Gemini Code Analyzer",
+            "description": "Use Zen Gemini Code Analyzer (integrating `file`, `strings`, `ldd` equivalent functionalities) to infer programming languages (C, C++, Go), dependencies for binaries, and script types (shell, Python, Perl) by examining shebang lines and content.",
+            "status": "pending",
+            "dependencies": [
+              3
+            ],
+            "details": "List identified languages, crucial libraries, and interpreters for each binary and script component, with Zen Gemini assisting in correlating findings and identifying potential vulnerabilities related to outdated libraries.",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Analyze Web Components & Config Files via Zen Gemini Parsers",
+            "description": "Employ Zen Gemini Web Technology Analyzer and Data Parsers to examine HTML, CSS, and JavaScript for frameworks/libraries. Identify formats (JSON, XML, proprietary) of configuration files and any embedded database/storage mechanisms (e.g., SQLite).",
+            "status": "pending",
+            "dependencies": [
+              3
+            ],
+            "details": "Document identified web frameworks (e.g., React, Angular, jQuery), UI libraries, configuration file structures, data storage methods, and API endpoints suggested by Zen Gemini's analysis of web components.",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Deduce Functionality & Interactions with Zen Gemini RE Aids (Legally Permissible)",
+            "description": "Utilize Zen Gemini's Reverse Engineering Aids (e.g., advanced string analysis, function call tracing, network traffic pattern identification, where legally permissible and ethical) on key binaries and scripts to deduce primary functionalities.",
+            "status": "pending",
+            "dependencies": [
+              5,
+              6
+            ],
+            "details": "Document observed functionalities (e.g., parental controls, web filtering, threat prevention), identify key processes/daemons, and map their interactions with other system services or kernel modules, based on analysis facilitated by Zen Gemini. Clearly state limitations and legal/ethical boundaries observed during analysis.",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Compile Comprehensive Analysis Report using Zen Gemini Documentation Suite",
+            "description": "Consolidate all findings from subtasks 1-7 into a comprehensive report using the standard documentation template (Task 2, informed by Task 42 and Task 43). Leverage Zen Gemini's report generation and data aggregation features.",
+            "status": "pending",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "The report must include: package purpose, installation paths, detailed structure, identified technologies, digital signature status, functional overview, security considerations (permissions, network ports identified via Zen Gemini tools, potential attack vectors), and configuration options. Cross-reference findings and ensure clarity for stakeholders. Ensure the report adheres to the structure defined in Task 43 and uses templates from Task 42.",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 42,
+        "title": "Create Specialized Documentation Template for Package Analysis",
+        "description": "Develop a new documentation template specifically for software package analysis, extending the base documentation template. This template will include dedicated sections for package metadata, structure, digital signatures, technologies, functionality, dependencies, and security considerations.",
+        "details": "The new package analysis template should be created as a Markdown file (e.g., `package_analysis_template.md`) and stored in a designated templates directory within the project's documentation structure (e.g., `_documentation/_templates/`).\nThis template must:\n1.  **Extend Base Template**: Inherit common sections and styling from the standard documentation template defined in Task 2 to ensure consistency.\n2.  **Incorporate Package-Specific Sections**: Add the following new sections, clearly defined:\n    *   **Package Identification & Metadata**:\n        *   Package Name\n        *   Version\n        *   Vendor/Author\n        *   License\n        *   Release Date\n        *   Source (e.g., official repository, third-party)\n        *   Package Manager ID (if applicable)\n    *   **Package Structure & Contents**:\n        *   Installation Path(s)\n        *   Key Directories and Files (with descriptions)\n        *   Configuration Files\n        *   Log Files\n        *   Binary/Executable Files\n        *   Scripts (installation, startup, operational)\n        *   UI Components (if any)\n    *   **Digital Signatures & Integrity**:\n        *   Signature Verification Status (verified, not signed, failed verification)\n        *   Signing Certificate Details (Issuer, Subject, Validity, Fingerprint)\n        *   Checksums (MD5, SHA256, etc.) and how to verify\n    *   **Technologies Used**:\n        *   Programming Languages\n        *   Frameworks/Libraries\n        *   Databases\n        *   Communication Protocols\n    *   **Core Functionality**:\n        *   Primary purpose and features of the package\n        *   Key services or daemons provided\n        *   User interaction points (CLI, Web UI, API)\n    *   **Package Dependencies**:\n        *   Software dependencies (other packages, libraries)\n        *   System dependencies (kernel modules, specific system utilities)\n        *   External service dependencies\n    *   **Security Analysis**:\n        *   Known vulnerabilities (CVEs)\n        *   Default security configurations\n        *   Permissions and access control\n        *   Data handling and storage security\n        *   Potential attack vectors\n        *   Hardening recommendations\n3.  **Adhere to Documentation Standards**: Follow guidelines outlined in `CONTRIBUTING.md` (Task 37) regarding formatting, linking, and style.\n4.  **Provide Guidance**: Include placeholder text or comments within the template to guide the author on what information to fill in for each section.\n5.  **Example Usage (Optional but Recommended)**: Briefly describe how to use this template or link to an example of its use.",
+        "testStrategy": "1.  **Template File Creation**: Verify that the `package_analysis_template.md` file (or similarly named) is created in the specified location (e.g., `_documentation/_templates/`).\n2.  **Base Template Extension**: Compare the new template with the base template (from Task 2) to ensure common elements are consistent and the new template logically extends it, maintaining overall documentation style.\n3.  **Completeness of Sections**: Review the template to confirm all specified package-specific sections (Package Identification & Metadata, Package Structure & Contents, Digital Signatures & Integrity, Technologies Used, Core Functionality, Package Dependencies, Security Analysis) are present and their sub-points are clearly defined.\n4.  **Clarity of Guidance**: Check that placeholder text and instructional comments within the template are clear, concise, and helpful for authors filling out the template.\n5.  **Adherence to Standards**: Verify the template structure and any example content comply with the documentation standards, formatting, and linking conventions defined in `CONTRIBUTING.md` (Task 37).\n6.  **Usability**: Perform a mock fill-out of the template for a hypothetical or simple actual package to assess its practicality, comprehensiveness, and ease of use for documenting package analysis findings.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          37
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Review Base Template (Task 2) and Documentation Standards (Task 37)",
+            "description": "Thoroughly analyze the existing base documentation template (referenced as Task 2 output) and the project's documentation contribution guidelines (`CONTRIBUTING.md`, Task 37). This initial step is crucial for understanding inheritable common structures, styling, formatting, and linking conventions to ensure the new package analysis template is consistent.",
+            "dependencies": [],
+            "details": "Locate and review the base documentation template file. Identify common sections (e.g., headers, footers, navigation elements) and styling mechanisms. Examine `CONTRIBUTING.md` for specific rules on Markdown syntax, section formatting, image usage, and inter-document linking. Document key elements and standards to be adhered to or inherited by the new template.",
+            "status": "pending",
+            "testStrategy": "Create a checklist of common elements, styles, and formatting rules from the base template and `CONTRIBUTING.md` that must be incorporated or followed in the new template."
+          },
+          {
+            "id": 2,
+            "title": "Design Detailed Structure for Package-Specific Sections",
+            "description": "Define the precise Markdown structure, including headings (e.g., H2, H3), list formats, table layouts, and initial placeholder text/guidance for each of the seven new sections required for package analysis: Package Identification & Metadata, Package Structure & Contents, Digital Signatures & Integrity, Technologies Used, Core Functionality, Package Dependencies, and Security Analysis.",
+            "dependencies": [
+              1
+            ],
+            "details": "For each of the seven sections: Specify the main Markdown heading (e.g., `## Package Identification & Metadata`). List all sub-items as per the parent task (e.g., Package Name, Version, Vendor/Author). Determine the optimal Markdown representation for each sub-item (e.g., bullet points, definition lists, tables). Draft initial placeholder text or instructional comments for each item (e.g., `Package Name: [Enter Package Name]`, `<!-- Describe the key directories and their purpose -->`). This design should be documented before template creation.",
+            "status": "pending",
+            "testStrategy": "Review the designed structures against the parent task's requirements for each of the seven sections, ensuring all specified items are covered and have clear preliminary placeholder/guidance."
+          },
+          {
+            "id": 3,
+            "title": "Create `package_analysis_template.md` with Base Integration and Section Shells",
+            "description": "Create the new Markdown file `package_analysis_template.md` within the `_documentation/_templates/` directory. Integrate common elements inherited from the base template (identified in subtask 1) and implement the basic structural shells for the package-specific sections as designed in subtask 2.",
+            "dependencies": [
+              2
+            ],
+            "details": "Create the file `_documentation/_templates/package_analysis_template.md`. Incorporate common structural and styling elements from the base template. Add the main Markdown headings for each of the seven package-specific sections (Package Identification & Metadata, etc.) as defined in subtask 2. Ensure the file adheres to basic formatting guidelines from `CONTRIBUTING.md`.",
+            "status": "pending",
+            "testStrategy": "Verify the file `package_analysis_template.md` exists in `_documentation/_templates/`. Check that base template commonalities are present and the primary headings for all seven new sections are included as per the design."
+          },
+          {
+            "id": 4,
+            "title": "Populate Sections with Detailed Placeholders, Guidance, and Example Usage Note",
+            "description": "Flesh out each package-specific section in `package_analysis_template.md` by adding comprehensive placeholder text, detailed instructional comments (using Markdown comment syntax `<!-- ... -->`), and examples where appropriate. This will guide the end-user on what information to provide for each item. Include a brief note on how to use the template or a placeholder for a link to an example.",
+            "dependencies": [
+              3
+            ],
+            "details": "Iterate through each of the seven package-specific sections and their sub-items. For each item (e.g., \"Version\", \"Installation Path(s)\", \"Known vulnerabilities\"), insert specific placeholder text (e.g., `Version: [Specify package version]`, `Known vulnerabilities: \n- CVE-XXXX-XXXXX: [Description]\n  - Link: [URL to CVE details]\n  - Status: [Fixed/Unfixed/Mitigated]\n<!-- List known CVEs or state \"None identified at the time of analysis.\" -->`). Add clear, concise comments to guide the author. Add a section or comment for \"Example Usage\" as specified: \"Briefly describe how to use this template or link to an example of its use.\"",
+            "status": "pending",
+            "testStrategy": "Review each section and sub-item to confirm that placeholder text is informative and instructional comments are clear and helpful. Ensure all points from the parent task's section descriptions are covered with appropriate guidance."
+          },
+          {
+            "id": 5,
+            "title": "Validate Template Usability, Ensure Compliance, and Finalize",
+            "description": "Conduct a final comprehensive review of `package_analysis_template.md`. Validate its usability by attempting to fill it out for a hypothetical software package. Ensure full compliance with documentation standards (Task 37) and all requirements of the parent task (Task 42). Make final corrections and confirm storage in `_documentation/_templates/`.",
+            "dependencies": [
+              4
+            ],
+            "details": "Perform a thorough review of the entire template for completeness, clarity, and consistency. Cross-reference with requirements in Task 42 and `CONTRIBUTING.md` (Task 37). Conduct a usability test by simulating filling out the template for a fictional package. Make revisions based on the review and test. Confirm the final file is correctly placed.",
+            "status": "pending",
+            "testStrategy": "Successfully complete a mock package analysis document using the finalized template, ensuring all sections can be filled out logically and the guidance is effective. Optionally, have a peer review the template and the mock document."
+          }
+        ]
+      },
+      {
+        "id": 43,
+        "title": "Establish Documentation Structure for Software Packages",
+        "description": "Create the directory structure and index for software package documentation within `_documentation/packages/`. This framework will organize individual package analyses and provide a central listing.",
+        "details": "1. Create a new directory: `_documentation/packages/`.\n2. Inside `_documentation/packages/`, create an `index.md` file. This file will serve as the main landing page for package documentation.\n   - It should include an introduction explaining its purpose.\n   - It should contain a section that will list all documented software packages, with links to their respective detailed documentation pages. Initially, this can be a placeholder or an example structure.\n3. Define a clear and consistent subdirectory structure for individual packages. For example, each package `[package_name]` will have its documentation located in `_documentation/packages/[package_name]/README.md` or `_documentation/packages/[package_name]/[package_name].md`.\n4. Ensure this structure is designed to effectively host documentation created using the package analysis template defined in Task 42.\n5. Plan for integration: The main documentation index (`_documentation/index.md` from Task 39) and the `_documentation/README.md` (from Task 23) should eventually link to this new `_documentation/packages/index.md`. This task includes making a note or creating a sub-task for this update if not performed immediately.\n6. The structure and process for adding new package documentation should align with the guidelines established in `CONTRIBUTING.md` (Task 37).",
+        "testStrategy": "1. Verify that the `_documentation/packages/` directory has been successfully created.\n2. Verify that the `_documentation/packages/index.md` file exists. Review its content to ensure it includes an introductory section and a clear structure or placeholder for listing packages and linking to their individual documentation.\n3. Create a sample package documentation directory, e.g., `_documentation/packages/example_package/`, and place a placeholder `README.md` file within it. This placeholder should be suitable for content generated using the template from Task 42.\n4. Confirm that the `_documentation/packages/index.md` is structured to allow easy addition of a link to this sample package documentation.\n5. Review the overall directory and file structure for clarity, scalability for multiple packages, and consistency with project documentation standards (Task 2) and contribution guidelines (Task 37).\n6. Verify that a plan or note exists for updating `_documentation/index.md` (Task 39) and `_documentation/README.md` (Task 23) to link to the new package documentation section.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          23,
+          37,
+          39,
+          42
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create `_documentation/packages/` Directory and Initial `index.md`",
+            "description": "Establishes the root directory for all software package documentation and creates the main index file that will list them. This is the foundational step for organizing package-specific information.",
+            "dependencies": [],
+            "details": "1. Create the directory: `_documentation/packages/`.\n2. Inside `_documentation/packages/`, create a new file named `index.md`.\n3. Add an introductory paragraph to `_documentation/packages/index.md`. Example: \"This section provides detailed documentation for various software packages used or developed within the project. Each package listed below has its own dedicated documentation page detailing its analysis, usage, and configuration.\"\n4. Add a placeholder section titled \"## Software Packages\" in `_documentation/packages/index.md`. Under this heading, add a temporary note: \"A list of documented software packages with links to their respective pages will appear here. This list will be populated as individual package documentation is created.\"",
+            "status": "pending",
+            "testStrategy": "Verify the directory `_documentation/packages/` exists. Manually inspect `_documentation/packages/index.md` to confirm it contains the specified introductory text and the 'Software Packages' placeholder section."
+          },
+          {
+            "id": 2,
+            "title": "Define and Document Standardized Structure for Individual Package Documentation",
+            "description": "Specifies and documents the consistent directory and file naming convention for each software package's documentation to ensure uniformity and ease of navigation.",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Determine the standard subdirectory structure for individual packages. The recommended structure is `_documentation/packages/[package_name]/README.md`.\n2. Document this chosen structure. This can be done by adding a small section in `_documentation/packages/index.md` (e.g., under a heading like \"Documentation Structure for Individual Packages\"). Example: \"Each package's documentation resides in its own subdirectory: `_documentation/packages/[package_name]/`, with the main content in a `README.md` file within that subdirectory.\"\n3. Create an example directory for one hypothetical package to illustrate the structure: `_documentation/packages/example-package/`.\n4. Inside `_documentation/packages/example-package/`, create an empty `README.md` file. This serves as a visual example of the defined structure.",
+            "status": "pending",
+            "testStrategy": "Check that the chosen package directory structure (e.g., `_documentation/packages/[package_name]/README.md`) is documented within `_documentation/packages/index.md`. Verify the example directory `_documentation/packages/example-package/` and its `README.md` file are created as specified."
+          },
+          {
+            "id": 3,
+            "title": "Design Package Listing Format in `index.md` and Ensure Template Compatibility",
+            "description": "Refines the `_documentation/packages/index.md` to include a structured way to list packages with links, and confirms that the overall structure is compatible with the package analysis template from Task 42.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "1. In `_documentation/packages/index.md`, under the \"## Software Packages\" section (created in Subtask 1), replace the placeholder note with a defined format for listing each package. This format should include the package name and a relative link to its detailed documentation. Example format for each item: `- [Package Name](./[package_name]/README.md)`.\n2. Add 1-2 placeholder/example entries using this format, e.g., `- [Example Package](./example-package/README.md)` (if `example-package` was created in Subtask 2).\n3. Review the package analysis template defined in Task 42. Confirm that the individual package documentation file (e.g., `_documentation/packages/[package_name]/README.md`) is the appropriate place for content generated using this template.\n4. Add a note in `_documentation/packages/index.md` or as a developer comment regarding this compatibility. Example note: \"Individual package `README.md` files should be populated using the standard package analysis template (see Task 42).\"",
+            "status": "pending",
+            "testStrategy": "Review `_documentation/packages/index.md` to ensure the package listing format is clear and example links are present and correctly formatted. Confirm by review that the structure is suitable for content from the Task 42 template, and that this compatibility is noted."
+          },
+          {
+            "id": 4,
+            "title": "Plan Integration Links and Align Contribution Process with `CONTRIBUTING.md`",
+            "description": "Outlines how the new package documentation section will be linked from existing main documentation files and ensures the process for adding new package documentation is clearly defined in `CONTRIBUTING.md`.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "1. Identify the files that should link to `_documentation/packages/index.md`:\n    - Main documentation index: `_documentation/index.md` (from Task 39).\n    - Documentation root README: `_documentation/README.md` (from Task 23).\n2. In each of these identified files, add a placeholder comment or a TODO note indicating where the link to `_documentation/packages/index.md` should be added. Example: `<!-- TODO (Task 43): Add link to Software Package Documentation at _documentation/packages/index.md -->`.\n3. Review `CONTRIBUTING.md` (Task 37). Draft a new section or update an existing one titled \"Adding Software Package Documentation\". This section should:\n    - Briefly explain the purpose of package documentation.\n    - Specify the directory structure: `_documentation/packages/[package_name]/README.md`.\n    - Instruct contributors to use the package analysis template (Task 42) for the content of `[package_name]/README.md`.\n    - Explain how to add a link to the new package's documentation in `_documentation/packages/index.md`.",
+            "status": "pending",
+            "testStrategy": "Verify that placeholder comments for linking are present in `_documentation/index.md` and `_documentation/README.md`. Review the additions/modifications to `CONTRIBUTING.md` to confirm that instructions for adding new package documentation are clear, accurate, and cover the necessary steps (structure, template usage, updating the package index)."
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "title": "Identify and Document Default SRM Packages (Excluding Safe Access)",
+        "description": "Discover, prioritize, and document all default software packages installed on the SRM system, apart from Safe Access. Utilize Zen Gemini tools for discovery and the established package analysis template for documentation.",
+        "details": "1. **Package Discovery:** Employ Zen Gemini tools and system exploration techniques (e.g., examining `/var/packages`, `/usr/syno/pkgscripts`, `/usr/local/packages/@appstore`, package manager databases if any) to compile a comprehensive list of all pre-installed software packages on the SRM system. Explicitly exclude the \"Safe Access\" package, as it is covered by Task 41.\n2. **Prioritization:** Analyze the identified packages to determine their importance to core system functionality, user-facing features, or security. Categorize packages (e.g., critical system component, essential service, utility, optional application). Create a prioritized list to guide the documentation effort, focusing on the most impactful packages first.\n3. **Documentation:** For each prioritized package (or all, if feasible within scope): Locate its installation directories, configuration files, data storage locations, and related processes/services. Utilize the specialized package analysis template created in Task 42. Document package metadata (version, vendor), structure, key executables, libraries, dependencies (on other packages or system libraries), primary functionality, user interface components (if any), and known security considerations. Store the documentation for each package in the structure defined by Task 43 (e.g., `_documentation/packages/<package_name>/README.md`).\n4. **Update Package Index:** Update the `_documentation/packages/index.md` (from Task 43) to include links to the newly created documentation for each analyzed package.",
+        "testStrategy": "1. **Package List Verification:** Cross-reference the discovered list of packages with any available system information or known SRM features to ensure completeness (excluding Safe Access). Confirm that Zen Gemini tools were effectively used for discovery.\n2. **Prioritization Review:** Review the package prioritization to ensure it logically reflects system importance.\n3. **Documentation Content Review:** For a selection of documented packages (and all critical ones): Verify that all sections of the package analysis template (from Task 42) are accurately and comprehensively filled. Confirm the documented file locations, functionalities, and dependencies are correct. Check for clarity and technical accuracy.\n4. **Documentation Storage and Linking:** Ensure each package's documentation is stored in the correct subdirectory within `_documentation/packages/`. Verify that the `_documentation/packages/index.md` is updated and all links to individual package documentation are functional.\n5. **Exclusion Check:** Confirm that \"Safe Access\" package documentation was not duplicated and that this task focused on other packages.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2,
+          42,
+          43
+        ],
+        "priority": "medium",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-06-20T19:30:39.187Z",
-      "updated": "2025-06-23T13:54:21.920Z",
+      "updated": "2025-06-24T06:05:38.201Z",
       "description": "Tasks for master context"
     }
   }

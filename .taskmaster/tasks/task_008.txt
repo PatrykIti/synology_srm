@@ -1,0 +1,11 @@
+# Task ID: 8
+# Title: Analyze and Document /bin Directory (System Binaries)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document standard system binaries and executables in /bin, detailing their purpose, usage, and any SRM-specific behaviors.
+# Details:
+Similar to /sbin analysis (Task 7), but for /bin which typically contains essential user command-line utilities. Use MCP Zen tools, `file`, `strings`, `ldd`. Document purpose, common options, and any SRM-specific aspects. Examples: shell (sh, bash), core utilities (ls, cp, mv, grep). Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Review documentation for accuracy. Ensure essential user-level system binaries are documented. Adherence to template.

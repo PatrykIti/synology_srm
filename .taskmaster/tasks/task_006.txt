@@ -1,0 +1,11 @@
+# Task ID: 6
+# Title: Analyze and Document Network Services and Daemons
+# Status: done
+# Dependencies: 1, 2, 3
+# Priority: high
+# Description: Identify, analyze, and document all network services and daemons, including their configurations, ports, protocols, startup scripts, and integration points. Produce a Network Services Inventory.
+# Details:
+Locate service configuration files (primarily in /etc, /usr/local/etc) and startup scripts (e.g., in /etc/init.d, or systemd unit files if used). For each service (e.g., HTTP/HTTPS server, DNS resolver/proxy, DHCP server/client, NTP, SSH, VPNs), document its purpose, key configuration files and parameters, default ports, protocols used, and security considerations (authentication, encryption). Use MCP Zen tools and netstat/ss (if analyzing a live similar system for context) to identify listening services. Compile this into a Network Services Inventory deliverable using the standard template (Task 2).
+
+# Test Strategy:
+Verify the Network Services Inventory is complete and accurate. Documentation for each service should cover configuration, security, operational aspects, and adherence to the template. Cross-check with /etc documentation (Task 3).

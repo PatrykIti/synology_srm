@@ -1,0 +1,11 @@
+# Task ID: 14
+# Title: Analyze and Document /ini Directory (Initialization/Configuration Files)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document files within the /ini directory, typically used for initialization scripts or specific component configurations, possibly for Synology-specific applications.
+# Details:
+Investigate the purpose of the /ini directory and its contents. Analyze each file or subdirectory. These might be custom INI-style configuration files or scripts used during system/application initialization. Document configuration parameters, their effects, and which components or services use them. Use MCP Zen tools. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Ensure each file/subdirectory in /ini is documented with its role and configuration options if applicable. Accuracy and adherence to template.

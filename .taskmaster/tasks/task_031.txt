@@ -1,0 +1,40 @@
+# Task ID: 31
+# Title: Implement Standardized Navigation in Documentation Files
+# Status: done
+# Dependencies: 3, 7, 8, 9, 14, 23, 24, 26, 27, 28, 29
+# Priority: high
+# Description: Update all existing Markdown documents in `_documentation/structure/` to include standardized top and bottom navigation links (Table of Contents, Previous, Next) according to a predefined sequence and the template from Task 24.
+# Details:
+This task involves updating all Markdown files currently residing in the `_documentation/structure/` directory (e.g., `bin.md`, `sbin.md`, `etc.md`, `lib.md`, `usr.md`, `var.md`, `etc.defaults.md`, `var.defaults.md`, and others) to incorporate consistent navigation elements.
+
+1.  **Identify Target Files**: Locate all `.md` files within the `_documentation/structure/` directory.
+2.  **Establish Document Order**: Create a definitive sequence for all identified files. The order is:
+    *   `bin.md`
+    *   `sbin.md`
+    *   `etc.md`
+    *   `lib.md`
+    *   `usr.md`
+    *   `var.md`
+    *   `etc.defaults.md`
+    *   `var.defaults.md`
+    *   Followed by any remaining `.md` files from `_documentation/structure/`, sorted alphabetically by their filenames.
+3.  **Update Each Document**: For every file in the established sequence:
+    *   Determine its predecessor and successor document based on the sequence. The display name for link text (e.g., `{Poprzedni Nazwa}` or `{Następna Nazwa}`) should be the filename without the `.md` extension (e.g., 'bin' for `bin.md`, 'sbin' for `sbin.md`).
+    *   Drawing from the navigation structure defined in Task 24, insert/update two identical navigation sections: one at the very top of the document content and one at the very bottom.
+    *   Each navigation section must contain:
+        *   A link to the main table of contents: `[← Powrót do spisu treści](../README.md)`. This link points to `_documentation/README.md` (created by Task 23).
+        *   A link to the previous document: `[← Poprzedni dokument: {Poprzedni Nazwa}](./{poprzedni_plik}.md)`. If the current document is the first in the overall sequence, this link should be omitted or replaced with a placeholder like '---' as per Task 24 guidelines.
+        *   A link to the next document: `[Następny dokument: {Następna Nazwa} →](./{następna_plik}.md)`. If the current document is the last in the overall sequence, this link should be omitted or replaced with a placeholder like '---' as per Task 24 guidelines.
+    *   Ensure all relative links for previous (`./{poprzedni_plik}.md`) and next (`./{następna_plik}.md`) documents correctly point to sibling files within the `_documentation/structure/` directory.
+
+# Test Strategy:
+1.  Retrieve all `.md` files from the `_documentation/structure/` directory after the task is completed.
+2.  For each retrieved Markdown file, perform the following checks:
+    a.  Verify the presence of a navigation bar at the absolute top of the file content and an identical navigation bar at the absolute bottom.
+    b.  Confirm that the 'Powrót do spisu treści' link in both navigation bars correctly points to `../README.md`.
+    c.  Validate that the 'Poprzedni dokument' and 'Następny dokument' links (or their placeholders) are accurate according to the specified document sequence: `bin.md` → `sbin.md` → `etc.md` → `lib.md` → `usr.md` → `var.md` → `etc.defaults.md` → `var.defaults.md`, followed by all other `.md` files from the directory sorted alphabetically.
+    d.  Ensure the display text for 'Poprzedni dokument' and 'Następny dokument' links correctly uses the filename (without the `.md` extension) of the linked document (e.g., 'sbin' for `sbin.md`).
+    e.  Confirm that the first document in the sequence (e.g., `bin.md`) appropriately omits the 'Poprzedni dokument' link or uses the agreed-upon placeholder.
+    f.  Confirm that the last document in the overall sequence appropriately omits the 'Następny dokument' link or uses the agreed-upon placeholder.
+    g.  Verify that all relative file paths in the 'Poprzedni dokument' and 'Następny dokument' links (e.g., `./sbin.md`) correctly resolve to other files within the `_documentation/structure/` directory.
+3.  Ensure the overall structure and formatting of the navigation links are consistent with the specifications outlined in Task 24.

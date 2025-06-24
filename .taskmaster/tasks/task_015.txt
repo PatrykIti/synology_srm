@@ -1,0 +1,11 @@
+# Task ID: 15
+# Title: Analyze and Document /initrd Directory (Initial RAM Disk Components)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document the components of the initial RAM disk (/initrd), focusing on the early boot process, kernel module loading, and initial filesystem setup.
+# Details:
+Describe the purpose of an initrd in the SRM boot sequence. If the /initrd directory contains an uncompressed or easily explorable initramfs image, analyze its structure. Identify key scripts (e.g., init script), essential kernel modules, and utilities within it. Document the early system initialization steps facilitated by the initrd. Use MCP Zen tools. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Verify documentation accurately explains the role and typical contents of an initrd in the SRM context. Accuracy and adherence to template.

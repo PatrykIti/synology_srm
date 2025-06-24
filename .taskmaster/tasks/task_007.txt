@@ -1,0 +1,11 @@
+# Task ID: 7
+# Title: Analyze and Document /sbin Directory (System Administration Binaries)
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Analyze and document system administration binaries in /sbin, detailing their purpose, usage, command-line options, and any specific SRM customizations or wrappers.
+# Details:
+For each binary in /sbin, use MCP Zen tools, `file`, `strings`, `ldd`, and available `--help` or `man` pages (if any within the backup or via web search for common utilities). Document its function, typical use cases in system administration, important command-line options, and any observed SRM-specific behavior or scripts that wrap these binaries. Focus on utilities for system control, filesystem management, and network configuration. Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Review documentation for accuracy and completeness. Ensure key system administration binaries are covered and their SRM context is explained. Adherence to template.

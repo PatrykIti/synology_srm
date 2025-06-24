@@ -1,0 +1,25 @@
+# Task ID: 17
+# Title: Analyze and Document /mnt Directory (Mount Points)
+# Status: done
+# Dependencies: 1, 2
+# Priority: low
+# Description: Document the purpose of the /mnt directory and typical mount points used by SRM, such as for external storage devices.
+# Details:
+Explain the conventional role of /mnt as a temporary mount point for filesystems. Document any standard subdirectories within /mnt that SRM might use for automatically or manually mounted external storage (e.g., USB drives). Follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Verify documentation accurately describes the use of /mnt in SRM. Adherence to template.
+
+# Subtasks:
+## 1. Document Conventional Role of /mnt [done]
+### Dependencies: None
+### Description: Document the conventional role of /mnt as a temporary mount point in Unix-like systems.
+### Details:
+Research and document the standard, conventional use of the /mnt directory in Linux/Unix-like systems. Focus on its historical and common role as a temporary mount point for filesystems by system administrators.
+
+## 2. Document SRM-Specific Utilization of /mnt [done]
+### Dependencies: 17.1
+### Description: Document any standard subdirectories or specific ways SRM utilizes /mnt for automatically or manually mounted external storage (e.g., USB drives).
+### Details:
+Investigate and document how Synology Router Manager (SRM) specifically uses the /mnt directory. This includes identifying any standard subdirectories created or used by SRM under /mnt, and detailing the processes for how external storage devices (like USB drives) are automatically or manually mounted and accessed via /mnt within the SRM environment.
+

@@ -1,0 +1,24 @@
+# Task ID: 32
+# Title: Fix Broken Cross-Reference Links in Core Documentation Files
+# Status: done
+# Dependencies: 9, 10, 11, 22, 23, 29, 31
+# Priority: high
+# Description: Identify and correct approximately 18 known broken cross-reference links. This involves updating links within documentation files such as usr.syno.md, usr.sbin.md, usr.bin.md, sys.md, dev.md, and init.md, or links pointing to them. Links will be updated to valid targets or replaced with placeholder references if the target content is not yet finalized.
+# Details:
+1.  **Scope Definition:** Confirm the list of approximately 18 specific broken cross-reference links identified (likely from Task 22 findings). The primary files for investigation are `usr.syno.md`, `usr.sbin.md`, `usr.bin.md`, `sys.md`, `dev.md`, and `init.md`. This includes links originating from these files, and links from other documents targeting these files or their internal anchors.
+2.  **Link Analysis and Correction:** For each identified broken link:
+    a.  Determine the cause: typo, incorrect path, changed filename/anchor, missing target content.
+    b.  If the target exists, correct the link to point to the valid file and anchor. Ensure paths are relative and consistent with the documentation structure (e.g., `../README.md` for main ToC, `./sibling-doc.md`, `./subdir/doc.md`).
+    c.  If the target content does not yet exist or is part of an incomplete task (e.g., content for `init.md` from pending Task 29), create a clear placeholder. Examples: `[Link Text](./placeholder_target.md#anchor)` with a minimal placeholder file, or an HTML comment `<!-- TODO: Link to [Future Document/Section Name] once Task X is complete. Original broken link: [text](broken-path) -->`.
+    d.  If a link is obsolete and its target removed, evaluate if the link itself should be removed or redirected to a more relevant, existing section. Document such decisions.
+3.  **Tooling:** Utilize text editors with robust search/replace (and ideally regex) capabilities. Consider using `grep` or similar command-line tools to batch-find link patterns (`\[[^\]]+\]\([^\)]+\)`) for verification. A Markdown link checker tool can be used for broader validation if available.
+4.  **Consistency:** Ensure all corrected links and new placeholder strategies align with the project's documentation standards and the navigation structure established in Task 24 and Task 31.
+5.  **Version Control:** Commit all changes to the Git repository with a clear, descriptive commit message detailing the scope of fixes (e.g., "Fix 18 broken cross-references in core system docs").
+
+# Test Strategy:
+1.  **Targeted Verification:** Review each of the ~18 identified broken links post-correction. Manually click through them in a local Markdown previewer or by inspecting the raw Markdown to confirm they point to the intended (now valid) target or the defined placeholder.
+2.  **File-Specific Check:** Perform a spot-check of links within the primary affected files (`usr.syno.md`, `usr.sbin.md`, `usr.bin.md`, `sys.md`, `dev.md`, `init.md`) beyond the initially identified 18, to catch any collateral damage or closely related issues.
+3.  **Automated Link Check (Recommended):** If a Markdown link checker tool is configured for the project, run it on the modified files and ideally on the entire `_documentation/structure/` directory to identify any remaining or newly introduced broken links.
+4.  **Placeholder Review:** If placeholders were used, verify they are correctly formatted, clearly indicate the intended future target, and reference any relevant pending tasks (like Task 29 for `init.md` content).
+5.  **Diff Review:** Conduct a peer review of the committed changes (Git diff) to ensure accuracy, consistency, and adherence to the correction strategy.
+6.  **Count Confirmation:** Confirm that the number of addressed links aligns with the initial count of ~18. Document any significant deviations.

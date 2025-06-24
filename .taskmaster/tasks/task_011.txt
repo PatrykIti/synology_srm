@@ -1,0 +1,61 @@
+# Task ID: 11
+# Title: Analyze and Document /usr Directory Structure and Key Components
+# Status: done
+# Dependencies: 1, 2
+# Priority: medium
+# Description: Provide a comprehensive overview of the /usr directory structure. This task involves documenting key components, applications, and libraries within /usr, building upon the completed analysis of /usr/share and /usr/libexec. The documentation will cover /usr/bin, /usr/sbin, /usr/lib, /usr/local, and integrate detailed findings for /usr/share and /usr/libexec.
+# Details:
+Leverage the completed analysis of /usr/share and /usr/libexec (SRM backup) which revealed significant components. The documentation effort will:
+1. Formally document the findings for /usr/share, including its role in storing CA certificates (141 Mozilla), captive portal web application (CGI, CSS, JS, HTML), CUPS charset/MIME configurations, FreeRADIUS dictionary files (222), OpenSSL documentation (HTML, man pages), NTP pool/time server configurations, PostgreSQL initialization/configuration templates, and shared data (ICU, Apache icons, zone info).
+2. Formally document the findings for /usr/libexec, detailing its extensive event-based network hooks (interface link up/down, IP address changes, gateway changes, topology changes, DHCP server changes, network isolation changes), service integration hooks (volume mount/unmount, share management, user/group management, service start/stop/restart, database auto-updates), Synology-specific SDK integration patterns, and security-relevant scripts (firewall reload, policy routing, VPN client hooks). Emphasize how these provide deep integration for network management and service orchestration.
+3. Analyze and document the purpose and key contents of other major subdirectories: /usr/bin (non-essential command-line programs), /usr/sbin (non-essential system administration binaries), /usr/lib (non-essential libraries), and /usr/local (locally installed software).
+4. Identify and document key applications, utilities, and libraries specific to the overall /usr directory, particularly those related to SRM's extended functionality, highlighting the integration points revealed in /usr/libexec.
+5. Utilize MCP Zen tools for analysis where applicable for the remaining directories.
+6. All documentation must follow the standard documentation template (Task 2).
+
+# Test Strategy:
+Review documentation for comprehensive coverage of /usr's structure and significant contents, including detailed findings for /usr/share and /usr/libexec, and analysis of /usr/bin, /usr/sbin, /usr/lib, and /usr/local. Ensure clarity, accuracy, and proper integration of all components. Verify adherence to the standard documentation template (Task 2).
+
+# Subtasks:
+## 1. Document findings for /usr/share based on completed analysis [done]
+### Dependencies: None
+### Description: Incorporate and detail the already analyzed findings for /usr/share: 141 Mozilla CA certificates, captive portal web application (CGI, CSS, JS, HTML), CUPS charset/MIME configurations, 222 FreeRADIUS dictionary files, OpenSSL documentation (HTML, man pages), NTP pool/time server configuration files, PostgreSQL initialization/configuration templates, and shared data (ICU, Apache icons, zone info). Follow standard documentation template (Task 2).
+### Details:
+
+
+## 2. Document findings for /usr/libexec based on completed analysis [done]
+### Dependencies: None
+### Description: Incorporate and detail the already analyzed findings for /usr/libexec: extensive network hook scripts (interface link, IP address, gateway, topology, DHCP server, network isolation changes), service integration hooks (volume, share, user/group, service lifecycle, DB auto-updates), Synology-specific SDK integration, and security-relevant scripts (firewall reload, policy routing, VPN client). Highlight its role in network management and service orchestration. Follow standard documentation template (Task 2).
+### Details:
+
+
+## 3. Analyze and Document /usr/bin directory [done]
+### Dependencies: None
+### Description: Analyze the /usr/bin directory to identify its purpose, key non-essential command-line programs, and any utilities specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).
+### Details:
+
+
+## 4. Analyze and Document /usr/sbin directory [done]
+### Dependencies: None
+### Description: Analyze the /usr/sbin directory to identify its purpose, key non-essential system administration binaries, and any utilities specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).
+### Details:
+
+
+## 5. Analyze and Document /usr/lib directory [done]
+### Dependencies: None
+### Description: Analyze the /usr/lib directory to identify its purpose, key non-essential libraries, and any libraries specific to SRM's extended functionality. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).
+### Details:
+
+
+## 6. Analyze and Document /usr/local directory [done]
+### Dependencies: None
+### Description: Analyze the /usr/local directory to identify its purpose, structure for locally installed software, and any SRM-specific configurations or software residing within. Document findings using MCP Zen tools as applicable and adhere to the standard documentation template (Task 2).
+### Details:
+
+
+## 7. Consolidate and Review Overall /usr Documentation [done]
+### Dependencies: None
+### Description: Merge all documented sections (/usr/share, /usr/libexec, /usr/bin, /usr/sbin, /usr/lib, /usr/local) into a single, coherent document. Ensure consistency, accuracy, comprehensive coverage of SRM-specific aspects, and strict adherence to the standard documentation template (Task 2).
+### Details:
+
+

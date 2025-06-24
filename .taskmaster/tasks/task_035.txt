@@ -1,0 +1,38 @@
+# Task ID: 35
+# Title: Document /dev Directory (Device Files and Special Files)
+# Status: done
+# Dependencies: 1, 2, 34
+# Priority: medium
+# Description: Analyze and document the /dev directory, focusing on device files (block and character), pseudo-devices, and special files. This is essential for understanding device management, hardware interfaces, and system communication channels in SRM.
+# Details:
+1.  **Introduction to /dev**: Explain that `/dev` is a special directory in Unix-like systems that contains device files (also known as device nodes). These files provide an interface to hardware devices and other system resources.
+2.  **Dynamic Management**: Document how `/dev` is typically managed dynamically by `devtmpfs` at boot time and further populated/managed by the `udev` daemon. Explain that `udev` relies on information from the `/sys` filesystem (see Task 34) to create device nodes with appropriate names and permissions.
+3.  **Types of Device Files**:
+    *   **Character Devices**: Explain these provide unbuffered, direct access to hardware. Provide examples like `/dev/ttyS0` (serial ports), `/dev/console` (system console), `/dev/input/*` (input devices), `/dev/snd/*` (sound devices).
+    *   **Block Devices**: Explain these provide buffered access to hardware in fixed-size blocks. Provide examples like `/dev/sda` (first SCSI/SATA disk), `/dev/mmcblk0` (embedded MultiMediaCard).
+    *   **Pseudo-Devices**: Document common pseudo-devices and their functions:
+        *   `/dev/null`: The null device, discards all data written to it, returns EOF on read.
+        *   `/dev/zero`: Provides an endless stream of null characters (zeros) when read.
+        *   `/dev/random` & `/dev/urandom`: Sources of random numbers. Explain the difference (blocking vs. non-blocking).
+        *   `/dev/full`: Returns ENOSPC (No space left on device) on write, endless zeros on read.
+        *   `/dev/kmsg`: Interface for user-space programs to read kernel messages.
+        *   `/dev/ptmx` and `/dev/pts/*`: For pseudo-terminals.
+4.  **Major and Minor Numbers**: Explain that each device file is associated with a major number (identifying the driver) and a minor number (identifying the specific device instance handled by that driver). Show how to view these using `ls -l /dev`.
+5.  **Common Subdirectories**:
+    *   `/dev/shm`: For shared memory (typically a tmpfs mount).
+    *   `/dev/disk/by-*`: Contains symbolic links to block devices, organized by ID, label, path, UUID, etc., providing persistent naming.
+    *   `/dev/mapper/`: Device mapper targets (e.g., LVM, encrypted volumes).
+    *   `/dev/input/`: Input devices (keyboards, mice, joysticks).
+6.  **SRM-Specific Devices**: Outline the process for identifying any SRM-specific device files, possibly related to unique hardware features (e.g., LEDs, buttons, specific network interfaces). This may involve exploring the filesystem or looking for custom `udev` rules.
+7.  **Permissions and Security**: Discuss the importance of permissions on device files, as they control access to underlying hardware.
+8.  **Tools for Inspection**: Recommend using `ls -l`, `file`, `stat`, and examining `udev` rules (often in `/etc/udev/rules.d/` or `/lib/udev/rules.d/`).
+
+# Test Strategy:
+1.  Verify the documentation accurately explains the fundamental purpose of the `/dev` directory and the concept of device files as interfaces to hardware.
+2.  Confirm that the roles of `devtmpfs` and `udev` in dynamically managing `/dev` are clearly described, including the link to `/sys` (Task 34).
+3.  Ensure comprehensive explanations and correct examples are provided for character devices, block devices, and key pseudo-devices (e.g., `/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`, `/dev/tty`, `/dev/console`).
+4.  Validate that the explanation of major and minor device numbers is accurate and includes how to identify them.
+5.  Check for documentation of important subdirectories like `/dev/shm`, `/dev/disk/by-*`, and `/dev/mapper/`.
+6.  Confirm that security implications related to device file permissions are discussed.
+7.  Verify that methods for identifying potential SRM-specific device files are outlined.
+8.  Ensure the documentation adheres to the project's standard template and quality guidelines (as defined in Task 2).
