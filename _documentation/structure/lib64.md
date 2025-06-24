@@ -13,6 +13,49 @@ The `/lib64` directory in Synology SRM is a symbolic link pointing to the `/lib`
 /lib64 -> lib  [Symbolic link to /lib directory]
 ```
 
+## Key Components
+
+Since `/lib64` is a symbolic link to `/lib`, it inherits all components from the /lib directory:
+
+### Core System Libraries (via /lib)
+- **Purpose**: Essential system operation libraries
+- **Location**: Accessed through `/lib64/` symlink
+- **Dependencies**: Kernel and system services
+- **Configuration**: Via `/etc/ld.so.conf`
+- **Security**: Protected by filesystem permissions
+
+### Security Libraries (via /lib)
+- **Purpose**: Cryptographic and authentication libraries
+- **Location**: `/lib64/security/` (→ `/lib/security/`)
+- **Dependencies**: PAM, OpenSSL, kernel crypto
+- **Configuration**: PAM configuration files
+- **Security**: Critical for system security
+
+### Network Libraries (via /lib)
+- **Purpose**: Network protocol and service libraries
+- **Location**: Various subdirectories via symlink
+- **Dependencies**: Network stack, kernel modules
+- **Configuration**: Service-specific configs
+- **Security**: Network service isolation
+
+## Configuration Files
+
+Since `/lib64` is a symbolic link, it doesn't contain configuration files directly. All library configurations are managed through:
+
+### Library Configuration
+- `/etc/ld.so.conf` - Dynamic linker configuration
+- `/etc/ld.so.conf.d/` - Additional library paths
+- `/etc/ld.so.cache` - Library cache (generated)
+
+### Service Configurations
+- PAM modules configured in `/etc/pam.d/`
+- Network services in `/etc/` subdirectories
+- Synology services in `/etc/synoinfo.conf`
+
+## Scripts and Executables
+
+No scripts or executables in `/lib64` - it's a symbolic link. All executables that reference `/lib64` are actually loading libraries from `/lib`.
+
 ## Technical Details
 
 ### Symlink Properties
@@ -53,6 +96,19 @@ ldd /lib/libc.so.1
 - **LD**: Follows symlinks during linking
 - **pkg-config**: Resolves actual paths
 - **CMake**: FindPackage modules check both
+
+## Network Services
+
+Since `/lib64` is a symbolic link to `/lib`, network service libraries are accessed through:
+
+### Network Service Libraries (via symlink)
+- **Samba/SMB**: `/lib64/samba/` → `/lib/samba/`
+- **Apache modules**: `/lib64/apache2/` → `/lib/apache2/`
+- **Network tools**: Various network protocol libraries
+- **VPN libraries**: OpenVPN, IPSec support libraries
+- **DNS/DHCP**: Supporting libraries for network services
+
+All actual network service functionality is documented in the [/lib directory](lib.md#network-services).
 
 ## Security Considerations
 

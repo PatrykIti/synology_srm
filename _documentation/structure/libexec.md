@@ -8,12 +8,58 @@
 ## Overview
 The `/libexec` directory **does not exist** in the Synology SRM RT6600ax system. This is notable because `/libexec` is a standard directory in many Unix-like systems used for storing internal executables that are not intended to be executed directly by users but rather called by other programs.
 
+## Directory Structure
+
+The `/libexec` directory does not exist in Synology SRM:
+```bash
+# Directory check shows no /libexec in the root filesystem
+ls -la / | grep libexec
+# No results - directory does not exist
+```
+
+### Absent Directory Structure
+```
+/libexec/  [DOES NOT EXIST]
+```
+
+## Key Components
+
+Since `/libexec` doesn't exist, there are no components. However, functionality typically found in `/libexec` is distributed across:
+
+### System Helper Executables
+- **Purpose**: Internal executables called by other programs
+- **Location**: Distributed across `/usr/lib/`, `/usr/syno/bin/`
+- **Dependencies**: Parent programs that call them
+- **Configuration**: Configured by parent services
+- **Security**: Protected by standard file permissions
+
+### Service-Specific Helpers
+- **Purpose**: Service-specific internal programs
+- **Location**: Within service directories under `/usr/lib/`
+- **Dependencies**: Specific to each service
+- **Configuration**: Service configuration files
+- **Security**: Service-specific access controls
+
 ## Analysis Results
 ```bash
 # Directory check shows no /libexec in the root filesystem
 ls -la / | grep libexec
 # No results - directory does not exist
 ```
+
+## Configuration Files
+
+Since `/libexec` doesn't exist, there are no configuration files. Helper executables use configurations from their parent services located in:
+- `/etc/` - System service configurations
+- `/usr/syno/etc/` - Synology-specific configurations
+- Service-specific configuration directories
+
+## Scripts and Executables
+
+No scripts or executables since the directory doesn't exist. Equivalent functionality found in:
+- `/usr/lib/*/` - Service-specific helper programs
+- `/usr/syno/bin/` - Synology system utilities
+- `/usr/local/bin/` - Additional system tools
 
 ## Why /libexec is Absent
 
@@ -73,6 +119,19 @@ Synology SRM follows a modified FHS approach suitable for embedded router system
 - Need to audit `/usr/lib/` subdirectories for setuid helpers
 - Package-specific helpers may have elevated privileges
 - Service directories should be monitored for changes
+
+## Network Services
+
+Since `/libexec` doesn't exist, network service helpers are located elsewhere:
+
+### Network Service Helper Locations
+- **Apache**: `/usr/lib/apache2/` - Web server helper programs
+- **SSH**: `/usr/lib/openssh/` - SSH/SFTP server components
+- **Samba**: `/usr/lib/samba/` - SMB/CIFS VFS modules
+- **CUPS**: `/usr/lib/cups/` - Print server backends
+- **Network Tools**: Integrated into main binaries or in `/usr/lib/`
+
+All network service functionality that would typically use `/libexec` helpers is implemented through alternative locations in the Synology SRM architecture.
 
 ## Integration Points
 

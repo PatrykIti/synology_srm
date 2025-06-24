@@ -170,6 +170,32 @@ To debug issues with the automatic mounting of external drives, follow this sequ
 
 4. **Verify Mounts**: Once mounted, use `mount | grep /volume` to see the actual device, mount point (e.g., `/volumeUSB1`), filesystem type, and mount options applied by SRM.
 
+## Maintenance Notes
+
+### Mount Point Management
+- Always unmount external devices before removal
+- Check for open files before unmounting: `lsof /mnt/usb1`
+- Monitor failed mount attempts in system logs
+- Clean up stale mount points after device removal
+
+### Troubleshooting Mount Issues
+- Verify filesystem support: `cat /proc/filesystems`
+- Check kernel messages: `dmesg | grep -i mount`
+- Review mount options: `mount | grep /mnt`
+- Ensure proper permissions on mount points
+
+### Best Practices
+- Use UUID-based mounting for consistent device identification
+- Implement proper error handling in mount scripts
+- Set appropriate mount options for security (noexec, nosuid)
+- Regular cleanup of unused mount points
+
+### Monitoring
+- Track mount/unmount events in syslog
+- Monitor disk usage on mounted filesystems
+- Alert on mount failures or filesystem errors
+- Verify backup device connectivity
+
 ## Cross-References
 - Volume storage: [/volume1/](volume1.md)
 - Device management: /dev/ <!-- Link to dev.md removed until documented -->

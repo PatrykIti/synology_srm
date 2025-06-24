@@ -104,6 +104,34 @@ The `/ini` directory contains critical WiFi hardware configuration files for Syn
 - Beamforming parameters
 - Band steering settings
 
+## Configuration Files
+
+### Key Configuration Files
+
+#### global.ini
+- Global WiFi parameters and feature flags
+- System-wide offload configurations
+- Debug and logging parameters
+- Memory allocation settings
+
+#### QCA6018.ini
+- QCA6018 chipset-specific configurations
+- 5GHz band operation parameters
+- 2x2 MIMO settings
+- 80MHz channel width configurations
+
+#### QCN9000.ini
+- QCN9000 chipset-specific configurations
+- 5GHz/6GHz band operation parameters
+- 4x4 MIMO settings
+- 160MHz channel width configurations
+
+#### wifi_module_param.ini
+- Kernel module loading parameters
+- Hardware detection settings
+- Resource allocation configurations
+- Performance tuning flags
+
 ## Scripts and Executables
 No executable scripts in this directory - purely configuration files loaded by:
 - WiFi kernel modules during initialization
