@@ -36,8 +36,15 @@ _documentation/
 │   ├── bin.md         # One file per directory
 │   ├── etc.md
 │   └── ...
+├── packages/          # Software package documentation
+│   ├── index.md       # Package documentation index
+│   ├── safe-access/   # Individual package directories
+│   │   └── README.md
+│   └── ...
 ├── guides/            # Comprehensive guides
 ├── tools/             # Documentation tools
+├── _templates/        # Documentation templates
+│   └── package_analysis_template.md
 ├── TEMPLATE.md        # Master template
 ├── CONTRIBUTING.md    # This file
 └── README.md          # Project overview
@@ -230,6 +237,46 @@ python _documentation/tools/validate_docs.py
 - Verify version numbers
 - Test commands shown
 - Validate configuration examples
+
+## Adding Software Package Documentation
+
+### Purpose
+Package documentation provides detailed technical analysis of software packages installed on the SRM system, including their structure, technologies, security implications, and integration points.
+
+### Process
+1. **Create Package Directory**
+   ```bash
+   mkdir -p _documentation/packages/[package-name]/
+   ```
+
+2. **Use Package Analysis Template**
+   - Copy from `_documentation/_templates/package_analysis_template.md`
+   - Fill in all sections following the template guidance
+   - Use Zen MCP tools for thorough analysis
+
+3. **Analyze Package with Zen Tools**
+   ```bash
+   # Example commands for package analysis
+   mcp zen analyze --model gemini-2.5-pro --path /var/packages/PackageName
+   mcp zen secaudit --model gemini-2.5-pro --focus package
+   ```
+
+4. **Update Package Index**
+   - Add entry to `_documentation/packages/index.md`
+   - Include package name, description, status, and version
+   - Maintain alphabetical order within categories
+
+5. **Cross-Reference**
+   - Link from related system documentation
+   - Update security analysis if relevant
+   - Add to network services if applicable
+
+### Package Documentation Requirements
+- Complete all sections in the template
+- Include digital signature verification results
+- Document all network ports and services
+- Identify security implications and CVEs
+- Map integration with system components
 
 ## Getting Help
 

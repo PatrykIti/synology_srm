@@ -72,6 +72,11 @@ This documentation provides deep technical analysis of:
 - [/ini - WiFi Configuration](structure/ini.md) - Hardware initialization files
 - [/root - Root Home](structure/root.md) - Root user directory
 
+### 📦 Software Packages
+- [Package Documentation Index](packages/index.md) - Analysis of installed software packages
+  - Safe Access - Parental control and web filtering solution
+  - Additional system packages (pending documentation)
+
 ### 🔧 Key Components Quick Links
 
 #### Critical Configuration Files

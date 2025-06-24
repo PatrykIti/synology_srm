@@ -42,6 +42,11 @@ Complete technical documentation for all major system directories:
 - [/lib64 - 64-bit Libraries](structure/lib64.md) - Symlink to /lib
 - [/libexec - Helper Programs](structure/libexec.md) - Internal executables
 
+### 📦 Package Documentation
+- [Package Documentation Index](packages/index.md) - Analysis of installed software packages
+  - Safe Access - Parental control and web filtering
+  - Additional packages to be documented
+
 ### 📚 Comprehensive Guides
 - [System Architecture Diagrams](system_architecture_diagrams.md) - Visual system overview
 - [Configuration Management Guide](configuration_management_guide.md) - 3-tier config system
