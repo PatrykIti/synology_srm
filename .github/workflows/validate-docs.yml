@@ -32,7 +32,7 @@ jobs:
         
     - name: Run documentation validation
       run: |
-        python _documentation/tools/validate_docs.py --json > validation-results.json
+        python _documentation/tools/validate_docs.py --json 2>/dev/null > validation-results.json
         
     - name: Upload validation results
       if: always()

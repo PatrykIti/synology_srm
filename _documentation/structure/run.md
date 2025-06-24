@@ -126,6 +126,38 @@ Boot Timeline:
 - **Interfaces**: ppp100 (PPP), usbnet0 (USB networking)
 - **Format**: Microsecond timestamps
 
+## Configuration Files
+
+The /run directory contains runtime state files rather than traditional configuration:
+
+### Runtime State Files
+- **PID files**: Process ID tracking for service management
+- **Lock files**: Synchronization and exclusive access control
+- **State files**: Dynamic service state information
+- **Cache files**: Temporary cached data (mDNS, DHCP)
+
+### Dynamic Configuration
+- **ipset/**: Firewall rule sets loaded at runtime
+- **interface timing**: Network interface state tracking
+- **bootup timing**: Service startup performance data
+- **device discovery**: Dynamic device detection results
+
+## Scripts and Executables
+
+No executable scripts stored in /run - it's a runtime data directory. However, many scripts interact with /run:
+
+### Service Management Scripts
+- Init scripts write PID files during startup
+- Service monitors check PID file validity
+- Cleanup scripts remove stale lock files
+- Status scripts read runtime state
+
+### System Scripts Using /run
+- `/etc/init/*.conf` - Write PID files
+- `/usr/syno/bin/synoservice` - Check service state
+- `/usr/syno/sbin/synodeviced` - Manage device state
+- Network scripts update interface timing
+
 ## Integration Points
 
 ### Service Startup
